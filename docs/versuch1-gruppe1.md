@@ -59,17 +59,29 @@ $ find /sys | grep drivers.*00:1f.6
 /sys/bus/pci/drivers/e1000e/0000:00:1f.6
 ```
 
-**Testen Sie die DNS-Namensauflösung mit nslookup/dig**
+**Testen Sie die DNS-Namensauflösung mit nslookup**
+
+Wir verwenden an dieser Stelle `dig`, da `nslookup` deprecated ist. Die Option `+noall` entfernt alle Display-Flags und `+answer` zeigt dann nur die Antwortsektion des Outputs an.
 
 ```shell
 $ dig +noall +answer +multiline www.hdm-stuttgart.de
-www.hdm-stuttgart.de.	3553 IN	A 141.62.1.53
-www.hdm-stuttgart.de.	3553 IN	A 141.62.1.59
+www.hdm-stuttgart.de. 3553 IN A 141.62.1.53
+www.hdm-stuttgart.de. 3553 IN A 141.62.1.59
 ```
+
+Wir erhalten zwei Ergebnisse auf unsere Anfrage. Das könnte daran liegen, dass die HdM zur Lastenaufteilung zwei Webserver einsetzt.
 
 ### Anschluss des PC an das Labornetz
 
 **Betrachten Sie die Verbindungen der Labor-Switches untereinander. Welche Wege können Sie erkennen?**
+
+Folgende Verbindungen konnten erkannt werden:
+
+![Unser Computer ist an die RJ-45-Buchse 1-01 angeschlossen. Das Kabel der Buchse führt dann in den Netzwerkschrank](./static/connector.jpeg){ width=200px }
+
+![Auf diesem Bild ist der Netzwerkschrank zu sehen. Man sieht hier das Patchfeld, an welchem die 1-01 angeschlossen ist. Vom Patchfeld führt ein weiteres LAN-Kabel (CAT-5e) zu einem Switch.](./static/full.jpeg){ width=200px }
+
+![Der Switch ist dann mit dem hier zu sehenden Router verbunden. Der Router führt dann zur restlichen Infrastruktur des Hauses bzw. zum Internet.](./static/router.jpeg){ width=200px }
 
 Wenn die Verbindung am Patch-Panel zu 1-01 unterbrochen wird, so verliert die Netzwerkkarte die Verbindung, was der Kernel-Buffer bestätigt:
 
@@ -81,20 +93,9 @@ $ dmesg -w
 # ...
 ```
 
-Folgende Verbindungen konnten erkannt werden:
-
-![Buchse](./static/connector.jpeg){ width=200px }
-
-![Full](./static/full.jpeg){ width=200px }
-
-![Router](./static/router.jpeg){ width=200px }
-
-```plaintext
-Desktop-Netzwerkkarte via CAT-6-Kabel → RJ45/LAN-Buchse an Tisch → Patch-Feld → Switch →  Router (mit IP) `142.62.66.5` → Rest der Infrastruktur
-```
-
 **Verfolgen Sie den im Netzwerkschrank gepatchten Weg, auf dem die Pakete Ihres Rechners zum Router gelangen**
 
+Wie schon an den Bildern vorher illustriert lässt sich folgender Weg ableiten:
 ```plaintext
 Patch-Feld → Switch → Router → Rest der Infrastruktur
 ```
@@ -145,7 +146,7 @@ rtt min/avg/max/mdev = 0.509/0.554/0.670/0.058 ms
 
 **Senden Sie einen ping-command zu einem Rechner, der am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist**
 
-Hier wird nun ein Rechner mit der IP `141.62.66.13` angepingt, welcher am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist. Wie zu sehen ist ist die Latenz um ~200 ms größer.
+Hier wird nun ein Rechner mit der IP `141.62.66.13` angepingt, welcher am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist. Wie zu sehen ist ist die Latenz um ~0.2 ms größer.
 
 ```shell
 $ ping 141.62.66.13
@@ -162,6 +163,8 @@ rtt min/avg/max/mdev = 0.752/0.791/0.853/0.033 ms
 ```
 
 **Senden Sie einen ping-command zum Labor-Router**
+
+Der Labor-Router hat die IP-Addresse `141.62.66.250`. Die Latenz beläuft sich bei diesem mal auf ~1.05 ms.
 
 ```shell
 $ ping 141.62.66.250
@@ -181,6 +184,8 @@ rtt min/avg/max/mdev = 1.015/1.046/1.127/0.040 ms
 **Starten Sie einen Web-Browser und überprüfen Sie die korrekte Funktion des DNS-Servers durch Aufruf einer beliebigen URL**
 
 ![Screenshot](./static/screenshot.png)
+
+Die Seite ist erreichbar und war davor nicht gecached. Daraus lässt sich schließen, dass die DNS-Abfrage erfolgreich funktioniert hat.
 
 **Sehen Sie sich den DNS-Cache an**
 
@@ -310,6 +315,8 @@ $ ip neigh show
 141.62.66.216 dev enp0s31f6 lladdr 44:31:92:50:6c:61 STALE
 ```
 
+Nun wurde die Adresse `141.62.66.236` zur ARP-Tabelle hinzugefügt.
+
 **Ist die MAC-Adresse Ihres PC lokal oder global vergeben?**
 
 ```shell
@@ -328,7 +335,7 @@ Es findet sich die MAC-Addresse `4c:52:62:0e:54:8b`; ein Lookup der OUI ergibt: 
 
 **Was würde geschehen, wenn ein weiterer PC mit gleicher IP (aber selbstverständlich anderer MAC) ans gleiche Subnetz angeschlossen würde?**
 
-Gleiche IP, andere MAC: Reines Ethernet-Frame würde noch den Host korrekt erreichen, aber da die IP nun mehreren Hosts zugeordnet wäre würden IP-Packete nicht mehr den richtigen Host erreichen.
+Ein reines Ethernet-Frame würde den Host noch korrekt erreichen, aber da die IP nun mehreren Hosts zugeordnet wäre würden IP-Packete nicht mehr den richtigen Host erreichen.
 
 **Vergleichen Sie die Vorteile / Nachteile einer statischen und dynamische ARP-Tabelle**
 
@@ -352,8 +359,6 @@ Durch die Löschung der ARP-Tabelle werden die ARP-Anfragen erneut gemacht; wenn
 
 ```shell
 $ ping --help
-ping: invalid option -- '-'
-
 Usage
   ping [options] <destination>
 
@@ -399,7 +404,12 @@ IPv6 options:
   -N <nodeinfo opt>  use icmp6 node info query, try <help> as argument
 
 For more details see ping(8).
-praktikum@rn05:~$ ping -4 google.com
+```
+
+Erzwungenes IPv4:
+
+```shell
+$ ping -4 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.58 ms
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=2 ttl=114 time=5.40 ms
@@ -407,15 +417,11 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 --- google.com ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1002ms
 rtt min/avg/max/mdev = 4.582/4.989/5.397/0.407 ms
-praktikum@rn05:~$ ping -6 google.com
-ping: connect: Cannot assign requested address
-praktikum@rn05:~$ ping -n 2 google.com
-PING google.com (142.250.185.78) 56(124) bytes of data.
+```
 
-^C
---- google.com ping statistics ---
-11 packets transmitted, 0 received, 100% packet loss, time 10240ms
+Nur zwei Pakete:
 
+```
 praktikum@rn05:~$ ping -c 2 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.45 ms
@@ -424,7 +430,12 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 --- google.com ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1002ms
 rtt min/avg/max/mdev = 4.447/4.453/4.460/0.006 ms
-praktikum@rn05:~$ ping -i 2 google.com
+```
+
+2 Sekunden Pause zwischen den Paketen:
+
+```shell
+$ ping -i 2 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.69 ms
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=2 ttl=114 time=4.59 ms
@@ -435,6 +446,8 @@ rtt min/avg/max/mdev = 4.586/4.639/4.693/0.053 ms
 ```
 
 **HRPing-Nutzung**
+
+HRPing ist ein erweiteres Ping-Command mit folgenden Optionen:
 
 ```shell
 $ wine64 hrping.exe
@@ -476,6 +489,32 @@ hrPING is Freeware, please share it!  See www.cfos.de for our other solutions:
   -- Internet Acceleration via Traffic Shaping     : cFosSpeed
   -- Webserver for home users and professionals    : cFos Personal Net
   -- IPv6 Connectivity for XP, Vista and Windows 7 : cFos IPv6 Link
+```
+
+HRPing jedoch ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein Sicherheitsrisiko darstellt. Stattdessen wurde deshalb die freie Implementation `fping` verwendet:
+
+
+```plaintext
+Name         : fping
+Version      : 5.0
+Release      : 3.fc34
+Architecture : x86_64
+Size         : 63 k
+Source       : fping-5.0-3.fc34.src.rpm
+Repository   : @System
+From repo    : fedora
+Summary      : Scriptable, parallelized ping-like utility
+URL          : http://www.fping.org/
+License      : BSD with advertising
+Description  : fping is a ping-like program which can determine the
+             : accessibility of multiple hosts using ICMP echo requests. fping
+             : is designed for parallelized monitoring of large numbers of
+             : systems, and is developed with ease of use in scripting in mind.
+```
+
+Diese hat ähnliche Optionen:
+
+```shell
 $ fping --help
 Usage: fping [options] [targets...]
 
@@ -519,6 +558,13 @@ Output options:
    -u, --unreach      show targets that are unreachable
    -v, --version      show version
    -x, --reachable=N  shows if >=N hosts are reachable or not
+```
+
+Die Verwendung ist ähnlich wie `ping`.
+
+**Weisen Sie mit Hilfe von HRPING nach, dass ein Ping, der zuerst eine ARP-Auflösung erforderlich macht, zu deutlich erhöhten Antwortzeiten führt.**
+
+```shell
 $ fping -e 10.60.43.50
 10.60.43.50 is alive (70.9 ms)
 $ sudo ip -s -s neigh flush all
@@ -530,6 +576,8 @@ $ sudo ip -s -s neigh flush all
 $ fping -e 10.60.43.50
 10.60.43.50 is alive (212 ms)
 ```
+
+Zu erkennen ist, dass nach der Löschen der ARP-Tabelle eine deutlich längere Antwortzeit zu messen ist.
 
 ### Traceroute & MTR
 
@@ -728,6 +776,8 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 
 **Besuchen Sie das DENIC (www.denic.de) und erfragen Sie den Besitzer von Domain-Namen, die Sie interessieren.**
 
+Hier z.B. die HdM Stuttgart:
+
 ```shell
 $ whois www.hdm-stuttgart.de
 [Querying whois.denic.de]
@@ -757,6 +807,43 @@ Nserver: iz-net-3.hdm-stuttgart.de 141.62.1.3
 Nserver: iz-net-4.hdm-stuttgart.de 141.62.1.4
 Status: connect
 Changed: 2015-04-22T16:37:06+02:00
+```
+
+Und die Electronic Frontier Foundation:
+
+```shell
+$ whois eff.org
+[Querying whois.pir.org]
+[whois.pir.org]
+Domain Name: EFF.ORG
+Registry Domain ID: D2234962-LROR
+Registrar WHOIS Server: whois.gandi.net
+Registrar URL: http://www.gandi.net
+Updated Date: 2018-03-08T02:19:58Z
+Creation Date: 1990-10-10T04:00:00Z
+Registry Expiry Date: 2022-10-09T04:00:00Z
+Registrar Registration Expiration Date:
+Registrar: Gandi SAS
+Registrar IANA ID: 81
+Registrar Abuse Contact Email: abuse@support.gandi.net
+Registrar Abuse Contact Phone: +33.170377661
+Reseller:
+Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited
+Registrant Organization: Electronic Frontier Foundation
+Registrant State/Province: CA
+Registrant Country: US
+Name Server: NS1.EFF.ORG
+Name Server: NS2.EFF.ORG
+Name Server: NS4.EFF.ORG
+DNSSEC: unsigned
+URL of the ICANN Whois Inaccuracy Complaint Form https://www.icann.org/wicf/)
+>>> Last update of WHOIS database: 2021-10-20T20:35:43Z <<<
+
+For more information on Whois status codes, please visit https://icann.org/epp
+
+Access to Public Interest Registry WHOIS information is provided to assist persons in determining the contents of a domain name registration record in the Public Interest Registry registry database. The data in this record is provided by Public Interest Registry for informational purposes only, and Public Interest Registry does not guarantee its accuracy. This service is intended only for query-based access. You agree that you will use this data only for lawful purposes and that, under no circumstances will you use this data to (a) allow, enable, or otherwise support the transmission by e-mail, telephone, or facsimile of mass unsolicited, commercial advertising or solicitations to entities other than the data recipient's own existing customers; or (b) enable high volume, automated, electronic processes that send queries or data to the systems of Registry Operator, a Registrar, or Afilias except as reasonably necessary to register domain names or modify existing registrations. All rights reserved. Public Interest Registry reserves the right to modify these terms at any time. By submitting this query, you agree to abide by this policy.
+
+The Registrar of Record identified in this output may have an RDDS service that can be queried for additional information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
 ```
 
 **Sehen Sie sich die Möglichkeiten von Pathping an.**
@@ -792,8 +879,9 @@ Description  : MTR combines the functionality of the 'traceroute' and 'ping'
              : for X (provided in the mtr-gtk package).
 ```
 
-```shell
+`mtr` kombiniert die Funktionalität von `traceroute` und `ping`, was folgende Optionen ermöglicht:
 
+```shell
 Usage:
  mtr [options] hostname
 
@@ -836,6 +924,11 @@ Usage:
  -v, --version              output version information and exit
 
 See the 'man 8 mtr' for details.
+```
+
+Interessant ist z.B. die `-n`-Flag:
+
+```shell
 $ mtr -n --json www.aol.com
 {
     "report": {
@@ -1154,11 +1247,11 @@ $ mtr --json www.aol.com
 }
 ```
 
-Wie zu erkennen ist wird durch die `-n`-Flag die Hostnamen-Auflösungen übersprungen, was die Geschwindigkeit erhöht.
+Wie zu erkennen ist wird durch diese z.B. die Hostnamen-Auflösungen übersprungen, was die Geschwindigkeit erhöht.
 
 ### SS
 
-Netstat ist deprecated, es wird stattdessen dessen Nachfolger `ss` aus dem `iproute2`-Package verwendet:
+`netstat` ist deprecated, es wird stattdessen dessen Nachfolger `ss` aus dem `iproute2`-Package verwendet:
 
 ```plaintext
 Name         : iproute
@@ -1332,6 +1425,8 @@ Wie zu erkennen ist werden viele TCP-Verbindungen zu Webservern (Port 80 & Port 
 
 **Interpretieren Sie die Einträge in der Routing-Tabelle Ihres Rechners.**
 
+Zu Erkennen ist dass das Default-Gateway `141.62.66.250` ist, über das Netzwerkgerät `enp0s31f6`. Auf `localhost` wird über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt. Andere Subnetze werden über das Default-Gateway gerouted.
+
 ```shell
 $ ip route show table all
 default via 141.62.66.250 dev enp0s31f6
@@ -1345,9 +1440,9 @@ local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.6
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 ```
 
-Zu Erkennen ist dass das Default-Gateway `141.62.66.250` ist, über das Netzwerkgerät `enp0s31f6`. Auf `localhost` wird über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt. Andere Subnetze werden über das Default-Gateway gerouted.
-
 **Erweitern oder modifizieren Sie die Routing-Tabelle Ihres PC**
+
+Hier wurde nun eine neue Route hinzugefügt, welche das Subnet `192.0.2.128/25` über den Host `141.62.66.4` routed. Lädt der Host die richtigen Kernel-Module und wird IP-Forwarding mittels `sysctl` aktiviert, so könnte dieser damit als Router fungieren.
 
 ```shell
 $ sudo ip route add 192.0.2.128/25 via 141.62.66.4
@@ -1364,7 +1459,6 @@ local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.6
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 ```
 
-Hier wurde nun eine neue Route hinzugefügt, welche das Subnet `192.0.2.128/25` über den Host `141.62.66.4` routed.
 
 **iperf**
 
