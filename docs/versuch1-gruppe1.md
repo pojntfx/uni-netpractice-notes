@@ -1,10 +1,11 @@
-% Uni Network Practice Notes
-% Felix Pojtinger
-% \today
+% Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP
+% Gruppe 1 (Jakob Waibel, Daniel Hiller, Elia Wüstner und Felix Pojtinger)
+% Durchführung 2021-10-19, letzte Änderung \today
+\newpage
 \tableofcontents
 \newpage
 
-# Uni Network Practice Notes
+# Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP
 
 ## Introduction
 
@@ -82,6 +83,12 @@ $ dmesg -w
 
 Folgende Verbindungen konnten erkannt werden:
 
+![Buchse](./static/connector.jpeg){ width=200px }
+
+![Full](./static/full.jpeg){ width=200px }
+
+![Router](./static/router.jpeg){ width=200px }
+
 ```plaintext
 Desktop-Netzwerkkarte via CAT-6-Kabel → RJ45/LAN-Buchse an Tisch → Patch-Feld → Switch →  Router (mit IP) `142.62.66.5` → Rest der Infrastruktur
 ```
@@ -94,11 +101,11 @@ Patch-Feld → Switch → Router → Rest der Infrastruktur
 
 **Verfolgen Sie den Weg, auf dem die Pakete Ihres Rechners den gegenüberliegenden Netzwerkschrank erreichen**
 
-Mittels Glasfaserverbindung.
+![Der gegenüberliegende Netzwerkschrank wird durch Glasfaser erreicht. Wie im Bild zu sehen, sind zwei Glasfaserkabel an das Panel mit der Aufschrift "Panel B" angeschlossen. Zwei Kabel daher, da eines der beiden Kabel für das eingehende Signal reserviert ist und das andere für das ausgehende Signal. Durch diese beiden Kabel sind die Netzwerkschränke miteinander verbunden. Bei Glasfaserkabel muss beachtet werden, dass die Kabel nicht zu stark gebogen sind, da dies sonst zu Signalverlust führt.](./static/patch_panel.jpeg)
 
 **Warum ist im Netzwerkschrank wohl ein Hub installiert?**
 
-Es ist ein Switch installiert, sodass die verschiedenen Nodes im LAN-Netzwerk miteinander kommunizieren können. Dies ermöglicht zudem auch einfacheres Debugging über Sniffing.
+Es ist ein Hub installiert, sodass die verschiedenen Nodes im LAN-Netzwerk miteinander kommunizieren können. Dies ermöglicht zudem auch einfacheres Debugging über Sniffing.
 
 ### Überprüfung der korrekten Installation
 
@@ -120,6 +127,8 @@ $ ip a
 
 **Senden Sie einen ping-command an einen zweiten Rechner, der am gleichen Switch angeschlossen ist**
 
+Hier wird ein anderer Laborrechner, `141.62.66.4`, angepingt.
+
 ```shell
 $ ping 141.62.66.4
 PING 141.62.66.4 (141.62.66.4) 56(84) bytes of data.
@@ -135,6 +144,8 @@ rtt min/avg/max/mdev = 0.509/0.554/0.670/0.058 ms
 ```
 
 **Senden Sie einen ping-command zu einem Rechner, der am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist**
+
+Hier wird nun ein Rechner mit der IP `141.62.66.13` angepingt, welcher am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist. Wie zu sehen ist ist die Latenz um ~200 ms größer.
 
 ```shell
 $ ping 141.62.66.13
@@ -153,7 +164,7 @@ rtt min/avg/max/mdev = 0.752/0.791/0.853/0.033 ms
 **Senden Sie einen ping-command zum Labor-Router**
 
 ```shell
-$ $ ping 141.62.66.250
+$ ping 141.62.66.250
 PING 141.62.66.250 (141.62.66.250) 56(84) bytes of data.
 64 bytes from 141.62.66.250: icmp_seq=1 ttl=64 time=1.13 ms
 64 bytes from 141.62.66.250: icmp_seq=2 ttl=64 time=1.07 ms
