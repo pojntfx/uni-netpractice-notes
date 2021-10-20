@@ -96,6 +96,7 @@ $ dmesg -w
 **Verfolgen Sie den im Netzwerkschrank gepatchten Weg, auf dem die Pakete Ihres Rechners zum Router gelangen**
 
 Wie schon an den Bildern vorher illustriert lässt sich folgender Weg ableiten:
+
 ```plaintext
 Patch-Feld → Switch → Router → Rest der Infrastruktur
 ```
@@ -492,7 +493,6 @@ hrPING is Freeware, please share it!  See www.cfos.de for our other solutions:
 ```
 
 HRPing jedoch ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein Sicherheitsrisiko darstellt. Stattdessen wurde deshalb die freie Implementation `fping` verwendet:
-
 
 ```plaintext
 Name         : fping
@@ -1459,7 +1459,6 @@ local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.6
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 ```
 
-
 **iperf**
 
 Mittels iperf3 kann die Übertragungsrate zwischen zwei Hosts getestet werden.
@@ -1510,3 +1509,39 @@ iperf Done.
 ```
 
 Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu erwarten ist.
+
+### Nmap
+
+`Nmap` ist die Kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
+
+Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der `TCP Connect Port Scan`. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
+
+```plaintext
+-sS   TCP SYN Port Scan
+-sA   TCP ACK Port Scan
+-sU   UDP Port Scan
+```
+
+Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein Bereich von IPs, eine einzige IP oder eine Domain:
+
+```shell
+$ nmap 10.10.247.15                   # Scannen einer einzigen IP
+$ nmap 10.10.247.15 10.10.247.240     # Scannen mehrerer IPs
+$ nmap 10.10.247.15-240               # Scannen des Bereichs von .15-.240
+$ nmap scanme.nmap.org                # Scannen der Domain scanme.nmap.org
+```
+
+Es lassen sich ebenfalls die Ports definieren, welche auf einer IP gescannt werden sollen:
+
+```shell
+$ nmap 10.10.247.15 -p-               # Scannen der gesamten Portrange
+$ nmap 10.10.247.15 -p 21             # Scannen des Port 21
+$ nmap 10.10.247.15 -p 21-200         # Scannen alle Ports von 21 bis 200
+```
+
+Um Informationen bezüglich der verwendeten Versionen und Betriebssysteme zu erhalten können folgende Flags verwendet werden:
+
+```shell
+$ nmap 10.10.247.15 -sV               # Versucht die Version des Services zu ermitteln
+$ nmap 10.10.247.15 -O                # Versucht das Betriebsystem zu ermitteln
+```
