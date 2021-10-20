@@ -1,9 +1,11 @@
-% Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP
-% Gruppe 1 (Jakob Waibel, Daniel Hiller, Elia Wüstner und Felix Pojtinger)
-% Durchführung 2021-10-19, letzte Änderung \today
+\begin{titlepage}
+\author{Elia Wüstner, Daniel Hiller, Felix Pojtinger, Jakob Waibel} 
+\title{Praktikum Rechnernetze}
+\subtitle{Versuch 1: Troubleshooting TCP/IP} 
+\date{2021-10-19} 
+\maketitle
 \newpage
-\tableofcontents
-\newpage
+\end{titlepage}
 
 # Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP
 
@@ -1509,21 +1511,17 @@ iperf Done.
 ```
 
 Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu erwarten ist.
+### NMAP
+```Nmap``` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
 
-### Nmap
-
-`Nmap` ist die Kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
-
-Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der `TCP Connect Port Scan`. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
-
-```plaintext
--sS   TCP SYN Port Scan
--sA   TCP ACK Port Scan
--sU   UDP Port Scan
+Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der ```TCP connect Port Scan```. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
+```shell
+$ nmap 10.10.247.15 -sS               # TCP SYN Port Scan
+$ nmap 10.10.247.15 -sA               # TCP ACK Port Scan
+$ nmap 10.10.247.15 -sU               # UDP Port Scan
 ```
 
 Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein Bereich von IPs, eine einzige IP oder eine Domain:
-
 ```shell
 $ nmap 10.10.247.15                   # Scannen einer einzigen IP
 $ nmap 10.10.247.15 10.10.247.240     # Scannen mehrerer IPs
@@ -1532,7 +1530,6 @@ $ nmap scanme.nmap.org                # Scannen der Domain scanme.nmap.org
 ```
 
 Es lassen sich ebenfalls die Ports definieren, welche auf einer IP gescannt werden sollen:
-
 ```shell
 $ nmap 10.10.247.15 -p-               # Scannen der gesamten Portrange
 $ nmap 10.10.247.15 -p 21             # Scannen des Port 21
@@ -1540,7 +1537,6 @@ $ nmap 10.10.247.15 -p 21-200         # Scannen alle Ports von 21 bis 200
 ```
 
 Um Informationen bezüglich der verwendeten Versionen und Betriebssysteme zu erhalten können folgende Flags verwendet werden:
-
 ```shell
 $ nmap 10.10.247.15 -sV               # Versucht die Version des Services zu ermitteln
 $ nmap 10.10.247.15 -O                # Versucht das Betriebsystem zu ermitteln
