@@ -41,11 +41,11 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Überprüfen Sie zunächst die Netzkonfiguration Ihres PC. IP-Adresse, Subnetzmaske, Default-Gateway und DNS-Server Erfragen Sie den Klartextnamen Ihres PC.**
 
-IP-Addresse: `142.62.66.5`
-Subnetzmaske: `255.255.255.0`
-Default-Gateway: `141.62.66.250`
-DNS-Server: `141.62.66.250`
-Klartextnamen: `rn05`
+**IP-Addresse:** `142.62.66.5` \
+**Subnetzmaske:** `255.255.255.0` \
+**Default-Gateway:** `141.62.66.250`  
+**DNS-Server:** `141.62.66.250` \
+**Klartextnamen:** `rn05`
 
 **Wie können Sie die korrekte Installation der Netzwerkkarten-Treiber testen?**
 
