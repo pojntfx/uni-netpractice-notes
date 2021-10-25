@@ -359,7 +359,7 @@ Es findet sich die MAC-Addresse `4c:52:62:0e:54:8b`; ein Lookup der OUI ergibt: 
 
 **Was würde geschehen, wenn ein weiterer PC mit gleicher IP (aber selbstverständlich anderer MAC) ans gleiche Subnetz angeschlossen würde?**
 
-Ein reines Ethernet-Frame würde den Host noch korrekt erreichen, aber da die IP nun mehreren Hosts zugeordnet wäre würden IP-Packete nicht mehr den richtigen Host erreichen.
+Ein reines Ethernet-Frame würde den Host noch korrekt erreichen, aber da die IP nun mehreren Hosts zugeordnet wäre, würden IP-Packete nicht mehr den richtigen Host erreichen.
 
 **Vergleichen Sie die Vorteile / Nachteile einer statischen und dynamische ARP-Tabelle**
 
@@ -589,7 +589,7 @@ Output options:
 
 Die Verwendung ist ähnlich wie `ping`.
 
-**Weisen Sie mit Hilfe von HRPING nach, dass ein Ping, der zuerst eine ARP-Auflösung erforderlich macht, zu deutlich erhöhten Antwortzeiten führt.**
+**Weisen Sie mithilfe von HRPING nach, dass ein Ping, der zuerst eine ARP-Auflösung erforderlich macht, zu deutlich erhöhten Antwortzeiten führt.**
 
 ```shell
 $ fping -e 10.60.43.50
@@ -608,7 +608,7 @@ Nach dem Löschen der ARP-Tabelle ist eine deutlich längere Antwortzeit zu mess
 
 ### Traceroute & MTR
 
-**Versuchen Sie, den zentralen Peering-Point (DE-CIX) in Deutschland geographisch anhand des Namens zu lokalisieren.**
+**Versuchen Sie, den zentralen Peering-Point (DE-CIX) in Deutschland geografisch anhand des Namens zu lokalisieren.**
 
 ```shell
 $ traceroute de-cix.net
@@ -663,7 +663,7 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 
 **Beobachten Sie Zeitüberschreitungen? Wie können Sie tracert so manipulieren, dass möglichst selten Zeitüberschreitungen auftauchen?**
 
-Eine Zeitüberschreitung kann zwischen `firewall-h.hdm-stuttgart.de` und `stu-al30-1-te0-0-0-17.belwue.net` erkannt werden; hier wurde versucht das Timeout auf 5 Sekunden mittels `-w` zu setzen und mit `-I` über die Raw Sockets API direkt die Pakete am Kernel-Stack vorbei zu schicken, was jedoch in beiden Fällen die durch `* * *` gekennzeichneten Timeouts nicht umgehen kann.
+Eine Zeitüberschreitung kann zwischen `firewall-h.hdm-stuttgart.de` und `stu-al30-1-te0-0-0-17.belwue.net` erkannt werden; hier wurde versucht das Timeout auf 5 Sekunden mittels `-w` zu setzen und mit `-I` über die Raw Sockets API direkt die Pakete am Kernel-Stack vorbeizuschicken, was jedoch in beiden Fällen die durch `* * *` gekennzeichneten Timeouts nicht umgehen kann.
 
 ```shell
 $ traceroute --help
@@ -1278,7 +1278,7 @@ $ ss -tnp
 State      Recv-Q      Send-Q           Local Address:Port           Peer Address:Port      Process
 ```
 
-Wie zu erkennen ist werden viele TCP-Verbindungen zu Webservern (Port 80 & Port 443) aufgebaut, hier zu news.ycombinator.com, eff.org und Amazon.
+Wie zu erkennen ist, werden viele TCP-Verbindungen zu Webservern (Port 80 & Port 443) aufgebaut, hier zu news.ycombinator.com, eff.org und Amazon.
 
 ### Route
 
@@ -1286,7 +1286,7 @@ Wie zu erkennen ist werden viele TCP-Verbindungen zu Webservern (Port 80 & Port 
 
 **Interpretieren Sie die Einträge in der Routing-Tabelle Ihres Rechners.**
 
-Zu Erkennen ist dass das Default-Gateway `141.62.66.250` ist, über das Netzwerkgerät `enp0s31f6`. Auf `localhost` wird über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt. Andere Subnetze werden über das Default-Gateway gerouted.
+Zu Erkennen ist, dass das Default-Gateway `141.62.66.250` ist, über das Netzwerkgerät `enp0s31f6`. Auf `localhost` wird über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt. Andere Subnetze werden über das Default-Gateway gerouted.
 
 ```shell
 $ ip route show table all
@@ -1305,7 +1305,7 @@ broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 14
 
 **Erweitern oder modifizieren Sie die Routing-Tabelle Ihres PC**
 
-Hier wurde nun eine neue Route hinzugefügt, welche das Subnet `192.0.2.128/25` über den Host `141.62.66.4` routed. Lädt der Host die richtigen Kernel-Module und wird IP-Forwarding mittels `sysctl` aktiviert, so könnte dieser damit als Router fungieren.
+Hier wurde nun eine neue Route hinzugefügt, welche das Subnetz `192.0.2.128/25` über den Host `141.62.66.4` routed. Lädt der Host die richtigen Kernel-Module und wird IP-Weiterleitung mittels `sysctl` aktiviert, so könnte dieser damit als Router fungieren.
 
 ```shell
 $ sudo ip route add 192.0.2.128/25 via 141.62.66.4
@@ -1377,9 +1377,9 @@ Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, w
 
 ### Nmap
 
-`Nmap` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
+`Nmap` ist die Kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebssystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
 
-Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der `TCP connect Port Scan`. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
+Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (und die Standardeinstellung) ist der `TCP connect Port Scan`. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
 
 ```shell
 $ nmap 10.10.247.15 -sS               # TCP SYN Port Scan
