@@ -1,8 +1,40 @@
-# Praktikum Rechnernetze
-# Versuch 1: Troubleshooting TCP/IP
-## Elia Wüstner, Daniel Hiller, Felicitas Pojtinger, Jakob Waibel
-### 19.10.2021
+---
+title: "Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP"
+author: Gruppe 1 (Jakob Waibel, Daniel Hiller, Elia Wüstner, Felicitas Pojtinger)
+subtitle: Durchführung 2021-10-19
+geometry: margin=4cm
+header-includes:
+  - \usepackage{fancyhdr}
+  - \usepackage{xcolor}
+  - \usepackage{courier}
+  - \usepackage{lastpage}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \lhead{Praktikum Rechnernetze}
+  - \rhead{Overleaf}
+  - \rfoot{Seite \thepage\ von \pageref{LastPage}}
+  - \lstset{basicstyle=\small\ttfamily}
+  - \lstset{numbers=left}
+  - \lstset{numberstyle=\footnotesize}
+  - \lstset{stepnumber=1}
+  - \lstset{numbersep=5pt}
+  - \lstset{backgroundcolor=\color{white}}
+  - \lstset{showspaces=false}
+  - \lstset{showstringspaces=false}
+  - \lstset{showtabs=false}
+  - \lstset{tabsize=2}
+  - \lstset{captionpos=b}
+  - \lstset{breaklines=true}
+  - \lstset{breakatwhitespace=true}
+  - \lstset{breakautoindent=true}
+  - \lstset{linewidth=\textwidth}
+listings: true
+---
+
 \newpage
+\tableofcontents
+\newpage
+
 ## Introduction
 
 ### Contributing
@@ -14,6 +46,7 @@ These study materials are heavily based on [professor Kiefer's "Praktikum Rechne
 ![QR code to source repository](./static/qr.png){ width=150px }
 
 If you like the study materials, a GitHub star is always appreciated :)
+
 <div style="page-break-after: always;"></div>
 ### License
 ![AGPL-3.0 license badge](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
@@ -1507,10 +1540,13 @@ iperf Done.
 ```
 
 Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu erwarten ist.
-### NMAP
-```Nmap``` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
 
-Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der ```TCP connect Port Scan```. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
+### NMAP
+
+`Nmap` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
+
+Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der `TCP connect Port Scan`. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
+
 ```shell
 $ nmap 10.10.247.15 -sS               # TCP SYN Port Scan
 $ nmap 10.10.247.15 -sA               # TCP ACK Port Scan
@@ -1518,6 +1554,7 @@ $ nmap 10.10.247.15 -sU               # UDP Port Scan
 ```
 
 Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein Bereich von IPs, eine einzige IP oder eine Domain:
+
 ```shell
 $ nmap 10.10.247.15                   # Scannen einer einzigen IP
 $ nmap 10.10.247.15 10.10.247.240     # Scannen mehrerer IPs
@@ -1526,6 +1563,7 @@ $ nmap scanme.nmap.org                # Scannen der Domain scanme.nmap.org
 ```
 
 Es lassen sich ebenfalls die Ports definieren, welche auf einer IP gescannt werden sollen:
+
 ```shell
 $ nmap 10.10.247.15 -p-               # Scannen der gesamten Portrange
 $ nmap 10.10.247.15 -p 21             # Scannen des Port 21
@@ -1533,6 +1571,7 @@ $ nmap 10.10.247.15 -p 21-200         # Scannen alle Ports von 21 bis 200
 ```
 
 Um Informationen bezüglich der verwendeten Versionen und Betriebssysteme zu erhalten können folgende Flags verwendet werden:
+
 ```shell
 $ nmap 10.10.247.15 -sV               # Versucht die Version des Services zu ermitteln
 $ nmap 10.10.247.15 -O                # Versucht das Betriebsystem zu ermitteln
