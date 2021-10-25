@@ -1,22 +1,47 @@
-# Praktikum Rechnernetze
-# Versuch 1: Troubleshooting TCP/IP
-## Elia Wüstner, Daniel Hiller, Felicitas Pojtinger, Jakob Waibel
-### 19.10.2021
+\begin{titlepage}
+\author{Elia Wüstner, Daniel Hiller, Felicitas Pojtinger, Jakob Waibel} 
+\title{Praktikum Rechnernetze}
+\subtitle{Versuch 1: Troubleshooting TCP/IP} 
+\date{2021-10-19} 
+\maketitle
 \newpage
-## Introduction
+\end{titlepage}
+\newpage
 
-### Contributing
+\hypertarget{praktikum-rechnernetze-versuch-1-troubleshooting-tcpip}{%
+\section{Praktikum Rechnernetze: Versuch 1: Troubleshooting
+TCP/IP}\label{praktikum-rechnernetze-versuch-1-troubleshooting-tcpip}}
 
-These study materials are heavily based on [professor Kiefer's "Praktikum Rechnernetze" lecture at HdM Stuttgart](https://www.hdm-stuttgart.de/vorlesung_detail?vorlid=5212254).
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
 
-**Found an error or have a suggestion?** Please open an issue on GitHub ([github.com/pojntfx/uni-netpractice-notes](https://github.com/pojntfx/uni-netpractice-notes)):
+\hypertarget{contributing}{%
+\subsubsection{Contributing}\label{contributing}}
 
-![QR code to source repository](./static/qr.png){ width=150px }
+These study materials are heavily based on
+\href{https://www.hdm-stuttgart.de/vorlesung_detail?vorlid=5212254}{professor
+Kiefer's ``Praktikum Rechnernetze'' lecture at HdM Stuttgart}.
+
+\textbf{Found an error or have a suggestion?} Please open an issue on
+GitHub
+(\href{https://github.com/pojntfx/uni-netpractice-notes}{github.com/pojntfx/uni-netpractice-notes}):
+
+\begin{figure}
+\centering
+\includegraphics[width=1.5625in,height=\textheight]{./static/qr.png}
+\caption{QR code to source repository}
+\end{figure}
 
 If you like the study materials, a GitHub star is always appreciated :)
-<div style="page-break-after: always;"></div>
-### License
-![AGPL-3.0 license badge](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
+
+\hypertarget{license}{%
+\subsubsection{License}\label{license}}
+
+\begin{figure}
+\centering
+\includegraphics[width=1.33333in,height=\textheight]{https://www.gnu.org/graphics/agplv3-155x51.png}
+\caption{AGPL-3.0 license badge}
+\end{figure}
 
 Uni Network Practice Notes (c) 2021 Felicitas Pojtinger and contributors
 
@@ -24,28 +49,34 @@ SPDX-License-Identifier: AGPL-3.0
 
 \newpage
 
-## IP-Subnetz-Berechnung
+\hypertarget{ip-subnetz-berechnung}{%
+\subsection{IP-Subnetz-Berechnung}\label{ip-subnetz-berechnung}}
 
-**Ergänzen Sie die Tabelle**
+\textbf{Ergänzen Sie die Tabelle}
 
-![IP calc, part 1](./static/ipcalc_1.png)
-![IP calc, part 2](./static/ipcalc_2.png)
+\includegraphics{./static/ipcalc_1.png}
+\includegraphics{./static/ipcalc_2.png}
 
-## Tools des OS
+\hypertarget{tools-des-os}{%
+\subsection{Tools des OS}\label{tools-des-os}}
 
-### IP-Konfiguration
+\hypertarget{ip-konfiguration}{%
+\subsubsection{IP-Konfiguration}\label{ip-konfiguration}}
 
-**Überprüfen Sie zunächst die Netzkonfiguration Ihres PC. IP-Adresse, Subnetzmaske, Default-Gateway und DNS-Server Erfragen Sie den Klartextnamen Ihres PC.**
+\textbf{Überprüfen Sie zunächst die Netzkonfiguration Ihres PC.
+IP-Adresse, Subnetzmaske, Default-Gateway und DNS-Server Erfragen Sie
+den Klartextnamen Ihres PC.}
 
-**IP-Addresse:** `142.62.66.5` \
-**Subnetzmaske:** `255.255.255.0` \
-**Default-Gateway:** `141.62.66.250`  
-**DNS-Server:** `141.62.66.250` \
-**Klartextnamen:** `rn05`
+\textbf{IP-Addresse:} \texttt{142.62.66.5}\\
+\textbf{Subnetzmaske:} \texttt{255.255.255.0}\\
+\textbf{Default-Gateway:} \texttt{141.62.66.250}\\
+\textbf{DNS-Server:} \texttt{141.62.66.250}\\
+\textbf{Klartextnamen:} \texttt{rn05}
 
-**Wie können Sie die korrekte Installation der Netzwerkkarten-Treiber testen?**
+\textbf{Wie können Sie die korrekte Installation der
+Netzwerkkarten-Treiber testen?}
 
-```shell
+\begin{verbatim}
 $ lspci
 # ...
 00:1f.6 Ethernet controller: Intel Corporation Ethernet Connection (2) I219-LM
@@ -53,65 +84,110 @@ $ lspci
 $ find /sys | grep drivers.*00:1f.6
 # ...
 /sys/bus/pci/drivers/e1000e/0000:00:1f.6
-```
+\end{verbatim}
 
-**Testen Sie die DNS-Namensauflösung mit nslookup**
+\textbf{Testen Sie die DNS-Namensauflösung mit nslookup}
 
-Wir verwenden an dieser Stelle `dig`, da `nslookup` deprecated ist. Die Option `+noall` entfernt alle Display-Flags und `+answer` zeigt dann nur die Antwortsektion des Outputs an.
+Wir verwenden an dieser Stelle \texttt{dig}, da \texttt{nslookup}
+deprecated ist. Die Option \texttt{+noall} entfernt alle Display-Flags
+und \texttt{+answer} zeigt dann nur die Antwortsektion des Outputs an.
 
-```shell
+\begin{verbatim}
 $ dig +noall +answer +multiline www.hdm-stuttgart.de
 www.hdm-stuttgart.de. 3553 IN A 141.62.1.53
 www.hdm-stuttgart.de. 3553 IN A 141.62.1.59
-```
+\end{verbatim}
 
-Wir erhalten zwei Ergebnisse auf unsere Anfrage. Das könnte daran liegen, dass die HdM zur Lastenaufteilung zwei Webserver einsetzt.
+Wir erhalten zwei Ergebnisse auf unsere Anfrage. Das könnte daran
+liegen, dass die HdM zur Lastenaufteilung zwei Webserver einsetzt.
 
-### Anschluss des PC an das Labornetz
+\hypertarget{anschluss-des-pc-an-das-labornetz}{%
+\subsubsection{Anschluss des PC an das
+Labornetz}\label{anschluss-des-pc-an-das-labornetz}}
 
-**Betrachten Sie die Verbindungen der Labor-Switches untereinander. Welche Wege können Sie erkennen?**
+\textbf{Betrachten Sie die Verbindungen der Labor-Switches
+untereinander. Welche Wege können Sie erkennen?}
 
 Folgende Verbindungen konnten erkannt werden:
 
-![Unser Computer ist an die RJ-45-Buchse 1-01 angeschlossen. Das Kabel der Buchse führt dann in den Netzwerkschrank](./static/connector.jpeg){ width=200px }
+\begin{figure}
+\centering
+\includegraphics[width=2.08333in,height=\textheight]{./static/connector.jpeg}
+\caption{Unser Computer ist an die RJ-45-Buchse 1-01 angeschlossen. Das
+Kabel der Buchse führt dann in den Netzwerkschrank}
+\end{figure}
 
-![Auf diesem Bild ist der Netzwerkschrank zu sehen. Man sieht hier das Patchfeld, an welchem die 1-01 angeschlossen ist. Vom Patchfeld führt ein weiteres LAN-Kabel (CAT-5e) zu einem Switch.](./static/full.jpeg){ width=200px }
+\begin{figure}
+\centering
+\includegraphics[width=2.08333in,height=\textheight]{./static/full.jpeg}
+\caption{Auf diesem Bild ist der Netzwerkschrank zu sehen. Man sieht
+hier das Patchfeld, an welchem die 1-01 angeschlossen ist. Vom Patchfeld
+führt ein weiteres LAN-Kabel (CAT-5e) zu einem Switch.}
+\end{figure}
 
-![Der Switch ist dann mit dem hier zu sehenden Router verbunden. Der Router führt dann zur restlichen Infrastruktur des Hauses bzw. zum Internet.](./static/router.jpeg){ width=200px }
+\begin{figure}
+\centering
+\includegraphics[width=2.08333in,height=\textheight]{./static/router.jpeg}
+\caption{Der Switch ist dann mit dem hier zu sehenden Router verbunden.
+Der Router führt dann zur restlichen Infrastruktur des Hauses bzw. zum
+Internet.}
+\end{figure}
 
-Wenn die Verbindung am Patch-Panel zu 1-01 unterbrochen wird, so verliert die Netzwerkkarte die Verbindung, was der Kernel-Buffer bestätigt:
+Wenn die Verbindung am Patch-Panel zu 1-01 unterbrochen wird, so
+verliert die Netzwerkkarte die Verbindung, was der Kernel-Buffer
+bestätigt:
 
-```shell
+\begin{verbatim}
 $ dmesg -w
 # ...
 [    6.048643] e1000e 0000:00:1f.6 enp0s31f6: NIC Link is Up 1000 Mbps Full Duplex, Flow Control: None
 [ 1360.221984] e1000e 0000:00:1f.6 enp0s31f6: NIC Link is Down
 # ...
-```
+\end{verbatim}
 
-**Verfolgen Sie den im Netzwerkschrank gepatchten Weg, auf dem die Pakete Ihres Rechners zum Router gelangen**
+\textbf{Verfolgen Sie den im Netzwerkschrank gepatchten Weg, auf dem die
+Pakete Ihres Rechners zum Router gelangen}
 
-Wie schon an den Bildern vorher illustriert lässt sich folgender Weg ableiten:
+Wie schon an den Bildern vorher illustriert lässt sich folgender Weg
+ableiten:
 
-```plaintext
-Patch-Feld -> Switch -> Router -> Rest der Infrastruktur
-```
+\begin{verbatim}
+Patch-Feld → Switch → Router → Rest der Infrastruktur
+\end{verbatim}
 
-**Verfolgen Sie den Weg, auf dem die Pakete Ihres Rechners den gegenüberliegenden Netzwerkschrank erreichen**
+\textbf{Verfolgen Sie den Weg, auf dem die Pakete Ihres Rechners den
+gegenüberliegenden Netzwerkschrank erreichen}
 
-![Der gegenüberliegende Netzwerkschrank wird durch Glasfaser erreicht. Wie im Bild zu sehen, sind zwei Glasfaserkabel an das Panel mit der Aufschrift "Panel B" angeschlossen. Zwei Kabel daher, da eines der beiden Kabel für das eingehende Signal reserviert ist und das andere für das ausgehende Signal. Durch diese beiden Kabel sind die Netzwerkschränke miteinander verbunden. Bei Glasfaserkabel muss beachtet werden, dass die Kabel nicht zu stark gebogen sind, da dies sonst zu Signalverlust führt.](./static/patch_panel.jpeg)
+\begin{figure}
+\centering
+\includegraphics{./static/patch_panel.jpeg}
+\caption{Der gegenüberliegende Netzwerkschrank wird durch Glasfaser
+erreicht. Wie im Bild zu sehen, sind zwei Glasfaserkabel an das Panel
+mit der Aufschrift ``Panel B'' angeschlossen. Zwei Kabel daher, da eines
+der beiden Kabel für das eingehende Signal reserviert ist und das andere
+für das ausgehende Signal. Durch diese beiden Kabel sind die
+Netzwerkschränke miteinander verbunden. Bei Glasfaserkabel muss beachtet
+werden, dass die Kabel nicht zu stark gebogen sind, da dies sonst zu
+Signalverlust führt.}
+\end{figure}
 
-**Warum ist im Netzwerkschrank wohl ein Hub installiert?**
+\textbf{Warum ist im Netzwerkschrank wohl ein Hub installiert?}
 
-Es ist ein Hub installiert, sodass die verschiedenen Nodes im LAN-Netzwerk miteinander kommunizieren können. Dies ermöglicht zudem auch einfacheres Debugging über Sniffing.
+Es ist ein Hub installiert, sodass die verschiedenen Nodes im
+LAN-Netzwerk miteinander kommunizieren können. Dies ermöglicht zudem
+auch einfacheres Debugging über Sniffing.
 
-### Überprüfung der korrekten Installation
+\hypertarget{uxfcberpruxfcfung-der-korrekten-installation}{%
+\subsubsection{Überprüfung der korrekten
+Installation}\label{uxfcberpruxfcfung-der-korrekten-installation}}
 
-**Sehen Sie sich die IP-Konfiguration Ihres Rechners an durch Eingabe von ipconfig bzw. ipconfig/all in der DOS-Box.**
+\textbf{Sehen Sie sich die IP-Konfiguration Ihres Rechners an durch
+Eingabe von ipconfig bzw. ipconfig/all in der DOS-Box.}
 
-`ifconfig` ist deprecated, es wird stattdessen `ip` verwendet.
+\texttt{ifconfig} ist deprecated, es wird stattdessen \texttt{ip}
+verwendet.
 
-```shell
+\begin{verbatim}
 $ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -121,13 +197,14 @@ $ ip a
     link/ether 4c:52:62:0e:54:8b brd ff:ff:ff:ff:ff:ff
     inet 141.62.66.5/24 brd 141.62.66.255 scope global dynamic enp0s31f6
        valid_lft 11902sec preferred_lft 11902sec
-```
+\end{verbatim}
 
-**Senden Sie einen ping-command an einen zweiten Rechner, der am gleichen Switch angeschlossen ist**
+\textbf{Senden Sie einen ping-command an einen zweiten Rechner, der am
+gleichen Switch angeschlossen ist}
 
-Hier wird ein anderer Laborrechner, `141.62.66.4`, angepingt.
+Hier wird ein anderer Laborrechner, \texttt{141.62.66.4}, angepingt.
 
-```shell
+\begin{verbatim}
 $ ping 141.62.66.4
 PING 141.62.66.4 (141.62.66.4) 56(84) bytes of data.
 64 bytes from 141.62.66.4: icmp_seq=1 ttl=64 time=0.670 ms
@@ -139,13 +216,16 @@ PING 141.62.66.4 (141.62.66.4) 56(84) bytes of data.
 --- 141.62.66.4 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 4085ms
 rtt min/avg/max/mdev = 0.509/0.554/0.670/0.058 ms
-```
+\end{verbatim}
 
-**Senden Sie einen ping-command zu einem Rechner, der am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist**
+\textbf{Senden Sie einen ping-command zu einem Rechner, der am Switch im
+gegenüberliegenden Netzwerkschrank angeschlossen ist}
 
-Hier wird nun ein Rechner mit der IP `141.62.66.13` angepingt, welcher am Switch im gegenüberliegenden Netzwerkschrank angeschlossen ist. Wie zu sehen ist ist die Latenz um ~0.2 ms größer.
+Hier wird nun ein Rechner mit der IP \texttt{141.62.66.13} angepingt,
+welcher am Switch im gegenüberliegenden Netzwerkschrank angeschlossen
+ist. Wie zu sehen ist ist die Latenz um \textasciitilde0.2 ms größer.
 
-```shell
+\begin{verbatim}
 $ ping 141.62.66.13
 PING 141.62.66.13 (141.62.66.13) 56(84) bytes of data.
 64 bytes from 141.62.66.13: icmp_seq=1 ttl=128 time=0.786 ms
@@ -157,13 +237,14 @@ PING 141.62.66.13 (141.62.66.13) 56(84) bytes of data.
 --- 141.62.66.13 ping statistics ---
 5 packets transmitted, 5 received, 0% packet loss, time 4095ms
 rtt min/avg/max/mdev = 0.752/0.791/0.853/0.033 ms
-```
+\end{verbatim}
 
-**Senden Sie einen ping-command zum Labor-Router**
+\textbf{Senden Sie einen ping-command zum Labor-Router}
 
-Der Labor-Router hat die IP-Addresse `141.62.66.250`. Die Latenz beläuft sich bei diesem mal auf ~1.05 ms.
+Der Labor-Router hat die IP-Addresse \texttt{141.62.66.250}. Die Latenz
+beläuft sich bei diesem mal auf \textasciitilde1.05 ms.
 
-```shell
+\begin{verbatim}
 $ ping 141.62.66.250
 PING 141.62.66.250 (141.62.66.250) 56(84) bytes of data.
 64 bytes from 141.62.66.250: icmp_seq=1 ttl=64 time=1.13 ms
@@ -176,19 +257,23 @@ PING 141.62.66.250 (141.62.66.250) 56(84) bytes of data.
 --- 141.62.66.250 ping statistics ---
 6 packets transmitted, 6 received, 0% packet loss, time 5007ms
 rtt min/avg/max/mdev = 1.015/1.046/1.127/0.040 ms
-```
+\end{verbatim}
 
-\newpage
+\textbf{Starten Sie einen Web-Browser und überprüfen Sie die korrekte
+Funktion des DNS-Servers durch Aufruf einer beliebigen URL}
 
-**Starten Sie einen Web-Browser und überprüfen Sie die korrekte Funktion des DNS-Servers durch Aufruf einer beliebigen URL**
+\begin{figure}
+\centering
+\includegraphics{./static/screenshot.png}
+\caption{Screenshot}
+\end{figure}
 
-![Screenshot](./static/screenshot.png)
+Die Seite ist erreichbar und war davor nicht gecached. Daraus lässt sich
+schließen, dass die DNS-Abfrage erfolgreich funktioniert hat.
 
-Die Seite ist erreichbar und war davor nicht gecached. Daraus lässt sich schließen, dass die DNS-Abfrage erfolgreich funktioniert hat.
+\textbf{Sehen Sie sich den DNS-Cache an}
 
-**Sehen Sie sich den DNS-Cache an**
-
-```shell
+\begin{verbatim}
 $ sudo journalctl -u systemd-resolved
 -- Journal begins at Tue 2021-10-05 07:59:05 CEST, ends at Tue 2021-10-19 15:33:33 CEST. --
 Oct 19 15:31:00 rn05 systemd[1]: Starting Network Name Resolution...
@@ -269,17 +354,23 @@ Oct 19 15:33:30 rn05 systemd-resolved[34579]:         Failed TCP attempts: 0
 Oct 19 15:33:30 rn05 systemd-resolved[34579]:         Seen truncated packet: no
 Oct 19 15:33:30 rn05 systemd-resolved[34579]:         Seen OPT RR getting lost: no
 Oct 19 15:33:30 rn05 systemd-resolved[34579]:         Seen RRSIG RR missing: no
-```
+\end{verbatim}
 
-Wie zu erkennen ist, befinden sich mom. 2 Einträge im DNS-Cache: `test.com` und `example.com`, für welche jeweils die `A` und `AAAA`-Records gecached wurden.
+Wie zu erkennen ist, befinden sich mom. 2 Einträge im DNS-Cache:
+\texttt{test.com} und \texttt{example.com}, für welche jeweils die
+\texttt{A} und \texttt{AAAA}-Records gecached wurden.
 
-### Adress Resolution Protocol ARP
+\hypertarget{adress-resolution-protocol-arp}{%
+\subsubsection{Adress Resolution Protocol
+ARP}\label{adress-resolution-protocol-arp}}
 
-`arp` ist deprecated, es wird stattdessen `ip neigh` verwendet.
+\texttt{arp} ist deprecated, es wird stattdessen \texttt{ip\ neigh}
+verwendet.
 
-**Dokumentieren Sie den Inhalt der ARP-Tabelle Ihres PC (arp-a, DOS-Box).**
+\textbf{Dokumentieren Sie den Inhalt der ARP-Tabelle Ihres PC (arp-a,
+DOS-Box).}
 
-```shell
+\begin{verbatim}
 $ ip neigh show
 141.62.66.186 dev enp0s31f6 lladdr 10:82:86:01:36:6d STALE
 141.62.66.12 dev enp0s31f6 lladdr 4c:52:62:0e:e0:e9 STALE
@@ -289,11 +380,12 @@ $ ip neigh show
 141.62.66.13 dev enp0s31f6 lladdr 4c:52:62:0e:54:5d STALE
 141.62.66.22 dev enp0s31f6  FAILED
 141.62.66.216 dev enp0s31f6 lladdr 44:31:92:50:6c:61 STALE
-```
+\end{verbatim}
 
-**Nun pingen Sie einen beliebigen anderen Arbeitsplatz an und beobachten Sie evtl. Veränderungen der ARP-Tabelle**
+\textbf{Nun pingen Sie einen beliebigen anderen Arbeitsplatz an und
+beobachten Sie evtl. Veränderungen der ARP-Tabelle}
 
-```shell
+\begin{verbatim}
 $ ping 141.62.66.236
 PING 141.62.66.236 (141.62.66.236) 56(84) bytes of data.
 64 bytes from 141.62.66.236: icmp_seq=1 ttl=64 time=0.530 ms
@@ -312,13 +404,14 @@ $ ip neigh show
 141.62.66.13 dev enp0s31f6 lladdr 4c:52:62:0e:54:5d STALE
 141.62.66.22 dev enp0s31f6  FAILED
 141.62.66.216 dev enp0s31f6 lladdr 44:31:92:50:6c:61 STALE
-```
+\end{verbatim}
 
-Nun wurde die Adresse `141.62.66.236` zur ARP-Tabelle hinzugefügt.
+Nun wurde die Adresse \texttt{141.62.66.236} zur ARP-Tabelle
+hinzugefügt.
 
-**Ist die MAC-Adresse Ihres PC lokal oder global vergeben?**
+\textbf{Ist die MAC-Adresse Ihres PC lokal oder global vergeben?}
 
-```shell
+\begin{verbatim}
 $ ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
@@ -328,35 +421,58 @@ $ ip a
     link/ether 4c:52:62:0e:54:8b brd ff:ff:ff:ff:ff:ff
     inet 141.62.66.5/24 brd 141.62.66.255 scope global dynamic enp0s31f6
        valid_lft 10201sec preferred_lft 10201sec
-```
+\end{verbatim}
 
-Es findet sich die MAC-Addresse `4c:52:62:0e:54:8b`; ein Lookup der OUI ergibt: `4C:52:62 Fujitsu Technology Solutions GmbH`, woraus sich schließen lässt, dass die MAC global vergeben ist.
+Es findet sich die MAC-Addresse \texttt{4c:52:62:0e:54:8b}; ein Lookup
+der OUI ergibt: \texttt{4C:52:62\ Fujitsu\ Technology\ Solutions\ GmbH},
+woraus sich schließen lässt, dass die MAC global vergeben ist.
 
-**Was würde geschehen, wenn ein weiterer PC mit gleicher IP (aber selbstverständlich anderer MAC) ans gleiche Subnetz angeschlossen würde?**
+\textbf{Was würde geschehen, wenn ein weiterer PC mit gleicher IP (aber
+selbstverständlich anderer MAC) ans gleiche Subnetz angeschlossen
+würde?}
 
-Ein reines Ethernet-Frame würde den Host noch korrekt erreichen, aber da die IP nun mehreren Hosts zugeordnet wäre würden IP-Packete nicht mehr den richtigen Host erreichen.
+Ein reines Ethernet-Frame würde den Host noch korrekt erreichen, aber da
+die IP nun mehreren Hosts zugeordnet wäre würden IP-Packete nicht mehr
+den richtigen Host erreichen.
 
-**Vergleichen Sie die Vorteile / Nachteile einer statischen und dynamische ARP-Tabelle**
+\textbf{Vergleichen Sie die Vorteile / Nachteile einer statischen und
+dynamische ARP-Tabelle}
 
 Vorteile einer statischen/Nachteile einer dynamischen:
 
-- Schneller und weniger Traffic; ARP-Request muss nicht gemacht werden
-- Chain of Trust ist kürzer, da nicht dem Host, welche den ARP-Request beantwortet, vertraut werden muss
+\begin{itemize}
+\tightlist
+\item
+  Schneller und weniger Traffic; ARP-Request muss nicht gemacht werden
+\item
+  Chain of Trust ist kürzer, da nicht dem Host, welche den ARP-Request
+  beantwortet, vertraut werden muss
+\end{itemize}
 
 Vorteile einer dynamischen/Nachteile einer statischen:
 
-- Wenn Geräte entfernt werden, dann müssen die Einträge manuell gelöscht werden
-- Neue Geräte müssen nicht manuell hinzugefügt werden
+\begin{itemize}
+\tightlist
+\item
+  Wenn Geräte entfernt werden, dann müssen die Einträge manuell gelöscht
+  werden
+\item
+  Neue Geräte müssen nicht manuell hinzugefügt werden
+\end{itemize}
 
-**Warum wird die ARP-Tabelle ganz oder teilweise nach Ablauf einer bestimmten Zeit gelöscht, wie Sie leicht nachvollziehen können?**
+\textbf{Warum wird die ARP-Tabelle ganz oder teilweise nach Ablauf einer
+bestimmten Zeit gelöscht, wie Sie leicht nachvollziehen können?}
 
-Durch die Löschung der ARP-Tabelle werden die ARP-Anfragen erneut gemacht; wenn Geräte zum Netzwerk hinzukommen oder entfernt werden, so werden diese Änderungen dadurch repräsentiert.
+Durch die Löschung der ARP-Tabelle werden die ARP-Anfragen erneut
+gemacht; wenn Geräte zum Netzwerk hinzukommen oder entfernt werden, so
+werden diese Änderungen dadurch repräsentiert.
 
-### Ping
+\hypertarget{ping}{%
+\subsubsection{Ping}\label{ping}}
 
-**Ping-Nutzung**
+\textbf{Ping-Nutzung}
 
-```shell
+\begin{verbatim}
 $ ping --help
 Usage
   ping [options] <destination>
@@ -403,11 +519,11 @@ IPv6 options:
   -N <nodeinfo opt>  use icmp6 node info query, try <help> as argument
 
 For more details see ping(8).
-```
+\end{verbatim}
 
 Erzwungenes IPv4:
 
-```shell
+\begin{verbatim}
 $ ping -4 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.58 ms
@@ -416,11 +532,11 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 --- google.com ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1002ms
 rtt min/avg/max/mdev = 4.582/4.989/5.397/0.407 ms
-```
+\end{verbatim}
 
 Nur zwei Pakete:
 
-```
+\begin{verbatim}
 praktikum@rn05:~$ ping -c 2 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.45 ms
@@ -429,11 +545,11 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 --- google.com ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 1002ms
 rtt min/avg/max/mdev = 4.447/4.453/4.460/0.006 ms
-```
+\end{verbatim}
 
 2 Sekunden Pause zwischen den Paketen:
 
-```shell
+\begin{verbatim}
 $ ping -i 2 google.com
 PING google.com (142.250.185.78) 56(84) bytes of data.
 64 bytes from fra16s48-in-f14.1e100.net (142.250.185.78): icmp_seq=1 ttl=114 time=4.69 ms
@@ -442,13 +558,13 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 --- google.com ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 2003ms
 rtt min/avg/max/mdev = 4.586/4.639/4.693/0.053 ms
-```
+\end{verbatim}
 
-**HRPing-Nutzung**
+\textbf{HRPing-Nutzung}
 
 HRPing ist ein erweiteres Ping-Command mit folgenden Optionen:
 
-```shell
+\begin{verbatim}
 $ wine64 hrping.exe
 This is hrPING v5.04 by cFos Software GmbH -- http://www.cfos.de
 
@@ -488,11 +604,15 @@ hrPING is Freeware, please share it!  See www.cfos.de for our other solutions:
   -- Internet Acceleration via Traffic Shaping     : cFosSpeed
   -- Webserver for home users and professionals    : cFos Personal Net
   -- IPv6 Connectivity for XP, Vista and Windows 7 : cFos IPv6 Link
-```
+\end{verbatim}
 
-HRPing jedoch ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein Sicherheitsrisiko darstellt. Stattdessen wurde deshalb die freie Implementation `fping` verwendet:
+HRPing jedoch ist unfreie Software und respektiert deshalb nicht die
+digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht
+auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein
+Sicherheitsrisiko darstellt. Stattdessen wurde deshalb die freie
+Implementation \texttt{fping} verwendet:
 
-```plaintext
+\begin{verbatim}
 Name         : fping
 Version      : 5.0
 Release      : 3.fc34
@@ -508,11 +628,11 @@ Description  : fping is a ping-like program which can determine the
              : accessibility of multiple hosts using ICMP echo requests. fping
              : is designed for parallelized monitoring of large numbers of
              : systems, and is developed with ease of use in scripting in mind.
-```
+\end{verbatim}
 
 Diese hat ähnliche Optionen:
 
-```shell
+\begin{verbatim}
 $ fping --help
 Usage: fping [options] [targets...]
 
@@ -556,13 +676,15 @@ Output options:
    -u, --unreach      show targets that are unreachable
    -v, --version      show version
    -x, --reachable=N  shows if >=N hosts are reachable or not
-```
+\end{verbatim}
 
-Die Verwendung ist ähnlich wie `ping`.
+Die Verwendung ist ähnlich wie \texttt{ping}.
 
-**Weisen Sie mit Hilfe von HRPING nach, dass ein Ping, der zuerst eine ARP-Auflösung erforderlich macht, zu deutlich erhöhten Antwortzeiten führt.**
+\textbf{Weisen Sie mit Hilfe von HRPING nach, dass ein Ping, der zuerst
+eine ARP-Auflösung erforderlich macht, zu deutlich erhöhten
+Antwortzeiten führt.}
 
-```shell
+\begin{verbatim}
 $ fping -e 10.60.43.50
 10.60.43.50 is alive (70.9 ms)
 $ sudo ip -s -s neigh flush all
@@ -573,15 +695,18 @@ $ sudo ip -s -s neigh flush all
 *** Flush is complete after 1 round ***
 $ fping -e 10.60.43.50
 10.60.43.50 is alive (212 ms)
-```
+\end{verbatim}
 
-Zu erkennen ist, dass nach der Löschen der ARP-Tabelle eine deutlich längere Antwortzeit zu messen ist.
+Zu erkennen ist, dass nach der Löschen der ARP-Tabelle eine deutlich
+längere Antwortzeit zu messen ist.
 
-### Traceroute & MTR
+\hypertarget{traceroute-mtr}{%
+\subsubsection{Traceroute \& MTR}\label{traceroute-mtr}}
 
-**Versuchen Sie, den zentralen Peering-Point (DE-CIX) in Deutschland geographisch anhand des Namens zu lokalisieren.**
+\textbf{Versuchen Sie, den zentralen Peering-Point (DE-CIX) in
+Deutschland geographisch anhand des Namens zu lokalisieren.}
 
-```shell
+\begin{verbatim}
 $ traceroute de-cix.net
 traceroute to de-cix.net (46.31.121.136), 30 hops max, 60 byte packets
  1  opnsense-router.rnlabor.hdm-stuttgart.de (141.62.66.250)  0.509 ms  1.566 ms  0.991 ms
@@ -598,18 +723,32 @@ traceroute to de-cix.net (46.31.121.136), 30 hops max, 60 byte packets
 12  * * *
 13  * * *
 14  *^C
-```
+\end{verbatim}
 
-1. `opnsense-router.rnlabor.hdm-stuttgart.de`: Gateway des RN-Labors
-2. `ciscovlgw318.hdm-stuttgart.de`: Gateway zwischen RN-Labor-Router und Firewall
-3. `firewall-h.hdm-stuttgart.de`: Firewall der HdM
-4. `stu-al30-1-te0-0-0-17.belwue.net` und `stu-nwz-a99-hu0-3-0-5.belwue.net`: Router Belwue in Stuttgart
-5. `fra-decix-1-hu0-0-0-4.belwue.net`: Router Belwue in Frankfurt
-6. `sgw2-te-0-0-2-3-ixp.fra.de-cix.net`: Router DE-CIX in Frankfurt
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{opnsense-router.rnlabor.hdm-stuttgart.de}: Gateway des
+  RN-Labors
+\item
+  \texttt{ciscovlgw318.hdm-stuttgart.de}: Gateway zwischen
+  RN-Labor-Router und Firewall
+\item
+  \texttt{firewall-h.hdm-stuttgart.de}: Firewall der HdM
+\item
+  \texttt{stu-al30-1-te0-0-0-17.belwue.net} und
+  \texttt{stu-nwz-a99-hu0-3-0-5.belwue.net}: Router Belwue in Stuttgart
+\item
+  \texttt{fra-decix-1-hu0-0-0-4.belwue.net}: Router Belwue in Frankfurt
+\item
+  \texttt{sgw2-te-0-0-2-3-ixp.fra.de-cix.net}: Router DE-CIX in
+  Frankfurt
+\end{enumerate}
 
-**Zeichnen Sie den Weg eines Pakets zu www.aol.com auf.**
+\textbf{Zeichnen Sie den Weg eines Pakets zu www.aol.com auf.}
 
-```shell
+\begin{verbatim}
 $ traceroute www.aol.com
 traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
  1  opnsense.rnlabor.hdm-stuttgart.de (141.62.66.250)  1.284 ms  0.653 ms  0.956 ms
@@ -626,13 +765,20 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 12  lo0.fab2-1-gdc.ir2.yahoo.com (77.238.190.3)  29.678 ms lo0.fab3-1-gdc.ir2.yahoo.com (77.238.190.4)  29.709 ms lo0.fab2-1-gdc.ir2.yahoo.com (77.238.190.3)  29.842 ms
 13  usw2-1-lba.ir2.yahoo.com (77.238.190.103)  29.724 ms  29.602 ms usw1-1-lba.ir2.yahoo.com (77.238.190.102)  29.750 ms
 14  media-router-aol71.prod.media.vip.ir2.yahoo.com (212.82.100.163)  29.546 ms  30.166 ms  29.797 ms
-```
+\end{verbatim}
 
-**Beobachten Sie Zeitüberschreitungen? Wie können Sie tracert so manipulieren, dass möglichst selten Zeitüberschreitungen auftauchen?**
+\textbf{Beobachten Sie Zeitüberschreitungen? Wie können Sie tracert so
+manipulieren, dass möglichst selten Zeitüberschreitungen auftauchen?}
 
-Eine Zeitüberschreitung kann zwischen `firewall-h.hdm-stuttgart.de` und `stu-al30-1-te0-0-0-17.belwue.net` erkannt werden; hier wurde versucht das Timeout auf 5 Sekunden mittels `-w` zu setzen und mit `-I` über die Raw Sockets API direkt die Pakete am Kernel-Stack vorbei zu schicken, was jedoch in beiden Fällen die durch `* * *` gekennzeichneten Timeouts nicht umgehen kann.
+Eine Zeitüberschreitung kann zwischen
+\texttt{firewall-h.hdm-stuttgart.de} und
+\texttt{stu-al30-1-te0-0-0-17.belwue.net} erkannt werden; hier wurde
+versucht das Timeout auf 5 Sekunden mittels \texttt{-w} zu setzen und
+mit \texttt{-I} über die Raw Sockets API direkt die Pakete am
+Kernel-Stack vorbei zu schicken, was jedoch in beiden Fällen die durch
+\texttt{*\ *\ *} gekennzeichneten Timeouts nicht umgehen kann.
 
-```shell
+\begin{verbatim}
 $ traceroute --help
 Usage:
   traceroute [ -46dFITnreAUDV ] [ -f first_ttl ] [ -g gate,... ] [ -i device ] [ -m max_ttl ] [ -N squeries ] [ -p port ] [ -t tos ] [ -l flow_label ] [ -w MAX,HERE,NEAR ] [ -q nqueries ] [ -s src_addr ] [ -z sendwait ] [ --fwmark=num ] host [ packetlen ]
@@ -770,13 +916,14 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 12  lo0.fab3-1-gdc.ir2.yahoo.com (77.238.190.4)  29.757 ms  29.662 ms  29.707 ms
 13  usw2-1-lba.ir2.yahoo.com (77.238.190.103)  29.685 ms  29.690 ms  29.696 ms
 14  media-router-aol71.prod.media.vip.ir2.yahoo.com (212.82.100.163)  29.631 ms  29.915 ms  30.152 ms
-```
+\end{verbatim}
 
-**Besuchen Sie das DENIC (www.denic.de) und erfragen Sie den Besitzer von Domain-Namen, die Sie interessieren.**
+\textbf{Besuchen Sie das DENIC (www.denic.de) und erfragen Sie den
+Besitzer von Domain-Namen, die Sie interessieren.}
 
 Hier z.B. die HdM Stuttgart:
 
-```shell
+\begin{verbatim}
 $ whois www.hdm-stuttgart.de
 [Querying whois.denic.de]
 [whois.denic.de]
@@ -805,11 +952,11 @@ Nserver: iz-net-3.hdm-stuttgart.de 141.62.1.3
 Nserver: iz-net-4.hdm-stuttgart.de 141.62.1.4
 Status: connect
 Changed: 2015-04-22T16:37:06+02:00
-```
+\end{verbatim}
 
 Und die Electronic Frontier Foundation:
 
-```shell
+\begin{verbatim}
 $ whois eff.org
 [Querying whois.pir.org]
 [whois.pir.org]
@@ -842,13 +989,13 @@ For more information on Whois status codes, please visit https://icann.org/epp
 Access to Public Interest Registry WHOIS information is provided to assist persons in determining the contents of a domain name registration record in the Public Interest Registry registry database. The data in this record is provided by Public Interest Registry for informational purposes only, and Public Interest Registry does not guarantee its accuracy. This service is intended only for query-based access. You agree that you will use this data only for lawful purposes and that, under no circumstances will you use this data to (a) allow, enable, or otherwise support the transmission by e-mail, telephone, or facsimile of mass unsolicited, commercial advertising or solicitations to entities other than the data recipient's own existing customers; or (b) enable high volume, automated, electronic processes that send queries or data to the systems of Registry Operator, a Registrar, or Afilias except as reasonably necessary to register domain names or modify existing registrations. All rights reserved. Public Interest Registry reserves the right to modify these terms at any time. By submitting this query, you agree to abide by this policy.
 
 The Registrar of Record identified in this output may have an RDDS service that can be queried for additional information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
-```
+\end{verbatim}
 
-**Sehen Sie sich die Möglichkeiten von Pathping an.**
+\textbf{Sehen Sie sich die Möglichkeiten von Pathping an.}
 
-Als freie Alternative zu Pathping wurde `mtr` verwendet:
+Als freie Alternative zu Pathping wurde \texttt{mtr} verwendet:
 
-```plaintext
+\begin{verbatim}
 Name         : mtr
 Epoch        : 2
 Version      : 0.94
@@ -875,11 +1022,12 @@ Description  : MTR combines the functionality of the 'traceroute' and 'ping'
              : MTR provides two user interfaces: an ncurses interface, useful
              : for the command line, e.g. for SSH sessions; and a GTK interface
              : for X (provided in the mtr-gtk package).
-```
+\end{verbatim}
 
-`mtr` kombiniert die Funktionalität von `traceroute` und `ping`, was folgende Optionen ermöglicht:
+\texttt{mtr} kombiniert die Funktionalität von \texttt{traceroute} und
+\texttt{ping}, was folgende Optionen ermöglicht:
 
-```shell
+\begin{verbatim}
 Usage:
  mtr [options] hostname
 
@@ -922,11 +1070,11 @@ Usage:
  -v, --version              output version information and exit
 
 See the 'man 8 mtr' for details.
-```
+\end{verbatim}
 
-Interessant ist z.B. die `-n`-Flag:
+Interessant ist z.B. die \texttt{-n}-Flag:
 
-```shell
+\begin{verbatim}
 $ mtr -n --json www.aol.com
 {
     "report": {
@@ -1243,15 +1391,18 @@ $ mtr --json www.aol.com
         ]
     }
 }
-```
+\end{verbatim}
 
-Wie zu erkennen ist wird durch diese z.B. die Hostnamen-Auflösungen übersprungen, was die Geschwindigkeit erhöht.
+Wie zu erkennen ist wird durch diese z.B. die Hostnamen-Auflösungen
+übersprungen, was die Geschwindigkeit erhöht.
 
-### SS
+\hypertarget{ss}{%
+\subsubsection{SS}\label{ss}}
 
-`netstat` ist deprecated, es wird stattdessen dessen Nachfolger `ss` aus dem `iproute2`-Package verwendet:
+\texttt{netstat} ist deprecated, es wird stattdessen dessen Nachfolger
+\texttt{ss} aus dem \texttt{iproute2}-Package verwendet:
 
-```plaintext
+\begin{verbatim}
 Name         : iproute
 Version      : 5.10.0
 Release      : 2.fc34
@@ -1266,13 +1417,14 @@ License      : GPLv2+ and Public Domain
 Description  : The iproute package contains networking utilities (ip and rtmon,
              : for example) which are designed to use the advanced networking
              : capabilities of the Linux kernel.
-```
+\end{verbatim}
 
-**Gehen Sie ins www und beobachten Sie die Veränderungen der netstat-Tabelle (netstat –an). Interpretieren Sie die Anzeige**
+\textbf{Gehen Sie ins www und beobachten Sie die Veränderungen der
+netstat-Tabelle (netstat --an). Interpretieren Sie die Anzeige}
 
 Zuvor:
 
-```shell
+\begin{verbatim}
 $ ss -tnp
 State                  Recv-Q             Send-Q                                                    Local Address:Port                                   Peer Address:Port             Process
 FIN-WAIT-1             0                  1                                                           10.60.54.18:60340                                104.17.239.204:443
@@ -1289,11 +1441,11 @@ FIN-WAIT-1             0                  1                                     
 ESTAB                  0                  0                                                           10.60.54.18:57766                                 159.69.63.133:443               users:(("nextcloud",pid=4890,fd=38))
 FIN-WAIT-1             0                  1                                                           10.60.54.18:58314                                  104.244.42.2:443
 FIN-WAIT-1             0                  1                                                           10.60.54.18:41736                               185.199.109.154:443
-```
+\end{verbatim}
 
-Nach dem Aufruf von `news.ycombinator.com`:
+Nach dem Aufruf von \texttt{news.ycombinator.com}:
 
-```shell
+\begin{verbatim}
 $ ss -tnp
 State                  Recv-Q             Send-Q                                                    Local Address:Port                                   Peer Address:Port             Process
 FIN-WAIT-1             0                  1                                                           10.60.54.18:60340                                104.17.239.204:443
@@ -1329,18 +1481,21 @@ FIN-WAIT-1             0                  1                                     
 FIN-WAIT-1             0                  1                                                           10.60.54.18:38950                                104.17.233.204:443
 ESTAB                  0                  0                              [2001:7c7:2121:8d00:1902:f308:6c8b:acb7]:50102                         [2606:50c0:8001::153]:443               users:(("gnome-software",pid=4888,fd=92))
 ESTAB                  0                  0                              [2001:7c7:2121:8d00:1902:f308:6c8b:acb7]:50100                         [2606:50c0:8001::153]:443               users:(("gnome-software",pid=4888,fd=42))
-```
+\end{verbatim}
 
-Wie zu sehen ist wurde eine TCP-Verbindung mit `news.ycombinator.com` aufgebaut:
+Wie zu sehen ist wurde eine TCP-Verbindung mit
+\texttt{news.ycombinator.com} aufgebaut:
 
-```shell
+\begin{verbatim}
 $ dig +noall +answer news.ycombinator.com
-news.ycombinator.com.	228	IN	A	209.216.230.240
-```
+news.ycombinator.com.   228 IN  A   209.216.230.240
+\end{verbatim}
 
-**Testen Sie nun die Verbindung zwischen Ihrem PC und dem PC einer anderen Praktikumsgruppe und loten Sie die Möglichkeiten zur Verkehrsanalyse aus (netstat –s).**
+\textbf{Testen Sie nun die Verbindung zwischen Ihrem PC und dem PC einer
+anderen Praktikumsgruppe und loten Sie die Möglichkeiten zur
+Verkehrsanalyse aus (netstat --s).}
 
-```shell
+\begin{verbatim}
 # Auf Host A
 $ ss -tlnp
 State    Recv-Q   Send-Q           Local Address:Port       Peer Address:Port   Process
@@ -1370,19 +1525,22 @@ asdf
 asdf
 $ ss -tnp | grep 6767
 State      Recv-Q      Send-Q           Local Address:Port            Peer Address:Port     Process
-```
+\end{verbatim}
 
-Wie zu Erkennen ist wurde eine TCP-Verbindung zwischen Host A und Host B erstellt, über welcher hier folgende Nachricht gesendet wurde:
+Wie zu Erkennen ist wurde eine TCP-Verbindung zwischen Host A und Host B
+erstellt, über welcher hier folgende Nachricht gesendet wurde:
 
-```plaintext
+\begin{verbatim}
 asdf
 
 asdf
-```
+\end{verbatim}
 
-**Beobachten, dokumentieren und interpretieren Sie die Veränderungen der netstat-Tabelle beim „Durchklicken“ eines beliebigen Internet-Angebots.**
+\textbf{Beobachten, dokumentieren und interpretieren Sie die
+Veränderungen der netstat-Tabelle beim „Durchklicken`` eines beliebigen
+Internet-Angebots.}
 
-```shell
+\begin{verbatim}
 $ ss -tnp
 State      Recv-Q      Send-Q           Local Address:Port           Peer Address:Port      Process
 $ ss -tnp
@@ -1413,19 +1571,27 @@ ESTAB 0      0        141.62.66.5:34436   162.219.224.163:443   users:(("firefox
 ESTAB 0      0        141.62.66.5:44868       65.9.84.191:80    users:(("firefox-esr",pid=36809,fd=140))
 $ ss -tnp
 State      Recv-Q      Send-Q           Local Address:Port           Peer Address:Port      Process
-```
+\end{verbatim}
 
-Wie zu erkennen ist werden viele TCP-Verbindungen zu Webservern (Port 80 & Port 443) aufgebaut, hier zu news.ycombinator.com, eff.org und Amazon.
+Wie zu erkennen ist werden viele TCP-Verbindungen zu Webservern (Port 80
+\& Port 443) aufgebaut, hier zu news.ycombinator.com, eff.org und
+Amazon.
 
-### Route
+\hypertarget{route}{%
+\subsubsection{Route}\label{route}}
 
-`route` ist deprecated, es wird stattdessen `ip route` verwendet.
+\texttt{route} ist deprecated, es wird stattdessen \texttt{ip\ route}
+verwendet.
 
-**Interpretieren Sie die Einträge in der Routing-Tabelle Ihres Rechners.**
+\textbf{Interpretieren Sie die Einträge in der Routing-Tabelle Ihres
+Rechners.}
 
-Zu Erkennen ist dass das Default-Gateway `141.62.66.250` ist, über das Netzwerkgerät `enp0s31f6`. Auf `localhost` wird über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt. Andere Subnetze werden über das Default-Gateway gerouted.
+Zu Erkennen ist dass das Default-Gateway \texttt{141.62.66.250} ist,
+über das Netzwerkgerät \texttt{enp0s31f6}. Auf \texttt{localhost} wird
+über den Kernel geroutet, d.h. dass Traffic niemals das System verlässt.
+Andere Subnetze werden über das Default-Gateway gerouted.
 
-```shell
+\begin{verbatim}
 $ ip route show table all
 default via 141.62.66.250 dev enp0s31f6
 141.62.66.0/24 dev enp0s31f6 proto kernel scope link src 141.62.66.5
@@ -1436,13 +1602,16 @@ broadcast 127.255.255.255 dev lo table local proto kernel scope link src 127.0.0
 broadcast 141.62.66.0 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.66.5
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
-```
+\end{verbatim}
 
-**Erweitern oder modifizieren Sie die Routing-Tabelle Ihres PC**
+\textbf{Erweitern oder modifizieren Sie die Routing-Tabelle Ihres PC}
 
-Hier wurde nun eine neue Route hinzugefügt, welche das Subnet `192.0.2.128/25` über den Host `141.62.66.4` routed. Lädt der Host die richtigen Kernel-Module und wird IP-Forwarding mittels `sysctl` aktiviert, so könnte dieser damit als Router fungieren.
+Hier wurde nun eine neue Route hinzugefügt, welche das Subnet
+\texttt{192.0.2.128/25} über den Host \texttt{141.62.66.4} routed. Lädt
+der Host die richtigen Kernel-Module und wird IP-Forwarding mittels
+\texttt{sysctl} aktiviert, so könnte dieser damit als Router fungieren.
 
-```shell
+\begin{verbatim}
 $ sudo ip route add 192.0.2.128/25 via 141.62.66.4
 $ ip route show table all
 default via 141.62.66.250 dev enp0s31f6
@@ -1455,13 +1624,14 @@ broadcast 127.255.255.255 dev lo table local proto kernel scope link src 127.0.0
 broadcast 141.62.66.0 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.66.5
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
-```
+\end{verbatim}
 
-**iperf**
+\textbf{iperf}
 
-Mittels iperf3 kann die Übertragungsrate zwischen zwei Hosts getestet werden.
+Mittels iperf3 kann die Übertragungsrate zwischen zwei Hosts getestet
+werden.
 
-```shell
+\begin{verbatim}
 # Host A
 $ iperf3 -s
 -----------------------------------------------------------
@@ -1504,36 +1674,48 @@ Connecting to host 141.62.66.5, port 5201
 [  5]   0.00-10.00  sec  1008 MBytes   845 Mbits/sec                  receiver
 
 iperf Done.
-```
+\end{verbatim}
 
-Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu erwarten ist.
-### NMAP
-```Nmap``` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
+Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden
+können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu
+erwarten ist. \#\#\# NMAP \texttt{Nmap} ist die kurzform für Network
+Mapper. Mit diesem kann man Ports scannen, Informationen über die
+Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als
+auch eigene Skripts verwenden.
 
-Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige (auch default) ist der ```TCP connect Port Scan```. Es gibt noch weitere, welche situativ über Flags verwendet werden können:
-```shell
+Es gibt verschiedene Möglichkeiten Scans durchzuführen, der gängige
+(auch default) ist der \texttt{TCP\ connect\ Port\ Scan}. Es gibt noch
+weitere, welche situativ über Flags verwendet werden können:
+
+\begin{verbatim}
 $ nmap 10.10.247.15 -sS               # TCP SYN Port Scan
 $ nmap 10.10.247.15 -sA               # TCP ACK Port Scan
 $ nmap 10.10.247.15 -sU               # UDP Port Scan
-```
+\end{verbatim}
 
-Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein Bereich von IPs, eine einzige IP oder eine Domain:
-```shell
+Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein
+Bereich von IPs, eine einzige IP oder eine Domain:
+
+\begin{verbatim}
 $ nmap 10.10.247.15                   # Scannen einer einzigen IP
 $ nmap 10.10.247.15 10.10.247.240     # Scannen mehrerer IPs
 $ nmap 10.10.247.15-240               # Scannen des Bereichs von .15-.240
 $ nmap scanme.nmap.org                # Scannen der Domain scanme.nmap.org
-```
+\end{verbatim}
 
-Es lassen sich ebenfalls die Ports definieren, welche auf einer IP gescannt werden sollen:
-```shell
+Es lassen sich ebenfalls die Ports definieren, welche auf einer IP
+gescannt werden sollen:
+
+\begin{verbatim}
 $ nmap 10.10.247.15 -p-               # Scannen der gesamten Portrange
 $ nmap 10.10.247.15 -p 21             # Scannen des Port 21
 $ nmap 10.10.247.15 -p 21-200         # Scannen alle Ports von 21 bis 200
-```
+\end{verbatim}
 
-Um Informationen bezüglich der verwendeten Versionen und Betriebssysteme zu erhalten können folgende Flags verwendet werden:
-```shell
+Um Informationen bezüglich der verwendeten Versionen und Betriebssysteme
+zu erhalten können folgende Flags verwendet werden:
+
+\begin{verbatim}
 $ nmap 10.10.247.15 -sV               # Versucht die Version des Services zu ermitteln
 $ nmap 10.10.247.15 -O                # Versucht das Betriebsystem zu ermitteln
-```
+\end{verbatim}
