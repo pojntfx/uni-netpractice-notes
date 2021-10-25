@@ -1,57 +1,37 @@
 ---
-title: "Praktikum Rechnernetze: Versuch 1: Troubleshooting TCP/IP"
-author: Gruppe 1 (Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger)
-subtitle: Durchführung 2021-10-19
-geometry: margin=4cm
-header-includes:
-  - \usepackage{fancyhdr}
-  - \usepackage{xcolor}
-  - \usepackage{courier}
-  - \usepackage{lastpage}
-  - \pagestyle{fancy}
-  - \fancyhf{}
-  - \lhead{Praktikum Rechnernetze}
-  - \rhead{Overleaf}
-  - \rfoot{Seite \thepage\ von \pageref{LastPage}}
-  - \lstset{basicstyle=\small\ttfamily}
-  - \lstset{numbers=left}
-  - \lstset{numberstyle=\footnotesize}
-  - \lstset{stepnumber=1}
-  - \lstset{numbersep=5pt}
-  - \lstset{backgroundcolor=\color{white}}
-  - \lstset{showspaces=false}
-  - \lstset{showstringspaces=false}
-  - \lstset{showtabs=false}
-  - \lstset{tabsize=2}
-  - \lstset{captionpos=b}
-  - \lstset{breaklines=true}
-  - \lstset{breakatwhitespace=true}
-  - \lstset{breakautoindent=true}
-  - \lstset{linewidth=\textwidth}
-listings: true
----
+author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger]
+date: "2021-10-19"
+subject: "Praktikum Rechnernetze: Protokoll zu Versuch 1 (Troubleshooting TCP/IP) von Gruppe 1"
+keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
+subtitle: "Protokoll zu Versuch 1 (Troubleshooting TCP/IP) von Gruppe 1"
+lang: "de"
+titlepage: true
+toc: true
+toc-own-page: true
+linkcolor: "{HTML}{006666}"
+...
 
-\newpage
-\tableofcontents
-\newpage
+# Praktikum Rechnernetze
 
-## Introduction
+## Einführung
 
-### Contributing
+### Mitwirken
 
-These study materials are heavily based on [professor Kiefer's "Praktikum Rechnernetze" lecture at HdM Stuttgart](https://www.hdm-stuttgart.de/vorlesung_detail?vorlid=5212254).
+Diese Materialien basieren auf [Professor Kiefers "Praktikum Rechnernetze"-Vorlesung der HdM Stuttgart](https://www.hdm-stuttgart.de/vorlesung_detail?vorlid=5212254).
 
-**Found an error or have a suggestion?** Please open an issue on GitHub ([github.com/pojntfx/uni-netpractice-notes](https://github.com/pojntfx/uni-netpractice-notes)):
+**Sie haben einen Fehler gefunden oder haben einen Verbesserungsvorschlag?** Bitte eröffnen Sie ein Issue auf GitHub ([github.com/pojntfx/uni-netpractice-notes](https://github.com/pojntfx/uni-netpractice-notes)):
 
-![QR code to source repository](./static/qr.png){ width=150px }
+![QR-Code zum Quelltext auf GitHub](./static/qr.png){ width=150px }
 
-If you like the study materials, a GitHub star is always appreciated :)
+Wenn ihnen die Materialien gefallen, würden wir uns über einen GitHub-Stern sehr freuen.
 
-<div style="page-break-after: always;"></div>
-### License
-![AGPL-3.0 license badge](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
+### Lizenz
 
-Uni Network Practice Notes (c) 2021 Felix Pojtinger and contributors
+Dieses Dokument und der enthaltene Quelltext ist freie Kultur bzw. freie Software.
+
+![Badge der AGPL-3.0-Lizenz](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
+
+Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger
 
 SPDX-License-Identifier: AGPL-3.0
 
@@ -61,10 +41,10 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Ergänzen Sie die Tabelle**
 
-![IP calc, part 1](./static/ipcalc_1.png)
-![IP calc, part 2](./static/ipcalc_2.png)
+![IP-Subnetz-Berechnung 1](./static/ipcalc_1.png)
+![IP-Subnetz-Berechnung 2](./static/ipcalc_2.png)
 
-## Tools des OS
+## Werkzeuge des Betriebssystems
 
 ### IP-Konfiguration
 
@@ -100,17 +80,19 @@ www.hdm-stuttgart.de. 3553 IN A 141.62.1.59
 
 Wir erhalten zwei Ergebnisse auf unsere Anfrage. Das könnte daran liegen, dass die HdM zur Lastenaufteilung zwei Webserver einsetzt.
 
+\newpage
+
 ### Anschluss des PC an das Labornetz
 
 **Betrachten Sie die Verbindungen der Labor-Switches untereinander. Welche Wege können Sie erkennen?**
 
 Folgende Verbindungen konnten erkannt werden:
 
-![Unser Computer ist an die RJ-45-Buchse 1-01 angeschlossen. Das Kabel der Buchse führt dann in den Netzwerkschrank](./static/connector.jpeg){ width=200px }
+![Unser Computer ist an die RJ-45-Buchse 1-01 angeschlossen. Das Kabel der Buchse führt dann in den Netzwerkschrank.](./static/connector.jpeg){ width=400px }
 
-![Auf diesem Bild ist der Netzwerkschrank zu sehen. Man sieht hier das Patchfeld, an welchem die 1-01 angeschlossen ist. Vom Patchfeld führt ein weiteres LAN-Kabel (CAT-5e) zu einem Switch.](./static/full.jpeg){ width=200px }
+![Auf diesem Bild ist der Netzwerkschrank zu sehen. Man sieht hier das Patchfeld, an welchem die 1-01 angeschlossen ist. Vom Patchfeld führt ein weiteres LAN-Kabel (CAT-5e) zu einem Switch.](./static/full.jpeg){ width=240px }
 
-![Der Switch ist dann mit dem hier zu sehenden Router verbunden. Der Router führt dann zur restlichen Infrastruktur des Hauses bzw. zum Internet.](./static/router.jpeg){ width=200px }
+![Der Switch ist dann mit dem hier zu sehenden Router verbunden. Der Router führt dann zur restlichen Infrastruktur des Hauses bzw. zum Internet.](./static/router.jpeg){ width=240px }
 
 Wenn die Verbindung am Patch-Panel zu 1-01 unterbrochen wird, so verliert die Netzwerkkarte die Verbindung, was der Kernel-Buffer bestätigt:
 
@@ -130,9 +112,13 @@ Wie schon an den Bildern vorher illustriert lässt sich folgender Weg ableiten:
 Patch-Feld -> Switch -> Router -> Rest der Infrastruktur
 ```
 
+\newpage
+
 **Verfolgen Sie den Weg, auf dem die Pakete Ihres Rechners den gegenüberliegenden Netzwerkschrank erreichen**
 
-![Der gegenüberliegende Netzwerkschrank wird durch Glasfaser erreicht. Wie im Bild zu sehen, sind zwei Glasfaserkabel an das Panel mit der Aufschrift "Panel B" angeschlossen. Zwei Kabel daher, da eines der beiden Kabel für das eingehende Signal reserviert ist und das andere für das ausgehende Signal. Durch diese beiden Kabel sind die Netzwerkschränke miteinander verbunden. Bei Glasfaserkabel muss beachtet werden, dass die Kabel nicht zu stark gebogen sind, da dies sonst zu Signalverlust führt.](./static/patch_panel.jpeg)
+![Der gegenüberliegende Netzwerkschrank wird durch Glasfaser erreicht. Wie im Bild zu sehen, sind zwei Glasfaserkabel an das Panel mit der Aufschrift "Panel B" angeschlossen. Zwei Kabel daher, da eines der beiden Kabel für das eingehende Signal reserviert ist und das andere für das ausgehende Signal. Durch diese beiden Kabel sind die Netzwerkschränke miteinander verbunden. Bei Glasfaserkabel muss beachtet werden, dass die Kabel nicht zu stark gebogen sind, da dies sonst zu Signalverlust führt.](./static/patch_panel.jpeg){ width=400px }
+
+\newpage
 
 **Warum ist im Netzwerkschrank wohl ein Hub installiert?**
 
@@ -155,6 +141,8 @@ $ ip a
     inet 141.62.66.5/24 brd 141.62.66.255 scope global dynamic enp0s31f6
        valid_lft 11902sec preferred_lft 11902sec
 ```
+
+\newpage
 
 **Senden Sie einen ping-command an einen zweiten Rechner, der am gleichen Switch angeschlossen ist**
 
@@ -192,6 +180,8 @@ PING 141.62.66.13 (141.62.66.13) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.752/0.791/0.853/0.033 ms
 ```
 
+\newpage
+
 **Senden Sie einen ping-command zum Labor-Router**
 
 Der Labor-Router hat die IP-Addresse `141.62.66.250`. Die Latenz beläuft sich bei diesem mal auf ~1.05 ms.
@@ -211,13 +201,13 @@ PING 141.62.66.250 (141.62.66.250) 56(84) bytes of data.
 rtt min/avg/max/mdev = 1.015/1.046/1.127/0.040 ms
 ```
 
-\newpage
-
 **Starten Sie einen Web-Browser und überprüfen Sie die korrekte Funktion des DNS-Servers durch Aufruf einer beliebigen URL**
 
 ![Screenshot](./static/screenshot.png)
 
 Die Seite ist erreichbar und war davor nicht gecached. Daraus lässt sich schließen, dass die DNS-Abfrage erfolgreich funktioniert hat.
+
+\newpage
 
 **Sehen Sie sich den DNS-Cache an**
 
@@ -349,6 +339,8 @@ $ ip neigh show
 
 Nun wurde die Adresse `141.62.66.236` zur ARP-Tabelle hinzugefügt.
 
+\newpage
+
 **Ist die MAC-Adresse Ihres PC lokal oder global vergeben?**
 
 ```shell
@@ -384,6 +376,8 @@ Vorteile einer dynamischen/Nachteile einer statischen:
 **Warum wird die ARP-Tabelle ganz oder teilweise nach Ablauf einer bestimmten Zeit gelöscht, wie Sie leicht nachvollziehen können?**
 
 Durch die Löschung der ARP-Tabelle werden die ARP-Anfragen erneut gemacht; wenn Geräte zum Netzwerk hinzukommen oder entfernt werden, so werden diese Änderungen dadurch repräsentiert.
+
+\newpage
 
 ### Ping
 
@@ -477,6 +471,8 @@ PING google.com (142.250.185.78) 56(84) bytes of data.
 rtt min/avg/max/mdev = 4.586/4.639/4.693/0.053 ms
 ```
 
+\newpage
+
 **HRPing-Nutzung**
 
 HRPing ist ein erweiteres Ping-Command mit folgenden Optionen:
@@ -523,7 +519,7 @@ hrPING is Freeware, please share it!  See www.cfos.de for our other solutions:
   -- IPv6 Connectivity for XP, Vista and Windows 7 : cFos IPv6 Link
 ```
 
-HRPing jedoch ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein Sicherheitsrisiko darstellt. Stattdessen wurde deshalb die freie Implementation `fping` verwendet:
+HRPing jedoch ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchsdurchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur Verfügung, was ein Sicherheitsrisiko darstellt: Als freien Äquivalent wurde deshalb `fping` verwendet:
 
 ```plaintext
 Name         : fping
@@ -608,7 +604,7 @@ $ fping -e 10.60.43.50
 10.60.43.50 is alive (212 ms)
 ```
 
-Zu erkennen ist, dass nach der Löschen der ARP-Tabelle eine deutlich längere Antwortzeit zu messen ist.
+Nach dem Löschen der ARP-Tabelle ist eine deutlich längere Antwortzeit zu messen.
 
 ### Traceroute & MTR
 
@@ -640,6 +636,8 @@ traceroute to de-cix.net (46.31.121.136), 30 hops max, 60 byte packets
 5. `fra-decix-1-hu0-0-0-4.belwue.net`: Router Belwue in Frankfurt
 6. `sgw2-te-0-0-2-3-ixp.fra.de-cix.net`: Router DE-CIX in Frankfurt
 
+\newpage
+
 **Zeichnen Sie den Weg eines Pakets zu www.aol.com auf.**
 
 ```shell
@@ -660,6 +658,8 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 13  usw2-1-lba.ir2.yahoo.com (77.238.190.103)  29.724 ms  29.602 ms usw1-1-lba.ir2.yahoo.com (77.238.190.102)  29.750 ms
 14  media-router-aol71.prod.media.vip.ir2.yahoo.com (212.82.100.163)  29.546 ms  30.166 ms  29.797 ms
 ```
+
+\newpage
 
 **Beobachten Sie Zeitüberschreitungen? Wie können Sie tracert so manipulieren, dass möglichst selten Zeitüberschreitungen auftauchen?**
 
@@ -877,9 +877,11 @@ Access to Public Interest Registry WHOIS information is provided to assist perso
 The Registrar of Record identified in this output may have an RDDS service that can be queried for additional information on how to contact the Registrant, Admin, or Tech contact of the queried domain name.
 ```
 
-**Sehen Sie sich die Möglichkeiten von Pathping an.**
+**Sehen Sie sich die Möglichkeiten von PathPing an.**
 
-Als freie Alternative zu Pathping wurde `mtr` verwendet:
+PathPing ist unfreie Software und respektiert deshalb nicht die digitalen Rechte der Versuchs-
+durchführenden; zudem funktioniert es nicht auf freien Systemen und der Quellcode steht nicht zur
+Verfügung, was ein Sicherheitsrisiko darstellt. Als freien Äquivalent zu PathPing wurde deshalb `mtr` verwendet:
 
 ```plaintext
 Name         : mtr
@@ -1005,94 +1007,7 @@ $ mtr -n --json www.aol.com
                 "Wrst": 0.0,
                 "StDev": 0.0
             },
-            {
-                "count": 4,
-                "host": "129.143.56.53",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 16.222,
-                "Avg": 3.928,
-                "Best": 1.613,
-                "Wrst": 16.222,
-                "StDev": 4.422
-            },
-            {
-                "count": 5,
-                "host": "129.143.56.106",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 231.77,
-                "Avg": 25.22,
-                "Best": 1.846,
-                "Wrst": 231.77,
-                "StDev": 72.574
-            },
-            {
-                "count": 6,
-                "host": "129.143.60.113",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 77.414,
-                "Avg": 13.153,
-                "Best": 5.437,
-                "Wrst": 77.414,
-                "StDev": 22.584
-            },
-            {
-                "count": 7,
-                "host": "80.81.192.115",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 86.385,
-                "Avg": 13.403,
-                "Best": 5.122,
-                "Wrst": 86.385,
-                "StDev": 25.643
-            },
-            {
-                "count": 8,
-                "host": "209.191.112.17",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 138.72,
-                "Avg": 29.309,
-                "Best": 13.844,
-                "Wrst": 138.72,
-                "StDev": 39.424
-            },
-            {
-                "count": 9,
-                "host": "209.191.112.54",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 116.04,
-                "Avg": 41.328,
-                "Best": 29.978,
-                "Wrst": 116.04,
-                "StDev": 26.988
-            },
-            {
-                "count": 10,
-                "host": "66.196.65.21",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 39.317,
-                "Avg": 31.703,
-                "Best": 30.246,
-                "Wrst": 39.317,
-                "StDev": 2.747
-            },
-            {
-                "count": 11,
-                "host": "77.238.190.5",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 32.85,
-                "Avg": 31.768,
-                "Best": 30.18,
-                "Wrst": 38.489,
-                "StDev": 2.535
-            },
+# ...
             {
                 "count": 12,
                 "host": "77.238.190.103",
@@ -1163,94 +1078,7 @@ $ mtr --json www.aol.com
                 "Wrst": 0.0,
                 "StDev": 0.0
             },
-            {
-                "count": 4,
-                "host": "stu-al30-1-te0-0-0-17.belwue.net",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 14.869,
-                "Avg": 11.953,
-                "Best": 1.886,
-                "Wrst": 50.552,
-                "StDev": 17.083
-            },
-            {
-                "count": 5,
-                "host": "stu-nwz-a99-hu0-3-0-5.belwue.net",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 2.332,
-                "Avg": 2.954,
-                "Best": 1.847,
-                "Wrst": 7.302,
-                "StDev": 1.961
-            },
-            {
-                "count": 6,
-                "host": "fra-decix-1-hu0-0-0-4.belwue.net",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 58.059,
-                "Avg": 22.657,
-                "Best": 5.208,
-                "Wrst": 74.371,
-                "StDev": 27.785
-            },
-            {
-                "count": 7,
-                "host": "ge-1-3-0.pat1.dee.yahoo.com",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 5.488,
-                "Avg": 6.379,
-                "Best": 4.908,
-                "Wrst": 13.858,
-                "StDev": 2.716
-            },
-            {
-                "count": 8,
-                "host": "ae-3.pat1.frz.yahoo.com",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 125.22,
-                "Avg": 33.495,
-                "Best": 14.004,
-                "Wrst": 125.22,
-                "StDev": 40.562
-            },
-            {
-                "count": 9,
-                "host": "ae-2.pat1.iry.yahoo.com",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 86.809,
-                "Avg": 36.314,
-                "Best": 29.889,
-                "Wrst": 86.809,
-                "StDev": 17.76
-            },
-            {
-                "count": 10,
-                "host": "ge-0-3-9-d104.pat1.the.yahoo.com",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 31.651,
-                "Avg": 41.326,
-                "Best": 30.095,
-                "Wrst": 134.5,
-                "StDev": 32.747
-            },
-            {
-                "count": 11,
-                "host": "lo0.fab4-1-gdc.ir2.yahoo.com",
-                "Loss%": 0.0,
-                "Snt": 10,
-                "Last": 130.62,
-                "Avg": 46.746,
-                "Best": 30.125,
-                "Wrst": 130.62,
-                "StDev": 34.357
-            },
+# ...
             {
                 "count": 12,
                 "host": "usw1-1-lba.ir2.yahoo.com",
@@ -1371,6 +1199,8 @@ $ dig +noall +answer news.ycombinator.com
 news.ycombinator.com.	228	IN	A	209.216.230.240
 ```
 
+\newpage
+
 **Testen Sie nun die Verbindung zwischen Ihrem PC und dem PC einer anderen Praktikumsgruppe und loten Sie die Möglichkeiten zur Verkehrsanalyse aus (netstat –s).**
 
 ```shell
@@ -1471,6 +1301,8 @@ local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.6
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 ```
 
+\newpage
+
 **Erweitern oder modifizieren Sie die Routing-Tabelle Ihres PC**
 
 Hier wurde nun eine neue Route hinzugefügt, welche das Subnet `192.0.2.128/25` über den Host `141.62.66.4` routed. Lädt der Host die richtigen Kernel-Module und wird IP-Forwarding mittels `sysctl` aktiviert, so könnte dieser damit als Router fungieren.
@@ -1490,9 +1322,11 @@ local 141.62.66.5 dev enp0s31f6 table local proto kernel scope host src 141.62.6
 broadcast 141.62.66.255 dev enp0s31f6 table local proto kernel scope link src 141.62.66.5
 ```
 
-**iperf**
+## Weitere Werkzeuge
 
-Mittels iperf3 kann die Übertragungsrate zwischen zwei Hosts getestet werden.
+### iperf
+
+Mittels `iperf3` kann die Übertragungsrate zwischen zwei Hosts getestet werden.
 
 ```shell
 # Host A
@@ -1541,7 +1375,7 @@ iperf Done.
 
 Hier kann z.B. erkannt werden, dass ca. 850 Mbits/sec erreicht werden können, was für die verwendete Gigabit-Netzwerkkarte mit CAT-5e-Kabel zu erwarten ist.
 
-### NMAP
+### Nmap
 
 `Nmap` ist die kurzform für Network Mapper. Mit diesem kann man Ports scannen, Informationen über die Services bekommen (Version, Betriebsystem etc.) und vorinstallierte als auch eigene Skripts verwenden.
 
@@ -1552,6 +1386,8 @@ $ nmap 10.10.247.15 -sS               # TCP SYN Port Scan
 $ nmap 10.10.247.15 -sA               # TCP ACK Port Scan
 $ nmap 10.10.247.15 -sU               # UDP Port Scan
 ```
+
+\newpage
 
 Es besteht die Möglichkeit mehrere IPs zu scannen, ebenso wie ein Bereich von IPs, eine einzige IP oder eine Domain:
 
