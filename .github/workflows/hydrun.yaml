@@ -14,9 +14,9 @@ jobs:
         target:
           - id: pdf
             src: .
-            os: debian:bullseye
+            os: texlive/texlive
             flags: ""
-            cmd: apt update && apt install -y sudo make && make depend && make
+            cmd: apt update && apt install -y curl python3-pip && make depend && make
             dst: out/*
 
     steps:
