@@ -23,7 +23,7 @@ clean:
 
 # Dependencies
 depend:
-	[ -x "$$(command -v apt)" ] && sudo apt install -y curl python3-pip pandoc texlive-full || sudo dnf install -y curl python3-pip pandoc texlive-scheme-full
-	pip install qrcode
+	pip install pillow qrcode
+	curl -L -o /tmp/Eisvogel.zip 'https://github.com/Wandmalfarbe/pandoc-latex-template/releases/latest/download/Eisvogel.zip'
 	mkdir -p $${HOME}/.local/share/pandoc/templates
 	unzip -p /tmp/Eisvogel.zip eisvogel.latex > $${HOME}/.local/share/pandoc/templates/eisvogel.latex
