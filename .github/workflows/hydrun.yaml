@@ -16,7 +16,7 @@ jobs:
             src: .
             os: texlive/texlive
             flags: ""
-            cmd: apt update && apt install -y curl python3-pip && make depend && make
+            cmd: apt update && apt install -y curl python3-pip pandoc && make depend && make
             dst: out/*
 
     steps:
