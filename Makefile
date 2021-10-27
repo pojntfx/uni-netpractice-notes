@@ -34,17 +34,17 @@ $(addprefix build-html-slides/,$(obj)): build/qr
 # Build QR code
 build/qr:
 	mkdir -p docs/static
-	qr "$$(git remote get-url origin | sed -r 's|^.*@(.*):|https://\1/|g' | sed 's/.git$$//g')" > docs/static/qr.png
+	qr "$$(git remote get-url origin | sed -r 's|^.*@(.*):|https://\1/|g' | sed 's/.git$$//g')" | tee docs/static/qr.png>/dev/null
 
 # Build tree
 build/tree: $(addprefix build/,$(obj))
 	mkdir -p out
-	tree -T "$$(git remote get-url origin | sed -r 's|^.*@(.*):|\1/|g' | sed 's/.git$$//g')" -H '.' -I 'index.html|*.zip' -o out/index.html out
+	tree -T "$$(git remote get-url origin | sed -r 's|^.*@(.*):|\1/|g' | sed 's/.git$$//g')" -H '.' -I 'index.html|release.zip' -o out/index.html out
 
 # Build archive
 build/archive: build/tree
 	mkdir -p out
-	zip -j -x '*.zip' -FSr out/release.zip out/*
+	zip -j -x 'release.zip' -FSr out/release.zip out/*
 
 # Open PDF
 $(addprefix open-pdf/,$(obj)):
@@ -71,4 +71,4 @@ depend:
 	pip install pillow qrcode
 	curl -L -o /tmp/Eisvogel.zip 'https://github.com/Wandmalfarbe/pandoc-latex-template/releases/latest/download/Eisvogel.zip'
 	mkdir -p "$${HOME}/.local/share/pandoc/templates"
-	unzip -p /tmp/Eisvogel.zip eisvogel.latex | tee "$${HOME}/.local/share/pandoc/templates/eisvogel.latex" "$${HOME}/.local/share/pandoc/templates/eisvogel.beamer">/dev/null
+	unzip -p /tmp/Eisvogel.zip eisvogel.latex | tee "$${HOME}/.local/share/pandoc/templates/eisvogel.latex">/dev/null
