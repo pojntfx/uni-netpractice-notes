@@ -14,9 +14,9 @@ jobs:
         target:
           - id: pdf
             src: .
-            os: texlive/texlive
+            os: danteev/texlive
             flags: ""
-            cmd: apt update && apt install -y curl python3-pip pandoc && make depend && make
+            cmd: apt update && apt install -y curl python3-pip && make depend && make -j "$(nproc)"
             dst: out/*
 
     steps:

@@ -5,10 +5,6 @@ subject: "Praktikum Rechnernetze: Protokoll zu Versuch 1 (Troubleshooting TCP/IP
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 1 (Troubleshooting TCP/IP) von Gruppe 1"
 lang: "de"
-titlepage: true
-toc: true
-toc-own-page: true
-linkcolor: "{HTML}{006666}"
 ...
 
 # Praktikum Rechnernetze
