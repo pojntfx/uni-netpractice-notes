@@ -4,10 +4,10 @@ OUTPUT_DIR ?= out
 
 # Private variables
 obj = $(shell ls docs/*.md | sed -r 's@docs/(.*).md@\1@g')
-all: $(addprefix build/,$(obj))
+all: build
 
 # Build
-build: $(addprefix build/,$(obj))
+build: $(addprefix build/,$(obj)) build/tree
 $(addprefix build/,$(obj)):
 	$(MAKE) build-pdf/$(subst build/,,$@) build-pdf-slides/$(subst build/,,$@) build-html/$(subst build/,,$@) build-html-slides/$(subst build/,,$@) 
 
@@ -35,6 +35,11 @@ $(addprefix build-html-slides/,$(obj)): build/qr
 build/qr:
 	mkdir -p docs/static
 	qr "$$(git remote get-url origin | sed -r 's|^.*@(.*):|https://\1/|g' | sed 's/.git$$//g')" > docs/static/qr.png
+
+# Build tree
+build/tree: $(addprefix build/,$(obj))
+	mkdir -p out
+	tree -T "$$(git remote get-url origin | sed -r 's|^.*@(.*):|\1/|g' | sed 's/.git$$//g')" -H '.' -I 'index.html' -o out/index.html out
 
 # Open PDF
 $(addprefix open-pdf/,$(obj)):

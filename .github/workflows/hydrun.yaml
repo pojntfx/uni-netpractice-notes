@@ -16,7 +16,7 @@ jobs:
             src: .
             os: danteev/texlive
             flags: ""
-            cmd: apt update && apt install -y curl python3-pip && make depend && make -j "$(nproc)"
+            cmd: apt update && apt install -y curl python3-pip tree && make depend && make -j "$(nproc)"
             dst: out/*
 
     steps:
