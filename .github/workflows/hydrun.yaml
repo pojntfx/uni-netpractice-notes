@@ -12,12 +12,12 @@ jobs:
     strategy:
       matrix:
         target:
-          - id: pdf
+          - id: docs
             src: .
             os: danteev/texlive
             flags: ""
             cmd: apt update && apt install -y curl python3-pip tree && make depend && make -j "$(nproc)"
-            dst: out/*
+            dst: out/release.zip
 
     steps:
       - name: Checkout
@@ -55,15 +55,16 @@ jobs:
           automatic_release_tag: latest
           prerelease: false
           files: |
-            /tmp/out/*.zip
-      - name: Remove release archive
+            /tmp/out/docs/release.zip
+      - name: Extract release archive
         run: |
-          rm /tmp/out/*.zip
+          mkdir -p /tmp/gh-pages
+          unzip /tmp/out/docs/release.zip -d /tmp/gh-pages
       - name: Publish release to GitHub pages
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: /tmp/out
+          folder: /tmp/out/release.zip
           git-config-name: GitHub Pages Bot
           git-config-email: bot@example.com
