@@ -9,7 +9,7 @@ all: build
 # Build
 build: build/archive
 $(addprefix build/,$(obj)):
-	$(MAKE) build-pdf/$(subst build/,,$@) build-pdf-slides/$(subst build/,,$@) build-html/$(subst build/,,$@) build-html-slides/$(subst build/,,$@) 
+	$(MAKE) build-pdf/$(subst build/,,$@) build-pdf-slides/$(subst build/,,$@) build-html/$(subst build/,,$@) build-html-slides/$(subst build/,,$@) build-epub/$(subst build/,,$@) build-odt/$(subst build/,,$@) build-md/$(subst build/,,$@) 
 
 # Build PDF
 $(addprefix build-pdf/,$(obj)): build/qr
@@ -30,6 +30,21 @@ $(addprefix build-html/,$(obj)): build/qr
 $(addprefix build-html-slides/,$(obj)): build/qr
 	mkdir -p out
 	pandoc --to slidy --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --katex --self-contained -o "$(OUTPUT_DIR)/$(subst build-html-slides/,,$@).slides.html" "docs/$(subst build-html-slides/,,$@).md"
+
+# Build EPUB
+$(addprefix build-epub/,$(obj)): build/qr
+	mkdir -p out
+	pandoc --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs -M titlepage=true -M toc=true -M toc-own-page=true -M linkcolor="{HTML}{006666}" -o "$(OUTPUT_DIR)/$(subst build-epub/,,$@).epub" "docs/$(subst build-epub/,,$@).md"
+
+# Build ODT
+$(addprefix build-odt/,$(obj)): build/qr
+	mkdir -p out
+	pandoc --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs -M titlepage=true -M toc=true -M toc-own-page=true -M linkcolor="{HTML}{006666}" -o "$(OUTPUT_DIR)/$(subst build-odt/,,$@).odt" "docs/$(subst build-odt/,,$@).md"
+
+# Build Markdown
+$(addprefix build-md/,$(obj)): build/qr
+	mkdir -p out
+	cp "docs/$(subst build-md/,,$@).md" "$(OUTPUT_DIR)/$(subst build-md/,,$@).md"
 
 # Build QR code
 build/qr:
