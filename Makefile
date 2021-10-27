@@ -7,7 +7,7 @@ obj = $(shell ls docs/*.md | sed -r 's@docs/(.*).md@\1@g')
 all: build
 
 # Build
-build: $(addprefix build/,$(obj)) build/tree
+build: build/archive
 $(addprefix build/,$(obj)):
 	$(MAKE) build-pdf/$(subst build/,,$@) build-pdf-slides/$(subst build/,,$@) build-html/$(subst build/,,$@) build-html-slides/$(subst build/,,$@) 
 
@@ -39,7 +39,12 @@ build/qr:
 # Build tree
 build/tree: $(addprefix build/,$(obj))
 	mkdir -p out
-	tree -T "$$(git remote get-url origin | sed -r 's|^.*@(.*):|\1/|g' | sed 's/.git$$//g')" -H '.' -I 'index.html' -o out/index.html out
+	tree -T "$$(git remote get-url origin | sed -r 's|^.*@(.*):|\1/|g' | sed 's/.git$$//g')" -H '.' -I 'index.html|*.zip' -o out/index.html out
+
+# Build archive
+build/archive: build/tree
+	mkdir -p out
+	zip -j -x '*.zip' -FSr out/release.zip out/*
 
 # Open PDF
 $(addprefix open-pdf/,$(obj)):

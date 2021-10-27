@@ -47,7 +47,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: /tmp/out
-      - name: Publish release to GitHub releases
+      - name: Publish release archive to GitHub releases
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: marvinpinto/action-automatic-releases@latest
         with:
@@ -55,4 +55,15 @@ jobs:
           automatic_release_tag: latest
           prerelease: false
           files: |
-            /tmp/out/*/*
+            /tmp/out/*.zip
+      - name: Remove release archive
+        run: |
+          rm /tmp/out/*.zip
+      - name: Publish release to GitHub pages
+        if: ${{ github.ref == 'refs/heads/main' }}
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: /tmp/out
+          git-config-name: GitHub Pages Bot
+          git-config-email: bot@example.com
