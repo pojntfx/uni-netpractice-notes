@@ -279,7 +279,7 @@ Da der Rechner außerhalb des Labor-Netzes ist, kann dessen Mac nicht bestimmt w
 
 **Filtern Sie auf das Protokoll BPDU/STP. Wer sendet es und welchen Sinn hat dieses Protokoll?**
 
-TODO: Add interpretation
+Das STP-Protokoll ist das Spanning Tree Protocol. Das STP-Protokoll verhindert Schleifenbildung; dies ist besonders dann von nutzen, wenn Redundanzen vorhanden sind. Beim STP-Protokoll werden durch alle am Netz beteiligten Switches eine "Root Bridge" gewählt und redundante Links werden deaktiviert. Wie anhand der OUI der MAC-Addresse erkannt werden kann wird dieses hier von einem HP-Switch verwendet.
 
 ![Capture mit Filter für STP](./static/stp-inspect.png)
 
@@ -287,27 +287,33 @@ TODO: Add interpretation
 
 **Auf welchen Komponenten im Netzwerk wird das Protokoll SNMP ausgeführt?**
 
-TODO: Add interpretation (there were no packets to be found at the time of the experiment)
+Es konnte kein SNMP-Traffic im Netzwerk gefunden werden. SNMP, das Simple Network Management Protocol, wird jedoch meist zur Wartung von verbundenen Gerätem im Network verwendet, woraus sich schließen lässt dass es auf Komponenten wie Switches, Routern oder Servern zum Einsatz kommen würde.
 
 ### Streaming and Downloads
 
 **Starten Sie einen Download einer größeren Datei aus dem Internet und stoppen Sie ihn während der Übertragung. Dokumentieren Sie, wie der Stop-Befehl innerhalb der Protokolle umgesetzt wird**
 
-TODO: Add description
+![Capture beim Canceln des eines Downloads über HTTPS](./static/cancel-download.png)
+
+Da der Download hier via HTTPS durchgeführt wurde, kann erkannt werden dass die darunterliegende TCP-Verbindung unterbrochen wurde, indem die `RST`-Flag gesetzt wurde. Auch ein TCP-Segment, in welchem hier die `FIN`- und `ACK`-Flags gesetzt wurden, ist dementspechend zu erkennen.
 
 **Protokollieren sie ein Video-Streaming Ihrer Wahl. Welche TCP-Ports werden wozu benutzt? Filtern Sie alle Rahmen, in denen sich das TCP-Window geändert hat**
 
-TODO: Add description
+![Verlauf der TCP-Window-Size beim Streaming von Twitch](./static/streaming-port.png)
+
+Hier wurde ein Stream von Twitch konsumiert; wie zu erkennen ist, wird die Window Size stetig erhöht. Es wird Port 443, der Standard-Port für HTTPS, verwendet.
 
 ### Telnet und SSH
 
 **Protokollieren Sie den Ablauf einer TELNET-Verbindung zur IP-Adresse 141.62.66.207 (login: praktikum; passwd: versuch). Können Sie Passwörter im Wireshark-Trace identifizieren? Wie verhält sich im Vergleich dazu eine SSH-Verbindung zum gleichen Server?**
 
-TODO: Add interpretation
+Wie zu erkennen ist wird für eine Telnet-Verbindung eine TCP-Verbindung aufgebaut. Die Passwörter sind zu erkennen.
 
 ![Capture des Telnet-Logins](./static/telnet-login.png)
 
 **Können Sie Passwörter im Wireshark-Trace identifizieren?**
+
+Da Telnet unverschlüsselt ist, können Passwörter identifiziert und ausgelesen werden.
 
 ![Capture des Telnet-Passworts](./static/telnet-password.png)
 
@@ -315,7 +321,7 @@ TODO: Add interpretation
 
 **Wie verhält sich im Vergleich dazu eine SSH-Verbindung zum gleichen Server?**
 
-TODO: Add interpretation
+Die SSH-Verbindung ist verschlüsselt; Passwörter, Logins etc. können hier nicht mitgelesen werden.
 
 ![Capture eines verschlüsselten SSH-Pakets](./static/ssh.png)
 
@@ -325,22 +331,30 @@ TODO: Add interpretation
 
 **Nur IP-Pakete, deren TTL größer ist als ein von Ihnen sinnvoll gewählter Referenzwert**
 
-TODO: Add description
+![Capture der TTL-Werte ab 200](./static/ttl-to-long.png)
+
+Der Linux-Kernel stellt standardmäßig die TTL auf 64; hier wurde ab 200 gefiltert, damit ausschließlich "ungewöhnliche" Pakete wie z.B. `Type: 11 (Time-to-live exceeded)`-ICMP-Pakete angezeigt werden.
 
 **Nur IP-Pakete, die fragmentiert sind**
 
-TODO: Add description
+Mittels eines Filters auf "Must Fragment" wurde hier die TTL eingestellt.
+
+![Capture von fragmentierten IP-Paketen](./static/ttl-to-long.png)
 
 **Beim Login-Versuch auf ftp.bellevue.de mit von Ihnen wählbaren Account-Daten nur Rahmen herausfiltern, die das gewählte Passwort im Ethernet-Datenfeld enthalten**
 
-TODO: Add interpretation
+Mittels des Filters `ftp.request.command == "PASS"` werden nur Pakete angezeigt, welche das Passwort enthalten.
 
 ![Capture eines FTP-Pakets, welches ein Password enthält](./static/ftp.png)
 
 **Nur den Port 80-Verkehr zu Ihrer IP-Adresse (ankommend und abgehend)**
 
-TODO: Add description
+Mittels eines Filters wurde ausschließlich TCP-Traffic auf Port 80 dargestellt. Mittels `|| udp.port == 80` hätte auch noch UDP-Traffic auf diesem Port dargestellt werden können.
+
+![Capture alle TCP-Segmente auf Port 80](./static/port-80-only.png)
 
 **Nur Pakete mit einer IP-Multicast-Adresse**
 
-TODO: Add description
+Mittels eines Filters werden nur IPs > `224.0.0.0` dargestellt, was IP-Multicast-Adressen sind.
+
+![Capture aller IP-Pakete mit Multicast-Adressen](./static/port-80-only.png)
