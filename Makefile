@@ -1,5 +1,4 @@
 # Public variables
-DESTDIR ?=
 OUTPUT_DIR ?= out
 
 # Private variables
@@ -61,7 +60,7 @@ build/qr:
 # Build tarball
 build/tarball: build/qr build/metadata
 	mkdir -p "$(OUTPUT_DIR)"
-	tar zcvf "$(OUTPUT_DIR)"/source.tar.gz --exclude-from=.gitignore --exclude=.git .
+	tar zcvf "$(OUTPUT_DIR)"/source.tar.gz --exclude-from=.gitignore --exclude=.git --exclude="$(OUTPUT_DIR)" .
 
 # Build tree
 build/tree: $(addprefix build/,$(obj)) build/tarball
