@@ -88,6 +88,18 @@ $(addprefix open-html/,$(obj)):
 $(addprefix open-html-slides/,$(obj)):
 	xdg-open "$(OUTPUT_DIR)/$(subst open-html-slides/,,$@).slides.html"
 
+# Open EPUB
+$(addprefix open-epub/,$(obj)):
+	xdg-open "$(OUTPUT_DIR)/$(subst open-epub/,,$@).epub"
+
+# Open ODT
+$(addprefix open-odt/,$(obj)):
+	xdg-open "$(OUTPUT_DIR)/$(subst open-odt/,,$@).odt"
+
+# Open plaintext
+$(addprefix open-plaintext/,$(obj)):
+	xdg-open "$(OUTPUT_DIR)/$(subst open-plaintext/,,$@).txt"
+
 # Clean
 clean:
 	rm -rf "$(OUTPUT_DIR)" docs/static/qr.png
