@@ -92,7 +92,7 @@ not ip.addr == 141.62.66.5
 
 **Analysieren Sie die Abläufe bei DHCP (im Labor installiert). Ihre Teilgruppe am Nachbartisch bootet den PC am Arbeitsplatz, protokollieren Sie die DHCP-Abläufe sowie sonstigen Netzverkehr, den der PC bis zum Erhalt der IP-Adresse erzeugt.**
 
-TODO: Add descriptions
+Während des startens werden drei DHCP-Requests für verschiedene Komponenten abgehandelt.
 
 ![Gesamter Bootprozess](./static/boot-process.png){ width=450px }
 
@@ -102,8 +102,9 @@ TODO: Add descriptions
 
 **Strukturieren Sie die DHCP-Abläufe und beschreiben Sie, wie DHCP im Detail funktioniert.**
 
-TODO: Add answer
+Durch Booten des PCs wird dem Rechner mittels DHCP eine IP zugewiesen. Ergänzend kommen noch Standard-Gateway-Adresse und DNS Adresse hinzu. DHCP ermöglicht damit erst, dass verschiedene Rechner in einem Netzwerk kommunizieren können, da dafür jeder Computer eine eigene IP benötigt.
 
+Grundlegend funktioniert DHCP mit Hilfe von vier Nachrichtentypen. Es gibt den DHCP-Discover, welcher den DHCP-Server in erster Linie notifyen will, dass eine neue IP verlangt wird. Der Server antwortet daraufhin mit einer Offer, welche eine IP reserviert und diese dem Client anbietet. Außerdem enthält die Offer die IP des DHCP-Servers, die Subnetzmaske und die Lease-Time. Danach kann der Client mit einer DHCP-Request die angebotene IP anfordern. Wenn das in Ordnung ist, antwortet der DHCP-Server mit einem DHCP-Acknowledge.
 **Vergleich Sie den Ablauf, wenn Sie den DHCP-Ablauf per `ipconfig /release` und `ipconfig /renew` initiieren**
 
 Mittels der folgenden Commands wurde eine IP-Addresse freigegeben und eine neue angefordert.
@@ -115,7 +116,7 @@ Mittels der folgenden Commands wurde eine IP-Addresse freigegeben und eine neue 
 
 ![Ablauf des DHCP-Protokolls](./static/dhcp-request.png).
 
-TODO: Add description (no BIOS and iPXE DHCP requests)
+Dem bereits gebooteten Rechner wird eine neue IP zugeordnet. Wenn wir die IP Zuweisung auf diese weise neu initiieren dann ist der DHCP Ablauf deutlich kürzer, da beim Booten unter der Haube noch deutlich mehr gemacht werden muss (Es muss e.g. keine DHCP-Request des Bios zum Netzwerkboot getätigt werden).
 
 ### DNS
 
@@ -132,7 +133,7 @@ google.com.		163	IN	A	142.250.186.174
 
 ![Ablauf der Anfrage](./static/dns-request.png)
 
-TODO: Add interpretation
+Hier nutzten wir den internen DNS Server und machen eine Anfrage auf `google.com`.
 
 **Fall 2: DNS-Server 1.1.1.1 (Cloudflare)**:
 
@@ -145,7 +146,7 @@ google.com.		231	IN	A	142.250.185.110
 
 ![Ablauf der Anfrage](./static/dns-request-cloudflare.png)
 
-TODO: Add interpretation
+Bei der DNS Anfrage über Cloudflare erscheinen weitere DNS requests über DNS reverse zones. Dies wird daran liegen, dass wir über den Router mit dem Internet kommunizieren.
 
 **Fall 3: DNS-Server 8.8.8.9 (DNS-Dienst ist dort nicht installiert)**:
 
@@ -158,27 +159,27 @@ $ dig @8.8.8.9 +noall +answer  google.com
 
 ![Ablauf der Anfrage](./static/dns-request-8889.png)
 
-TODO: Add interpretation
+Wie im Bild zu sehen ist, bekommen wir den Response "No such name PTR 9.8.8.8."
 
 **Wie erkennen Sie mit Wireshark, dass "versehentlich" ein falscher DNS-Server eingetragen wurde?**
 
-TODO: Add interpretation (based on case 3)
+Es gibt eine Antwort, die darauf hindeutet dass die IP nicht gültig ist (Siehe oben).
 
 ### ARP
 
 **Lösen Sie eine ARP-Anfrage aus und protokollieren Sie die Datenpakete.**
 
-> Hierzu wurde ein Rechner, welcher zuvor nicht im lokalen ARP-Cache war, neugestartet.
+Hierzu wurde ein Rechner, welcher zuvor nicht im lokalen ARP-Cache war, neugestartet.
 
 ![Ablauf der Anfrage](./static/arp.png)
 
 **Wann wird eine ARP-Anfrage gestartet?**
 
-TODO: Add interpretation
+Sobald ein Paket an die Zieladresse (in unserem Fall 141.62.66.6) gesendet werden soll, wird eine ARP-Anfrage in Form eines Broadcasts gestartet, um das Zielgerät im Netwerk zu ermitteln, sofern sich diese nicht bereits im ARP-Cache befindet. Dieser kann mit `ip neigh show` ausgelesen werden. Mit `ip neigh flush all` kann der ARP-Cache geleert werden.
 
 **Welcher Rahmentyp wird für die Anfrage verwendet?**
 
-TODO: Add description (Ethernet II)
+Als Rahmentyp wird Ethernet II verwendet.
 
 ![Verwendetes Ethernet-Frame](./static/used-ethernet-frame.png)
 
@@ -209,23 +210,20 @@ $ ip neigh show
 
 **Gelegentlich werden vom Analyzer Broadcasts erkannt. Wer sendet sie, warum und in welchen zeitlichen Abständen?**
 
-Die Broadcasts sind ARP-Requests.
+Die Broadcasts sind ARP-Requests. Sie enstehen dadurch, da Geräte versuchen Daten an andere Geräte zu übertragen, für welche sie keinen Eintrag in ihrem ARP-Cache haben, deshalb muss eine ARP-Anfrage in Form
+eines Broadcasts gesendet werden, da jeder Host potentiell der gesuchte Host sein kann. Dieser besitzt gesuchte IP X und antwortet daraufhin mit seiner Mac.
 
 ![Aufzeichnung der ARP-Requests](./static/broadcast.png)
 
-TODO: Add interpretation
-
 **Haben Sie noch weitere Protokolle "eingefangen", die offensichtlich im Labor Rechnernetze keinen Sinn machen?**
 
-NMEA 0183.
-
-TODO: Add interpretation
+Aus dem Screenshot lässt sich aus der MDNS-Nachricht der `_nmea-0183._tcp.local` Service-String entnehmen. NMEA 0183 ist ein Standard, welcher für die Kommunikation zwischen Navigationsgeräten auf Schiffen definiert wurde. Da es mitunter für die Kommunikation zwischen GPS-Empfänger und PCs werdendet wird, macht es in unserem Netzwerk wenig Sinn.
 
 ![Aufzeichnung der ARP-Requests; hier ist das Protokoll zu sehen](./static/broadcast.png)
 
 **Wie sieht es mit UPnP im Labor aus? Auf welchen Maschinen von welchem Hersteller läuft der Dienst? Mit welchem Wireshark-Filter „fischen“ Sie den Traffic heraus?**
 
-TODO: Re-start this experiment once the network is back up
+Es existiert ein Gerät von AVMAudio im Netwerk, welches über UPnP angesteuert wird. Dies wird immer von dem selben Gerät angesteuert, welches über eine Link-Lokale Adresse verfügt, was dafür sorgt, dass es nur innerhalb des Netzwerkes erreicht werden kann. Diese Adressen werden nicht geroutet, sprich die Geräte müssen durch einen Switch etc. verbundem sein. Es kann über den Display-Filter "herausgefischt werden", indem man nach "ssdp" filtert.
 
 ![Aufzeichnung des SSDP-Protokolls](./static/upnp.png)
 
@@ -233,43 +231,55 @@ TODO: Re-start this experiment once the network is back up
 
 **Initiieren Sie eine HTTP-TCP-Sitzung (beliebige Website) und zeichnen Sie die Protokollabläufe auf**
 
-TODO: Add description
+Zuerst wird eine DNS-Request getätigt. Daraufhin folgt der 3-Way-Handshake.
+
+![Initiierung einer HTTP-TCP-Sitzung](./static/ycombinator.png)
 
 **Können Sie den 3-Way-Handshake erkennen? Markieren Sie ihn in der Dokumentation. Welche TCP-Optionen sind beim Handshake aktiviert und welche Bedeutung haben sie?**
 
-TODO: Add description
+![3-Way-Handshake. Dieser lässt sich an den Flags SYN, SYN-ACK und ACK erkennen.](./static/ycombinator.com)
+
+![Das SYN-Segment enthält die Optionen Maximum Segment Size, Window scale, Timestamps und SACK (Selective Acknowledgement). Die Maximum Segment Size gibt die maximale Anzahl an Daten in Bytes an, die pro Segment akzeptiert werden. Der Window scale factor ist dazu da, die zuvor gesetzte maximale window-size über 65535 Bytes zu setzen. Der Timestamp misst die derzeitige Roundtrip time. Dadurch kann man den retransmission-timer jederzeit neu evaluieren. Selective Acknowledgement wird benutzt, um bei verlorenen Segmenten wirklich nur die fehlenden retransmitten zu müssen.](./static/first-segment.png)
+
+![Das SYN-ACK-Segment verwendet wieder die Optionen Maximum Segment Size, Window scale, SACK und Timestamps.](./static/second-segment.png)
+
+![Das ACK Segment hat nur die Timestamps-Option gesetzt.](./static/third-segment.png)
 
 **Dokumentieren und erläutern Sie die Verwendung der Portnummern bei der Dienstanfrage und der Beantwortung des Dienstes durch den Server.**
 
-TODO: Add description
+Unser Computer sendet von Port `49314` an Port `443`, welcher für HTTPS genutzt wird. Unser Port ist dabei arbiträr vom System gewählt, der HTTPS Port ist allerdings fest für HTTPS reserviert. Mit einem Port ist ein Dienst eines Rechners gekennzeichnet. Die Kombination aus Port und IP ergibt einen Socket. Wir senden unsere Nachrichten also an den Socket `209.216.230.240:443`.
 
 **Klicken Sie auf der Website ein anderes Bild / Link an. Beobachten und dokumentieren Sie: wie verändert sich der TCP-Ablauf?**
 
-TODO: Add description
+![Es wird eine TCP-Verbindung zur neuen Seite (lwn.net) aufgebaut. Dies sieht man anhand des wiederholten TCP-Handshakes.](./static/lwn.png)
 
 ### MAC
 
 **Wie lauten die MAC-Adressen der im Labor befindlichen Ethernet-Switches? Wie haben Sie die Switches identifizieren können. Welche Möglichkeiten der Identifizierung gibt es?**
 
-TODO: Add interpretation
+Beim Spanning-Tree-Protocol lässt sich sehen, dass die Quelle der Nachrichten immer ein HP-Gerät ist. Dieses muss ein fähiges Kopplungselement des Netzwerkes sein, welches das Spanning-Tree-Protocol unterstützt. Daher wird dies mit hoher wahrscheinlichkeit der Ethernet-Switch sein.
+
+Mac: `04:09:73:aa:8b:be`
 
 ![Aufzeichnung des STP-Protokolls](./static/stp.png)
 
 **Welche MAC-Adresse hat ihr Nachbarrechner?**
 
-TODO: Add interpretation
+Durch einen `ping` konnten wir die Mac des Switches herausfinden.
+
+Mac: `4c:52:62:0e:54:2b`
 
 ![MAC-Addresse des Nachbarrechners](./static/neigh-mac.png)
 
 **Welche MAC-Adresse hat der Labor-Router?**
 
-TODO: Add interpretation
+Durch einen `ping` konnten wir die Mac des Routers herausfinden.
+
+Mac: `00:0d:b9:4f:b8:14`
 
 ![MAC-Addresse des Labor-Routers](./static/router-mac.png)
 
 **Welche MAC-Adresse hat der Server 141.62.1.5 (außerhalb des Labor-Netzes)?**
-
-TODO: Add interpretation
 
 Da der Rechner außerhalb des Labor-Netzes ist, kann dessen Mac nicht bestimmt werden.
 
