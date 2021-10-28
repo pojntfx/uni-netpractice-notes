@@ -23,7 +23,7 @@ $(addprefix build-pdf-slides/,$(obj)): build/qr
 # Build HTML
 $(addprefix build-html/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
-	pandoc --to html5 --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --katex --self-contained -o "$(OUTPUT_DIR)/$(subst build-html/,,$@).html" "docs/$(subst build-html/,,$@).md"
+	pandoc --shift-heading-level-by=-1 --to markdown --standalone "docs/$(subst build-html/,,$@).md" | pandoc --to html5 --listings --shift-heading-level-by=1 --number-sections --resource-path=docs --toc --katex --self-contained --number-offset=1 -o "$(OUTPUT_DIR)/$(subst build-html/,,$@).html"
 
 # Build HTML slides
 $(addprefix build-html-slides/,$(obj)): build/qr
@@ -43,14 +43,14 @@ $(addprefix build-odt/,$(obj)): build/qr
 # Build plaintext
 $(addprefix build-plaintext/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
-	pandoc --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --self-contained -o "$(OUTPUT_DIR)/$(subst build-plaintext/,,$@).txt" "docs/$(subst build-plaintext/,,$@).md"
+	pandoc --to plain --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --self-contained -o "$(OUTPUT_DIR)/$(subst build-plaintext/,,$@).txt" "docs/$(subst build-plaintext/,,$@).md"
 
 # Build metadata
 build/metadata:
 	mkdir -p "$(OUTPUT_DIR)"
 	git log > "$(OUTPUT_DIR)"/CHANGELOG
 	cp LICENSE "$(OUTPUT_DIR)"
-	pandoc --to html5 --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --katex --self-contained -o "$(OUTPUT_DIR)/README.html" "README.md"
+	pandoc --shift-heading-level-by=-1 --to markdown --standalone "README.md" | pandoc --to html5 --listings --shift-heading-level-by=1 --number-sections --resource-path=docs --toc --katex --self-contained --number-offset=1 -o "$(OUTPUT_DIR)/README.html"
 
 # Build QR code
 build/qr:
