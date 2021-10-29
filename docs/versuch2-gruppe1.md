@@ -174,6 +174,8 @@ Hierzu wurde ein Rechner, welcher zuvor nicht im lokalen ARP-Cache war, neu gest
 
 ![Ablauf der Anfrage](./static/arp.png)
 
+\newpage
+
 **Wann wird eine ARP-Anfrage gestartet?**
 
 Sobald ein Paket an die Zieladresse (in unserem Fall 141.62.66.6) gesendet werden soll, wird eine ARP-Anfrage in Form eines Broadcasts gestartet, um das Zielgerät im Netzwerk zu ermitteln, sofern sich diese nicht bereits im ARP-Cache befindet. Dieser kann mit `ip neigh show` ausgelesen werden. Mit `ip neigh flush all` kann der ARP-Cache geleert werden.
@@ -228,23 +230,32 @@ Es existiert ein Gerät von AVMAudio im Netwerk, welches über UPnP angesteuert 
 
 ![Aufzeichnung des SSDP-Protokolls](./static/upnp.png)
 
+\newpage
+
 ### HTTP und TCP
 
 **Initiieren Sie eine HTTP-TCP-Sitzung (beliebige Website) und zeichnen Sie die Protokollabläufe auf**
 
-Zuerst wird eine DNS-Request getätigt. Daraufhin folgt der 3-Way-Handshake.
+Zuerst wird ein DNS-Request getätigt. Daraufhin folgt der 3-Way-Handshake. Dieser ist an der charakteristischen Abfolge SYN, SYN-ACK, ACK zu erkennen.
 
 ![Initiierung einer HTTP-TCP-Sitzung](./static/ycombinator.png)
 
+\newpage
+
 **Können Sie den 3-Way-Handshake erkennen? Markieren Sie ihn in der Dokumentation. Welche TCP-Optionen sind beim Handshake aktiviert und welche Bedeutung haben sie?**
 
-![3-Way-Handshake. Dieser lässt sich an den Flags SYN, SYN-ACK und ACK erkennen.](./static/ycombinator.png)
+![3-Way-Handshake.](./static/ycombinator.png)
 
-![Das SYN-Segment enthält die Optionen Maximum Segment Size, Window scale, Timestamps und SACK (Selective Acknowledgement). Die Maximum Segment Size gibt die maximale Anzahl an Daten in Bytes an, die pro Segment akzeptiert werden. Der Window scale factor ist dazu da, die zuvor gesetzte maximale window-size über 65535 Bytes zu setzen. Der Timestamp misst die derzeitige Roundtrip time. Dadurch kann man den retransmission-timer jederzeit neu evaluieren. Selective Acknowledgement wird benutzt, um bei verlorenen Segmenten wirklich nur die fehlenden retransmitten zu müssen.](./static/first-segment.png)
+![First segment](./static/first-segment.png)
+Das SYN-Segment enthält die Optionen Maximum Segment Size, Window scale, Timestamps und SACK (Selective Acknowledgement).
 
-![Das SYN-ACK-Segment verwendet wieder die Optionen Maximum Segment Size, Window scale, SACK und Timestamps.](./static/second-segment.png)
+![Second segment](./static/second-segment.png)
+Das SYN-ACK-Segment verwendet wieder die Optionen Maximum Segment Size, Window scale, SACK und Timestamps.
 
-![Das ACK Segment hat nur die Timestamps-Option gesetzt.](./static/third-segment.png)
+![Third segment ](./static/third-segment.png)
+Das ACK Segment hat nur die Timestamps-Option gesetzt.
+
+Die Maximum Segment Size gibt die maximale Anzahl an Daten in Bytes an, die pro Segment akzeptiert werden. Der Window scale factor ist dazu da, die zuvor gesetzte maximale window-size über 65535 Bytes zu setzen. Der Timestamp misst die derzeitige Roundtrip time. Dadurch kann man den retransmission-timer jederzeit neu evaluieren. Selective Acknowledgement wird benutzt, um bei verlorenen Segmenten wirklich nur die fehlenden retransmitten zu müssen.
 
 **Dokumentieren und erläutern Sie die Verwendung der Portnummern bei der Dienstanfrage und der Beantwortung des Dienstes durch den Server.**
 
@@ -252,9 +263,9 @@ Unser Computer sendet von Port `49314` an Port `443`, welcher für HTTPS genutzt
 
 **Klicken Sie auf der Website ein anderes Bild / Link an. Beobachten und dokumentieren Sie: wie verändert sich der TCP-Ablauf?**
 
-**TODO**: Add valid image
+![Es wird eine TCP-Verbindung zur neuen Seite (lwn.net) aufgebaut. Dies sieht man anhand des wiederholten TCP-Handshakes.](./static/lwn.png)
 
-<!-- ![Es wird eine TCP-Verbindung zur neuen Seite (lwn.net) aufgebaut. Dies sieht man anhand des wiederholten TCP-Handshakes.](./static/lwn.png) -->
+\newpage
 
 ### MAC
 
@@ -265,6 +276,8 @@ Beim Spanning-Tree-Protocol lässt sich sehen, dass die Quelle der Nachrichten i
 **MAC-Adresse**: `04:09:73:aa:8b:be`
 
 ![Aufzeichnung des STP-Protokolls](./static/stp.png)
+
+\newpage
 
 **Welche MAC-Adresse hat ihr Nachbarrechner?**
 
@@ -281,6 +294,8 @@ Durch einen `ping` konnten wir die MAC-Adresse des Routers herausfinden.
 **MAC-Adresse**: `00:0d:b9:4f:b8:14`
 
 ![MAC-Addresse des Labor-Routers](./static/router-mac.png)
+
+\newpage 
 
 **Welche MAC-Adresse hat der Server 141.62.1.5 (außerhalb des Labor-Netzes)?**
 
@@ -301,6 +316,8 @@ Das STP-Protokoll ist das Spanning Tree Protocol. Das STP-Protokoll verhindert S
 **Auf welchen Komponenten im Netzwerk wird das Protokoll SNMP ausgeführt?**
 
 Es konnte kein SNMP-Traffic im Netzwerk gefunden werden. SNMP, das Simple Network Management Protocol, wird jedoch meist zur Wartung von verbundenen Geräte im Network verwendet, woraus sich schließen lässt, dass es auf Komponenten wie Switches, Routern oder Servern zum Einsatz kommen würde.
+
+\newpage
 
 ### Streaming and Downloads
 
@@ -338,6 +355,8 @@ Die SSH-Verbindung ist verschlüsselt; Passwörter, Logins etc. können hier nic
 
 ![Capture eines verschlüsselten SSH-Pakets](./static/ssh.png)
 
+\newpage
+
 ### Wireshark-Filter
 
 **Entwickeln, testen und dokumentieren Sie Wireshark-Filter zur Lösung folgender Aufgaben:**
@@ -350,9 +369,11 @@ Der Linux-Kernel stellt standardmäßig die TTL auf 64; hier wurde ab 200 gefilt
 
 **Nur IP-Pakete, die fragmentiert sind**
 
-Mittels eines Filters auf "Must Fragment" wurde hier die TTL eingestellt.
+Mittels eines Filters auf "Must Fragment" konnten in dieser Aufgabe nur fragmentierte Pakete angezeigt werden.
 
-![Capture von fragmentierten IP-Paketen](./static/ttl-to-long.png)
+![Capture von fragmentierten IP-Paketen](./static/fragmented-ip.png)
+
+\newpage
 
 **Beim Login-Versuch auf ftp.bellevue.de mit von Ihnen wählbaren Account-Daten nur Rahmen herausfiltern, die das gewählte Passwort im Ethernet-Datenfeld enthalten**
 
@@ -370,4 +391,4 @@ Mittels eines Filters wurde ausschließlich TCP-Traffic auf Port 80 dargestellt.
 
 Mittels eines Filters werden nur IPs > `224.0.0.0` dargestellt, was IP-Multicast-Adressen sind.
 
-![Capture aller IP-Pakete mit Multicast-Adressen](./static/port-80-only.png)
+![Capture aller IP-Pakete mit Multicast-Adressen](./static/ip-multicast-only.png)
