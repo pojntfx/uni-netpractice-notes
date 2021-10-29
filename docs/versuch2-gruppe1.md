@@ -234,27 +234,17 @@ Es existiert ein Gerät von AVMAudio im Netwerk, welches über UPnP angesteuert 
 
 Zuerst wird eine DNS-Request getätigt. Daraufhin folgt der 3-Way-Handshake.
 
-**TODO**: Add valid image
-
-<!-- ![Initiierung einer HTTP-TCP-Sitzung](./static/ycombinator.png) -->
+![Initiierung einer HTTP-TCP-Sitzung](./static/ycombinator.png)
 
 **Können Sie den 3-Way-Handshake erkennen? Markieren Sie ihn in der Dokumentation. Welche TCP-Optionen sind beim Handshake aktiviert und welche Bedeutung haben sie?**
 
-**TODO**: Add valid image
+![3-Way-Handshake. Dieser lässt sich an den Flags SYN, SYN-ACK und ACK erkennen.](./static/ycombinator.png)
 
-<!-- ![3-Way-Handshake. Dieser lässt sich an den Flags SYN, SYN-ACK und ACK erkennen.](./static/ycombinator.png) -->
+![Das SYN-Segment enthält die Optionen Maximum Segment Size, Window scale, Timestamps und SACK (Selective Acknowledgement). Die Maximum Segment Size gibt die maximale Anzahl an Daten in Bytes an, die pro Segment akzeptiert werden. Der Window scale factor ist dazu da, die zuvor gesetzte maximale window-size über 65535 Bytes zu setzen. Der Timestamp misst die derzeitige Roundtrip time. Dadurch kann man den retransmission-timer jederzeit neu evaluieren. Selective Acknowledgement wird benutzt, um bei verlorenen Segmenten wirklich nur die fehlenden retransmitten zu müssen.](./static/first-segment.png)
 
-**TODO**: Add valid image
+![Das SYN-ACK-Segment verwendet wieder die Optionen Maximum Segment Size, Window scale, SACK und Timestamps.](./static/second-segment.png)
 
-<!-- ![Das SYN-Segment enthält die Optionen Maximum Segment Size, Window scale, Timestamps und SACK (Selective Acknowledgement). Die Maximum Segment Size gibt die maximale Anzahl an Daten in Bytes an, die pro Segment akzeptiert werden. Der Window scale factor ist dazu da, die zuvor gesetzte maximale window-size über 65535 Bytes zu setzen. Der Timestamp misst die derzeitige Roundtrip time. Dadurch kann man den retransmission-timer jederzeit neu evaluieren. Selective Acknowledgement wird benutzt, um bei verlorenen Segmenten wirklich nur die fehlenden retransmitten zu müssen.](./static/first-segment.png) -->
-
-**TODO**: Add valid image
-
-<!-- ![Das SYN-ACK-Segment verwendet wieder die Optionen Maximum Segment Size, Window scale, SACK und Timestamps.](./static/second-segment.png) -->
-
-**TODO**: Add valid image
-
-<!-- ![Das ACK Segment hat nur die Timestamps-Option gesetzt.](./static/third-segment.png) -->
+![Das ACK Segment hat nur die Timestamps-Option gesetzt.](./static/third-segment.png)
 
 **Dokumentieren und erläutern Sie die Verwendung der Portnummern bei der Dienstanfrage und der Beantwortung des Dienstes durch den Server.**
 
