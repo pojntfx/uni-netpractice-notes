@@ -3,12 +3,13 @@ OUTPUT_DIR ?= out
 
 # Private variables
 obj = $(shell ls docs/*.md | sed -r 's@docs/(.*).md@\1@g')
+formats = pdf slides.pdf html slides.html epub odt txt
 all: build
 
 # Build
 build: build/archive
 $(addprefix build/,$(obj)):
-	$(MAKE) build-pdf/$(subst build/,,$@) build-pdf-slides/$(subst build/,,$@) build-html/$(subst build/,,$@) build-html-slides/$(subst build/,,$@) build-epub/$(subst build/,,$@) build-odt/$(subst build/,,$@) build-plaintext/$(subst build/,,$@)
+	$(MAKE) build-pdf/$(subst build/,,$@) build-slides.pdf/$(subst build/,,$@) build-html/$(subst build/,,$@) build-slides.html/$(subst build/,,$@) build-epub/$(subst build/,,$@) build-odt/$(subst build/,,$@) build-txt/$(subst build/,,$@)
 
 # Build PDF
 $(addprefix build-pdf/,$(obj)): build/qr
@@ -16,9 +17,9 @@ $(addprefix build-pdf/,$(obj)): build/qr
 	pandoc --template eisvogel --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs -M titlepage=true -M toc=true -M toc-own-page=true -M linkcolor="{HTML}{006666}" -o "$(OUTPUT_DIR)/$(subst build-pdf/,,$@).pdf" "docs/$(subst build-pdf/,,$@).md"
 	
 # Build PDF slides
-$(addprefix build-pdf-slides/,$(obj)): build/qr
+$(addprefix build-slides.pdf/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
-	pandoc --to beamer --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --slide-level=3 --variable theme=metropolis -o "$(OUTPUT_DIR)/$(subst build-pdf-slides/,,$@).slides.pdf" "docs/$(subst build-pdf-slides/,,$@).md"
+	pandoc --to beamer --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --slide-level=3 --variable theme=metropolis -o "$(OUTPUT_DIR)/$(subst build-slides.pdf/,,$@).slides.pdf" "docs/$(subst build-slides.pdf/,,$@).md"
 
 # Build HTML
 $(addprefix build-html/,$(obj)): build/qr
@@ -26,9 +27,9 @@ $(addprefix build-html/,$(obj)): build/qr
 	pandoc --shift-heading-level-by=-1 --to markdown --standalone "docs/$(subst build-html/,,$@).md" | pandoc --to html5 --listings --shift-heading-level-by=1 --number-sections --resource-path=docs --toc --katex --self-contained --number-offset=1 -o "$(OUTPUT_DIR)/$(subst build-html/,,$@).html"
 
 # Build HTML slides
-$(addprefix build-html-slides/,$(obj)): build/qr
+$(addprefix build-slides.html/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
-	pandoc --to slidy --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --katex --self-contained -o "$(OUTPUT_DIR)/$(subst build-html-slides/,,$@).slides.html" "docs/$(subst build-html-slides/,,$@).md"
+	pandoc --to slidy --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --katex --self-contained -o "$(OUTPUT_DIR)/$(subst build-slides.html/,,$@).slides.html" "docs/$(subst build-slides.html/,,$@).md"
 
 # Build EPUB
 $(addprefix build-epub/,$(obj)): build/qr
@@ -40,10 +41,10 @@ $(addprefix build-odt/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
 	pandoc --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs -M titlepage=true -M toc=true -M toc-own-page=true -M linkcolor="{HTML}{006666}" -o "$(OUTPUT_DIR)/$(subst build-odt/,,$@).odt" "docs/$(subst build-odt/,,$@).md"
 
-# Build plaintext
-$(addprefix build-plaintext/,$(obj)): build/qr
+# Build txt
+$(addprefix build-txt/,$(obj)): build/qr
 	mkdir -p "$(OUTPUT_DIR)"
-	pandoc --to plain --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --self-contained -o "$(OUTPUT_DIR)/$(subst build-plaintext/,,$@).txt" "docs/$(subst build-plaintext/,,$@).md"
+	pandoc --to plain --listings --shift-heading-level-by=-1 --number-sections --resource-path=docs --toc --self-contained -o "$(OUTPUT_DIR)/$(subst build-txt/,,$@).txt" "docs/$(subst build-txt/,,$@).md"
 
 # Build metadata
 build/metadata:
@@ -72,33 +73,16 @@ build/archive: build/tree
 	mkdir -p "$(OUTPUT_DIR)"
 	zip -j -x 'release.zip' -FSr "$(OUTPUT_DIR)"/release.zip "$(OUTPUT_DIR)"/*
 
-# Open PDF
-$(addprefix open-pdf/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-pdf/,,$@).pdf"
+# Open
+$(foreach o,$(obj),$(foreach f,$(formats),open-$(f)/$(o))):
+	xdg-open "$(OUTPUT_DIR)/$(notdir $(subst open-,,$@)).$(subst /,,$(dir $(subst open-,,$@)))"
 
-# Open PDF slides
-$(addprefix open-pdf-slides/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-pdf-slides/,,$@).slides.pdf"
-
-# Open HTML
-$(addprefix open-html/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-html/,,$@).html"
-
-# Open HTML slides
-$(addprefix open-html-slides/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-html-slides/,,$@).slides.html"
-
-# Open EPUB
-$(addprefix open-epub/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-epub/,,$@).epub"
-
-# Open ODT
-$(addprefix open-odt/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-odt/,,$@).odt"
-
-# Open plaintext
-$(addprefix open-plaintext/,$(obj)):
-	xdg-open "$(OUTPUT_DIR)/$(subst open-plaintext/,,$@).txt"
+# Develop
+dev: build
+	while inotifywait -r -e close_write --exclude 'out' .; do $(MAKE); done
+$(foreach o,$(obj),$(foreach f,$(formats),dev-$(f)/$(o))):
+	$(MAKE) $(subst dev-,build-,$@)
+	while inotifywait -r -e close_write --exclude 'out' .; do $(MAKE) $(subst dev-,build-,$@); done
 
 # Clean
 clean:

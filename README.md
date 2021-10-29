@@ -8,6 +8,23 @@ Notes for the Praktikum Rechnernetze (networking practice) course at HdM Stuttga
 
 You can [view the notes on GitHub pages](https://pojntfx.github.io/uni-netpractice-notes/) or [download them from GitHub releases](https://github.com/pojntfx/uni-netpractice-notes/releases/latest).
 
+## Contributing
+
+To contribute, please use the [GitHub flow](https://guides.github.com/introduction/flow/) and follow our [Code of Conduct](./CODE_OF_CONDUCT.md).
+
+To build and open a note locally, run the following:
+
+```shell
+$ git clone https://github.com/pojntfx/uni-netpractice-notes.git
+$ cd uni-netpractice-notes
+$ make depend
+$ make dev-pdf/versuch1-gruppe1 # Or dev-html/versuch2-gruppe1 etc. - use Bash completion to list available targets.
+# In another terminal
+$ make open-pdf/versuch1-gruppe1 # Or open-html/versuch2-gruppe1 etc. - use Bash completion to list available targets.
+```
+
+The note should now be opened. Whenever you change a source file, it will automatically be re-compiled.
+
 ## License
 
 Uni Network Practice Notes (c) 2021 Felix Pojtinger and contributors
