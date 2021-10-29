@@ -49,8 +49,8 @@ $(addprefix build-txt/,$(obj)): build/qr
 # Build metadata
 build/metadata:
 	mkdir -p "$(OUTPUT_DIR)"
-	git log > "$(OUTPUT_DIR)"/CHANGELOG
-	cp LICENSE "$(OUTPUT_DIR)"
+	git log > "$(OUTPUT_DIR)"/CHANGELOG.txt
+	cp LICENSE "$(OUTPUT_DIR)"/LICENSE.txt
 	pandoc --shift-heading-level-by=-1 --to markdown --standalone "README.md" | pandoc --to html5 --listings --shift-heading-level-by=1 --number-sections --resource-path=docs --toc --katex --self-contained --number-offset=1 -o "$(OUTPUT_DIR)/README.html"
 
 # Build QR code
