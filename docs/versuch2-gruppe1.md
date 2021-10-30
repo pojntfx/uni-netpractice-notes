@@ -1,6 +1,6 @@
 ---
 author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger]
-date: "2021-10-19"
+date: "2021-10-26"
 subject: "Praktikum Rechnernetze: Protokoll zu Versuch 2 (Protokollanalyse mit Wireshark) von Gruppe 1"
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 2 (Protokollanalyse mit Wireshark) von Gruppe 1"
