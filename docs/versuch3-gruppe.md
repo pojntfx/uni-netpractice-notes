@@ -45,23 +45,44 @@ TODO
 
 Konfiguration `interface GigabitEthernet 0/1`
 
+Interface `GigabitEthernet 0/1` ist in unserer Konfiguration das LAN-Interface
+
 ![Konfiguration interface GigabitEthernet 0/1](./static/aufgabe2_configure_interface_01_short.png)
 
 Konfiguration `interface GigabitEthernet 0/0`
+
+Interface `GigabitEthernet 0/0` ist in unserer Konfiguration das WAN-Interface
 
 Anfangs haben wir die falsche IP `141.62.67.2` gesetzt. Diese haben wir im Nachhinein korrigiert.
 
 ![Erste, Fehlerbehaftete Konfiguration](./static/aufgabe21.png)
 
 Mit `clear ip nat translation *` können die falschen Konfigurationen rückgängig gemacht werden.
-![Konfiguration interface GigabitEthernet 0/0](./static/aufgabe2_configure_ip_nat_correctly.png)
+
+![Konfiguration interface GigabitEthernet 0/0](./static/aufgabe2_configure_ip_nat_correctly_cropped.png)
+
+Nun muss noch sichergestellt werden, dass wirklich alle interfaces den Status `up` besitzen. Andernfalls können diese mit `no shutdown` in der jeweiligen Interface-Konfiguration aktiviert werden.
 
 Interfaces mit `show ip interface brief` anzeigen und deren Status abfragen.
-![Interfaces anzeigen](./static/aufgabe2_interfaces_up.png)
+![Interfaces anzeigen](./static/aufgabe2_ping_room_router_show_ip_cropped.png)
 
-Danach kann am Router im `config` mode mit `ip route 0.0.0.0 0.0.0.0 141.62.66.250` die Route zum Router festgelegt werden.
+Danach kann am Router im `config` mode mit `ip route 0.0.0.0 0.0.0.0 141.62.66.250` die Route zum Router festgelegt werden und die Verbindung zum Internet sollte hergestellt sein.
 
-### Erlaeutern Sie in der ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
+Bevor der Lokale Computer über unseren Router eine Internetverbindung aufbauen kann, muss auch dieser konfiguriert werden.
+
+Zuerst entfernen wir die alte IP von unserem Netzwerkinterface `enp0s31f6`.
+
+![IP entfernen](./static/aufgabe2_add_inet_flush_cropped.png)
+
+Danach fügen wir unsere neu bestimmte IP-Adresse zum Netzwerk-Interface hinzu.  
+
+![Hinzufügen der neuen IP](./static/aufgabe2_add_inet_cropped_route_cropped.png)
+
+Testen der Internetverbindung unseres Lokalen Computers mit einem ping zu `8.8.8.8` (Googles Public DNS-Server). Dafür kann der Command `ping 8.8.8.8` verwendet werden.
+
+![Ping an den Google-DNS-Server](./static/aufgabe2_ping_dns.png)
+
+### Erläutern Sie in der Ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
 
 TODO
 
@@ -150,11 +171,11 @@ Die Routing Tabelle des Lokalen Computers kann mit `ip route show` angezeigt wer
 
 Als Erstes wurde unser Router von unserem Lokalen Computer angepingt.
 
-![Ping an unseren Router](./static/aufgabe2_ping_router.png)
+![Ping an unseren Router](./static/aufgabe2_ping_router_cropped.png)
 
 Danach wurde der Router im Rechnernetze-Labor von unserem Router angepingt. 
 
-![Ping an Router im Rechnernetze-Labor](./static/aufgabe2_ping_room_router.png)
+![Ping an Router im Rechnernetze-Labor](./static/aufgabe2_ping_room_router_ping_cropped.png)
 
 Danach haben wir den Google-DNS-Server angepingt.
 
