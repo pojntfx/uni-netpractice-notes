@@ -43,7 +43,23 @@ TODO
 
 ### Konfigurieren Sie ihren Router unter Einsatz von NAT so, dass von einem angeschlossenen PC aus eine Internet verbindung moeglich ist. 
 
-TODO
+Konfiguration `interface GigabitEthernet 0/1`
+
+![Konfiguration interface GigabitEthernet 0/1](./static/aufgabe2_configure_interface_01_short.png)
+
+Konfiguration `interface GigabitEthernet 0/0`
+
+Anfangs haben wir die falsche IP `141.62.67.2` gesetzt. Diese haben wir im Nachhinein korrigiert.
+
+![Erste, Fehlerbehaftete Konfiguration](./static/aufgabe21.png)
+
+Mit `clear ip nat translation *` können die falschen Konfigurationen rückgängig gemacht werden.
+![Konfiguration interface GigabitEthernet 0/0](./static/aufgabe2_configure_ip_nat_correctly.png)
+
+Interfaces mit `show ip interface brief` anzeigen und deren Status abfragen.
+![Interfaces anzeigen](./static/aufgabe2_interfaces_up.png)
+
+Danach kann am Router im `config` mode mit `ip route 0.0.0.0 0.0.0.0 141.62.66.250` die Route zum Router festgelegt werden.
 
 ### Erlaeutern Sie in der ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
 
@@ -51,11 +67,106 @@ TODO
 
 ### Dokumentieren Sie die Router-Konfiguration und die Routing-Tabelle des Routers und des PCs 
 
-TODO
+Die Konfiguration lässt sich mit `show running-config` anzeigen.
+
+```
+cisco-gruppe1#show running-config
+Building configuration...
+
+Current configuration : 1483 bytes
+!
+! Last configuration change atstname cisco-gruppe1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+no ipv6 cef
+ip source-route
+ip cef
+!
+!         
+!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      !   !    r
+multilink bundle-name authenticated
+!
+ --More--  default removal timeout 0
+!
+!         
+license udi pid CISCO1941/K9 sn FTX1636824P
+ --More-- 
+          !
+!         
+!
+!         
+!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              shutdown   
+!         
+interface GigabitEthernet61 255.255.255.0
+ ip nat outside
+ ip virtual-reassembly in
+ duplex auto
+ speed auto
+!                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           speed auto     
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!         
+ip nat pool HDM 141.62.66.161 141.62.66.161 prefix-length 24
+ --Morermit 192.168.1.0 0.0.0.255
+!         
+!
+!         
+control-plane                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       !      
+line con 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              line 2    -- 
+ no activation-character
+ no exec  
+ transport preferred none
+ transport input all
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ password hdm
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+end
+
+```
+
+Die Routing-Tabelle des Routers kann mit `show ip route` angezeigt werden. 
+
+![Routing-Tabelle des Routers](./static/aufgabe2_show_ip_route.png)
+
+Die Routing Tabelle des Lokalen Computers kann mit `ip route show` angezeigt werden. Zusätzlich nutzen wir `ip a`, um die Netzwerk-Interfaces und deren jeweilige IP-Adressen zu betrachten.
+
+![Routing-Tabelle des Lokalen Computers](./static/aufgabe2_ip_route_show_a.png)
 
 ### Experimentieren Sie mit nachfolgenden Befehlen nach Aufruf einer beliebigen Website und dokumentieren Sie Ihre Ergebnisse
 
-TODO
+Als Erstes wurde unser Router von unserem Lokalen Computer angepingt.
+
+![Ping an unseren Router](./static/aufgabe2_ping_router.png)
+
+Danach wurde der Router im Rechnernetze-Labor von unserem Router angepingt. 
+
+![Ping an Router im Rechnernetze-Labor](./static/aufgabe2_ping_room_router.png)
+
+Danach haben wir den Google-DNS-Server angepingt.
+
+![Ping an den Google-DNS-Server](./static/aufgabe2_ping_dns.png)
+
+TODO add output to the following commands
+
+`show ip nat statistics`
+`show ip nat translation`
+`debug ip nat`
+
+TODO: Add how to connect on linux to the top
 
 ## Internet-Verbindung ohne NAT 
 
