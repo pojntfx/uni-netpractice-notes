@@ -37,21 +37,21 @@ SPDX-License-Identifier: AGPL-3.0
 
 Anders als in der Anleitung beschrieben, haben wir den Versuch mit Ubuntu durchgeführt. Daher im Folgenden eine kleine Anleitung, wie man sich unter Ubuntu mit dem Router verbinden kann.
 
-Zuerst muss man die Anwendung `screen`installieren.
+Zuerst muss man die Anwendung `screen` installieren.
 
 ```
 sudo apt install screen
 ```
 
-Bevor man den Router nun einsteckt, kann man mit Hilfe von dmesg feststellen, welche Gerätebezeichnung der Router hat. 
+Bevor man den Router nun einsteckt, kann man mit Hilfe von `dmesg` feststellen, welche Gerätebezeichnung der Router hat. 
 
 ```
 sudo dmesg | grep -i tty
 ```
 
-Steckt man das Gerät nun ein, sollte man eine Meldung sehen, in welchem eine Device-Bezeichnung, wie in unserem Fall `ttyUSB0`angezeigt wird.
+Steckt man das Gerät nun ein, sollte man eine Meldung sehen, in welchem eine Device-Bezeichnung zu finden ist. In unserem Fall `ttyUSB0`.
 
-Abschließen muss man sich nur noch mit der Cisco-Konsole verbinden. Dies lässt sich mit folgendem Kommando erreichen.
+Abschließend muss man sich nur noch mit der Cisco-Konsole verbinden. Dies lässt sich mit folgendem Kommando erreichen.
 
 ```
 sudo screen /dev/ttyUSB0
@@ -147,7 +147,7 @@ Verbindet das Interface `GigabitEthernet 0/0` mit dem außenstehenden Netzwerk.
 
 **ip nat pool HDM 141.62.66.161 141.62.66.161 prefix-length 24**
 
-Definiert einen nat pool mit der Adress-Range von `141.62.66.161` bis `141.62.66.161`, also genau diese Adresse. Zusätzlich ist noch der Netzwerk-Präfix angegeben, der in unserem Beispiel 24 Bit lang ist.
+Definiert einen NAT-Pool mit der Adress-Range von `141.62.66.161` bis `141.62.66.161`, also genau diese Adresse. Zusätzlich ist noch der Netzwerk-Präfix angegeben, der in unserem Beispiel 24 Bit lang ist.
 
 **ip nat inside source list 8 HDM overload**
 
@@ -249,11 +249,11 @@ Danach wurde der Router im Rechnernetze-Labor von unserem Router angepingt.
 
 ![Ping an Router im Rechnernetze-Labor](./static/aufgabe2_ping_room_router_ping_cropped.png)
 
-Danach haben wir den Google-DNS-Server angepingt.
+Danach haben wir den Google DNS-Server angepingt.
 
-![Ping an den Google-DNS-Server](./static/aufgabe2_ping_dns.png)
+![Ping an den Google DNS-Server](./static/aufgabe2_ping_dns.png)
 
-Von den folgenden Kommandos, haben wir vergessen Screenshots zu machen, daher Bilder uas dem Internet, wie es hätte aussehen sollen. Die Konfiguration unterscheidet sich offensichtlich.
+Von den folgenden Kommandos haben wir vergessen Screenshots zu machen, daher finden sich im Folgenden Bilder aus dem Internet, die die Funktionalität der Kommandos illustrieren sollen. Die Konfiguration unterscheidet sich offensichtlich.
 
 `show ip nat statistics`
 
