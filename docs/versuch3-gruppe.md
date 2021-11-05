@@ -37,15 +37,83 @@ SPDX-License-Identifier: AGPL-3.0
 
 ### Konfiguration des Routers, so dass er mittels ping oder telnet von ihrem Rechner erreichbar ist
 
-TODO
+Um den Router auf die Default-Werte zurückzusetzen, verwenden wir ```write erase```. Um nun in den Urzustand zu kommen starten wir den Router neu mit ```reload```.
+```shell
+Router>enable
+Router#write erase
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_write_erase.png){ width=450px }
+```shell
+Router#reload
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_write_erase_full.png){ width=450px }
 
-## Internet-Verbindung unter einsatz von NAT
+Erst wechseln wir mit ```enable``` in den "Privileged Exec"- Mode, worüber wir anschließend mit ```configure terminal``` in "Configuration Exec"-Mode gelangen können.
+```shell
+Router>enable
+Router#configure terminal
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_configure_terminal.png){ width=450px }
+
+Den Hostname vergeben wir wie folgt ```hostname cisco-gruppe1```.
+```shell
+Router(configure)#hostname cisco-gruppe1
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_hostname.png){ width=450px }
+TODO
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_ip_address.png){ width=450px }
+
+Um für ```line con 0``` kein Passwort zu vergeben, lassen wir den Passwortparameter weg. Dies sorgt jedoch dafür, dass der Login verwährt wurde, wie im folgenden Scrreenshot zu sehen ist.
+```shell
+cisco-gruppe1(configure)#line con 0
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_line_con_0_login.png){ width=450px }
+
+Um für ```line vty 0 4``` das Passwort zu vergeben und uns einzuloggen, können wir folgende Kommandos verwenden.
+```shell
+cisco-gruppe1(config)#line con 0
+cisco-gruppe1(config-line)#password hdm
+cisco-gruppe1(config-line)#login
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_password_short.png){ width=450px }
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_password.png){ width=450px }
+
+Die Liste, in welcher alle Interfaces mit IP, etc. aufgelistet wird, kann durch ```show ip interface brief``` erzeugt werden.
+```shell
+cisco-gruppe1#show ip interface brief
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_brief_interface.png){ width=450px }
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_change_state_to_up.png){ width=450px }
+
+Um die Konfigurationsdatei einzusehen, können wird ```show running-config``` verwenden.
+```shell
+cisco-gruppe1#show running-config
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_running_config.png){ width=450px }
+
+TODO richtige Scrreenshots?
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_interface_brief.png){ width=450px }
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_interfaces_brief.png){ width=450px }
+
+Die statisch und dynamischen Routen, können wird mit ```show ip route``` einsehen.
+```shell
+cisco-gruppe1#show ip route
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_route.png){ width=450px }
+
+Informationen zur Version erhalten wir mit ```show version```.
+```shell
+cisco-gruppe1#show version
+```
+![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_version.png){ width=450px }
+
+## Internet-Verbindung unter Einsatz von NAT
 
 ### Konfigurieren Sie ihren Router unter Einsatz von NAT so, dass von einem angeschlossenen PC aus eine Internet verbindung moeglich ist. 
 
 TODO
 
-### Erlaeutern Sie in der ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
+### Erlaeutern Sie in der Ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
 
 TODO
 
