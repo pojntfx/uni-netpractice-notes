@@ -61,37 +61,39 @@ Nun sollte eine Verbindung zur Cisco-Konsole bestehen.
 
 ### Konfiguration des Routers, so dass er mittels ping oder telnet von ihrem Rechner erreichbar ist
 
-Um den Router auf die Default-Werte zurückzusetzen, verwenden wir ```write erase```. Um nun in den Urzustand zu kommen starten wir den Router neu mit ```reload```.
+Um den Router auf die Default-Werte zurückzusetzen, verwenden wir ```write erase```. Zur Sicherheit Laden wir den Router neu mit ```reload``` neu.
 ```shell
 Router>enable
 Router#write erase
 ```
-![Entfernen aller besthenden Konfigurationsdateien](./static/aufgabe1_write_erase.png){ width=450px }
+![Entfernen aller besthenden Konfigurationsdateien](./static/aufgabe1_write_erase_cropped.png)
 ```shell
 Router#reload
 ```
-![Reload des Routers](./static/aufgabe1_write_erase_full.png){ width=450px }
+![Reload des Routers](./static/aufgabe1_write_erase_full_cropped.png)
 
-Erst wechseln wir mit ```enable``` in den "Privileged Exec"- Mode, worüber wir anschließend mit ```configure terminal``` in "Configuration Exec"-Mode gelangen können.
+Erst wechseln wir mit ```enable``` in den "Privileged Exec-Mode", worüber wir anschließend mit ```configure terminal``` in "Configuration Exec-Mode" gelangen können.
 ```shell
 Router>enable
 Router#configure terminal
 ```
-![Wechsel in den ```configure terminal`-Modus](./static/aufgabe1_configure_terminal.png){ width=450px }
+![Wechsel in den Configure Terminal-Mode](./static/aufgabe1_configure_terminal_cropped.png)
 
 Den Hostname vergeben wir wie folgt ```hostname cisco-gruppe1```.
 ```shell
 Router(configure)#hostname cisco-gruppe1
 ```
-![Vergeben eines Hostnamens](./static/aufgabe1_set_hostname.png){ width=450px }
-TODO
-![TODO](./static/aufgabe1_set_ip_address.png){ width=450px }
+![Vergeben eines Hostnamens](./static/aufgabe1_set_hostname_full.png)
 
-Um für ```line con 0``` kein Passwort zu vergeben, lassen wir den Passwortparameter im Kommando weg. Dies sorgt jedoch dafür, dass der Login verwährt wurde, wie im folgenden Scrreenshot zu sehen ist.
+Bevor wir nun eine IP-Adresse vergeben können, müssen wir in den Interface-Konfigurations-Modus wechseln. Dies können wir im Config-Exec-Mode mit dem Command `interface GigabitEthernet 0/0` erreichen. 
+
+![Vergeben einer IP im Interface GigabitEthernet 0/0](./static/aufgabe1_set_ip_address_cropped.png)
+
+Um für ```line con 0``` kein Passwort zu vergeben, lassen wir den Passwort-Parameter im Kommando weg. Dies sorgt jedoch dafür, dass der Login verwährt wurde, wie im folgenden Scrreenshot zu sehen ist.
 ```shell
 cisco-gruppe1(configure)#line con 0
 ```
-![Login line con 0](./static/aufgabe1_line_con_0_login.png){ width=450px }
+![Login line con 0](./static/aufgabe1_line_con_0_login.png)
 
 Um für ```line vty 0 4``` das Passwort zu vergeben und uns einzuloggen, können wir folgende Kommandos verwenden.
 ```shell
@@ -99,37 +101,34 @@ cisco-gruppe1(config)#line vty 0 4
 cisco-gruppe1(config-line)#password hdm
 cisco-gruppe1(config-line)#login
 ```
-![Passwortvergabe von line vty 0 4](./static/aufgabe1_set_password_short.png){ width=450px }
-![Login line vty 0 4](./static/aufgabe1_set_password.png){ width=450px }
+![Passwortvergabe von line vty 0 4](./static/aufgabe1_set_password_short.png)
 
 Die Liste, in welcher alle Interfaces mit IP, etc. aufgelistet wird, kann durch ```show ip interface brief``` erzeugt werden.
 ```shell
 cisco-gruppe1#show ip interface brief
 ```
-![Einsehen aller Interfaces](./static/aufgabe1_brief_interface.png){ width=450px }
-![TODO](./static/aufgabe1_change_state_to_up.png){ width=450px }
+![Einsehen aller Interfaces](./static/aufgabe1_brief_interface.png)
 
 Um die Konfigurationsdatei einzusehen, können wird ```show running-config``` verwenden.
 ```shell
 cisco-gruppe1#show running-config
 ```
-![Einsehen der Konfigurationsdateien](./static/aufgabe1_show_running_config.png){ width=450px }
-
-TODO richtige Scrreenshots?
-![TODO](./static/aufgabe1_show_ip_interface_brief.png){ width=450px }
-![TODO](./static/aufgabe1_show_ip_interfaces_brief.png){ width=450px }
+![Einsehen der Konfigurationsdateien](./static/aufgabe1_show_running_config.png)
 
 Die statisch und dynamischen Routen, können wird mit ```show ip route``` einsehen.
 ```shell
 cisco-gruppe1#show ip route
 ```
-![Einsehen der Routen](./static/aufgabe1_show_ip_route.png){ width=450px }
+![Einsehen der Routen](./static/aufgabe1_show_ip_route.png)
 
 Informationen zur Version erhalten wir mit ```show version```.
 ```shell
 cisco-gruppe1#show version
 ```
-![Einsehen der Versionsinformationen](./static/aufgabe1_show_version.png){ width=450px }
+![Einsehen der Versionsinformationen](./static/aufgabe1_show_version_cropped.png)
+
+
+Nun kann unser Router über `ping` erreicht werden. 
 
 ## Internet-Verbindung unter Einsatz von NAT
 
