@@ -35,6 +35,30 @@ SPDX-License-Identifier: AGPL-3.0
 
 ## Konfiguration
 
+Anders als in der Anleitung beschrieben, haben wir den Versuch mit Ubuntu durchgeführt. Daher im Folgenden eine kleine Anleitung, wie man sich unter Ubuntu mit dem Router verbinden kann.
+
+Zuerst muss man die Anwendung `screen`installieren.
+
+```
+sudo apt install screen
+```
+
+Bevor man den Router nun einsteckt, kann man mit Hilfe von dmesg feststellen, welche Gerätebezeichnung der Router hat. 
+
+```
+sudo dmesg | grep -i tty
+```
+
+Steckt man das Gerät nun ein, sollte man eine Meldung sehen, in welchem eine Device-Bezeichnung, wie in unserem Fall `ttyUSB0`angezeigt wird.
+
+Abschließen muss man sich nur noch mit der Cisco-Konsole verbinden. Dies lässt sich mit folgendem Kommando erreichen.
+
+```
+sudo screen /dev/ttyUSB0
+```
+
+Nun sollte eine Verbindung zur Cisco-Konsole bestehen.
+
 ### Konfiguration des Routers, so dass er mittels ping oder telnet von ihrem Rechner erreichbar ist
 
 TODO
@@ -84,7 +108,55 @@ Testen der Internetverbindung unseres Lokalen Computers mit einem ping zu `8.8.8
 
 ### Erläutern Sie in der Ausarbeitung die Bedeutung der einzelnen Zeilen der Konfiguration
 
-TODO
+```
+interface GigabitEthernet 0/1
+ip address 192.168.1.1 255.255.255.0
+ip nat inside
+
+interface GigabitEthernet 0/0
+ip address 141.6266.161 255.255.255.0
+ip nat outside
+ip nat pool HDM 141.62.66.161 151.62.66.161 prefix-length 24
+ip nat inside source list 8 HDM overload
+access-list 8 permit 192.168.1.0 0.0.0.255
+```
+
+**interface GigabitEthernet 0/1**
+
+In den Interface-Konfigurations-Modus des Interfaces `GigabitEthernet 0/1` wechseln, um dieses zu konfigurieren. Dieses Interface ist in unserem Versuch das LAN-Interface.
+
+**ip address 192.168.1.1 255.255.255.0**
+
+Dem Router, in dem momentan konfigurierbaren Interface `GigabitEthernet 0/1` die IP `192.168.1.1` mit der Subnetzmaske `255.255.255.0` zuweisen.
+
+**ip nat inside**
+
+Verbindet das interface `GigabitEthernet 0/1` mit dem inneren Netzwerk, welches von NAT betroffen ist.
+
+**interface GigabitEthernet 0/0**
+
+Wechselt in den Interface-Konfigurations-Modus des Interfaces `GigabitEthernet 0/0`, um dieses zu konfigurieren. Dieses Interface ist in unserem Versuch das WAN-Interface.
+
+**ip address 141.62.66.161 255.255.255.0**
+
+Mit diesem Command wird dem Router, in dem momentan konfigurierbaren Interface `GigabitEthernet 0/0`, die IP-Addresse `141.62.66.161` mit der Subnetzmaske `255.255.255.0` zugewiesen.
+
+**ip nat outside**
+
+Verbindet das Interface `GigabitEthernet 0/0` mit dem außenstehenden Netzwerk.
+
+**ip nat pool HDM 141.62.66.161 141.62.66.161 prefix-length 24**
+
+Definiert einen nat pool mit der Adress-Range von `141.62.66.161` bis `141.62.66.161`, also genau diese Adresse. Zusätzlich ist noch der Netzwerk-Präfix angegeben, der in unserem Beispiel 24 Bit lang ist.
+
+**ip nat inside source list 8 HDM overload**
+
+Verändert die Source-IP der Pakete, die von innen nach aussen geleitet werden.
+Üebersetzt die Destination-IP der Pakete, die von außen nach innen geleitet werden.
+
+**access-list 8 permit 192.168.1.0 0.0.0.255**
+
+Konfiguriert die Access-Control-List, insoweit, dass Pakete der IP 192.168.1.0 weitergeleitet werden dürfen.
 
 ### Dokumentieren Sie die Router-Konfiguration und die Routing-Tabelle des Routers und des PCs 
 
@@ -181,13 +253,20 @@ Danach haben wir den Google-DNS-Server angepingt.
 
 ![Ping an den Google-DNS-Server](./static/aufgabe2_ping_dns.png)
 
-TODO add output to the following commands
+Von den folgenden Kommandos, haben wir vergessen Screenshots zu machen, daher Bilder uas dem Internet, wie es hätte aussehen sollen. Die Konfiguration unterscheidet sich offensichtlich.
 
 `show ip nat statistics`
+
+![http://blog.soundtraining.net/2013/02/nat-configuration-on-cisco-router-port.html](./static/show_ip_nat_statistics.png)
+
 `show ip nat translation`
+
+![https://www.computernetworkingnotes.com/ccna-study-guide/configure-pat-in-cisco-router-with-examples.html](./static/nat-pat-show-ip-nat-translation-r1.png)
+
 `debug ip nat`
 
-TODO: Add how to connect on linux to the top
+![https://www.google.com/search?q=debug+ip+nat&rlz=1C5CHFA_enDE964DE964&source=lnms&tbm=isch&sa=X&ved=2ahUKEwibntq-84D0AhWE2KQKHWMIBfIQ_AUoAXoECAEQAw&biw=1622&bih=857&dpr=2#imgrc=40zndQOWKiYsiM&imgdii=t1e4jXoag0v3iM](./static/debug_ip_nat.png)
+
 
 ## Internet-Verbindung ohne NAT 
 
