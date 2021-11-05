@@ -42,41 +42,41 @@ Um den Router auf die Default-Werte zurückzusetzen, verwenden wir ```write eras
 Router>enable
 Router#write erase
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_write_erase.png){ width=450px }
+![Entfernen aller besthenden Konfigurationsdateien](./static/aufgabe1_write_erase.png){ width=450px }
 ```shell
 Router#reload
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_write_erase_full.png){ width=450px }
+![Reload des Routers](./static/aufgabe1_write_erase_full.png){ width=450px }
 
 Erst wechseln wir mit ```enable``` in den "Privileged Exec"- Mode, worüber wir anschließend mit ```configure terminal``` in "Configuration Exec"-Mode gelangen können.
 ```shell
 Router>enable
 Router#configure terminal
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_configure_terminal.png){ width=450px }
+![Wechsel in den ```configure terminal`-Modus](./static/aufgabe1_configure_terminal.png){ width=450px }
 
 Den Hostname vergeben wir wie folgt ```hostname cisco-gruppe1```.
 ```shell
 Router(configure)#hostname cisco-gruppe1
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_hostname.png){ width=450px }
+![Vergeben eines Hostnamens](./static/aufgabe1_set_hostname.png){ width=450px }
 TODO
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_ip_address.png){ width=450px }
+![TODO](./static/aufgabe1_set_ip_address.png){ width=450px }
 
-Um für ```line con 0``` kein Passwort zu vergeben, lassen wir den Passwortparameter weg. Dies sorgt jedoch dafür, dass der Login verwährt wurde, wie im folgenden Scrreenshot zu sehen ist.
+Um für ```line con 0``` kein Passwort zu vergeben, lassen wir den Passwortparameter im Kommando weg. Dies sorgt jedoch dafür, dass der Login verwährt wurde, wie im folgenden Scrreenshot zu sehen ist.
 ```shell
 cisco-gruppe1(configure)#line con 0
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_line_con_0_login.png){ width=450px }
+![Login line con 0](./static/aufgabe1_line_con_0_login.png){ width=450px }
 
 Um für ```line vty 0 4``` das Passwort zu vergeben und uns einzuloggen, können wir folgende Kommandos verwenden.
 ```shell
-cisco-gruppe1(config)#line con 0
+cisco-gruppe1(config)#line vty 0 4
 cisco-gruppe1(config-line)#password hdm
 cisco-gruppe1(config-line)#login
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_password_short.png){ width=450px }
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_set_password.png){ width=450px }
+![Passwortvergabe von line vty 0 4](./static/aufgabe1_set_password_short.png){ width=450px }
+![Login line vty 0 4](./static/aufgabe1_set_password.png){ width=450px }
 
 Die Liste, in welcher alle Interfaces mit IP, etc. aufgelistet wird, kann durch ```show ip interface brief``` erzeugt werden.
 ```shell
@@ -89,23 +89,23 @@ Um die Konfigurationsdatei einzusehen, können wird ```show running-config``` ve
 ```shell
 cisco-gruppe1#show running-config
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_running_config.png){ width=450px }
+![Einsehen der Konfigurationsdateien](./static/aufgabe1_show_running_config.png){ width=450px }
 
 TODO richtige Scrreenshots?
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_interface_brief.png){ width=450px }
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_interfaces_brief.png){ width=450px }
+![TODO](./static/aufgabe1_show_ip_interface_brief.png){ width=450px }
+![TODO](./static/aufgabe1_show_ip_interfaces_brief.png){ width=450px }
 
 Die statisch und dynamischen Routen, können wird mit ```show ip route``` einsehen.
 ```shell
 cisco-gruppe1#show ip route
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_ip_route.png){ width=450px }
+![Einsehen der Routen](./static/aufgabe1_show_ip_route.png){ width=450px }
 
 Informationen zur Version erhalten wir mit ```show version```.
 ```shell
 cisco-gruppe1#show version
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_show_version.png){ width=450px }
+![Einsehen der Versionsinformationen](./static/aufgabe1_show_version.png){ width=450px }
 
 ## Internet-Verbindung unter Einsatz von NAT
 
