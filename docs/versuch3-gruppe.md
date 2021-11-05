@@ -82,8 +82,8 @@ Die Liste, in welcher alle Interfaces mit IP, etc. aufgelistet wird, kann durch 
 ```shell
 cisco-gruppe1#show ip interface brief
 ```
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_brief_interface.png){ width=450px }
-![Wireshark-Output zu einem Ping nach `google.com`](./static/aufgabe1_change_state_to_up.png){ width=450px }
+![Einsehen aller Interfaces](./static/aufgabe1_brief_interface.png){ width=450px }
+![TODO](./static/aufgabe1_change_state_to_up.png){ width=450px }
 
 Um die Konfigurationsdatei einzusehen, können wird ```show running-config``` verwenden.
 ```shell
