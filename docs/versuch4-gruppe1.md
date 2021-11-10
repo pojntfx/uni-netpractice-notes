@@ -34,8 +34,15 @@ SPDX-License-Identifier: AGPL-3.0
 \newpage
 
 ## IPv6-Addressen
+**Voreinstellung für die Aufgaben - deaktivieren von IPv4 und aktivivieren von IPv6 unter Windows.**
+
+Um IPv4 zu deaktivieren und IPv6 zu deaktivieren muss man in den Netzterkeistellungen zum jeweiligen Adapter über den Pfad `Systemsteuerung > Netzwerk und Internet > Netzwerkverbindungen > Adaptereinstellungen`. Hier wurde der Haken bei IPv6 (Internetprotokoll, Version6) gesetzt und bei IPv4 (Internetprotokoll, Version4) entfernt
+
+![Deaktivieren von IPv4 und aktivieren von IPv6](./static/vorbereitung_ipv6_aktiv.png)
 
 **Erkunden sie unter Windows und Ubuntu, wie viele IP-Adressen dem physikalischen Interface zugeordnet sind.**
+
+> Linux
 
 ```shell
 $ ip addr
@@ -78,9 +85,15 @@ $ ip a
        valid_lft forever preferred_lft forever
 ```
 
+> Windows
+
+![Anzeigen aller IPv6-Adressen](./static/aufgabe_1_get_net_ip_address_address_family_ipv6.png)
+
 Es sind 3 Addressen zu finden; eine Host-Local-Addresse, eine Global-Unique-Addresse und eine Link-Local-Addresse.
 
 Nun wird noch IPv4 deaktiviert:
+
+>Linux
 
 ```shell
 $ sudo ip addr delete 141.62.66.5/24 dev enp0s31f6
@@ -109,7 +122,13 @@ Das EUI-64-Format lässt sich mittels `fe0e` bei `2001:470:6d:4d0:4e52:62ff:fe0e
 
 Prefix: `2001:470:6d:4d0`
 
+> Linux
+
 Host-ID: `4e52:62ff:fe0e:548b`
+
+> Windows
+
+Host-ID: `4e52:62ff:fe0e:542b`
 
 **Testen Sie die Netzwerkverbindung zwischen dem Linux und dem Windows-Rechner mit einem Ping (IPv6)?**
 
@@ -130,14 +149,28 @@ PING 2001:470:6d:4d0:4e52:62ff:fe0e:542b(2001:470:6d:4d0:4e52:62ff:fe0e:542b) 56
 rtt min/avg/max/mdev = 0.775/0.879/1.327/0.200 ms
 ```
 
+Vom Windows-Host zum Linux-Host:
+![Ping von Windows zu Linux](./static/aufgabe_1_ping_form_windows_to_linux.png)
+
+
 **Lassen Sie sich die Routen anzeigen und ermitteln Sie die „Default Route“**
 
+>Linux
+
+```shell
 $ ip -6 route show
 2001:470:6d:4d0::/64 dev enp0s31f6 proto kernel metric 256 expires 86097sec pref medium
 fe80::/64 dev enp0s31f6 proto kernel metric 256 pref medium
 default via fe80::fad1:11ff:febd:6612 dev enp0s31f6 proto ra metric 1024 expires 1497sec hoplimit 64 pref medium
+```
+
+> Windows
+
+![Ping von Windows zu Linux](./static/aufgabe_1_tracert.png)
 
 **Wer antwortet auf Multicast-Addressen?**
+
+> Linux
 
 ```shell
 $ ping6 ff02::1%enp0s31f6 # Stations
@@ -186,11 +219,16 @@ PING ff02::2%enp0s31f6(ff02::2%enp0s31f6) 56 data bytes
 rtt min/avg/max/mdev = 0.294/0.466/0.697/0.165 ms
 ```
 
+> Windows
+
+![Ping alle IPv6 Clients](./static/aufgabe_2_ping_alle_clients.png)
+![Ping IPv6 Multicast](./static/aufgabe_2_ping_multicast_router_6612.png)
+
 TODO: Add interpretation
 
 **Können Sie einzelne Notes anhand der MAC-Adresse (siehe Anhang) identifizieren?**
 
-Die Station `fe80::fad1:11ff:febd:6612` konnte erkannt werden; diese ist wie zuvor schon beschrieben (`ip -6 route show`) das Standardgateway
+Die Station `fe80::fad1:11ff:febd:6612` konnte erkannt werden; diese ist wie zuvor schon beschrieben (`ip -6 route show`) das Standardgateway.
 
 **Wieviele unterschiedliche Stationen antworten darauf, oder wieviele aktive Komponenten im RN-LAN arbeiten bereits mit IPv6?**
 
@@ -212,6 +250,8 @@ Type: Router Solicitation bzw. Router Advertisement
 ![Router Advertisement Details: Die Zieladdresse ist `ff02::1`.](./static/router-advertisement-details.png)
 
 **Kommen Sie raus in das Internet? Was ist dazu noch erforderlich?**
+
+> Linux
 
 ```shell
 praktikum@rn05:~$ ping google.com
@@ -251,6 +291,12 @@ rtt min/avg/max/mdev = 55.925/55.962/56.000/0.037 ms
 
 Wie zu erkennen ist, können DNS-Requests noch nicht beantwortet werden (`sudo ip addr del 141.62.66.5/24 dev enp0s31f6` deaktiviert hier IPv6), wird jedoch die IPv6-Addresse `2a00:1450:4001:829::200e` direkt verwendet, so kann eine direkte Verbindung (hier z.B. zu Google) aufgebaut werden. Um das Internet jedoch im vollem Umfang nutzen zu können, muss noch ein IPv6-fähiger Nameserver eingerichtet werden.
 
+>Windows
+
+Wie bereits unter Linux beschrieben müssen wir einen IPv6-fähigen Nameserver hinterlegen, dies können wir über Windows wieder über die GUI erledigen `Systemsteuerung > Netzwerk und ernet > Netzwerkverbindungen > Adaptereinstellungen > Eigenschaften von Internetprotokoll, Version 6 (TCP/IPv6`. Hier kann im Feld `Bevorzugter DNS-Server` der DNS-Server hinterlegt und mit dem `OK-Button` bestätigt werden.
+
+![IPv6 DNS Server hinterlegen](./static/aufgabe_3_dns_server_add_via_gui.png)
+
 **Rufen Sie die Webseite www.kame.net mittels IPv6-Adresse auf (kame.net ist manchmal instabil, alternativ versuchen Sie ipv6.google.com)**
 
 Zuerst wurde ein IPv6-fähiger Nameserver eingerichtet und getested:
@@ -284,12 +330,18 @@ rtt min/avg/max/mdev = 26.463/26.463/26.463/0.000 ms
 
 **Mit welcher IPv6-Adresse sie im Netz unterwegs sind, zeigt die Seite http://www.heise.de/netze/tools/meine-ip-adresse an**
 
+> Linux
+
 > Wir haben hierzu den Dienst `ifconfig.io` verwendet.
 
 ```shell
 $ curl https://ifconfig.io
 2001:470:6d:4d0:4e52:62ff:fe0e:548b
 ```
+
+> Windows
+
+![Heise meine IP Adresse](./static/aufgabe_3_heise_meine_ip_adresse.png)
 
 **Welche IPv6-Adresse hat http://www.google.com?**
 
@@ -318,6 +370,12 @@ openldap.org.		300	IN	AAAA	2600:3c00:e000:2d3::1
 
 **Starten Sie den „Kabelhai“ und pingen Sie ihren Nachbarrechner. Welches Protokoll/Type wird anstatt ARP zur Ermittlung der MAC-Adressen verwendet?**
 
+> Windows
+
+![Solicitation und Advertisement-Pakete in Wireshark - Windows](./static/aufgabe_4_netsh_int_ipv6_del_neigh.png)
+
+> Linux
+
 ```shell
 $ sudo ip neigh flush dev enp0s31f6
 $ ping6 fe80::fad1:11ff:febd:6612
@@ -329,7 +387,7 @@ PING fe80::fad1:11ff:febd:6612(fe80::fad1:11ff:febd:6612) 56 data bytes
 rtt min/avg/max/mdev = 0.568/0.568/0.568/0.000 ms
 ```
 
-![Solicitation und Advertisement-Pakete in Wireshark](./static/neighbor-solicitation.png)
+![Solicitation und Advertisement-Pakete in Wireshark - Linux](./static/neighbor-solicitation.png)
 
 Hier wird ICMPv6 mit den Types Neighbor Solicitation und Neigbor Advertisement verwendet.
 
@@ -340,6 +398,14 @@ Es wird eine Multicast-Addresse (`ff02::1:ffbd:6612`) verwendet.
 ## IPv6-Header
 
 **Starten Sie Wireshark und senden sie ein ping an einen IPv6-fähigen Webserver (www.ix.de, http://www.heise.de, http://www.kame.net), stoppen Sie Wireshark und schauen sich den Trace an.**
+
+> Windows
+
+>Da der Screenshot verloren gegangen ist, wurde es nachträglich von daheim aus aufgenommen.
+
+![Solicitation und Advertisement-Pakete in Wireshark - Linux](./static/windows_ping_heise_ipv6.JPG)
+
+> Linux
 
 ```shell
 $ ping www.kame.net
@@ -377,9 +443,7 @@ TODO: Add information about different header fields.
 
 **Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den Ubuntu-PC und schauen sich die Abfolge der Pakete an**
 
-```shell
-# TODO: Add command with `-l 5000` flag
-```
+![Sendet 5000 Bytes langen Ping von Windows an Linux](./static/aufgabe_5_ping_linux_5000_length.png)
 
 ![Capture der Packets](./static/ping-overview.png)
 
@@ -399,9 +463,24 @@ TODO: Add interpretation
 
 **Tragen Sie weitere Informationen zur „Privacy Extension“ (vor allem auch zur Konfiguration unter Windows und Ubuntu) zusammen und versuchen hier im Versuch die Einstellungen für die „Privacy Extension“ auf beiden Rechnern (Windows und Ubuntu) zu realisieren.**
 
+> Windows
+
+Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deaktiviert werden:
+
+```shell
+>netsh interface ipv6 set global randomizeidentifiers=enabled store=active
+>netsh interface ipv6 set global state=enabled store=active
+```
+
+![Deaktivierung der Privacy Extension](./static/aufgabe_6_diable_privacy_extension.png)
+
 TODO: Add research results
 
 **Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy Extension im Internet unterwegs?**
+
+> Windows
+
+Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf uns zurückverfolgt werden kann.
 
 TODO: Add research results
 
@@ -442,6 +521,13 @@ praktikum@rn05:~$ ip a
 ```
 
 **Warum sollten Sie jetzt alle übrigen IPv6-Adressen löschen?**
+> Windows
+
+```shell
+> netsh interface ipv6 delete address interface="Ethernet" address="2001:470:6d:4d0:4e52:62ff:fe0e:542b"
+```
+
+> Linux
 
 TODO: Add interpretation
 
