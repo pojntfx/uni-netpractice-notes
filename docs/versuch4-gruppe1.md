@@ -403,7 +403,7 @@ Es wird eine Multicast-Addresse (`ff02::1:ffbd:6612`) verwendet.
 
 >Da der Screenshot verloren gegangen ist, wurde es nachträglich von daheim aus aufgenommen.
 
-![Solicitation und Advertisement-Pakete in Wireshark - Linux](./static/windows_ping_heise_ipv6.JPG)
+![Ping Heise](./static/windows_ping_heise_ipv6.JPG)
 
 > Linux
 
