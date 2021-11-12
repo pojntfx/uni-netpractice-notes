@@ -450,19 +450,31 @@ TODO: Add information about different header fields.
 
 **Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den Ubuntu-PC und schauen sich die Abfolge der Pakete an**
 
+Mit `ping -6 -l 5000 2001:470:6d:4d0:4e52:62ff:fe0e:548b` kann ein 5000 Byte langer Ping an das Linux-System gesendet werden.
+
 ![Sendet 5000 Bytes langen Ping von Windows an Linux](./static/aufgabe_5_ping_linux_5000_length.png)
 
 ![Capture der Packets](./static/ping-overview.png)
 
 **Welcher Wert taucht im Next-Header-Feld Ihres IPv6 Headers auf?**
 
-Hier taucht der Fragment-Header auf.
+Hier taucht der `Fragment-Header for IPv6` auf.
 
 ![Details eines gecaptureten Packets](./static/ping-next-header.png)
 
 **Welche Bedeutung haben die unterschiedlichen Felder des Fragmentation Headers, oder anders gefragt; wie setzt IPv6 die Pakete wieder zusammen?**
 
-TODO: Add interpretation
+**Next Header:** Das Next-Header Feld gibt den Typ des darauffolgenden Headers an. In diesem Fall ist der folgende Header ein ICMPv6 Header.
+
+**Reserved octet:** Das Reserved Octet ist im Moment auf 0 gesetzt und für die eventuelle zukünftige Nutzung reserviert. 
+
+**Fragment Offset:** Das Fragment Offset gibt die Startposition der Daten im Fragment in Relation zum ursprünglichen Packet an.
+
+**More Fragment:** More Fragments besteht aus einem einzenen Bit, welches angibt, ob nach dem jetzigen Fragment weitere Fragmente folgen.
+
+**Identification Number:** Die Identifikationsnummer ist unter allen Fragmenten eines Packets die gleiche.
+
+Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente mit gleichem IP-Header nach ihrem Fragment Offset geordnet wieder zusammengesetzt werden.
 
 ![Details des Fragment-Headers](./static/fragment-header.png)
 
