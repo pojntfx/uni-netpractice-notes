@@ -441,8 +441,6 @@ Der `Type IPv6` im Ethernet-Frame lässt auf das "eingepackte" IPv6 schließen.
 
 **Welche Bedeutung haben folgende Felder des IPv6-Headers und gibt es Entsprechungen in IPv4?**
 
-TODO: Add information about different header fields.
-
 |      | Version | Traffic Class | Flow Label | Payload Length | Hop Limit |
 | ---- | ------- | ------------- | ---------- | -------------- | --------- |
 | IPv6 | Dieses Feld ist 4 bits lang und enthält die Konstante 6 in Binär (0110) | Die Traffic Class ist ein Indikator für Class oder Priorität des IPv6 Packets. So können einzelne Packets mit einer höheren Priorität versehen werden. Kommt es zu einem Stau im Router werden die Packets mit der geringsten Priorität verworfen.              | Mit dem Flow-Label kann angegeben werden, dass ein IPv6 Paket des selben Flows von Routern speziell behandelt werden soll. Packets des gleichen Flows werden unverzüglich weitergeleitet. | Das "Payload-Length" Feld gibt die Länge des Payloads, also die Länge des Pakets ohne Berücksichtigung des Headers an. | Das Hop-Limit gibt die maximale Anzahl an aufeinanderfolgenden Nodes an, die ein Paket durchlaufen darf. Fällt diese Zahl auf 0 wird das Paket verworfen. |
@@ -482,6 +480,7 @@ Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente mit gle
 
 **Tragen Sie weitere Informationen zur „Privacy Extension“ (vor allem auch zur Konfiguration unter Windows und Ubuntu) zusammen und versuchen hier im Versuch die Einstellungen für die „Privacy Extension“ auf beiden Rechnern (Windows und Ubuntu) zu realisieren.**
 
+Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf *einen* Nutzer erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix vom Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden. 
 > Windows
 
 Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deaktiviert werden:
@@ -491,19 +490,19 @@ Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deakti
 >netsh interface ipv6 set global state=enabled store=active
 ```
 
-![Deaktivierung der Privacy Extension](./static/aufgabe_6_diable_privacy_extension.png)
+![Deaktivierung der Privacy Extension](./static/aufgabe_6_disable_privacy_extension.png)
 
-TODO: Add research results + Linux configuration
+TODO: Linux configuration
 
 **Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy Extension im Internet unterwegs?**
 
 > Windows
 
-TODO: Add screenshot 
+![IPv6-Adresse nach dem aktivieren der Privacy Extensions](./static/aufgabe_6_disable_privacy_extension.png)
 
-Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf uns zurückverfolgt werden kann.
+Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf unseren Host zurückverfolgt werden kann.
 
-TODO: Add research results + Linux solution
+TODO: Linux solution
 
 ## Feste IPv6-Addressen
 
@@ -571,14 +570,12 @@ netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f
 
 ![Terminal nur noch neue IP](./static/alteIpv6Del.png)
 
-TODO: Check if this should be working and rename the screenshot
 ![Heise IPv6 Adresse](./static/heiseFake.png)
 
 > Linux
 
 Mit `sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6` löschen wir die alte IPv6-Adresse aus dem Netzwerkinterface. Mit `ip a` können wir sehen, dass lediglich die zuvor neu hinzugefügte Global-Unicast-Adresse angezeigt wird.
 
-TODO: Add interpretation
 
 ```shell
 $ sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6
@@ -597,9 +594,11 @@ $ ip a
        valid_lft forever preferred_lft forever
 ```
 
+Man sollte die übrigen IPv6-Adressen löschen, da es sonst eventuell zu Problemen beim wählen der Source-IP kommen kann. 
+
 **Reicht das aus?**
 
-TODO: Add interpretation
+Wie auch schon oben erwähnt sollten außerdem noch die Privacy Extensions deaktiviert werden. Damit kann sichergestellt werden, dass auch wirklich unsere statisch konfigurierte IPv6-Adresse als Source-IP verendet wird.
 
 **Konfigurieren Sie die statische IPv6-Adresse über /etc/network/interfaces. Was wird dadurch verhindert? (U. U. müssen sie mit ifdown und ifup die Schnittstelle neu starten**
 
@@ -640,22 +639,20 @@ PING www.kame.net(2001:2f0:0:8800:226:2dff:fe0b:4311 (2001:2f0:0:8800:226:2dff:f
 rtt min/avg/max/mdev = 274.357/276.472/280.370/2.759 ms
 ```
 
-TODO: Add interpretation
+Wenn man die statische IPv6-Adresse über `/etc/network/interfaces` setzt, ist diese auch nach einem `reboot` konfiguriert. Einfache anpassungen über `ip addr add` sind nicht keine persistenten Änderungen.
 
 **Mit welcher IPv6-Adresse sind sie jetzt im Netz unterwegs? Die Seite http://www.heise.de/netze/tools/meine-ip-adresse gibt Aufschluss.**
-
-TODO: Add interpretation
 
 ```shell
 $ curl https://ipconfig.io
 2001:470:6d:4d0:4e52:62ff:fe0e:548c
 ```
 
+Nach dem setzen einer statischen IP-Adresse sind wir mit der IPv6-Adresse `2001:470:6d:4d0:4e52:62ff:fe0e:548c` unterwegs. Das ist die, die wir zuvor in `/etc/network/interfaces` konfiguriert haben.
+
 ## Lease-Zeiten
 
 **Die Werte für "Maximale bevorzugte Gültigkeitsdauer" und "Maximale Gültigkeitsdauer" setzt man in Windows über die Schlüssel maxpreferredlifetime und maxvalidlifetime, die Zeitangaben in Tagen (d), Stunden (h), Minuten (m) und Sekunden (s) entgegennehmen. Wie sind diese Parameter bei Ihnen gesetzt?**
-
-TODO: Add interpretation
 
 ```shell
 netsh interface ipv6 show privacy
@@ -663,11 +660,11 @@ netsh interface ipv6 show privacy
 
 ![Get IPv6 Parameter](./static/maxValidLifetime.png)
 
-"Maximale bevorzugte Gültigkeitsdauer" und "Maximale Gültigkeitsdauer" sing aud 7 Tage gesetzt.
+Die "Maximale bevorzugte Gültigkeitsdauer" und die "Maximale Gültigkeitsdauer" sind zu Beginn auf 7 Tage gesetzt.
+
+TODO: Add Linux version
 
 **Halbieren Sie die "Maximale bevorzugte Gültigkeitsdauer" auf den Rechnern.**
-
-TODO: Add interpretation
 
 ```shell
 netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
@@ -676,6 +673,8 @@ netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
 Hiermit können wir `maxpreferredlifetime` setzen.
 
 ![Set IPv6 Parameter](./static/halfPreferredLifetime.png)
+
+TODO: Add Linux version 
 
 **Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre IPv6-Adresse eingehende Pakete empfängt.**
 
@@ -686,21 +685,17 @@ netsh interface ipv6 set privacy maxvalidlifetime=3d
 
 **Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid Liftime anschaulich dar**
 
-TODO: transform into whole sentences
-
-maxvalidlifetime: Damit legen wir die Zeit fest, in der der Rechner eingehende Verbindungen auf einer temporären Adresse aktzeptiert.
-
-maxpreferredlifetime: Nach der angegebenen Zeit erzeugt der Rechner eine neue temporäre Adresse, die er für ausgehende Pakete nutzt.
-
+Die Preferred Lifetime gibt die Zeitspanne an, in welche rdie Adresse frei als source und destination Adresse genutzt werden kann. Nach dem Ablauf dieser Zeit bekommt die Adresse den "deprecated" Status. Im "deprecated" Status kann nur noch mit bestehenden Kommunikationsverbindungen kommuniziert werden. 
+Die Valid Lifetime ist mindestens so groß wie die Preferred Lifetime. Wenn diese abläuft wird die Adresse invalide und kann ab diesem Punkt auch anderen Interfaces zugewiesen werden.
 ## OS-Updates
 
 > Windows
 
-TODO: Is that correct?
-
 Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfügt über vollen IPv6-Support. (https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network)
 
 > Linux 
+
+Das Linux Update lässt sich auch durchführen.
 
 ```shell
 $ sudo ip addr del 141.62.66.5/24 dev enp0s31f6
