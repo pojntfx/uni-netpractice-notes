@@ -1,3 +1,30 @@
+commit 42744332f2b35228367fd2409b7fda8d62210f82
+Merge: c3bba58 3cc29ea
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Fri Nov 12 12:43:57 2021 +0100
+
+    Merge pull request #5 from dentremor/main
+    
+    feat: Add windows stuff for task 1-6
+
+commit 3cc29ea4ed09cd84a33475ab27ebe30ce7ad546c
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Thu Nov 11 14:32:22 2021 +0100
+
+    fix: Replace capital letters in image name
+
+commit 75c1293bb72ad6d3168c464ccb1b91f1332ee6a2
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Wed Nov 10 22:27:23 2021 +0100
+
+    fix: Remove wrong alt text
+
+commit 50b4c6e526d250aaee78baca3f31340a84e308de
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Wed Nov 10 18:37:21 2021 +0100
+
+    feat: Add windows stuff for task 1-6
+
 commit c3bba58603424354efef32ee90dab35d7c7f8af3
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Nov 9 17:31:40 2021 +0100
