@@ -224,9 +224,9 @@ rtt min/avg/max/mdev = 0.294/0.466/0.697/0.165 ms
 ![Ping alle IPv6 Clients](./static/aufgabe_2_ping_alle_clients.png)
 ![Ping IPv6 Multicast](./static/aufgabe_2_ping_multicast_router_6612.png)
 
-TODO: Add interpretation
+Mit einem Ping mit Hilfe von `ping6 ff02::1%enp0s31f6` lassen sich alle Nodes im Netzwerk anpingen. Im Gegensatz dazu antworten bei `ping6 ff02::2%enp0s31f6` alle Router.
 
-**Können Sie einzelne Notes anhand der MAC-Adresse (siehe Anhang) identifizieren?**
+**Können Sie einzelne Nodes anhand der MAC-Adresse (siehe Anhang) identifizieren?**
 
 Die Station `fe80::fad1:11ff:febd:6612` konnte erkannt werden; diese ist wie zuvor schon beschrieben (`ip -6 route show`) das Standardgateway.
 
@@ -238,12 +238,15 @@ Es sind 23 IPv6-Stationen im Netzwerk; die Addressen der Router `fe80::fad1:11ff
 
 **Identifizieren Sie mit Wireshark die Pakete mit denen der Router im Netz das Prefix mitteilt. Welches Protokoll wird dafür benutzt und um welchen Type handelt es sich und wie lautet die Zieladresse des Pakets?**
 
-Protokoll: ICMPv6
-Type: Router Solicitation bzw. Router Advertisement
+Das verwendete Protkoll ist wie auch in den unten stehenden Screenshots zu sehen `ICMPv6`. Die Types sind `Router Solicitation` und `Router Advertisement`. Die Zieladresse des Pakets ist die Multicast-Adresse `ff02::1`.
+
+Router Solicitation: 
 
 ![Router Solicitation](./static/router-solicitation.png)
 
 ![Router Solicitation Details: Die Zieladdresse ist `ff02::1`.](./static/router-solicitation-details.png)
+
+Router Advertisement: 
 
 ![Router Advertisement](./static/router-advertisement.png)
 
@@ -324,7 +327,7 @@ PING google.com(ham02s21-in-x0e.1e100.net (2a00:1450:4005:802::200e)) 56 data by
 rtt min/avg/max/mdev = 26.463/26.463/26.463/0.000 ms
 ```
 
-`www.kame.net` zeigt eine drehende Schildkröte:
+`www.kame.net` zeigt eine sich bewegende Schildkröte:
 
 ![Firefox stellt www.kame.net dar](./static/kame.png)
 
@@ -341,6 +344,8 @@ $ curl https://ifconfig.io
 
 > Windows
 
+> Dieses mal wurde die IPv6-Adresse mit Hilfe von Heise herausgefunden. 
+
 ![Heise meine IP Adresse](./static/aufgabe_3_heise_meine_ip_adresse.png)
 
 **Welche IPv6-Adresse hat http://www.google.com?**
@@ -349,6 +354,8 @@ $ curl https://ifconfig.io
 $ dig +noall +answer google.com AAAA
 google.com.		300	IN	AAAA	2a00:1450:4005:802::200e
 ```
+
+Die IPv6-Adresse von `http://www.google.com` lautet `2a00:1450:4005:802:200e`.
 
 **Was ist das besondere an der IPv6-Adresse von Facebook?**
 
@@ -365,6 +372,8 @@ Facebook hat das 5. und 6. Hextet `face` und `b00c`, als Anspielung zum Firmenna
 $ dig +noall +answer openldap.org AAAA
 openldap.org.		300	IN	AAAA	2600:3c00:e000:2d3::1
 ```
+
+Die IPv6-Adresse von `openldap.org` lautet `2600:3c00:e000:2d3::1`.
 
 ## Neighbor Solicitation
 
@@ -401,8 +410,6 @@ Es wird eine Multicast-Addresse (`ff02::1:ffbd:6612`) verwendet.
 
 > Windows
 
->Da der Screenshot verloren gegangen ist, wurde es nachträglich von daheim aus aufgenommen.
-
 ![Ping Heise](./static/windows_ping_heise_ipv6.jpg)
 
 > Linux
@@ -430,16 +437,16 @@ rtt min/avg/max/mdev = 271.343/277.307/316.896/14.971 ms
 
 ![IPv6-Protokoll-Typ in Wireshark](./static/ethernet-ipv6.png)
 
-Der Type IPv6 im Ethernet-Frame lässt auf das "eingepackte" IPv6 schließen.
+Der `Type IPv6` im Ethernet-Frame lässt auf das "eingepackte" IPv6 schließen.
 
 **Welche Bedeutung haben folgende Felder des IPv6-Headers und gibt es Entsprechungen in IPv4?**
 
 TODO: Add information about different header fields.
 
-|      | Version | Traffic | Class | Flow | Label | Payload | Length | Hop Limit |
-| ---- | ------- | ------- | ----- | ---- | ----- | ------- | ------ | --------- |
-| IPv6 |         |         |       |      |       |         |        |           |
-| IPv4 |         |         |       |      |       |         |        |           |
+|      | Version | Traffic Class | Flow Label | Payload Length | Hop Limit |
+| ---- | ------- | ------------- | ---------- | -------------- | --------- |
+| IPv6 | Dieses Feld ist 4 bits lang und enthält die Konstante 6 in Binär (0110) | Die Traffic Class ist ein Indikator für Class oder Priorität des IPv6 Packets. So können einzelne Packets mit einer höheren Priorität versehen werden. Kommt es zu einem Stau im Router werden die Packets mit der geringsten Priorität verworfen.              | Mit dem Flow-Label kann angegeben werden, dass ein IPv6 Paket des selben Flows von Routern speziell behandelt werden soll. Packets des gleichen Flows werden unverzüglich weitergeleitet. | Das "Payload-Length" Feld gibt die Länge des Payloads, also die Länge des Pakets ohne Berücksichtigung des Headers an. | Das Hop-Limit gibt die maximale Anzahl an aufeinanderfolgenden Nodes an, die ein Paket durchlaufen darf. Fällt diese Zahl auf 0 wird das Paket verworfen. |
+| IPv4 | Dieses Feld ist 4 bits lang und enthält die Konstante 4 in Binär (0100) | IPv6 besitzt das Traffic Class Feld nicht. Allerdings erfüllt das "Type of Service" oder auch "Differentiated Services Code Point" genannte Feld eine nahezu identische Funtion. Dieses Feld ist auch dazu da, Packets eine Priorität zu verleihen. | Das Flow-Label ist ebenfalls sehr ähnlich zum "Type of Service" Feld, welches einzelne Pakete priorisieren kann. Dieses Feld wurde bei IPv4 aber meistens ignoriert. | Bei IPv4 gibt es statt des "Payload-Length" Feldes das "Total Length" Feld. Dieses gibt die Länge des Pakets, inklusive Header, an. | Ein Analogon zum Hop-Limit ist die TTL (Time-to-Live). Die TTL funktioniert genau so wie das Hop-Limit auch. |
 
 **Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den Ubuntu-PC und schauen sich die Abfolge der Pakete an**
 
@@ -449,7 +456,7 @@ TODO: Add information about different header fields.
 
 **Welcher Wert taucht im Next-Header-Feld Ihres IPv6 Headers auf?**
 
-Hier tauch der Fragment-Header auf.
+Hier taucht der Fragment-Header auf.
 
 ![Details eines gecaptureten Packets](./static/ping-next-header.png)
 
@@ -474,19 +481,35 @@ Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deakti
 
 ![Deaktivierung der Privacy Extension](./static/aufgabe_6_diable_privacy_extension.png)
 
-TODO: Add research results
+TODO: Add research results + Linux configuration
 
 **Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy Extension im Internet unterwegs?**
 
 > Windows
 
+TODO: Add screenshot 
+
 Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf uns zurückverfolgt werden kann.
 
-TODO: Add research results
+TODO: Add research results + Linux solution
 
 ## Feste IPv6-Addressen
 
 **Weisen Sie in dieser Aufgabe ihrem Netzwerkinterface eine feste sinnvolle (heißt: Der Prefix ist weiterhin gültig) IPv6-Adresse zu.**
+
+> Windows
+
+![Setzen der neuen IP](./static/neueIpv6_setting.png)
+
+Mit einem Rechtsklick auf das Netzwerkinterface und dann bei IPv6 die Eigenschaften auswählen. Im Menü kann dann eine manuelle IP angegeben werden. Wir erhöhen die Hexadezimalzahl im letzen Hextet um eins. 
+
+Mit `ipconfig` kann dann die neue IP-Adresse gesehen werden. 
+
+![Neue IP unter ipconfig](./static/neueIpv6.png)
+
+> Linux 
+
+Im folgenden kann gesehen werden, wie eine neue IPv6-Adresse zum Netzwerkinterface `enp0s31f6` hinzugefügt wird. Dafür kann der Befehl `sudo ip addr add 2001:470:6d:4d0:4e52:62ff:fe0e:548c/64 dev enp0s31f6` verwendet werden. Die nun hinzugefügte IPv6-Adresse kann dann mit `ip a` betrachtet werden.
 
 ```shell
 $ ip a
@@ -521,13 +544,27 @@ praktikum@rn05:~$ ip a
 ```
 
 **Warum sollten Sie jetzt alle übrigen IPv6-Adressen löschen?**
+
 > Windows
 
+Mit folgendem Command können wir die Privacy-Extensions deaktivieren und die damit einhergehenden IPv6-Adressen entfernen.
 ```shell
-> netsh interface ipv6 delete address interface="Ethernet" address="2001:470:6d:4d0:4e52:62ff:fe0e:542b"
+netsh interface ipv6 set privacy disabled
 ```
 
+Jetzt löschen wir die alte IP
+```shell
+netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f4f2:d559:fca9:9fb2 store=active
+```
+
+![Terminal nur noch neue IP](./static/alteIpv6Del.png)
+
+TODO: Check if this should be working and rename the screenshot
+![Heise IPv6 Adresse](./static/heiseFake.png)
+
 > Linux
+
+Mit `sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6` löschen wir die alte IPv6-Adresse aus dem Netzwerkinterface. Mit `ip a` können wir sehen, dass lediglich die zuvor neu hinzugefügte Global-Unicast-Adresse angezeigt wird.
 
 TODO: Add interpretation
 
@@ -608,19 +645,50 @@ $ curl https://ipconfig.io
 
 TODO: Add interpretation
 
+```shell
+netsh interface ipv6 show privacy
+```
+
+![Get IPv6 Parameter](./static/maxValidLifetime.png)
+
+"Maximale bevorzugte Gültigkeitsdauer" und "Maximale Gültigkeitsdauer" sing aud 7 Tage gesetzt.
+
 **Halbieren Sie die "Maximale bevorzugte Gültigkeitsdauer" auf den Rechnern.**
 
 TODO: Add interpretation
 
+```shell
+netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
+```
+
+Hiermit können wir `maxpreferredlifetime` setzen.
+
+![Set IPv6 Parameter](./static/halfPreferredLifetime.png)
+
 **Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre IPv6-Adresse eingehende Pakete empfängt.**
 
-TODO: Add interpretation
+Dies kann mit folgendem Command erreicht werden:
+```shell
+netsh interface ipv6 set privacy maxvalidlifetime=3d
+```
 
 **Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid Liftime anschaulich dar**
 
-TODO: Add interpretation
+TODO: transform into whole sentences
+
+maxvalidlifetime: Damit legen wir die Zeit fest, in der der Rechner eingehende Verbindungen auf einer temporären Adresse aktzeptiert.
+
+maxpreferredlifetime: Nach der angegebenen Zeit erzeugt der Rechner eine neue temporäre Adresse, die er für ausgehende Pakete nutzt.
 
 ## OS-Updates
+
+> Windows
+
+TODO: Is that correct?
+
+Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfügt über vollen IPv6-Support. (https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network)
+
+> Linux 
 
 ```shell
 $ sudo ip addr del 141.62.66.5/24 dev enp0s31f6
@@ -656,3 +724,5 @@ Local time is now:      Tue Nov  9 16:52:29 CET 2021.
 Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
 Run 'dpkg-reconfigure tzdata' if you wish to change it.
 ```
+
+TODO: Add Wireshark capture for Linux update
