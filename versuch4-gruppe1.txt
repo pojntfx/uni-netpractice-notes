@@ -12,7 +12,6 @@ Jakob Waibel; Daniel Hiller; Elia Wüstner; Felix Pojtinger
 -   6 Privacy Extension
 -   7 Feste IPv6-Addressen
 -   8 Lease-Zeiten
--   9 OS-Updates
 
 Einführung
 
@@ -228,9 +227,11 @@ Wer antwortet auf Multicast-Addressen?
 
 [Ping alle IPv6 Clients] [Ping IPv6 Multicast]
 
-TODO: Add interpretation
+Mit einem Ping mit Hilfe von ping6 ff02::1%enp0s31f6 lassen sich alle
+Nodes im Netzwerk anpingen. Im Gegensatz dazu antworten bei
+ping6 ff02::2%enp0s31f6 alle Router.
 
-Können Sie einzelne Notes anhand der MAC-Adresse (siehe Anhang)
+Können Sie einzelne Nodes anhand der MAC-Adresse (siehe Anhang)
 identifizieren?
 
 Die Station fe80::fad1:11ff:febd:6612 konnte erkannt werden; diese ist
@@ -250,11 +251,18 @@ Identifizieren Sie mit Wireshark die Pakete mit denen der Router im Netz
 das Prefix mitteilt. Welches Protokoll wird dafür benutzt und um welchen
 Type handelt es sich und wie lautet die Zieladresse des Pakets?
 
-Protokoll: ICMPv6 Type: Router Solicitation bzw. Router Advertisement
+Das verwendete Protkoll ist wie auch in den unten stehenden Screenshots
+zu sehen ICMPv6. Die Types sind Router Solicitation und
+Router Advertisement. Die Zieladresse des Pakets ist die
+Multicast-Adresse ff02::1.
+
+Router Solicitation:
 
 [Router Solicitation]
 
 [Router Solicitation Details: Die Zieladdresse ist ff02::1.]
+
+Router Advertisement:
 
 [Router Advertisement]
 
@@ -342,7 +350,7 @@ Zuerst wurde ein IPv6-fähiger Nameserver eingerichtet und getested:
     1 packets transmitted, 1 received, 0% packet loss, time 0ms
     rtt min/avg/max/mdev = 26.463/26.463/26.463/0.000 ms
 
-www.kame.net zeigt eine drehende Schildkröte:
+www.kame.net zeigt eine sich bewegende Schildkröte:
 
 [Firefox stellt www.kame.net dar]
 
@@ -358,12 +366,17 @@ http://www.heise.de/netze/tools/meine-ip-adresse an
 
   Windows
 
+  Dieses mal wurde die IPv6-Adresse mit Hilfe von Heise herausgefunden.
+
 [Heise meine IP Adresse]
 
 Welche IPv6-Adresse hat http://www.google.com?
 
     $ dig +noall +answer google.com AAAA
     google.com.     300 IN  AAAA    2a00:1450:4005:802::200e
+
+Die IPv6-Adresse von http://www.google.com lautet
+2a00:1450:4005:802:200e.
 
 Was ist das besondere an der IPv6-Adresse von Facebook?
 
@@ -378,6 +391,8 @@ IPv6-Adresse auf!
 
     $ dig +noall +answer openldap.org AAAA
     openldap.org.       300 IN  AAAA    2600:3c00:e000:2d3::1
+
+Die IPv6-Adresse von openldap.org lautet 2600:3c00:e000:2d3::1.
 
 Neighbor Solicitation
 
@@ -418,9 +433,6 @@ Sie Wireshark und schauen sich den Trace an.
 
   Windows
 
-  Da der Screenshot verloren gegangen ist, wurde es nachträglich von
-  daheim aus aufgenommen.
-
 [Ping Heise]
 
   Linux
@@ -452,15 +464,50 @@ schließen.
 Welche Bedeutung haben folgende Felder des IPv6-Headers und gibt es
 Entsprechungen in IPv4?
 
-TODO: Add information about different header fields.
+  ------------------------------------------------------------------------------------------------
+         Version     Traffic Class     Flow Label        Payload Length     Hop Limit
+  ------ ----------- ----------------- ----------------- ------------------ ----------------------
+  IPv6   Dieses Feld Die Traffic Class Mit dem           Das                Das Hop-Limit gibt die
+         ist 4 bits  ist ein Indikator Flow-Label kann   “Payload-Length”   maximale Anzahl an
+         lang und    für Class oder    angegeben werden, Feld gibt die      aufeinanderfolgenden
+         enthält die Priorität des     dass ein IPv6     Länge des          Nodes an, die ein
+         Konstante 6 IPv6 Packets. So  Paket des selben  Payloads, also die Paket durchlaufen
+         in Binär    können einzelne   Flows von Routern Länge des Pakets   darf. Fällt diese Zahl
+         (0110)      Packets mit einer speziell          ohne               auf 0 wird das Paket
+                     höheren Priorität behandelt werden  Berücksichtigung   verworfen.
+                     versehen werden.  soll. Packets des des Headers an.    
+                     Kommt es zu einem gleichen Flows                       
+                     Stau im Router    werden                               
+                     werden die        unverzüglich                         
+                     Packets mit der   weitergeleitet.                      
+                     geringsten                                             
+                     Priorität                                              
+                     verworfen.                                             
 
-         Version   Traffic   Class   Flow   Label   Payload   Length   Hop Limit
-  ------ --------- --------- ------- ------ ------- --------- -------- -----------
-  IPv6                                                                 
-  IPv4                                                                 
+  IPv4   Dieses Feld IPv6 besitzt das  Das Flow-Label    Bei IPv4 gibt es   Ein Analogon zum
+         ist 4 bits  Traffic Class     ist ebenfalls     statt des          Hop-Limit ist die TTL
+         lang und    Feld nicht.       sehr ähnlich zum  “Payload-Length”   (Time-to-Live). Die
+         enthält die Allerdings        “Type of Service” Feldes das “Total  TTL funktioniert genau
+         Konstante 4 erfüllt das “Type Feld, welches     Length” Feld.      so wie das Hop-Limit
+         in Binär    of Service” oder  einzelne Pakete   Dieses gibt die    auch.
+         (0100)      auch              priorisieren      Länge des Pakets,  
+                     “Differentiated   kann. Dieses Feld inklusive Header,  
+                     Services Code     wurde bei IPv4    an.                
+                     Point” genannte   aber meistens                        
+                     Feld eine nahezu  ignoriert.                           
+                     identische                                             
+                     Funtion. Dieses                                        
+                     Feld ist auch                                          
+                     dazu da, Packets                                       
+                     eine Priorität zu                                      
+                     verleihen.                                             
+  ------------------------------------------------------------------------------------------------
 
 Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den
 Ubuntu-PC und schauen sich die Abfolge der Pakete an
+
+Mit ping -6 -l 5000 2001:470:6d:4d0:4e52:62ff:fe0e:548b kann ein 5000
+Byte langer Ping an das Linux-System gesendet werden.
 
 [Sendet 5000 Bytes langen Ping von Windows an Linux]
 
@@ -468,14 +515,31 @@ Ubuntu-PC und schauen sich die Abfolge der Pakete an
 
 Welcher Wert taucht im Next-Header-Feld Ihres IPv6 Headers auf?
 
-Hier tauch der Fragment-Header auf.
+Hier taucht der Fragment-Header for IPv6 auf.
 
 [Details eines gecaptureten Packets]
 
 Welche Bedeutung haben die unterschiedlichen Felder des Fragmentation
 Headers, oder anders gefragt; wie setzt IPv6 die Pakete wieder zusammen?
 
-TODO: Add interpretation
+Next Header: Das Next-Header Feld gibt den Typ des darauffolgenden
+Headers an. In diesem Fall ist der folgende Header ein ICMPv6 Header.
+
+Reserved octet: Das Reserved Octet ist im Moment auf 0 gesetzt und für
+die eventuelle zukünftige Nutzung reserviert.
+
+Fragment Offset: Das Fragment Offset gibt die Startposition der Daten im
+Fragment in Relation zum ursprünglichen Packet an.
+
+More Fragment: More Fragments besteht aus einem einzenen Bit, welches
+angibt, ob nach dem jetzigen Fragment weitere Fragmente folgen.
+
+Identification Number: Die Identifikationsnummer ist unter allen
+Fragmenten eines Packets die gleiche.
+
+Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente
+mit gleichem IP-Header nach ihrem Fragment Offset geordnet wieder
+zusammengesetzt werden.
 
 [Details des Fragment-Headers]
 
@@ -486,7 +550,17 @@ zur Konfiguration unter Windows und Ubuntu) zusammen und versuchen hier
 im Versuch die Einstellungen für die „Privacy Extension“ auf beiden
 Rechnern (Windows und Ubuntu) zu realisieren.
 
-  Windows
+Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu
+machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird.
+Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und
+erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden
+Adressen werden dann ausgehende Verbindungen hergestellt, was den
+Rückschluss auf einen Nutzer erschwert. Mit Hilfe der Privacy Extensions
+kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings
+trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher
+allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix
+vom Provider den Präfix regelmäßig wechselt, dann kann auch die
+Identifikation über diesen erschwert werden. > Windows
 
 Unter Windows kann die Privacy Extension mit den zwei folgenden
 Kommandos deaktiviert werden:
@@ -496,23 +570,45 @@ Kommandos deaktiviert werden:
 
 [Deaktivierung der Privacy Extension]
 
-TODO: Add research results
+TODO: Linux configuration
 
 Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy
 Extension im Internet unterwegs?
 
   Windows
 
+[IPv6-Adresse nach dem aktivieren der Privacy Extensions]
+
 Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6
-Adresse, welche von Webseiten-Betreibern nicht mehr auf uns
+Adresse, welche von Webseiten-Betreibern nicht mehr auf unseren Host
 zurückverfolgt werden kann.
 
-TODO: Add research results
+TODO: Linux solution
 
 Feste IPv6-Addressen
 
 Weisen Sie in dieser Aufgabe ihrem Netzwerkinterface eine feste
 sinnvolle (heißt: Der Prefix ist weiterhin gültig) IPv6-Adresse zu.
+
+  Windows
+
+[Setzen der neuen IP]
+
+Mit einem Rechtsklick auf das Netzwerkinterface und dann bei IPv6 die
+Eigenschaften auswählen. Im Menü kann dann eine manuelle IP angegeben
+werden. Wir erhöhen die Hexadezimalzahl im letzen Hextet um eins.
+
+Mit ipconfig kann dann die neue IP-Adresse gesehen werden.
+
+[Neue IP unter ipconfig]
+
+  Linux
+
+Im folgenden kann gesehen werden, wie eine neue IPv6-Adresse zum
+Netzwerkinterface enp0s31f6 hinzugefügt wird. Dafür kann der Befehl
+sudo ip addr add 2001:470:6d:4d0:4e52:62ff:fe0e:548c/64 dev enp0s31f6
+verwendet werden. Die nun hinzugefügte IPv6-Adresse kann dann mit ip a
+betrachtet werden.
 
     $ ip a
     1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
@@ -544,13 +640,30 @@ sinnvolle (heißt: Der Prefix ist weiterhin gültig) IPv6-Adresse zu.
         inet6 fe80::4e52:62ff:fe0e:548b/64 scope link
            valid_lft forever preferred_lft forever
 
-Warum sollten Sie jetzt alle übrigen IPv6-Adressen löschen? > Windows
+Warum sollten Sie jetzt alle übrigen IPv6-Adressen löschen?
 
-    > netsh interface ipv6 delete address interface="Ethernet" address="2001:470:6d:4d0:4e52:62ff:fe0e:542b"
+  Windows
+
+Mit folgendem Command können wir die Privacy-Extensions deaktivieren und
+die damit einhergehenden IPv6-Adressen entfernen.
+
+    netsh interface ipv6 set privacy disabled
+
+Jetzt löschen wir die alte IP
+
+    netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f4f2:d559:fca9:9fb2 store=active
+
+[Terminal nur noch neue IP]
+
+[Heise IPv6 Adresse]
 
   Linux
 
-TODO: Add interpretation
+Mit
+sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6
+löschen wir die alte IPv6-Adresse aus dem Netzwerkinterface. Mit ip a
+können wir sehen, dass lediglich die zuvor neu hinzugefügte
+Global-Unicast-Adresse angezeigt wird.
 
     $ sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6
     $ ip a
@@ -567,9 +680,14 @@ TODO: Add interpretation
         inet6 fe80::4e52:62ff:fe0e:548b/64 scope link
            valid_lft forever preferred_lft forever
 
+Man sollte die übrigen IPv6-Adressen löschen, da es sonst eventuell zu
+Problemen beim wählen der Source-IP kommen kann.
+
 Reicht das aus?
 
-TODO: Add interpretation
+Wie auch schon oben erwähnt sollten außerdem noch die Privacy Extensions
+deaktiviert werden. Damit kann sichergestellt werden, dass auch wirklich
+unsere statisch konfigurierte IPv6-Adresse als Source-IP verendet wird.
 
 Konfigurieren Sie die statische IPv6-Adresse über
 /etc/network/interfaces. Was wird dadurch verhindert? (U. U. müssen sie
@@ -608,15 +726,19 @@ mit ifdown und ifup die Schnittstelle neu starten
     3 packets transmitted, 3 received, 0% packet loss, time 2003ms
     rtt min/avg/max/mdev = 274.357/276.472/280.370/2.759 ms
 
-TODO: Add interpretation
+Wenn man die statische IPv6-Adresse über /etc/network/interfaces setzt,
+ist diese auch nach einem reboot konfiguriert. Einfache anpassungen über
+ip addr add sind nicht keine persistenten Änderungen.
 
 Mit welcher IPv6-Adresse sind sie jetzt im Netz unterwegs? Die Seite
 http://www.heise.de/netze/tools/meine-ip-adresse gibt Aufschluss.
 
-TODO: Add interpretation
-
     $ curl https://ipconfig.io
     2001:470:6d:4d0:4e52:62ff:fe0e:548c
+
+Nach dem setzen einer statischen IP-Adresse sind wir mit der
+IPv6-Adresse 2001:470:6d:4d0:4e52:62ff:fe0e:548c unterwegs. Das ist die,
+die wir zuvor in /etc/network/interfaces konfiguriert haben.
 
 Lease-Zeiten
 
@@ -626,24 +748,54 @@ maxpreferredlifetime und maxvalidlifetime, die Zeitangaben in Tagen (d),
 Stunden (h), Minuten (m) und Sekunden (s) entgegennehmen. Wie sind diese
 Parameter bei Ihnen gesetzt?
 
-TODO: Add interpretation
+    netsh interface ipv6 show privacy
+
+[Get IPv6 Parameter]
+
+Die “Maximale bevorzugte Gültigkeitsdauer” und die “Maximale
+Gültigkeitsdauer” sind zu Beginn auf 7 Tage gesetzt.
+
+TODO: Add Linux version
 
 Halbieren Sie die “Maximale bevorzugte Gültigkeitsdauer” auf den
 Rechnern.
 
-TODO: Add interpretation
+    netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
+
+Hiermit können wir maxpreferredlifetime setzen.
+
+[Set IPv6 Parameter]
+
+TODO: Add Linux version
 
 Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre
 IPv6-Adresse eingehende Pakete empfängt.
 
-TODO: Add interpretation
+Dies kann mit folgendem Command erreicht werden:
+
+    netsh interface ipv6 set privacy maxvalidlifetime=3d
 
 Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid
 Liftime anschaulich dar
 
-TODO: Add interpretation
+Die Preferred Lifetime gibt die Zeitspanne an, in welche rdie Adresse
+frei als source und destination Adresse genutzt werden kann. Nach dem
+Ablauf dieser Zeit bekommt die Adresse den “deprecated” Status. Im
+“deprecated” Status kann nur noch mit bestehenden
+Kommunikationsverbindungen kommuniziert werden. Die Valid Lifetime ist
+mindestens so groß wie die Preferred Lifetime. Wenn diese abläuft wird
+die Adresse invalide und kann ab diesem Punkt auch anderen Interfaces
+zugewiesen werden. ## OS-Updates
 
-OS-Updates
+  Windows
+
+Unter Windows wurde das Update ohne Probleme installiert. Windows Update
+verfügt über vollen IPv6-Support.
+(https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network)
+
+  Linux
+
+Das Linux Update lässt sich auch durchführen.
 
     $ sudo ip addr del 141.62.66.5/24 dev enp0s31f6
     $ sudo apt update
@@ -677,3 +829,5 @@ OS-Updates
     Local time is now:      Tue Nov  9 16:52:29 CET 2021.
     Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
     Run 'dpkg-reconfigure tzdata' if you wish to change it.
+
+TODO: Add Wireshark capture for Linux update

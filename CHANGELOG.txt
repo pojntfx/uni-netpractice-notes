@@ -1,3 +1,36 @@
+commit 1fa8a3ef42af5ededfad040e571a9d109fdb14c7
+Merge: 4274433 b94fe05
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Sat Nov 13 16:19:33 2021 +0100
+
+    Merge pull request #6 from JakWai01/main
+    
+    feat: Finished 8 TODOs
+
+commit b94fe05080076382d1aa9e67e0f7fdad5454a583
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Nov 13 09:52:27 2021 +0100
+
+    feat: Add missing images
+
+commit fb0d670d662b1c18d13e639dc954b1bddafe56ae
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 22:09:44 2021 +0100
+
+    feat: Finish the interpretation of the tasks
+
+commit cfc27d90b7b0bf2604d8ad63bdf385cb809ecbfa
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 20:34:27 2021 +0100
+
+    feat: Add answer to fragmentation question
+
+commit e771ee9613573f854bd6d902d011612d1cae1632
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 20:15:58 2021 +0100
+
+    feat: Work on experiment 4
+
 commit 42744332f2b35228367fd2409b7fda8d62210f82
 Merge: c3bba58 3cc29ea
 Author: Felix Pojtinger <felix@pojtinger.com>
