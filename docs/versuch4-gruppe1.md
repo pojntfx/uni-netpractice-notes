@@ -308,7 +308,7 @@ Wie bereits unter Linux beschrieben müssen wir einen IPv6-fähigen Nameserver h
 
 **Rufen Sie die Webseite www.kame.net mittels IPv6-Adresse auf (kame.net ist manchmal instabil, alternativ versuchen Sie ipv6.google.com)**
 
-Zuerst wurde ein IPv6-fähiger Nameserver eingerichtet und getested:
+Zuerst wurde ein IPv6-fähiger Nameserver eingerichtet und getestet:
 
 ```shell
 $ cat /etc/resolv.conf
@@ -763,9 +763,15 @@ Die Valid Lifetime ist mindestens so groß wie die Preferred Lifetime. Wenn dies
 
 ## OS-Updates
 
+**Lässt sich eigentlich Windows über IPv6 updaten? Was sagt Wireshark dazu?**
+
 > Windows
 
-Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfügt über vollen IPv6-Support. (https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network)
+Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfügt über vollen IPv6-Support. (https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network). Dies konnte auch mittels Wireshark validiert werden:
+
+![Wireshark-Capture eines Windows-Updates](./static/windows-update.png)
+
+**Wie verhält sich Linux im Vergleich dazu? (Anmerkung: Mittels sudo apt-get update und sudo apt-get upgrade im Terminal lässt sich Linux updaten)**
 
 > Linux
 
@@ -805,3 +811,7 @@ Local time is now:      Tue Nov  9 16:52:29 CET 2021.
 Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
 Run 'dpkg-reconfigure tzdata' if you wish to change it.
 ```
+
+Einen Blick auf Wireshark zeigt, das auch tatsächlich IPv6 verwendet wird (hier mit TLS & einem Spiegelserver der Hochschule Esslingen):
+
+![Wireshark-Capture eines APT-Updates](./static/dnf-update.png)
