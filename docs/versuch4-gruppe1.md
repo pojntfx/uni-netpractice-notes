@@ -34,6 +34,7 @@ SPDX-License-Identifier: AGPL-3.0
 \newpage
 
 ## IPv6-Addressen
+
 **Voreinstellung für die Aufgaben - deaktivieren von IPv4 und aktivivieren von IPv6 unter Windows.**
 
 Um IPv4 zu deaktivieren und IPv6 zu deaktivieren muss man in den Netzterkeistellungen zum jeweiligen Adapter über den Pfad `Systemsteuerung > Netzwerk und Internet > Netzwerkverbindungen > Adaptereinstellungen`. Hier wurde der Haken bei IPv6 (Internetprotokoll, Version6) gesetzt und bei IPv4 (Internetprotokoll, Version4) entfernt
@@ -93,7 +94,7 @@ Es sind 3 Addressen zu finden; eine Host-Local-Addresse, eine Global-Unique-Addr
 
 Nun wird noch IPv4 deaktiviert:
 
->Linux
+> Linux
 
 ```shell
 $ sudo ip addr delete 141.62.66.5/24 dev enp0s31f6
@@ -150,12 +151,12 @@ rtt min/avg/max/mdev = 0.775/0.879/1.327/0.200 ms
 ```
 
 Vom Windows-Host zum Linux-Host:
-![Ping von Windows zu Linux](./static/aufgabe_1_ping_form_windows_to_linux.png)
 
+![Ping von Windows zu Linux](./static/aufgabe_1_ping_form_windows_to_linux.png)
 
 **Lassen Sie sich die Routen anzeigen und ermitteln Sie die „Default Route“**
 
->Linux
+> Linux
 
 ```shell
 $ ip -6 route show
@@ -222,6 +223,7 @@ rtt min/avg/max/mdev = 0.294/0.466/0.697/0.165 ms
 > Windows
 
 ![Ping alle IPv6 Clients](./static/aufgabe_2_ping_alle_clients.png)
+
 ![Ping IPv6 Multicast](./static/aufgabe_2_ping_multicast_router_6612.png)
 
 Mit einem Ping mit Hilfe von `ping6 ff02::1%enp0s31f6` lassen sich alle Nodes im Netzwerk anpingen. Im Gegensatz dazu antworten bei `ping6 ff02::2%enp0s31f6` alle Router.
@@ -240,13 +242,13 @@ Es sind 23 IPv6-Stationen im Netzwerk; die Addressen der Router `fe80::fad1:11ff
 
 Das verwendete Protkoll ist wie auch in den unten stehenden Screenshots zu sehen `ICMPv6`. Die Types sind `Router Solicitation` und `Router Advertisement`. Die Zieladresse des Pakets ist die Multicast-Adresse `ff02::1`.
 
-Router Solicitation: 
+Router Solicitation:
 
 ![Router Solicitation](./static/router-solicitation.png)
 
 ![Router Solicitation Details: Die Zieladdresse ist `ff02::1`.](./static/router-solicitation-details.png)
 
-Router Advertisement: 
+Router Advertisement:
 
 ![Router Advertisement](./static/router-advertisement.png)
 
@@ -294,7 +296,7 @@ rtt min/avg/max/mdev = 55.925/55.962/56.000/0.037 ms
 
 Wie zu erkennen ist, können DNS-Requests noch nicht beantwortet werden (`sudo ip addr del 141.62.66.5/24 dev enp0s31f6` deaktiviert hier IPv6), wird jedoch die IPv6-Addresse `2a00:1450:4001:829::200e` direkt verwendet, so kann eine direkte Verbindung (hier z.B. zu Google) aufgebaut werden. Um das Internet jedoch im vollem Umfang nutzen zu können, muss noch ein IPv6-fähiger Nameserver eingerichtet werden.
 
->Windows
+> Windows
 
 Wie bereits unter Linux beschrieben müssen wir einen IPv6-fähigen Nameserver hinterlegen, dies können wir über Windows wieder über die GUI erledigen `Systemsteuerung > Netzwerk und ernet > Netzwerkverbindungen > Adaptereinstellungen > Eigenschaften von Internetprotokoll, Version 6 (TCP/IPv6`. Hier kann im Feld `Bevorzugter DNS-Server` der DNS-Server hinterlegt und mit dem `OK-Button` bestätigt werden.
 
@@ -344,7 +346,7 @@ $ curl https://ifconfig.io
 
 > Windows
 
-> Dieses mal wurde die IPv6-Adresse mit Hilfe von Heise herausgefunden. 
+> Dieses mal wurde die IPv6-Adresse mit Hilfe von Heise herausgefunden.
 
 ![Heise meine IP Adresse](./static/aufgabe_3_heise_meine_ip_adresse.png)
 
@@ -441,10 +443,10 @@ Der `Type IPv6` im Ethernet-Frame lässt auf das "eingepackte" IPv6 schließen.
 
 **Welche Bedeutung haben folgende Felder des IPv6-Headers und gibt es Entsprechungen in IPv4?**
 
-|      | Version | Traffic Class | Flow Label | Payload Length | Hop Limit |
-| ---- | ------- | ------------- | ---------- | -------------- | --------- |
-| IPv6 | Dieses Feld ist 4 bits lang und enthält die Konstante 6 in Binär (0110) | Die Traffic Class ist ein Indikator für Class oder Priorität des IPv6 Packets. So können einzelne Packets mit einer höheren Priorität versehen werden. Kommt es zu einem Stau im Router werden die Packets mit der geringsten Priorität verworfen.              | Mit dem Flow-Label kann angegeben werden, dass ein IPv6 Paket des selben Flows von Routern speziell behandelt werden soll. Packets des gleichen Flows werden unverzüglich weitergeleitet. | Das "Payload-Length" Feld gibt die Länge des Payloads, also die Länge des Pakets ohne Berücksichtigung des Headers an. | Das Hop-Limit gibt die maximale Anzahl an aufeinanderfolgenden Nodes an, die ein Paket durchlaufen darf. Fällt diese Zahl auf 0 wird das Paket verworfen. |
-| IPv4 | Dieses Feld ist 4 bits lang und enthält die Konstante 4 in Binär (0100) | IPv6 besitzt das Traffic Class Feld nicht. Allerdings erfüllt das "Type of Service" oder auch "Differentiated Services Code Point" genannte Feld eine nahezu identische Funtion. Dieses Feld ist auch dazu da, Packets eine Priorität zu verleihen. | Das Flow-Label ist ebenfalls sehr ähnlich zum "Type of Service" Feld, welches einzelne Pakete priorisieren kann. Dieses Feld wurde bei IPv4 aber meistens ignoriert. | Bei IPv4 gibt es statt des "Payload-Length" Feldes das "Total Length" Feld. Dieses gibt die Länge des Pakets, inklusive Header, an. | Ein Analogon zum Hop-Limit ist die TTL (Time-to-Live). Die TTL funktioniert genau so wie das Hop-Limit auch. |
+|      | Version                                                                 | Traffic Class                                                                                                                                                                                                                                       | Flow Label                                                                                                                                                                                | Payload Length                                                                                                                      | Hop Limit                                                                                                                                                 |
+| ---- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IPv6 | Dieses Feld ist 4 bits lang und enthält die Konstante 6 in Binär (0110) | Die Traffic Class ist ein Indikator für Class oder Priorität des IPv6 Packets. So können einzelne Packets mit einer höheren Priorität versehen werden. Kommt es zu einem Stau im Router werden die Packets mit der geringsten Priorität verworfen.  | Mit dem Flow-Label kann angegeben werden, dass ein IPv6 Paket des selben Flows von Routern speziell behandelt werden soll. Packets des gleichen Flows werden unverzüglich weitergeleitet. | Das "Payload-Length" Feld gibt die Länge des Payloads, also die Länge des Pakets ohne Berücksichtigung des Headers an.              | Das Hop-Limit gibt die maximale Anzahl an aufeinanderfolgenden Nodes an, die ein Paket durchlaufen darf. Fällt diese Zahl auf 0 wird das Paket verworfen. |
+| IPv4 | Dieses Feld ist 4 bits lang und enthält die Konstante 4 in Binär (0100) | IPv6 besitzt das Traffic Class Feld nicht. Allerdings erfüllt das "Type of Service" oder auch "Differentiated Services Code Point" genannte Feld eine nahezu identische Funtion. Dieses Feld ist auch dazu da, Packets eine Priorität zu verleihen. | Das Flow-Label ist ebenfalls sehr ähnlich zum "Type of Service" Feld, welches einzelne Pakete priorisieren kann. Dieses Feld wurde bei IPv4 aber meistens ignoriert.                      | Bei IPv4 gibt es statt des "Payload-Length" Feldes das "Total Length" Feld. Dieses gibt die Länge des Pakets, inklusive Header, an. | Ein Analogon zum Hop-Limit ist die TTL (Time-to-Live). Die TTL funktioniert genau so wie das Hop-Limit auch.                                              |
 
 **Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den Ubuntu-PC und schauen sich die Abfolge der Pakete an**
 
@@ -464,7 +466,7 @@ Hier taucht der `Fragment-Header for IPv6` auf.
 
 **Next Header:** Das Next-Header Feld gibt den Typ des darauffolgenden Headers an. In diesem Fall ist der folgende Header ein ICMPv6 Header.
 
-**Reserved octet:** Das Reserved Octet ist im Moment auf 0 gesetzt und für die eventuelle zukünftige Nutzung reserviert. 
+**Reserved octet:** Das Reserved Octet ist im Moment auf 0 gesetzt und für die eventuelle zukünftige Nutzung reserviert.
 
 **Fragment Offset:** Das Fragment Offset gibt die Startposition der Daten im Fragment in Relation zum ursprünglichen Packet an.
 
@@ -480,7 +482,8 @@ Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente mit gle
 
 **Tragen Sie weitere Informationen zur „Privacy Extension“ (vor allem auch zur Konfiguration unter Windows und Ubuntu) zusammen und versuchen hier im Versuch die Einstellungen für die „Privacy Extension“ auf beiden Rechnern (Windows und Ubuntu) zu realisieren.**
 
-Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf *einen* Nutzer erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix vom Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden. 
+Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf _einen_ Nutzer erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix vom Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden.
+
 > Windows
 
 Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deaktiviert werden:
@@ -512,13 +515,13 @@ TODO: Linux solution
 
 ![Setzen der neuen IP](./static/neueIpv6_setting.png)
 
-Mit einem Rechtsklick auf das Netzwerkinterface und dann bei IPv6 die Eigenschaften auswählen. Im Menü kann dann eine manuelle IP angegeben werden. Wir erhöhen die Hexadezimalzahl im letzen Hextet um eins. 
+Mit einem Rechtsklick auf das Netzwerkinterface und dann bei IPv6 die Eigenschaften auswählen. Im Menü kann dann eine manuelle IP angegeben werden. Wir erhöhen die Hexadezimalzahl im letzen Hextet um eins.
 
-Mit `ipconfig` kann dann die neue IP-Adresse gesehen werden. 
+Mit `ipconfig` kann dann die neue IP-Adresse gesehen werden.
 
 ![Neue IP unter ipconfig](./static/neueIpv6.png)
 
-> Linux 
+> Linux
 
 Im folgenden kann gesehen werden, wie eine neue IPv6-Adresse zum Netzwerkinterface `enp0s31f6` hinzugefügt wird. Dafür kann der Befehl `sudo ip addr add 2001:470:6d:4d0:4e52:62ff:fe0e:548c/64 dev enp0s31f6` verwendet werden. Die nun hinzugefügte IPv6-Adresse kann dann mit `ip a` betrachtet werden.
 
@@ -559,11 +562,13 @@ praktikum@rn05:~$ ip a
 > Windows
 
 Mit folgendem Command können wir die Privacy-Extensions deaktivieren und die damit einhergehenden IPv6-Adressen entfernen.
+
 ```shell
 netsh interface ipv6 set privacy disabled
 ```
 
 Jetzt löschen wir die alte IP
+
 ```shell
 netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f4f2:d559:fca9:9fb2 store=active
 ```
@@ -575,7 +580,6 @@ netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f
 > Linux
 
 Mit `sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6` löschen wir die alte IPv6-Adresse aus dem Netzwerkinterface. Mit `ip a` können wir sehen, dass lediglich die zuvor neu hinzugefügte Global-Unicast-Adresse angezeigt wird.
-
 
 ```shell
 $ sudo ip addr del 2001:470:6d:4d0:4e52:62ff:fe0e:548b/64 dev enp0s31f6
@@ -594,7 +598,7 @@ $ ip a
        valid_lft forever preferred_lft forever
 ```
 
-Man sollte die übrigen IPv6-Adressen löschen, da es sonst eventuell zu Problemen beim wählen der Source-IP kommen kann. 
+Man sollte die übrigen IPv6-Adressen löschen, da es sonst eventuell zu Problemen beim wählen der Source-IP kommen kann.
 
 **Reicht das aus?**
 
@@ -674,26 +678,28 @@ Hiermit können wir `maxpreferredlifetime` setzen.
 
 ![Set IPv6 Parameter](./static/halfPreferredLifetime.png)
 
-TODO: Add Linux version 
+TODO: Add Linux version
 
 **Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre IPv6-Adresse eingehende Pakete empfängt.**
 
 Dies kann mit folgendem Command erreicht werden:
+
 ```shell
 netsh interface ipv6 set privacy maxvalidlifetime=3d
 ```
 
 **Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid Liftime anschaulich dar**
 
-Die Preferred Lifetime gibt die Zeitspanne an, in welche rdie Adresse frei als source und destination Adresse genutzt werden kann. Nach dem Ablauf dieser Zeit bekommt die Adresse den "deprecated" Status. Im "deprecated" Status kann nur noch mit bestehenden Kommunikationsverbindungen kommuniziert werden. 
+Die Preferred Lifetime gibt die Zeitspanne an, in welche rdie Adresse frei als source und destination Adresse genutzt werden kann. Nach dem Ablauf dieser Zeit bekommt die Adresse den "deprecated" Status. Im "deprecated" Status kann nur noch mit bestehenden Kommunikationsverbindungen kommuniziert werden.
 Die Valid Lifetime ist mindestens so groß wie die Preferred Lifetime. Wenn diese abläuft wird die Adresse invalide und kann ab diesem Punkt auch anderen Interfaces zugewiesen werden.
+
 ## OS-Updates
 
 > Windows
 
 Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfügt über vollen IPv6-Support. (https://serverfault.com/questions/844107/windows-server-update-on-ipv6-only-network)
 
-> Linux 
+> Linux
 
 Das Linux Update lässt sich auch durchführen.
 
