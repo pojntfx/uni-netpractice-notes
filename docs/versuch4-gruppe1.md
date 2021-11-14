@@ -41,6 +41,8 @@ Um IPv4 zu deaktivieren und IPv6 zu deaktivieren muss man in den Netzterkeistell
 
 ![Deaktivieren von IPv4 und aktivieren von IPv6](./static/vorbereitung_ipv6_aktiv.png)
 
+\newpage
+
 **Erkunden sie unter Windows und Ubuntu, wie viele IP-Adressen dem physikalischen Interface zugeordnet sind.**
 
 > Linux
@@ -88,7 +90,7 @@ $ ip a
 
 > Windows
 
-![Anzeigen aller IPv6-Adressen](./static/aufgabe_1_get_net_ip_address_address_family_ipv6.png)
+![Anzeigen aller IPv6-Adressen](./static/aufgabe_1_get_net_ip_address_address_family_ipv6.png){ width=400px }
 
 Es sind 3 Addressen zu finden; eine Host-Local-Addresse, eine Global-Unique-Addresse und eine Link-Local-Addresse.
 
@@ -153,6 +155,8 @@ rtt min/avg/max/mdev = 0.775/0.879/1.327/0.200 ms
 Vom Windows-Host zum Linux-Host:
 
 ![Ping von Windows zu Linux](./static/aufgabe_1_ping_form_windows_to_linux.png)
+
+\newpage
 
 **Lassen Sie sich die Routen anzeigen und ermitteln Sie die „Default Route“**
 
@@ -406,6 +410,8 @@ Hier wird ICMPv6 mit den Types Neighbor Solicitation und Neigbor Advertisement v
 
 Es wird eine Multicast-Addresse (`ff02::1:ffbd:6612`) verwendet.
 
+\newpage
+
 ## IPv6-Header
 
 **Starten Sie Wireshark und senden sie ein ping an einen IPv6-fähigen Webserver (www.ix.de, http://www.heise.de, http://www.kame.net), stoppen Sie Wireshark und schauen sich den Trace an.**
@@ -484,18 +490,34 @@ Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente mit gle
 
 Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf _einen_ Nutzer erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix vom Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden.
 
+\newpage
+
 > Windows
 
-Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos deaktiviert werden:
+Unter Windows kann die Privacy Extension mit den zwei folgenden Kommandos aktivert werden:
 
 ```shell
 >netsh interface ipv6 set global randomizeidentifiers=enabled store=active
 >netsh interface ipv6 set global state=enabled store=active
 ```
 
-![Deaktivierung der Privacy Extension](./static/aufgabe_6_disable_privacy_extension.png)
+![Aktivierung der Privacy Extension](./static/aufgabe_6_disable_privacy_extension.png)
 
-TODO: Linux configuration
+> Linux
+
+Mittels `sysctl` kann die Privacy Extension aktiviert werden:
+
+```plaintext
+# /etc/sysctl.conf
+net.ipv6.conf.all.use_tempaddr=2
+net.ipv6.conf.default.use_tempaddr=2
+```
+
+```shell
+$ sudo sysctl -p
+```
+
+\newpage
 
 **Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy Extension im Internet unterwegs?**
 
@@ -505,7 +527,16 @@ TODO: Linux configuration
 
 Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf unseren Host zurückverfolgt werden kann.
 
-TODO: Linux solution
+> Linux
+
+> Wir haben hierzu den Dienst `ifconfig.io` verwendet.
+
+```shell
+$ curl https://ifconfig.io
+2001:7c7:2121:8d00:1902:f308:6c8b:acb7
+```
+
+\newpage
 
 ## Feste IPv6-Addressen
 
@@ -658,6 +689,8 @@ Nach dem setzen einer statischen IP-Adresse sind wir mit der IPv6-Adresse `2001:
 
 **Die Werte für "Maximale bevorzugte Gültigkeitsdauer" und "Maximale Gültigkeitsdauer" setzt man in Windows über die Schlüssel maxpreferredlifetime und maxvalidlifetime, die Zeitangaben in Tagen (d), Stunden (h), Minuten (m) und Sekunden (s) entgegennehmen. Wie sind diese Parameter bei Ihnen gesetzt?**
 
+> Windows
+
 ```shell
 netsh interface ipv6 show privacy
 ```
@@ -666,9 +699,20 @@ netsh interface ipv6 show privacy
 
 Die "Maximale bevorzugte Gültigkeitsdauer" und die "Maximale Gültigkeitsdauer" sind zu Beginn auf 7 Tage gesetzt.
 
-TODO: Add Linux version
+> Linux
+
+Mittels `sysctl` können die Werte abgefragt werden:
+
+```shell
+$ sysctl net.ipv6.conf.all.temp_prefered_lft
+net.ipv6.conf.all.temp_prefered_lft = 86400
+$ sysctl net.ipv6.conf.all.temp_valid_lft
+net.ipv6.conf.all.temp_valid_lft = 604800
+```
 
 **Halbieren Sie die "Maximale bevorzugte Gültigkeitsdauer" auf den Rechnern.**
+
+> Windows
 
 ```shell
 netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
@@ -678,14 +722,38 @@ Hiermit können wir `maxpreferredlifetime` setzen.
 
 ![Set IPv6 Parameter](./static/halfPreferredLifetime.png)
 
-TODO: Add Linux version
+> Linux
+
+Mittels `sysctl` kann der Wert halbiert werden:
+
+```plaintext
+net.ipv6.conf.all.temp_prefered_lft = 43200
+```
+
+```shell
+$ sudo sysctl -p
+```
 
 **Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre IPv6-Adresse eingehende Pakete empfängt.**
+
+> Windows
 
 Dies kann mit folgendem Command erreicht werden:
 
 ```shell
 netsh interface ipv6 set privacy maxvalidlifetime=3d
+```
+
+> Linux
+
+Mittels `sysctl` kann der Wert verringert werden:
+
+```plaintext
+net.ipv6.conf.all.temp_valid_lft = 404800
+```
+
+```shell
+$ sudo sysctl -p
 ```
 
 **Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid Liftime anschaulich dar**
@@ -701,7 +769,7 @@ Unter Windows wurde das Update ohne Probleme installiert. Windows Update verfüg
 
 > Linux
 
-Das Linux Update lässt sich auch durchführen.
+Das Linux-Update (bzw. Debian-Update; APT wird verwendet) lässt sich auch durchführen. Dies ist natürlich von den verwendeten Spiegelservern und deren IPv6-Fähigkeit abhängig, siehe https://www.debian.org/mirror/list.
 
 ```shell
 $ sudo ip addr del 141.62.66.5/24 dev enp0s31f6
@@ -737,5 +805,3 @@ Local time is now:      Tue Nov  9 16:52:29 CET 2021.
 Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
 Run 'dpkg-reconfigure tzdata' if you wish to change it.
 ```
-
-TODO: Add Wireshark capture for Linux update
