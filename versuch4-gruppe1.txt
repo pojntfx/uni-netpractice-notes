@@ -564,14 +564,22 @@ Identifikation über diesen erschwert werden.
   Windows
 
 Unter Windows kann die Privacy Extension mit den zwei folgenden
-Kommandos deaktiviert werden:
+Kommandos aktivert werden:
 
     >netsh interface ipv6 set global randomizeidentifiers=enabled store=active
     >netsh interface ipv6 set global state=enabled store=active
 
-[Deaktivierung der Privacy Extension]
+[Aktivierung der Privacy Extension]
 
-TODO: Linux configuration
+  Linux
+
+Mittels sysctl kann die Privacy Extension aktiviert werden:
+
+    # /etc/sysctl.conf
+    net.ipv6.conf.all.use_tempaddr=2
+    net.ipv6.conf.default.use_tempaddr=2
+
+    $ sudo sysctl -p
 
 Mit welchen IPv6-Adressen sind sie nach dem Aktivieren der Privacy
 Extension im Internet unterwegs?
@@ -584,7 +592,12 @@ Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6
 Adresse, welche von Webseiten-Betreibern nicht mehr auf unseren Host
 zurückverfolgt werden kann.
 
-TODO: Linux solution
+  Linux
+
+  Wir haben hierzu den Dienst ifconfig.io verwendet.
+
+    $ curl https://ifconfig.io
+    2001:7c7:2121:8d00:1902:f308:6c8b:acb7
 
 Feste IPv6-Addressen
 
@@ -749,6 +762,8 @@ maxpreferredlifetime und maxvalidlifetime, die Zeitangaben in Tagen (d),
 Stunden (h), Minuten (m) und Sekunden (s) entgegennehmen. Wie sind diese
 Parameter bei Ihnen gesetzt?
 
+  Windows
+
     netsh interface ipv6 show privacy
 
 [Get IPv6 Parameter]
@@ -756,10 +771,19 @@ Parameter bei Ihnen gesetzt?
 Die “Maximale bevorzugte Gültigkeitsdauer” und die “Maximale
 Gültigkeitsdauer” sind zu Beginn auf 7 Tage gesetzt.
 
-TODO: Add Linux version
+  Linux
+
+Mittels sysctl können die Werte abgefragt werden:
+
+    $ sysctl net.ipv6.conf.all.temp_prefered_lft
+    net.ipv6.conf.all.temp_prefered_lft = 86400
+    $ sysctl net.ipv6.conf.all.temp_valid_lft
+    net.ipv6.conf.all.temp_valid_lft = 604800
 
 Halbieren Sie die “Maximale bevorzugte Gültigkeitsdauer” auf den
 Rechnern.
+
+  Windows
 
     netsh interface ipv6 set privacy maxpreferredlifetime=3d12h
 
@@ -767,14 +791,30 @@ Hiermit können wir maxpreferredlifetime setzen.
 
 [Set IPv6 Parameter]
 
-TODO: Add Linux version
+  Linux
+
+Mittels sysctl kann der Wert halbiert werden:
+
+    net.ipv6.conf.all.temp_prefered_lft = 43200
+
+    $ sudo sysctl -p
 
 Verringern Sie ebenso die Zeitspanne, in der Windows über eine temporäre
 IPv6-Adresse eingehende Pakete empfängt.
 
+  Windows
+
 Dies kann mit folgendem Command erreicht werden:
 
     netsh interface ipv6 set privacy maxvalidlifetime=3d
+
+  Linux
+
+Mittels sysctl kann der Wert verringert werden:
+
+    net.ipv6.conf.all.temp_valid_lft = 404800
+
+    $ sudo sysctl -p
 
 Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid
 Liftime anschaulich dar
@@ -798,7 +838,10 @@ verfügt über vollen IPv6-Support.
 
   Linux
 
-Das Linux Update lässt sich auch durchführen.
+Das Linux-Update (bzw. Debian-Update; APT wird verwendet) lässt sich
+auch durchführen. Dies ist natürlich von den verwendeten Spiegelservern
+und deren IPv6-Fähigkeit abhängig, siehe
+https://www.debian.org/mirror/list.
 
     $ sudo ip addr del 141.62.66.5/24 dev enp0s31f6
     $ sudo apt update
@@ -832,5 +875,3 @@ Das Linux Update lässt sich auch durchführen.
     Local time is now:      Tue Nov  9 16:52:29 CET 2021.
     Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
     Run 'dpkg-reconfigure tzdata' if you wish to change it.
-
-TODO: Add Wireshark capture for Linux update
