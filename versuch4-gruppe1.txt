@@ -12,6 +12,7 @@ Jakob Waibel; Daniel Hiller; Elia Wüstner; Felix Pojtinger
 -   6 Privacy Extension
 -   7 Feste IPv6-Addressen
 -   8 Lease-Zeiten
+-   9 OS-Updates
 
 Einführung
 
@@ -158,7 +159,9 @@ Vom Linux-Host zum Windows-Host:
     6 packets transmitted, 6 received, 0% packet loss, time 5078ms
     rtt min/avg/max/mdev = 0.775/0.879/1.327/0.200 ms
 
-Vom Windows-Host zum Linux-Host: [Ping von Windows zu Linux]
+Vom Windows-Host zum Linux-Host:
+
+[Ping von Windows zu Linux]
 
 Lassen Sie sich die Routen anzeigen und ermitteln Sie die „Default
 Route“
@@ -225,7 +228,9 @@ Wer antwortet auf Multicast-Addressen?
 
   Windows
 
-[Ping alle IPv6 Clients] [Ping IPv6 Multicast]
+[Ping alle IPv6 Clients]
+
+[Ping IPv6 Multicast]
 
 Mit einem Ping mit Hilfe von ping6 ff02::1%enp0s31f6 lassen sich alle
 Nodes im Netzwerk anpingen. Im Gegensatz dazu antworten bei
@@ -464,44 +469,38 @@ schließen.
 Welche Bedeutung haben folgende Felder des IPv6-Headers und gibt es
 Entsprechungen in IPv4?
 
-  ------------------------------------------------------------------------------------------------
-         Version     Traffic Class     Flow Label        Payload Length     Hop Limit
-  ------ ----------- ----------------- ----------------- ------------------ ----------------------
-  IPv6   Dieses Feld Die Traffic Class Mit dem           Das                Das Hop-Limit gibt die
-         ist 4 bits  ist ein Indikator Flow-Label kann   “Payload-Length”   maximale Anzahl an
-         lang und    für Class oder    angegeben werden, Feld gibt die      aufeinanderfolgenden
-         enthält die Priorität des     dass ein IPv6     Länge des          Nodes an, die ein
-         Konstante 6 IPv6 Packets. So  Paket des selben  Payloads, also die Paket durchlaufen
-         in Binär    können einzelne   Flows von Routern Länge des Pakets   darf. Fällt diese Zahl
-         (0110)      Packets mit einer speziell          ohne               auf 0 wird das Paket
-                     höheren Priorität behandelt werden  Berücksichtigung   verworfen.
-                     versehen werden.  soll. Packets des des Headers an.    
-                     Kommt es zu einem gleichen Flows                       
-                     Stau im Router    werden                               
-                     werden die        unverzüglich                         
-                     Packets mit der   weitergeleitet.                      
-                     geringsten                                             
-                     Priorität                                              
-                     verworfen.                                             
+  ----------------------------------------------------------------------------------------------------
+         Version     Traffic Class         Flow Label        Payload Length     Hop Limit
+  ------ ----------- --------------------- ----------------- ------------------ ----------------------
+  IPv6   Dieses Feld Die Traffic Class ist Mit dem           Das                Das Hop-Limit gibt die
+         ist 4 bits  ein Indikator für     Flow-Label kann   “Payload-Length”   maximale Anzahl an
+         lang und    Class oder Priorität  angegeben werden, Feld gibt die      aufeinanderfolgenden
+         enthält die des IPv6 Packets. So  dass ein IPv6     Länge des          Nodes an, die ein
+         Konstante 6 können einzelne       Paket des selben  Payloads, also die Paket durchlaufen
+         in Binär    Packets mit einer     Flows von Routern Länge des Pakets   darf. Fällt diese Zahl
+         (0110)      höheren Priorität     speziell          ohne               auf 0 wird das Paket
+                     versehen werden.      behandelt werden  Berücksichtigung   verworfen.
+                     Kommt es zu einem     soll. Packets des des Headers an.    
+                     Stau im Router werden gleichen Flows                       
+                     die Packets mit der   werden                               
+                     geringsten Priorität  unverzüglich                         
+                     verworfen.            weitergeleitet.                      
 
-  IPv4   Dieses Feld IPv6 besitzt das  Das Flow-Label    Bei IPv4 gibt es   Ein Analogon zum
-         ist 4 bits  Traffic Class     ist ebenfalls     statt des          Hop-Limit ist die TTL
-         lang und    Feld nicht.       sehr ähnlich zum  “Payload-Length”   (Time-to-Live). Die
-         enthält die Allerdings        “Type of Service” Feldes das “Total  TTL funktioniert genau
-         Konstante 4 erfüllt das “Type Feld, welches     Length” Feld.      so wie das Hop-Limit
-         in Binär    of Service” oder  einzelne Pakete   Dieses gibt die    auch.
-         (0100)      auch              priorisieren      Länge des Pakets,  
-                     “Differentiated   kann. Dieses Feld inklusive Header,  
-                     Services Code     wurde bei IPv4    an.                
-                     Point” genannte   aber meistens                        
-                     Feld eine nahezu  ignoriert.                           
-                     identische                                             
-                     Funtion. Dieses                                        
-                     Feld ist auch                                          
-                     dazu da, Packets                                       
-                     eine Priorität zu                                      
-                     verleihen.                                             
-  ------------------------------------------------------------------------------------------------
+  IPv4   Dieses Feld IPv6 besitzt das      Das Flow-Label    Bei IPv4 gibt es   Ein Analogon zum
+         ist 4 bits  Traffic Class Feld    ist ebenfalls     statt des          Hop-Limit ist die TTL
+         lang und    nicht. Allerdings     sehr ähnlich zum  “Payload-Length”   (Time-to-Live). Die
+         enthält die erfüllt das “Type of  “Type of Service” Feldes das “Total  TTL funktioniert genau
+         Konstante 4 Service” oder auch    Feld, welches     Length” Feld.      so wie das Hop-Limit
+         in Binär    “Differentiated       einzelne Pakete   Dieses gibt die    auch.
+         (0100)      Services Code Point”  priorisieren      Länge des Pakets,  
+                     genannte Feld eine    kann. Dieses Feld inklusive Header,  
+                     nahezu identische     wurde bei IPv4    an.                
+                     Funtion. Dieses Feld  aber meistens                        
+                     ist auch dazu da,     ignoriert.                           
+                     Packets eine                                               
+                     Priorität zu                                               
+                     verleihen.                                                 
+  ----------------------------------------------------------------------------------------------------
 
 Senden Sie nun ein 5000 Byte großes Paket vom Windows-PC an den
 Ubuntu-PC und schauen sich die Abfolge der Pakete an
@@ -560,7 +559,9 @@ kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings
 trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher
 allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix
 vom Provider den Präfix regelmäßig wechselt, dann kann auch die
-Identifikation über diesen erschwert werden. > Windows
+Identifikation über diesen erschwert werden.
+
+  Windows
 
 Unter Windows kann die Privacy Extension mit den zwei folgenden
 Kommandos deaktiviert werden:
@@ -785,7 +786,9 @@ Ablauf dieser Zeit bekommt die Adresse den “deprecated” Status. Im
 Kommunikationsverbindungen kommuniziert werden. Die Valid Lifetime ist
 mindestens so groß wie die Preferred Lifetime. Wenn diese abläuft wird
 die Adresse invalide und kann ab diesem Punkt auch anderen Interfaces
-zugewiesen werden. ## OS-Updates
+zugewiesen werden.
+
+OS-Updates
 
   Windows
 

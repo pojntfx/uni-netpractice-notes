@@ -1,3 +1,9 @@
+commit f5e347aa43f214401eed3c37ebbbb60c76e8cebd
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Sun Nov 14 20:36:00 2021 +0100
+
+    fix: Use block formatting for pictures
+
 commit 1fa8a3ef42af5ededfad040e571a9d109fdb14c7
 Merge: 4274433 b94fe05
 Author: Felix Pojtinger <felix@pojtinger.com>
