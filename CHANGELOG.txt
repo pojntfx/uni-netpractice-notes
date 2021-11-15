@@ -1,3 +1,24 @@
+commit 5bfb60d557ab295c570ed8ded70a6ac9e17ecc9b
+Merge: 18dd450 4cbc336
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 15 14:06:11 2021 +0100
+
+    Merge pull request #7 from JakWai01/main
+    
+    fix: Spelling
+
+commit 4cbc336cd28270612fb7663077b8883681d730bd
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Nov 15 13:58:52 2021 +0100
+
+    fix: Gender with : instead of *
+
+commit 1ecde8d3b3d88e64e0b679a5b32d57eb17f5483a
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Nov 15 12:36:31 2021 +0100
+
+    fix: Spelling
+
 commit 18dd45062697cf1d75f626f295f6d190275cc217
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Sun Nov 14 21:48:16 2021 +0100
