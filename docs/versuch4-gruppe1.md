@@ -37,7 +37,7 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Voreinstellung für die Aufgaben - deaktivieren von IPv4 und aktivivieren von IPv6 unter Windows.**
 
-Um IPv4 zu deaktivieren und IPv6 zu deaktivieren muss man in den Netzterkeistellungen zum jeweiligen Adapter über den Pfad `Systemsteuerung > Netzwerk und Internet > Netzwerkverbindungen > Adaptereinstellungen`. Hier wurde der Haken bei IPv6 (Internetprotokoll, Version6) gesetzt und bei IPv4 (Internetprotokoll, Version4) entfernt
+Um IPv4 zu deaktivieren und IPv6 zu aktivieren, muss man in den Netzwerkeinstellungen zum jeweiligen Adapter über den Pfad `Systemsteuerung > Netzwerk und Internet > Netzwerkverbindungen > Adaptereinstellungen` navigieren. Hier wurde der Haken bei IPv6 (Internetprotokoll, Version6) gesetzt und bei IPv4 (Internetprotokoll, Version4) entfernt.
 
 ![Deaktivieren von IPv4 und aktivieren von IPv6](./static/vorbereitung_ipv6_aktiv.png)
 
@@ -92,7 +92,7 @@ $ ip a
 
 ![Anzeigen aller IPv6-Adressen](./static/aufgabe_1_get_net_ip_address_address_family_ipv6.png){ width=400px }
 
-Es sind 3 Addressen zu finden; eine Host-Local-Addresse, eine Global-Unique-Addresse und eine Link-Local-Addresse.
+Es sind 3 Adressen zu finden; eine Host-Local-Adresse, eine Global-Unique-Adresse und eine Link-Local-Adresse.
 
 Nun wird noch IPv4 deaktiviert:
 
@@ -117,7 +117,7 @@ $ ip a
 
 **Woraus setzt sich die Link-Lokale-Adresse zusammen und erkennen Sie das EUI-64 Format?**
 
-Die Link-Lokale-Addresse setzt sich aus Prefix `fe80` und 48 Füll-Nullen sowie und der mit EUI-64 erweiterten MAC-Addresse zusammen.
+Die Link-Lokale-Adresse setzt sich aus Prefix `fe80` und 48 Füll-Nullen, sowie der mit EUI-64 erweiterten MAC-Addresse zusammen.
 
 Das EUI-64-Format lässt sich mittels `fe0e` bei `2001:470:6d:4d0:4e52:62ff:fe0e:548b/64` und `fe80::4e52:62ff:fe0e:548b/64` erkennen.
 
@@ -232,13 +232,13 @@ rtt min/avg/max/mdev = 0.294/0.466/0.697/0.165 ms
 
 Mit einem Ping mit Hilfe von `ping6 ff02::1%enp0s31f6` lassen sich alle Nodes im Netzwerk anpingen. Im Gegensatz dazu antworten bei `ping6 ff02::2%enp0s31f6` alle Router.
 
-**Können Sie einzelne Nodes anhand der MAC-Adresse (siehe Anhang) identifizieren?**
+**Können Sie einzelne Nodes anhand der MAC-Adresse identifizieren?**
 
 Die Station `fe80::fad1:11ff:febd:6612` konnte erkannt werden; diese ist wie zuvor schon beschrieben (`ip -6 route show`) das Standardgateway.
 
 **Wieviele unterschiedliche Stationen antworten darauf, oder wieviele aktive Komponenten im RN-LAN arbeiten bereits mit IPv6?**
 
-Es sind 23 IPv6-Stationen im Netzwerk; die Addressen der Router `fe80::fad1:11ff:febd:6612`, `fe80::268:ebff:feb3:3487` und `fe80::268:ebff:feb3:3358` finden sich wie oben zu erkennen ist auch im 1. `ping`-Command.
+Es sind 23 IPv6-Stationen im Netzwerk; die Adressen der Router `fe80::fad1:11ff:febd:6612`, `fe80::268:ebff:feb3:3487` und `fe80::268:ebff:feb3:3358` finden sich wie oben zu erkennen ist auch im ersten `ping`-Command.
 
 ## IPv6 und DNS
 
@@ -298,11 +298,11 @@ PING 2a00:1450:4001:829::200e(2a00:1450:4001:829::200e) 56 data bytes
 rtt min/avg/max/mdev = 55.925/55.962/56.000/0.037 ms
 ```
 
-Wie zu erkennen ist, können DNS-Requests noch nicht beantwortet werden (`sudo ip addr del 141.62.66.5/24 dev enp0s31f6` deaktiviert hier IPv6), wird jedoch die IPv6-Addresse `2a00:1450:4001:829::200e` direkt verwendet, so kann eine direkte Verbindung (hier z.B. zu Google) aufgebaut werden. Um das Internet jedoch im vollem Umfang nutzen zu können, muss noch ein IPv6-fähiger Nameserver eingerichtet werden.
+Wie zu erkennen ist, können DNS-Requests noch nicht beantwortet werden (`sudo ip addr del 141.62.66.5/24 dev enp0s31f6` deaktiviert hier IPv6), wird jedoch die IPv6-Addresse `2a00:1450:4001:829::200e` direkt verwendet, so kann eine direkte Verbindung (hier z.B. zu Google) aufgebaut werden. Um das Internet jedoch in vollem Umfang nutzen zu können, muss noch ein IPv6-fähiger Nameserver eingerichtet werden.
 
 > Windows
 
-Wie bereits unter Linux beschrieben müssen wir einen IPv6-fähigen Nameserver hinterlegen, dies können wir über Windows wieder über die GUI erledigen `Systemsteuerung > Netzwerk und ernet > Netzwerkverbindungen > Adaptereinstellungen > Eigenschaften von Internetprotokoll, Version 6 (TCP/IPv6`. Hier kann im Feld `Bevorzugter DNS-Server` der DNS-Server hinterlegt und mit dem `OK-Button` bestätigt werden.
+Wie bereits unter Linux beschrieben müssen wir einen IPv6-fähigen Nameserver hinterlegen. Dies können wir über Windows wieder mit Hilfe des GUIs erledigen `Systemsteuerung > Netzwerk und ethernet > Netzwerkverbindungen > Adaptereinstellungen > Eigenschaften von Internetprotokoll, Version 6 (TCP/IPv6`. Hier kann im Feld `Bevorzugter DNS-Server` der DNS-Server hinterlegt und mit dem `OK-Button` bestätigt werden.
 
 ![IPv6 DNS Server hinterlegen](./static/aufgabe_3_dns_server_add_via_gui.png)
 
@@ -404,7 +404,7 @@ rtt min/avg/max/mdev = 0.568/0.568/0.568/0.000 ms
 
 ![Solicitation und Advertisement-Pakete in Wireshark - Linux](./static/neighbor-solicitation.png)
 
-Hier wird ICMPv6 mit den Types Neighbor Solicitation und Neigbor Advertisement verwendet.
+Hier wird ICMPv6 mit den Types `Neighbor Solicitation` und `Neigbor Advertisement` verwendet.
 
 **Welche Zieladresse wird im ersten Neighbour-Paket verwendet und um welchen Adresstyp handelt es sich?**
 
@@ -476,7 +476,7 @@ Hier taucht der `Fragment-Header for IPv6` auf.
 
 **Fragment Offset:** Das Fragment Offset gibt die Startposition der Daten im Fragment in Relation zum ursprünglichen Packet an.
 
-**More Fragment:** More Fragments besteht aus einem einzenen Bit, welches angibt, ob nach dem jetzigen Fragment weitere Fragmente folgen.
+**More Fragment:** More Fragments besteht aus einem einzelnen Bit, welches angibt, ob nach dem jetzigen Fragment weitere Fragmente folgen.
 
 **Identification Number:** Die Identifikationsnummer ist unter allen Fragmenten eines Packets die gleiche.
 
@@ -488,7 +488,7 @@ Zusammengesetzt werden die einzelnen Pakete wieder, indem alle Fragmente mit gle
 
 **Tragen Sie weitere Informationen zur „Privacy Extension“ (vor allem auch zur Konfiguration unter Windows und Ubuntu) zusammen und versuchen hier im Versuch die Einstellungen für die „Privacy Extension“ auf beiden Rechnern (Windows und Ubuntu) zu realisieren.**
 
-Privacy Extensions sind dafür da, Rückchluss auf den Nutzer schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf _einen_ Nutzer erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn das Präfix vom Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden.
+Privacy Extensions sind dafür da, Rückchluss auf Nutzer:innen schwerer zu machen, indem der Hostanteil der IPv6-Adressen anonymisiert wird. Privacy Extensions entkoppeln Interface Identifier und MAC-Adresse und erzeugen diese nahezu zufällig. Mit diesen periodisch wechselnden Adressen werden dann ausgehende Verbindungen hergestellt, was den Rückschluss auf _einzelne_ Nutzer:innen erschwert. Mit Hilfe der Privacy Extensions kann man also nicht mehr einzelne Nutzer:innen identifizieren. Was allerdings trotzdem möglich ist, ist das Identifizieren über den Präfix, welcher allerdings nur Informationen zum Netzwerk bereitstellt. Wenn der Provider den Präfix regelmäßig wechselt, dann kann auch die Identifikation über diesen erschwert werden.
 
 \newpage
 
@@ -525,7 +525,7 @@ $ sudo sysctl -p
 
 ![IPv6-Adresse nach dem aktivieren der Privacy Extensions](./static/aufgabe_6_disable_privacy_extension.png)
 
-Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Webseiten-Betreibern nicht mehr auf unseren Host zurückverfolgt werden kann.
+Wie im oberen Screenshot zu sehen ist, surfen wir mit einer anderen IPv6 Adresse, welche von Website-Betreibern nicht mehr auf unseren Host zurückverfolgt werden kann.
 
 > Linux
 
@@ -592,13 +592,13 @@ praktikum@rn05:~$ ip a
 
 > Windows
 
-Mit folgendem Command können wir die Privacy-Extensions deaktivieren und die damit einhergehenden IPv6-Adressen entfernen.
+Mit folgendem Command können die Privacy-Extensions deaktiviert und die damit einhergehenden IPv6-Adressen entfernt werden.
 
 ```shell
 netsh interface ipv6 set privacy disabled
 ```
 
-Jetzt löschen wir die alte IP
+Nun wird die alte IPv6-Adresse entfernt.
 
 ```shell
 netsh interface ipv6 delete address interface="WLAN" address=2003:cd:271d:f879:f4f2:d559:fca9:9fb2 store=active
@@ -633,7 +633,7 @@ Man sollte die übrigen IPv6-Adressen löschen, da es sonst eventuell zu Problem
 
 **Reicht das aus?**
 
-Wie auch schon oben erwähnt sollten außerdem noch die Privacy Extensions deaktiviert werden. Damit kann sichergestellt werden, dass auch wirklich unsere statisch konfigurierte IPv6-Adresse als Source-IP verendet wird.
+Wie auch schon oben erwähnt sollten außerdem noch die Privacy Extensions deaktiviert werden. Damit kann sichergestellt werden, dass auch wirklich unsere statisch konfigurierte IPv6-Adresse als Source-IP verwendet wird.
 
 **Konfigurieren Sie die statische IPv6-Adresse über /etc/network/interfaces. Was wird dadurch verhindert? (U. U. müssen sie mit ifdown und ifup die Schnittstelle neu starten**
 
@@ -674,7 +674,7 @@ PING www.kame.net(2001:2f0:0:8800:226:2dff:fe0b:4311 (2001:2f0:0:8800:226:2dff:f
 rtt min/avg/max/mdev = 274.357/276.472/280.370/2.759 ms
 ```
 
-Wenn man die statische IPv6-Adresse über `/etc/network/interfaces` setzt, ist diese auch nach einem `reboot` konfiguriert. Einfache anpassungen über `ip addr add` sind nicht keine persistenten Änderungen.
+Wenn man die statische IPv6-Adresse über `/etc/network/interfaces` setzt, ist diese auch nach einem `reboot` konfiguriert. Einfache Anpassungen über `ip addr add` sind keine persistenten Änderungen.
 
 **Mit welcher IPv6-Adresse sind sie jetzt im Netz unterwegs? Die Seite http://www.heise.de/netze/tools/meine-ip-adresse gibt Aufschluss.**
 
@@ -758,7 +758,7 @@ $ sudo sysctl -p
 
 **Stellen Sie den Zusammenhang zwischen Preferred Lifetime und Valid Liftime anschaulich dar**
 
-Die Preferred Lifetime gibt die Zeitspanne an, in welche rdie Adresse frei als source und destination Adresse genutzt werden kann. Nach dem Ablauf dieser Zeit bekommt die Adresse den "deprecated" Status. Im "deprecated" Status kann nur noch mit bestehenden Kommunikationsverbindungen kommuniziert werden.
+Die Preferred Lifetime gibt die Zeitspanne an, in welcher die Adresse frei als source und destination Adresse genutzt werden kann. Nach dem Ablauf dieser Zeit bekommt die Adresse den "deprecated" Status. Im "deprecated" Status kann nur noch mit bestehenden Kommunikationsverbindungen kommuniziert werden.
 Die Valid Lifetime ist mindestens so groß wie die Preferred Lifetime. Wenn diese abläuft wird die Adresse invalide und kann ab diesem Punkt auch anderen Interfaces zugewiesen werden.
 
 ## OS-Updates
@@ -812,6 +812,6 @@ Universal Time is now:  Tue Nov  9 15:52:29 UTC 2021.
 Run 'dpkg-reconfigure tzdata' if you wish to change it.
 ```
 
-Einen Blick auf Wireshark zeigt, das auch tatsächlich IPv6 verwendet wird (hier mit TLS & einem Spiegelserver der Hochschule Esslingen):
+Ein Blick auf Wireshark zeigt, das auch tatsächlich IPv6 verwendet wird (hier mit TLS & einem Spiegelserver der Hochschule Esslingen):
 
 ![Wireshark-Capture eines APT-Updates](./static/dnf-update.png)
