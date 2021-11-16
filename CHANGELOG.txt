@@ -1,3 +1,16 @@
+commit 54f15f946cef7143d52406461c933a0acfdad066
+Merge: e7a0f1c 5bfb60d
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Nov 16 16:17:09 2021 +0100
+
+    Merge branch 'main' of github.com:pojntfx/uni-netpractice-notes
+
+commit e7a0f1c6b634d42cb71b663423570962691e5f50
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Nov 16 16:17:05 2021 +0100
+
+    feat: Add section on Firewalls
+
 commit 5bfb60d557ab295c570ed8ded70a6ac9e17ecc9b
 Merge: 18dd450 4cbc336
 Author: Felix Pojtinger <felix@pojtinger.com>
