@@ -47,11 +47,13 @@ SPDX-License-Identifier: AGPL-3.0
 
 ![Wordpress-Home](./static/wordpress-home.png)
 
+\newpage
+
 ## Portscan durchführen
 
 **Überprüfen Sie mit einem Portscanner welche Ports an Ihrem Server öffentlich erreichbar sind. Welche Ports/Services sind das? Müssen diese Services öffentlich erreichbar sein?**
 
-![VPN-Einrichtung](./static/vpn.png)
+![VPN-Einrichtung](./static/vpn.png){ width=256px }
 
 `nmap` zeigt die offenen Ports:
 
