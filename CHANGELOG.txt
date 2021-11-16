@@ -1,3 +1,24 @@
+commit de5818e79160c535639850e6f06d98b98bf9c3b3
+Merge: fd53d3b 932074c
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Wed Nov 17 00:19:21 2021 +0100
+
+    Merge pull request #8 from JakWai01/main
+    
+    feat: Add final script
+
+commit 932074c97193d441143d2169317ddd9e04de770d
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 16 21:39:42 2021 +0100
+
+    feat: Add some interpretation
+
+commit c6301a6648501faf0b3a8415bd0ca2ca625530ed
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 16 16:47:13 2021 +0100
+
+    feat: Add final script
+
 commit fd53d3b04150ae7e4b47d84330ba6d3f75604712
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Nov 16 16:32:10 2021 +0100
