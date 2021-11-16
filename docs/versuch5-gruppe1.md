@@ -37,13 +37,19 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Auf ihrem Server ist Wordpress vorinstalliert / vorkonfiguriert. Lediglich die abschließende Einrichtung ist noch nicht erfolgt... Führen Sie die Einrichtung durch und stellen Sie die Funktion sicher. Rufen Sie dazu die IP der Servers in einem Web-Browser auf.**
 
+Zur Fertigstellung der Konfiguration muss zuerst folgender Dialog ausgefüllt werden:
+
 ![Wordpress-Einrichtungsbildschirm](./static/wordpress-setup.png)
+
+Im darauffolgenden Dashboard kann im `Pages` Reiter eine neue page erstellt werden.
 
 ![Wordpress-Dashboard](./static/wordpress-dashboard.png)
 
+Diese Page kann nun mit arbiträrem Inhalt gefüllt werden.
+
 ![Wordpress-Post](./static/wordpress-post.png)
 
-![Wordpress-Home](./static/wordpress-home.png)
+Der Resultierende Post kann nun im Web gefunden werden. Eine Eingabe der IP führt auf eine kleine Übersicht mit diesem Post und einem weiteren "Hello-World" Post.
 
 ![Wordpress-Home](./static/wordpress-home.png)
 
@@ -52,6 +58,8 @@ SPDX-License-Identifier: AGPL-3.0
 ## Portscan durchführen
 
 **Überprüfen Sie mit einem Portscanner welche Ports an Ihrem Server öffentlich erreichbar sind. Welche Ports/Services sind das? Müssen diese Services öffentlich erreichbar sein?**
+
+Zur Sicherheit starten wir bevor wir mit dem Portscanning beginnen den VPN unseres Vertrauens.
 
 ![VPN-Einrichtung](./static/vpn.png){ width=256px }
 
@@ -80,15 +88,19 @@ PORT     STATE    SERVICE
 9100/tcp open     jetdirect
 ```
 
-Ein Auszug des Wireshark-Captures zeigt dies ebenfalls (hier z.B. für Port 80):
+Ein Auszug des Wireshark-Captures zeigt hier zum Beispiel die Ergebnisse des Port-Scans.
 
 ![Wireshark-Capture von nmap](./static/nmap-wireshark.png)
+
+Da der Aufgabenstellung zu entnehmen ist, dass wir im Moment nur einen Webserver betreiben, können wir getrost allen externen Zugriff auf alle Ports bis auf Port 80 und Port 22 für den SSH-Zugriff blockieren. Für spätere Aufgabenstellungen können die Regeln dann angepasst werden.
 
 ## Blockieren von Services
 
 **Sie haben in Aufgabe 2 mindestens einen Service identifiziert, der nicht öffentlich verfügbar sein muss. Blockieren Sie den externen Zugriff auf diesen Service in Ihrer Firewall (Blacklist-Ansatz).**
 
-Blocken aller Ports neben 22 und 00:
+Der "Blacklist-Ansatz" bedeutet, dass mit einer ACCEPT policy und negativen Regeln gearbeitet wird, sodass alles erlaubt ist, sofern es nicht durch eine Regel explizit verboten wird.
+
+Blocken aller Ports neben 22 und 80:
 
 ```shell
 $ sudo iptables -F INPUT
@@ -115,6 +127,8 @@ DROP       tcp  --  anywhere             anywhere             tcp dpt:mysql
 
 Check auf dem lokalen System:
 
+Es kann erkannt werden, dass nun alle blockierten Ports als "filtered" angezeigt werden.
+
 ```shell
 $ nmap 65.21.244.249
 Starting Nmap 7.91 ( https://nmap.org ) at 2021-11-16 15:23 CET
@@ -138,6 +152,8 @@ Nmap done: 1 IP address (1 host up) scanned in 3.39 seconds
 ## Whitelist-Ansatz per Shell-Skript
 
 **Stellen Sie den gleichen Zustand der Firewall (Damit meine ich, dass die gleichen Services erreichbar sind) her wie in Aufgabe 3, allerdings verfolgen Sie jetzt den Whitelist-Ansatz.**
+
+Der "Whitelist-Ansatz" bedeutet, dass die default policy DROP verwendet wird und dass alles verboten ist, was nicht explizit durch eine Regel erlaubt wurde.
 
 Inhalt von `iptables-rules.sh`:
 
@@ -353,4 +369,27 @@ PORT STATE SERVICE
 9100/tcp open jetdirect
 
 Nmap done: 1 IP address (1 host up) scanned in 5.43 seconds
+```
+
+Letztendlich sieht unser überarbeitetes Skript wie folgt aus:
+
+```shell
+#!/usr/bin/env bash
+
+# exit on error 
+set -e
+
+IPT="/sbin/iptables"
+
+$IPT -F INPUT
+
+$IPT -A INPUT -p tcp --dport 22 -j ACCEPT
+$IPT -A INPUT -p tcp --dport 80 -j ACCEPT
+$IPT -A INPUT -p icmp -j ACCEPT -s 193.27.14.134
+$IPT -A INPUT -p tcp --dport 9100 -j ACCEPT -s 193.27.14.134
+
+# default targets
+$IPT -P INPUT DROP # we want to block all incoming traffic (whitelist-approach)
+$IPT -P OUTPUT ACCEPT # we trust the installed software
+$IPT -P FORWARD DROP # we don't want to forward traffic at all
 ```
