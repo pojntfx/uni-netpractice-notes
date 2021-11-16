@@ -354,3 +354,26 @@ PORT STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 5.43 seconds
 ```
+
+Letztendlich sieht unser überarbeitetes Skript wie folgt aus:
+
+```shell
+#!/usr/bin/env bash
+
+# exit on error 
+set -e
+
+IPT="/sbin/iptables"
+
+$IPT -F INPUT
+
+$IPT -A INPUT -p tcp --dport 22 -j ACCEPT
+$IPT -A INPUT -p tcp --dport 80 -j ACCEPT
+$IPT -A INPUT -p icmp -j ACCEPT -s 193.27.14.134
+$IPT -A INPUT -p tcp --dport 9100 -j ACCEPT -s 193.27.14.134
+
+# default targets
+$IPT -P INPUT DROP # we want to block all incoming traffic (whitelist-approach)
+$IPT -P OUTPUT ACCEPT # we trust the installed software
+$IPT -P FORWARD DROP # we don't want to forward traffic at all
+```
