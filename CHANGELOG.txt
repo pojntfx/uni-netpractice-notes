@@ -1,3 +1,15 @@
+commit b3e10740895d8b4d113a6765e23b65785a014712
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 22 23:25:49 2021 +0100
+
+    build: Add Deliverance-provided Makefile to gitignore
+
+commit cb3bed689ab547cf15434873c07708445b43c600
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 22 23:25:26 2021 +0100
+
+    feat: Use Deliverance
+
 commit b5a9814dc85cfc57b19b8d6612908f2efc6dda21
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Nov 22 23:08:48 2021 +0100
