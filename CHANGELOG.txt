@@ -1,3 +1,9 @@
+commit 50f8c2069c362cca4da518d50223d67819e1ca0d
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Nov 23 00:17:24 2021 +0100
+
+    docs: Add `./configure` step in contributing info
+
 commit ca190c9e332dd1d792b68d56b321a4dde712710d
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Nov 23 00:04:47 2021 +0100
