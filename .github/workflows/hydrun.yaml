@@ -57,11 +57,12 @@ jobs:
           automatic_release_tag: latest
           prerelease: false
           files: |
+            /tmp/out/docs/release.tar.gz
             /tmp/out/docs/release.zip
       - name: Extract release archive
         run: |
           mkdir -p /tmp/gh-pages
-          unzip /tmp/out/docs/release.zip -d /tmp/gh-pages
+          tar xvzf /tmp/out/docs/release.tar.gz /tmp/gh-pages
       - name: Publish release to GitHub pages
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@4.1.0

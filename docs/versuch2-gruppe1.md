@@ -5,7 +5,7 @@ subject: "Praktikum Rechnernetze: Protokoll zu Versuch 2 (Protokollanalyse mit W
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 2 (Protokollanalyse mit Wireshark) von Gruppe 1"
 lang: "de"
-...
+---
 
 # Praktikum Rechnernetze
 
@@ -295,7 +295,7 @@ Durch einen `ping` konnten wir die MAC-Adresse des Routers herausfinden.
 
 ![MAC-Addresse des Labor-Routers](./static/router-mac.png)
 
-\newpage 
+\newpage
 
 **Welche MAC-Adresse hat der Server 141.62.1.5 (außerhalb des Labor-Netzes)?**
 
