@@ -86,7 +86,7 @@ build/tree: $(addprefix build/,$(obj)) build/tarball
 # Build archive
 build/archive: build/tree
 	mkdir -p "$(OUTPUT_DIR)"
-	tar czvf "$(OUTPUT_DIR)"/release.tar.gz -C "$(OUTPUT_DIR)" --exclude="release.tar.gz" --exclude="release.zip" .
+	tar czvf "$(OUTPUT_DIR)"/release.tar.gz -C "$(OUTPUT_DIR)" --exclude="release.tar.gz" --exclude="release.zip" $(shell ls $(OUTPUT_DIR))
 	rm -f "$(OUTPUT_DIR)"/release.zip
 	zip -j -x 'release.tar.gz' -x 'release.zip' -FSr "$(OUTPUT_DIR)"/release.zip "$(OUTPUT_DIR)"/*
 
