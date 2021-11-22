@@ -2,7 +2,7 @@
 
 Notes for the Praktikum Rechnernetze (networking practice) course at HdM Stuttgart.
 
-[![hydrun CI](https://github.com/pojntfx/uni-netpractice-notes/actions/workflows/hydrun.yaml/badge.svg)](https://github.com/pojntfx/uni-netpractice-notes/actions/workflows/hydrun.yaml)
+[![Deliverance CI](https://github.com/pojntfx/uni-netpractice-notes/actions/workflows/deliverance.yaml/badge.svg)](https://github.com/pojntfx/uni-netpractice-notes/actions/workflows/deliverance.yaml)
 
 ## Overview
 
