@@ -17,6 +17,7 @@ To build and open a note locally, run the following:
 ```shell
 $ git clone https://github.com/pojntfx/uni-netpractice-notes.git
 $ cd uni-netpractice-notes
+$ ./configure
 $ make depend
 $ make dev-pdf/your-note # Use Bash completion to list available targets
 # In another terminal
