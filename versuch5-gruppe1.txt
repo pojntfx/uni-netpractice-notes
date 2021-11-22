@@ -380,7 +380,7 @@ Letztendlich sieht unser überarbeitetes Skript wie folgt aus:
 
     #!/usr/bin/env bash
 
-    # exit on error 
+    # exit on error
     set -e
 
     IPT="/sbin/iptables"
