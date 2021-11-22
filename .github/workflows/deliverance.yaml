@@ -12,3 +12,5 @@ jobs:
     steps:
       - name: Checkout, build and publish with Deliverance
         uses: pojntfx/deliverance@latest
+        with:
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
