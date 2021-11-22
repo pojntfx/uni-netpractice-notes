@@ -5,7 +5,7 @@ subject: "Praktikum Rechnernetze: Protokoll zu Versuch 4 (IPv6) von Gruppe 1"
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 4 (IPv6) von Gruppe 1"
 lang: "de"
-...
+---
 
 # Praktikum Rechnernetze
 

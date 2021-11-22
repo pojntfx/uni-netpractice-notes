@@ -6,7 +6,7 @@ Notes for the Praktikum Rechnernetze (networking practice) course at HdM Stuttga
 
 ## Overview
 
-You can [view the notes on GitHub pages](https://pojntfx.github.io/uni-netpractice-notes/) or [download them from GitHub releases](https://github.com/pojntfx/uni-netpractice-notes/releases/latest).
+You can [view the notes on GitHub pages](https://pojntfx.github.io/uni-netpractice-notes/), [download them from GitHub releases](https://github.com/pojntfx/uni-netpractice-notes/releases/latest) or [check out the source on GitHub](https://github.com/pojntfx/uni-netpractice-notes).
 
 ## Contributing
 
@@ -18,9 +18,9 @@ To build and open a note locally, run the following:
 $ git clone https://github.com/pojntfx/uni-netpractice-notes.git
 $ cd uni-netpractice-notes
 $ make depend
-$ make dev-pdf/versuch1-gruppe1 # Or dev-html/versuch2-gruppe1 etc. - use Bash completion to list available targets.
+$ make dev-pdf/your-note # Use Bash completion to list available targets
 # In another terminal
-$ make open-pdf/versuch1-gruppe1 # Or open-html/versuch2-gruppe1 etc. - use Bash completion to list available targets.
+$ make open-pdf/your-note # Use Bash completion to list available targets
 ```
 
 The note should now be opened. Whenever you change a source file, it will automatically be re-compiled.

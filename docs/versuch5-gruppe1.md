@@ -5,7 +5,7 @@ subject: "Praktikum Rechnernetze: Protokoll zu Versuch 5 (Paketfilter-Firewall u
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 5 (Paketfilter-Firewall unter Linux) von Gruppe 1"
 lang: "de"
-...
+---
 
 # Praktikum Rechnernetze
 
@@ -376,7 +376,7 @@ Letztendlich sieht unser überarbeitetes Skript wie folgt aus:
 ```shell
 #!/usr/bin/env bash
 
-# exit on error 
+# exit on error
 set -e
 
 IPT="/sbin/iptables"

@@ -5,7 +5,7 @@ subject: "Praktikum Rechnernetze: Protokoll zu Versuch 3 (Router-Betriebssystem 
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
 subtitle: "Protokoll zu Versuch 3 (Router-Betriebssystem Cisco IOS) von Gruppe 1"
 lang: "de"
-...
+---
 
 # Praktikum Rechnernetze
 
