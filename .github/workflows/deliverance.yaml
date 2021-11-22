@@ -1,4 +1,4 @@
-name: hydrun CI
+name: Deliverance CI
 
 on:
   push:
@@ -8,17 +8,6 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        target:
-          - id: docs
-            src: .
-            os: danteev/texlive
-            flags: ""
-            cmd: apt update && apt install -y curl python3-pip tree && ./configure && make depend && make -j "$(nproc)"
-            dst: out
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,26 +18,9 @@ jobs:
           curl -L -o /tmp/hydrun "https://github.com/pojntfx/hydrun/releases/latest/download/hydrun.linux-$(uname -m)"
           sudo install /tmp/hydrun /usr/local/bin
       - name: Build with hydrun
-        working-directory: ${{ matrix.target.src }}
-        run: hydrun -o ${{ matrix.target.os }} ${{ matrix.target.flags }} "${{ matrix.target.cmd }}"
+        run: hydrun -o danteev/texlive "apt update && apt install -y curl python3-pip tree && ./configure && make depend && make -j $(nproc)"
       - name: Fix permissions for output
         run: sudo chown -R $USER .
-      - name: Upload output
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ matrix.target.id }}
-          path: ${{ matrix.target.dst }}
-  publish-linux:
-    runs-on: ubuntu-latest
-    needs: build-linux
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Download output
-        uses: actions/download-artifact@v2
-        with:
-          path: /tmp/out
       - name: Publish release archive to GitHub releases
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: marvinpinto/action-automatic-releases@latest
@@ -57,12 +29,12 @@ jobs:
           automatic_release_tag: latest
           prerelease: false
           files: |
-            /tmp/out/docs/release.tar.gz
-            /tmp/out/docs/release.zip
+            out/release.tar.gz
+            out/release.zip
       - name: Extract release archive
         run: |
           mkdir -p /tmp/gh-pages
-          tar xvzf /tmp/out/docs/release.tar.gz -C /tmp/gh-pages
+          tar xvzf out/release.tar.gz -C /tmp/gh-pages
       - name: Publish release to GitHub pages
         if: ${{ github.ref == 'refs/heads/main' }}
         uses: JamesIves/github-pages-deploy-action@4.1.0
