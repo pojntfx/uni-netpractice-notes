@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jakob Waibel" />
+  <meta name="author" content="Daniel Hiller" />
+  <meta name="author" content="Elia Wüstner" />
+  <meta name="author" content="Felix Pojtinger" />
+  <meta name="dcterms.date" content="2021-11-16" />
+  <meta name="keywords" content="Rechnernetze, Protokoll, Versuch, HdM Stuttgart" />
+  <title>Praktikum Rechnernetze</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Praktikum Rechnernetze</h1>
+<p class="subtitle">Protokoll zu Versuch 6 (Verkabelung) von Gruppe 1</p>
+<p class="author">Jakob Waibel</p>
+<p class="author">Daniel Hiller</p>
+<p class="author">Elia Wüstner</p>
+<p class="author">Felix Pojtinger</p>
+<p class="date">2021-11-16</p>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#einführung"><span class="toc-section-number">1.1</span> Einführung</a>
+<ul>
+<li><a href="#mitwirken"><span class="toc-section-number">1.1.1</span> Mitwirken</a></li>
+<li><a href="#lizenz"><span class="toc-section-number">1.1.2</span> Lizenz</a></li>
+</ul></li>
+<li><a href="#elektrische-verkabelung"><span class="toc-section-number">1.2</span> Elektrische Verkabelung</a></li>
+<li><a href="#optische-verkabelung"><span class="toc-section-number">1.3</span> Optische Verkabelung</a></li>
+<li><a href="#aufgaben-für-die-kabel-gruppen"><span class="toc-section-number">1.4</span> Aufgaben für die „Kabel&quot;-Gruppen</a></li>
+</ul>
+</nav>
+<section id="einführung" data-number="0.1">
+<h2 data-number="1.1"><span class="header-section-number">1.1</span> Einführung</h2>
+<section id="mitwirken" data-number="0.1.1">
+<h3 data-number="1.1.1"><span class="header-section-number">1.1.1</span> Mitwirken</h3>
+<p>Diese Materialien basieren auf <a href="https://www.hdm-stuttgart.de/vorlesung_detail?vorlid=j212254">Professor Kiefers “Praktikum Rechnernetze”-Vorlesung der HdM Stuttgart</a>.</p>
+<p><strong>Sie haben einen Fehler gefunden oder haben einen Verbesserungsvorschlag?</strong> Bitte eröffnen Sie ein Issue auf GitHub (<a href="https://github.com/pojntfx/uni-netpractice-notes">github.com/pojntfx/uni-netpractice-notes</a>):</p>
+<figure>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAADC0lEQVR4nO2bwY3bMBBF30QCfKSBLcClSB2kpNSUDqRSXEAA8WiAws+BpCQ7uQTeaL2r0U2UHkzCgz8zn5SJf77Gb//OgEMOOeSQQw459DUhK1cLMJvZuY71zAaxvtB/yPQc2h/qJEkTQDwJopmGIJVbGkmS7qH9pufQ/lAsAmB9uBkEyfpoxnguL1QF+ZjpOfSBUDyJ7tpCpwTdBNb/n19y6BWh9q+j4+VmGq0R4xkT8R1+yaHPAdWICILyx88mmDEA6wTW/YStk/Xia3LoHaDRLHcYQCPr40l0E0Bc+g8z+6jpObS3RjxY2SLOOVdovNxMjy+8+JocegYid5VZD2hqCxoSGoIkKVHGaguq4cXX5NAzEKvPIClVZ2KNklAiQgOUpx4RB4A6JUrNEFssO5U00hBPMrtI9mOqYfFJ1uTQc91nIyOkVnAzEc9ASECYoBtg9apefk0OPQNRcsQE0tQINtXDWlZIJX941vjqUK0slaiiUJzKHAfdEhsDeB1xAOiuslw1YmqkIazB0ORC0zXi60OLRix68NhrKMuDBu8+DwHda8TSTdDoLn8kahLxiDgElMNivJQ6olpSwHhJSNcWDdF3w48A1dIgpOpBTU21rIPyYZksFF5HHAOqWSPb1mlJIktYUGrMPOZZ4yhQd22BeJL1sV387PsTM+Hme58HgBaNUJWCv7kQ2atyjTgCdL/3uTSZE9SOVCq7oJPXEUeA1n2NxPh9wjrNJgAR35JGaxJEQ2PfpN2n59Du0OP5iNXKrsqwbT1cI74+tDEpV/eyXBO5/yj5w+uIQ0A5a9Qmokkaz7+Wk3ZNsm6agfiWKEdy952eQ7tDbJWh7nRtHgBFI5Yx14hDQPWbLrqr5eNTm0/9RjODkMivfJY1OfRukIZwM+uDZD+m2YpHcfV9jSNAf3zTNV5SS3c9ifH8qxXxTbn73BzRf/E1OfQM9PhNl2DOI9ZdWwya/NTA/YgjQNsCcrvP2ehhX1ySn7M8AvT4TVdNDgnlu7A+W7yqF1+TQw455JBDDjm0D/QbWaSEhCo1bbkAAAAASUVORK5CYII=" width="150" alt="QR-Code zum Quelltext auf GitHub" /><figcaption aria-hidden="true">QR-Code zum Quelltext auf GitHub</figcaption>
+</figure>
+<p>Wenn ihnen die Materialien gefallen, würden wir uns über einen GitHub-Stern sehr freuen.</p>
+</section>
+<section id="lizenz" data-number="0.1.2">
+<h3 data-number="1.1.2"><span class="header-section-number">1.1.2</span> Lizenz</h3>
+<p>Dieses Dokument und der enthaltene Quelltext ist freie Kultur bzw. freie Software.</p>
+<figure>
+<img src="data:image/png;base64,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" width="128" alt="Badge der AGPL-3.0-Lizenz" /><figcaption aria-hidden="true">Badge der AGPL-3.0-Lizenz</figcaption>
+</figure>
+<p>Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger</p>
+<p>SPDX-License-Identifier: AGPL-3.0</p>
+</section>
+</section>
+<section id="elektrische-verkabelung" data-number="0.2">
+<h2 data-number="1.2"><span class="header-section-number">1.2</span> Elektrische Verkabelung</h2>
+<p><strong>Die wichtigsten technischen Größen eines Kabels sind die Werte für die Impedanz, die Dämpfung, für das Nebensprechen und das sich daraus zu errechnende ACR.</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Wie ist der ACR-Wert definiert?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung&quot;</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?</strong></p>
+<p>TODO: Add answer (has something to do with twisted pairs)</p>
+<p><strong>Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?</strong></p>
+<p>TODO: Add answer</p>
+</section>
+<section id="optische-verkabelung" data-number="0.3">
+<h2 data-number="1.3"><span class="header-section-number">1.3</span> Optische Verkabelung</h2>
+<p><strong>Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Wozu wird es benötigt</strong></p>
+<p>TODO: Add answer</p>
+</section>
+<section id="aufgaben-für-die-kabel-gruppen" data-number="0.4">
+<h2 data-number="1.4"><span class="header-section-number">1.4</span> Aufgaben für die „Kabel&quot;-Gruppen</h2>
+<p><strong>Schließen Sie eine RJ-45 Anschlussdose an das zur Verfügung gestellte Patchfeld an (kurzes Kabel von der Rolle abschneiden). Am Arbeitsplatz liegt entsprechendes Werkzeug. Lassen Sie sich vom Betreuer u. U. die Funktion des LSA-Werkzeuges erklären.</strong></p>
+<p>TODO: Add result (see pictures from Felix’s phone)</p>
+<p><strong>Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Wie lang darf die unverdrillte Kabelstrecke sein?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.</strong></p>
+<p>TODO: Add result (see screenshots)</p>
+<p><strong>Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM 200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)</strong></p>
+<p>TODO: Add result (see pictures on Felix’s phone from CM 200 and Fluke)</p>
+<p><strong>Welche Aussage können Sie bezüglich CAT5 und CAT6 machen? (Messtechniker-Gruppe ist hier gefragt; lassen sie sich ihre Ergebnisse auf dem Fluke DTX 1200 speichern)</strong></p>
+<p>TODO: Add result (see PDF)</p>
+<p><strong>Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu „bearbeiten&quot; (Quetschen, Pressen, Biegeradius verringern), daß Sie signifikant eine Änderung der Messqualität erreichen. Bitte systematisch und dokumentiert!</strong></p>
+<p>TODO: Add result (see pictures from Jakob’s phone)</p>
+<p><strong>Was versteht man unter „CableSharing&quot;? Realisieren Sie solch eine Verbindung (Patchfeld -&gt; Dose) und dokumentieren Sie Ihre Messergebnisse!</strong></p>
+<p>Connection:</p>
+<pre class="plaintext"><code>Dose 1:
+1-4
+2-5
+3-7
+6-8
+
+Dose 2:
+1-1
+2-2
+3-3
+6-6</code></pre>
+<p>TODO: Add result (see screenshots and pictures from Felix’s phone (Misswire) and PDF: We first tried to connect it differently, so there are multiple versions)</p>
+<p><strong>Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?</strong></p>
+<p>TODO: Add answer</p>
+<p><strong>Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse</strong></p>
+<p>TODO: Add answer (see pictures from Felix’s phone: 1: 1 &amp; 2 blinked, 2: 7 &amp; 8 blinked, 3: 6 &amp; 2 blinked and PDF)</p>
+<p><strong>Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?</strong></p>
+<p>TODO: Add result (see screenshot)</p>
+<p><strong>Messen Sie mit ihrem CM200-Messgerät folgende Strecken und dokumentieren Sie die Ergebnisse. Grosser Systemschrank: 1-05 zu 1-06 (Fragen Sie nach den Messergebnissen der „Messtechnikern&quot;-Gruppe und vergleichen sie mit Ihren Ergebnissen)</strong></p>
+<p>TODO: Add result (see pictures from Felix’s phone (Misswire) and PDF)</p>
+<p><strong>Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen der „Messtechnikern&quot;-Gruppe und vergleichen sie mit Ihren Ergebnissen)</strong></p>
+<p>TODO: Add result (see pictures from Felix’s phone (Pass, but with blinking C) and PDF)</p>
+<p><strong>Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen der „Messtechnikern&quot;-Gruppe und vergleichen sie mit Ihren Ergebnissen)</strong></p>
+<p>TODO: Add result (see pictures from Felix’s phone (Open, but with blinking 3,4,5,6) and PDF)</p>
+</section>
+</body>
+</html>
