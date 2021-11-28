@@ -37,49 +37,57 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Die wichtigsten technischen Größen eines Kabels sind die Werte für die Impedanz, die Dämpfung, für das Nebensprechen und das sich daraus zu errechnende ACR.**
 
-TODO: Add answer
-
 **Wie ist der ACR-Wert definiert?**
 
-TODO: Add answer
+TODO: Der ACR-Wert ist die Differenz aus dem NEXT-Wert und der Dämpfung. Damit gibt er das Verhältnis zwischen Nutzsignalstärke und Störsignalstärke an, was auch Signalrauschabstand genannt wird.
 
 **Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
 
-TODO: Add answer
+TODO: Der ACR-Wert sollte möglichst hoch sein. Ein zu niedriger ACR-Wert kann zu Bitfehlern führen.
 
 **Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
 
-TODO: Add answer
+TODO: 
+* Signallaufzeit
+* Transferimpedanz
+* Impedanz
+* Dämpfung
+* NEXT
 
 **Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
 
-TODO: Add answer
+TODO: Bei "strukturierter Verkabelung" handelt es sich um ein Konzept zur anwendungsneutralen Verkabelung in und zwischen Gebäuden.
+
 
 **Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
 
-TODO: Add answer (has something to do with twisted pairs)
+TODO: Wenn die Paare direkt nebeneinander liegen hebe ich die Verdrillung auf, die notwendig ist damit sich mit Differenzsignalen die eingestreuten Störungen gegenseitig kompensieren.
 
 **Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
 
-TODO: Add answer
+TODO: In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche Adern Paare für Senden und Empfangen genutzt. Gigabit Ethernet (1000 Mbps) nimmt dagegen ein Paar für Senden und Empfangen, was gleichzeitiges Senden und Empfangen auf einem Paar ermöglicht. Die Bandbreite von 1 Gbps wird durch das komplette Ausnützen aller 8 Adern erreicht.
 
 **Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
 
-TODO: Add answer
+TODO: Der Standard T568A von der Electronic Industries Alliance (EIA) und der Telecommunications Industry Association (TIA) ist an den Farbcodes der europäischen Telefonverkabelung angelehnt und wird daher gerne hier genutzt. In den USA gab es bereits den 258A Standard der weltweit verbreitet war. Die EIA übernahm diesen und nannte ihn um in T568B.
 
 ## Optische Verkabelung
 
 **Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?**
 
-TODO: Add answer
+TODO: 
+* Attenuation die den Lichtverlust aufgrund von z.B. Absorption, Biegen und Streuung angibt.
+* Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen um eine Ader zu durchlaufen
+* Reflektionen
+
 
 **Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?**
 
-TODO: Add answer
+TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflängen und Reflexionscharakteristika von Elektromagnetischen- und Lichtwellen analysiert. 
 
 **Wozu wird es benötigt**
 
-TODO: Add answer
+TODO: Wird z.B. verwendet um die Entfernung zu Fehlerstellen an Spleißen und Verbindern zu erfassen.
 
 ## Aufgaben für die „Kabel“-Gruppen
 
@@ -93,7 +101,7 @@ TODO: Add answer
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
-TODO: Add answer
+TODO: Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
 
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
@@ -133,7 +141,7 @@ TODO: Add result (see screenshots and pictures from Felicitas's phone (Misswire)
 
 **Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?**
 
-TODO: Add answer
+TODO: Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine schon alle acht Adern.
 
 **Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse**
 
