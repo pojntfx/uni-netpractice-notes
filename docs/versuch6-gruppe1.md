@@ -94,35 +94,35 @@ Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von 
 
 Das Kabel stammt von folgender Kabelrolle:
 
-![Kabelrolle](./static/Kabelrolle.jpeg)
+![Kabelrolle](./static/Kabelrolle.jpeg){ width=300px }
 
 Hier wurde nun ein Stück Kabel abgeschnitten und die äußere Abschirmung entfernt:
 
-![Crimping-Schritt 1](./static/crimping-1.jpg)
+![Crimping-Schritt 1](./static/crimping-1.jpg){ width=250px }
 
-![Crimping-Schritt 2](./static/crimping-2.jpg)
+![Crimping-Schritt 2](./static/crimping-2.jpg){ width=250px }
 
-![Crimping-Schritt 4](./static/crimping-4.jpg)
+![Crimping-Schritt 3](./static/crimping-4.jpg){ width=250px }
 
 Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
 
-![Crimping-Schritt 5](./static/crimping-5.jpg)
+![Crimping-Schritt 4](./static/crimping-5.jpg){ width=250px }
 
 Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
 
-![Crimping-Schritt 3](./static/crimping-3.jpg)
+![Crimping-Schritt 5](./static/crimping-3.jpg){ width=250px }
 
 Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
 
-![Crimping-Schritt 6](./static/crimping-6.jpg)
+![Crimping-Schritt 6](./static/crimping-6.jpg){ width=250px }
 
-![Crimping-Schritt 7](./static/crimping-7.jpg)
+![Crimping-Schritt 7](./static/crimping-7.jpg){ width=250px }
 
 Um das Kabel zu testen wurden die Abdeckungen wieder angebracht und mit der Workstation verbunden:
 
-![Crimping-Schritt 8](./static/crimping-8.jpg)
+![Crimping-Schritt 8](./static/crimping-8.jpg){ width=250px }
 
-![Crimping-Schritt 9](./static/crimping-9.jpg)
+![Crimping-Schritt 9](./static/crimping-9.jpg){ width=250px }
 
 **Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?**
 
@@ -145,15 +145,19 @@ Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
 
 Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
 
+\newpage
+
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
 Wir haben mit `iperf` die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen.
 
-![iperf-Server](./static/iperfserv.png)
+![iperf-Server](./static/iperfserv.png){ width=350px }
 
-![iperf-Client](./static/iperfclient.png)
+![iperf-Client](./static/iperfclient.png){ width=350px }
 
 Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyte eine Datenrate von 856 Mbit/s gemessen werden konnte.
+
+\newpage
 
 **Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
 
@@ -161,69 +165,87 @@ Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyt
 
 Hier wurde folgendes Setup aufgebaut:
 
-![CM200 Setup](./static/cable-test-1.jpg)
+![CM200 Setup](./static/cable-test-1.jpg){ width=250px }
 
 Und, was sich mit dem Ergebnis des Fluke deckt, folgendes Ergebnis gemessen:
 
-![CM200 Ergebnis](./static/cable-test-2.jpg)
+![CM200 Ergebnis](./static/cable-test-2.jpg){ width=250px }
+
+\newpage
 
 **Fluke DTX 1200**:
 
 Das Fluke-Setup sah folgendermaßen aus:
 
-![Fluke Setup](./static/fluke-setup.jpeg)
+![Fluke Setup](./static/fluke-setup.jpeg){ width=280px }
+
+\newpage
 
 Das Gerät zeigt uns an, dass wir am Patch-Feld aus Versehen den falschen Standard verwendet haben, um die Kabel anzuschließen. Das stellt aber keine weiteren Probleme dar. Eine Internetverbindung war auch so ohne Probleme möglich. Im folgenden Bild kann der Fehler betrachtet werden:
 
-![Verschiedene Standards verwendet](./static/verschiedene-standards.jpeg)
+![Verschiedene Standards verwendet](./static/verschiedene-standards.jpeg){ width=300px }
+
+\newpage
 
 Das Problem ist daher aufgetreten, dass am Patchfeld beide Standards verzeichnet sind, jedoch dies erst im Nachhinein bemerkt wurde und einer der beiden verwendet wurde.
 
-![Standards am Patchfeld](./static/zwei-standards.jpeg)
+![Standards am Patchfeld](./static/zwei-standards.jpeg){ width=280px }
+
+\newpage
 
 Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte.
 
-![Hoher NEXT-Wert](./static/hohes-next-am-nahen-ende.jpeg)
+![Hoher NEXT-Wert](./static/hohes-next-am-nahen-ende.jpeg){ width=280px }
 
 **Welche Aussage können Sie bezüglich CAT5 und CAT6 machen? (Messtechniker-Gruppe ist hier gefragt; lassen sie sich ihre Ergebnisse auf dem Fluke DTX 1200 speichern)**
 
 Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit:
 
-![Cat5e](./static/cat5e.png)
+![Cat5e](./static/cat5e.png){ width=500px }
 
-![Cat6](./static/cat6.png)
+![Cat6](./static/cat6.png){ width=500px }
 
 Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies sollte aber eigentlich nicht der Fall sein. Laut unseren Vorbereitungsunterlagen sollte das Cat6-Kabel sowohl eine geringere Dämpfung, als auch einen höheren NEXT-Wert als das Cat5e-Kabel vorweisen; genau das Gegenteil ist aber hier der Fall.
+
+\newpage
 
 **Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu „bearbeiten“ (Quetschen, Pressen, Biegeradius verringern), daß Sie signifikant eine Änderung der Messqualität erreichen. Bitte systematisch und dokumentiert!**
 
 Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste die Ergebnisse allerdings gar nicht.
 
-![Knick im Kabel](./static/knick.jpeg)
+![Knick im Kabel](./static/knick.jpeg){ width=280px }
+
+\newpage
 
 Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durchtrenten eine Ader. Dies lies sich dann an der Fluke-Analyse erkennen.
 
-![Ergebnis nach dem durchschneiden einer Ader](./static/kabel-seitenschneider.jpeg)
+![Ergebnis nach dem durchschneiden einer Ader](./static/kabel-seitenschneider.jpeg){ width=280px }
 
 **Was versteht man unter „CableSharing“? Realisieren Sie solch eine Verbindung (Patchfeld -> Dose) und dokumentieren Sie Ihre Messergebnisse!**
 
 Hierzu wurde ein CableSharing-Setup vorbereitet:
 
-![Buchsenverkabelung](./static/cablesharing-connector.jpg)
+![Buchsenverkabelung](./static/cablesharing-connector.jpg){ width=400px }
 
-![Patch-Panel-Verkabelung](./static/cablesharing-patch.jpg)
+![Patch-Panel-Verkabelung](./static/cablesharing-patch.jpg){ width=400px }
 
-![CableSharing mit der Workstation](./static/cablesharing-connection.jpg)
+\newpage
 
-Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet:
+![CableSharing mit der Workstation](./static/cablesharing-connection.jpg){ width=300px }
+
+Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei Anschlüsse am Patchfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet:
 
 ![Test der ersten Buchse](./static/erste-buchse-cable-sharing.png)
 
 ![Test der zweiten Buchse](./static/zweite-buchse-cable-sharing.png)
 
-Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät nicht für das Testen von CableSharing ausgelegt ist. Wir erhalten lediglich die Meldung, dass nicht alle Adern verbunden sind.
+\newpage
 
-![Fluke Messung](./static/Fluke.jpeg)
+Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät nicht für das Testen von CableSharing ausgelegt ist. Wir erhalten lediglich die Meldung, dass nicht alle Adern verbunden sind:
+
+![Fluke Messung](./static/Fluke.jpeg){ width=300px }
+
+\newpage
 
 Ähnlich verhält es sich mit dem Ergebnis des CM200, welcher `Open` anzeigt:
 
@@ -233,41 +255,49 @@ Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die M
 
 Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine schon alle acht Adern.
 
+\newpage
+
 **Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse**
 
 Bei Kabel 1 wurden 1 & 2 blinkend und `Open` angezeigt:
 
-![CM200-Ergebnis zu Kabel 1](./static/cm200-cable-1.jpg)
+![CM200-Ergebnis zu Kabel 1](./static/cm200-cable-1.jpg){ width=400px }
 
 Bei Kabel 2 wurden 7 & 8 blinkend und `Short` angezeigt:
 
-![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-2.jpg)
+![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-2.jpg){ width=400px }
 
 Bei Kabel 3 wurden 6 & 2 blinkend und `Misswire` angezeigt:
 
-![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-3.jpg)
+![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-3.jpg){ width=400px }
 
 **Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?**
 
 Ja, dies war trotz Fehler `short` möglich, wie im folgenden Bild zu sehen ist:
 
-![iperf client](./static/kabel-2-iperf-client.png)
+![iperf client](./static/kabel-2-iperf-client.png){ width=400px }
+
+\newpage
 
 **Messen Sie mit ihrem CM200-Messgerät folgende Strecken und dokumentieren Sie die Ergebnisse. Grosser Systemschrank: 1-05 zu 1-06 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
 Der CM200 wurde wie folgt angeschlossen:
 
-![Aufbau der Messung](./static/cm200-setup.jpg)
+![Aufbau der Messung](./static/cm200-setup.jpg){ width=350px }
 
 Zu erkennen ist ein `Misswire`:
 
-![Misswire-Ergebnis](./static/cm200-1.05-1.06.jpg)
+![Misswire-Ergebnis](./static/cm200-1.05-1.06.jpg){ width=350px }
+
+\newpage
 
 Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
-![Ergebnisse der Messtechniker](./static/1.05-1.06.png)
+![Ergebnisse der Messtechniker](./static/1.05-1.06.png){ width=500px }
 
 Beide Ergebnisse lassen darauf schließen, dass die Buchsen am Patch-Panel nicht standardkonform aneinander angeschlossen sind.
+
+\newpage
 
 **Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
@@ -275,11 +305,15 @@ Zu erkennen ist ein `Pass`, jedoch mit vertauschten Kabeln:
 
 ![Pass-Ergebnis](./static/cm200-1.07-1.08.jpg)
 
+\newpage
+
 Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
-![Ergebnisse der Messtechniker](./static/1.07-1.08.png)
+![Ergebnisse der Messtechniker](./static/1.07-1.08.png){ width=500px }
 
 Die Ergebnisse der Messtechniker unterstützen unsere Vermutung; 1/2 respektive 3/6 wurden getauscht.
+
+\newpage
 
 **Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
@@ -287,8 +321,10 @@ Zu erkennen ist ein `Open`; 3,4,5 und 6 blinken:
 
 ![Open-Ergebnis](./static/cm200-2.13-2.14.jpg)
 
+\newpage
+
 Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
-![Ergebnisse der Messtechniker](./static/2.13-2.14.png)
+![Ergebnisse der Messtechniker](./static/2.13-2.14.png){ width=500px }
 
 Wie auch auf dem Ergebnis der Messtechniker zu erkennen ist, sind 3 und 4 nicht miteinander verbunden.
