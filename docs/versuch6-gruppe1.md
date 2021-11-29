@@ -39,6 +39,39 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Wie ist der ACR-Wert definiert?**
 
+TODO: Der ACR-Wert ist die Differenz aus dem NEXT-Wert und der Dämpfung. Damit gibt er das Verhältnis zwischen Nutzsignalstärke und Störsignalstärke an, was auch Signalrauschabstand genannt wird.
+
+**Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
+
+TODO: Der ACR-Wert sollte möglichst hoch sein. Ein zu niedriger ACR-Wert kann zu Bitfehlern führen.
+
+**Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
+
+TODO: 
+* Signallaufzeit
+* Transferimpedanz
+* Impedanz
+* Dämpfung
+* NEXT
+
+**Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
+
+TODO: Bei "strukturierter Verkabelung" handelt es sich um ein Konzept zur anwendungsneutralen Verkabelung in und zwischen Gebäuden.
+
+
+**Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
+
+TODO: Wenn die Paare direkt nebeneinander liegen hebe ich die Verdrillung auf, die notwendig ist damit sich mit Differenzsignalen die eingestreuten Störungen gegenseitig kompensieren.
+
+**Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
+
+TODO: In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche Adern Paare für Senden und Empfangen genutzt. Gigabit Ethernet (1000 Mbps) nimmt dagegen ein Paar für Senden und Empfangen, was gleichzeitiges Senden und Empfangen auf einem Paar ermöglicht. Die Bandbreite von 1 Gbps wird durch das komplette Ausnützen aller 8 Adern erreicht.
+
+**Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
+
+TODO: Der Standard T568A von der Electronic Industries Alliance (EIA) und der Telecommunications Industry Association (TIA) ist an den Farbcodes der europäischen Telefonverkabelung angelehnt und wird daher gerne hier genutzt. In den USA gab es bereits den 258A Standard der weltweit verbreitet war. Die EIA übernahm diesen und nannte ihn um in T568B.
+
+
 Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem Signal-to-Noise-Ratio entspricht.
 
 **Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
@@ -65,19 +98,31 @@ PAM-5 verwendet 5 Amplitudenstufen (1V, 0.5V, 0V, -0.5V, -1.0V). PAM5 wird verwe
 **Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
 
 Die Electronic Industries Alliance (EIA) definierte die Standards für die Kontaktierung von achtpoligen RJ-45 Steckern und Buchsen. Da es vor dem TIA-568A-Standard der EIA bereits den populären 258-A-Standard von AT&T gab, wurde bei der Veröffentlichung von TIA-568A der bereits etablierte 258-A-Standard als TIA-568B-Standard veröffentlicht.
+
 ## Optische Verkabelung
 
 **Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?**
 
-TODO: Add answer
+TODO: 
+* Attenuation die den Lichtverlust aufgrund von z.B. Absorption, Biegen und Streuung angibt.
+* Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen um eine Ader zu durchlaufen
+* Reflektionen
+
 
 **Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?**
+
+TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflängen und Reflexionscharakteristika von Elektromagnetischen- und Lichtwellen analysiert. 
+
+**Wozu wird es benötigt**
+
+TODO: Wird z.B. verwendet um die Entfernung zu Fehlerstellen an Spleißen und Verbindern zu erfassen.
 
 Ein OTDR ist ein "Optical-Time-Domain-Reflectometer". Das ist ein Werkzeug, um optische Leitungen zu analysieren.
 
 **Wozu wird es benötigt**
 
 Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von elektromagnetischen Wellen zu analysieren. So können Leitungen auf ihre Funktionalität und Reflexionseigenschaften an Verbindungen oder Kabelenden getestet werden.
+
 ## Aufgaben für die „Kabel“-Gruppen
 
 **Schließen Sie eine RJ-45 Anschlussdose an das zur Verfügung gestellte Patchfeld an (kurzes Kabel von der Rolle abschneiden). Am Arbeitsplatz liegt entsprechendes Werkzeug. Lassen Sie sich vom Betreuer u. U. die Funktion des LSA-Werkzeuges erklären.**
@@ -108,7 +153,7 @@ Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
-TODO: Add answer
+TODO: Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
 
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
@@ -180,7 +225,7 @@ TODO: Add result (see screenshots and pictures from Felix's phone (Misswire) and
 
 **Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?**
 
-TODO: Add answer
+TODO: Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine schon alle acht Adern.
 
 **Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse**
 
