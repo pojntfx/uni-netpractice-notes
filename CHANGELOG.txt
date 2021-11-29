@@ -1,3 +1,64 @@
+commit 7e4511fe02caccd7db3b05b7ecb3f9a61c38e30d
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 18:20:46 2021 +0100
+
+    refactor: Scale down images for crimping
+
+commit ce0f74c43820b0a9fe16b4f541fbfb304ef52a27
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 17:25:07 2021 +0100
+
+    feat: Add notes on cabling
+
+commit efd440e8afd3834b0fd08c61b6749daef52b608e
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 17:01:51 2021 +0100
+
+    refactor: De-duplicate answers
+
+commit 278901bc7a57de527c39060925eb0e4f6e8b045a
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 16:48:19 2021 +0100
+
+    fix: Use proper filenames
+
+commit 8977c979bb981212ae0bdfd9cdc8ae6385f6f345
+Merge: 03c3d96 1442c43
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 16:39:42 2021 +0100
+
+    Merge pull request #10 from Elia-Wuestner/main
+    
+    tasks without screenshots
+
+commit 1442c4312a863efdb2f77a0d564f7abe605d5402
+Merge: dfdd8cc 03c3d96
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 16:39:36 2021 +0100
+
+    Merge branch 'main' into main
+
+commit 03c3d96a489a0e12f118441dd2ad9be244574a66
+Merge: b5bb324 12f2bc2
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 16:36:47 2021 +0100
+
+    Merge pull request #9 from JakWai01/main
+    
+    feat: Add documentation
+
+commit dfdd8cc4bf083394d80edb9873627a2e1a57a02f
+Author: elia-wuestner <elia_wuestner@web.de>
+Date:   Sun Nov 28 12:21:53 2021 +0100
+
+    tasks without screenshots
+
+commit 12f2bc25e6b08545e946c6ef3a2684b1475f3a8b
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 23 23:58:37 2021 +0100
+
+    feat: Add documentation
+
 commit b5bb32495415985db6e2f93a94d0837958241171
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Nov 23 17:08:20 2021 +0100
