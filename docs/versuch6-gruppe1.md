@@ -71,6 +71,34 @@ TODO: In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche 
 
 TODO: Der Standard T568A von der Electronic Industries Alliance (EIA) und der Telecommunications Industry Association (TIA) ist an den Farbcodes der europäischen Telefonverkabelung angelehnt und wird daher gerne hier genutzt. In den USA gab es bereits den 258A Standard der weltweit verbreitet war. Die EIA übernahm diesen und nannte ihn um in T568B.
 
+
+Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem Signal-to-Noise-Ratio entspricht.
+
+**Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
+
+Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist, desto höher ist die Qualität der Übertragungsstrecke. Ein ACR-Wert, der au ss erhalb der Toleranz liegt kann dazu führen, dass das Signal nicht mehr eindeutig vom Rauschen zu unterscheiden ist. Dadurch kann es zu Übertragungsfehlern kommen.
+
+**Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
+
+Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen. 
+
+**Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
+
+Die Strukturierte Verkabelung definiert ein Konzept für die Verkabelung zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen erweitert und bezieht sich nun auch auch industrielle Gebäude, Wohnkomplexe und Rechenzentren.
+
+**Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
+
+TODO: Add answer
+
+**Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
+
+4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt. 
+PAM-5 verwendet 5 Amplitudenstufen (1V, 0.5V, 0V, -0.5V, -1.0V). PAM5 wird verwendet, um eine Datenrate von 1Gbit zu ermöglichen.
+
+**Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
+
+Die Electronic Industries Alliance (EIA) definierte die Standards für die Kontaktierung von achtpoligen RJ-45 Steckern und Buchsen. Da es vor dem TIA-568A-Standard der EIA bereits den populären 258-A-Standard von AT&T gab, wurde bei der Veröffentlichung von TIA-568A der bereits etablierte 258-A-Standard als TIA-568B-Standard veröffentlicht.
+
 ## Optische Verkabelung
 
 **Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?**
@@ -89,15 +117,39 @@ TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflän
 
 TODO: Wird z.B. verwendet um die Entfernung zu Fehlerstellen an Spleißen und Verbindern zu erfassen.
 
+Ein OTDR ist ein "Optical-Time-Domain-Reflectometer". Das ist ein Werkzeug, um optische Leitungen zu analysieren.
+
+**Wozu wird es benötigt**
+
+Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von elektromagnetischen Wellen zu analysieren. So können Leitungen auf ihre Funktionalität und Reflexionseigenschaften an Verbindungen oder Kabelenden getestet werden.
+
 ## Aufgaben für die „Kabel“-Gruppen
 
 **Schließen Sie eine RJ-45 Anschlussdose an das zur Verfügung gestellte Patchfeld an (kurzes Kabel von der Rolle abschneiden). Am Arbeitsplatz liegt entsprechendes Werkzeug. Lassen Sie sich vom Betreuer u. U. die Funktion des LSA-Werkzeuges erklären.**
+
+Das Kabel stammt von folgender Kabelrolle: 
+
+![Kabelrolle](./static/Kabelrolle.jpeg)
 
 TODO: Add result (see pictures from Felicitas's phone)
 
 **Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?**
 
-TODO: Add answer
+Laut Norm gibt es den EIA/TIA-568A-Standard und den EIA/TIA-568B-Standard. Letzterer beschreibt den Standard, welcher von AT&T etabliert worden ist. 
+
+Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
+
+| Pin | TIA/EIA-568A | TIA/EIA-568B | 
+|-----|--------------|--------------|
+|  1  | weiß\grün | weiß\orange|
+|  2  | grün        | orange       |
+|  3  | weiß\orange| weiß\grün |
+|  4  | blau         | blau         |
+|  5  | weiß       | weiß/blau  |
+|  6  | orange       | grün        |
+|  7  | weiß\braun | weiß/braun |
+|  8  | braun        | braun        |
+
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
@@ -105,39 +157,71 @@ TODO: Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von
 
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
-TODO: Add result (see screenshots)
+Wir haben mit JPerf die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen. 
+
+![iperf server](./static/iperfserv.png)
+
+![iperf client](./static/iperfclient.png)
+
+Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyte eine Datenrate von 856 Mbits/s gemessen werden konnte.
 
 **Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM 200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
 
 TODO: Add result (see pictures on Felicitas's phone from CM 200 and Fluke)
 
+Fluke DTX 1200: 
+
+Das Fluke-Setup sah folgendermaßen aus: 
+
+![Fluke Setup](./static/fluke-setup.jpeg)
+
+Das Gerät zeigt uns an, dass wir am Patch-Feld aus Versehen den falschen Standard verwendet haben, um die Kabel anzuschließen. Das stellt aber keine weiteren Probleme dar. Eine Internetverbindung war auch so ohne Probleme möglich. Im folgenden Bild kann der Fehler betrachtet werden:
+
+![Verschiedene Standards verwendet](./static/verschiedene-standards.jpeg)
+
+Das Problem ist daher aufgetreten, dass am Patchfeld beide Standards verzeichnet sind, jedoch dies erst im Nachhinein bemerkt wurde und einer der beiden verwendet wurde.
+
+![Standards am Patchfeld](./static/zwei-standards.jpeg)
+
+Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte. 
+
+![Hoher NEXT-Wert](./static/hoher-next-am-nahen-ende.jpeg)
+
 **Welche Aussage können Sie bezüglich CAT5 und CAT6 machen? (Messtechniker-Gruppe ist hier gefragt; lassen sie sich ihre Ergebnisse auf dem Fluke DTX 1200 speichern)**
 
-TODO: Add result (see PDF)
+Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit: 
+
+![Cat5e](./static/cat5e.png)
+
+![Cat6](./static/cat6.png)
+
+TODO: Stimmt die interpretation?
+
+Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies sollte aber eigentlich nicht der Fall sein. Laut unseren Vorbereitungsunterlagen sollte das Cat6-Kabel sowohl eine geringere Dämpfung, als auch einen höheren NEXT-Wert als das Cat5e-Kabel vorweisen.
 
 **Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu „bearbeiten“ (Quetschen, Pressen, Biegeradius verringern), daß Sie signifikant eine Änderung der Messqualität erreichen. Bitte systematisch und dokumentiert!**
 
-TODO: Add result (see pictures from Jakob's phone)
+Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste die Ergebnisse allerdings gar nicht. 
+
+![Knick im Kabel](./static/knick.jpeg)
+
+Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durchtrenten eine Ader. Dies lies sich dann an der Fluke-Analyse erkennen.
+
+![Ergebnis nach dem durchschneiden einer Ader](./static/kabel-seitenschneider.jpeg)
 
 **Was versteht man unter „CableSharing“? Realisieren Sie solch eine Verbindung (Patchfeld -> Dose) und dokumentieren Sie Ihre Messergebnisse!**
 
-Connection:
+Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet: 
 
-```plaintext
-Dose 1:
-1-4
-2-5
-3-7
-6-8
+![Test der ersten Buchse](./static/erste-buchse-cable-sharing.png)
 
-Dose 2:
-1-1
-2-2
-3-3
-6-6
-```
+![Test der zweiten Buchse](./static/zweite-buchse-cable-sharing.png)
 
-TODO: Add result (see screenshots and pictures from Felicitas's phone (Misswire) and PDF: We first tried to connect it differently, so there are multiple versions)
+Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät nicht für das testen von CableSharing ausgelegt ist. Wir erhalten lediglich die Meldung, dass nicht alle Adern verbunden sind.
+
+![Fluke Messung](./static/Fluke.jpeg)
+
+TODO: Add result (see screenshots and pictures from Felicitas's phone (Misswire) and PDF: We first tried to connect it differently, so there are multiple versions) and interpretation
 
 **Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?**
 
@@ -149,16 +233,24 @@ TODO: Add answer (see pictures from Felicitas's phone: 1: 1 & 2 blinked, 2: 7 & 
 
 **Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?**
 
-TODO: Add result (see screenshot)
+Ja, dies war trotz dem Fehler `short` möglich, wie im folgenden Bild zu sehen ist: 
+
+![iperf client](./static/kabel-2-iperf-client.png)
 
 **Messen Sie mit ihrem CM200-Messgerät folgende Strecken und dokumentieren Sie die Ergebnisse. Grosser Systemschrank: 1-05 zu 1-06 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felicitas's phone (Misswire) and PDF)
+TODO: Add result (see pictures from Felicitas's phone (Misswire) and PDF) and interpretation
+
+![Ergebnisse der Messtechniker](./static/105106.png)
 
 **Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felicitas's phone (Pass, but with blinking C) and PDF)
+TODO: Add result (see pictures from Felicitas's phone (Pass, but with blinking C) and PDF) and interpretation
+
+![Ergebnisse der Messtechniker](./static/107108.png)
 
 **Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felicitas's phone (Open, but with blinking 3,4,5,6) and PDF)
+TODO: Add result (see pictures from Felicitas's phone (Open, but with blinking 3,4,5,6) and PDF) and interpretation
+
+![Ergebnisse der Messtechniker](./static/213214.png)
