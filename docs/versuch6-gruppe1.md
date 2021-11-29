@@ -209,17 +209,27 @@ Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durc
 
 **Was versteht man unter „CableSharing“? Realisieren Sie solch eine Verbindung (Patchfeld -> Dose) und dokumentieren Sie Ihre Messergebnisse!**
 
+Hierzu wurde ein CableSharing-Setup vorbereitet:
+
+![Buchsenverkabelung](./static/cablesharing-connector.jpg)
+
+![Patch-Panel-Verkabelung](./static/cablesharing-patch.jpg)
+
+![CableSharing mit der Workstation](./static/cablesharing-connection.jpg)
+
 Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet:
 
 ![Test der ersten Buchse](./static/erste-buchse-cable-sharing.png)
 
 ![Test der zweiten Buchse](./static/zweite-buchse-cable-sharing.png)
 
-Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät nicht für das testen von CableSharing ausgelegt ist. Wir erhalten lediglich die Meldung, dass nicht alle Adern verbunden sind.
+Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät nicht für das Testen von CableSharing ausgelegt ist. Wir erhalten lediglich die Meldung, dass nicht alle Adern verbunden sind.
 
 ![Fluke Messung](./static/Fluke.jpeg)
 
-TODO: Add result (see screenshots and pictures from Felicitas's phone (Misswire) and PDF: We first tried to connect it differently, so there are multiple versions) and interpretation
+Ähnlich verhält es sich mit dem Ergebnis des CM 200, welcher `Open` anzeigt:
+
+![CableSharing-Ergebnisse des CM200](./static/cablesharing-cm200.jpg)
 
 **Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?**
 
