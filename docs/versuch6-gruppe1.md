@@ -47,17 +47,17 @@ TODO: Der ACR-Wert sollte möglichst hoch sein. Ein zu niedriger ACR-Wert kann z
 
 **Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
 
-TODO: 
-* Signallaufzeit
-* Transferimpedanz
-* Impedanz
-* Dämpfung
-* NEXT
+TODO:
+
+- Signallaufzeit
+- Transferimpedanz
+- Impedanz
+- Dämpfung
+- NEXT
 
 **Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
 
 TODO: Bei "strukturierter Verkabelung" handelt es sich um ein Konzept zur anwendungsneutralen Verkabelung in und zwischen Gebäuden.
-
 
 **Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
 
@@ -71,7 +71,6 @@ TODO: In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche 
 
 TODO: Der Standard T568A von der Electronic Industries Alliance (EIA) und der Telecommunications Industry Association (TIA) ist an den Farbcodes der europäischen Telefonverkabelung angelehnt und wird daher gerne hier genutzt. In den USA gab es bereits den 258A Standard der weltweit verbreitet war. Die EIA übernahm diesen und nannte ihn um in T568B.
 
-
 Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem Signal-to-Noise-Ratio entspricht.
 
 **Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
@@ -80,7 +79,7 @@ Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist, desto hö
 
 **Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
 
-Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen. 
+Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen.
 
 **Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
 
@@ -92,7 +91,7 @@ TODO: Add answer
 
 **Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
 
-4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt. 
+4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt.
 PAM-5 verwendet 5 Amplitudenstufen (1V, 0.5V, 0V, -0.5V, -1.0V). PAM5 wird verwendet, um eine Datenrate von 1Gbit zu ermöglichen.
 
 **Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
@@ -103,15 +102,15 @@ Die Electronic Industries Alliance (EIA) definierte die Standards für die Konta
 
 **Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?**
 
-TODO: 
-* Attenuation die den Lichtverlust aufgrund von z.B. Absorption, Biegen und Streuung angibt.
-* Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen um eine Ader zu durchlaufen
-* Reflektionen
+TODO:
 
+- Attenuation die den Lichtverlust aufgrund von z.B. Absorption, Biegen und Streuung angibt.
+- Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen um eine Ader zu durchlaufen
+- Reflektionen
 
 **Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?**
 
-TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflängen und Reflexionscharakteristika von Elektromagnetischen- und Lichtwellen analysiert. 
+TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflängen und Reflexionscharakteristika von Elektromagnetischen- und Lichtwellen analysiert.
 
 **Wozu wird es benötigt**
 
@@ -127,7 +126,7 @@ Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von 
 
 **Schließen Sie eine RJ-45 Anschlussdose an das zur Verfügung gestellte Patchfeld an (kurzes Kabel von der Rolle abschneiden). Am Arbeitsplatz liegt entsprechendes Werkzeug. Lassen Sie sich vom Betreuer u. U. die Funktion des LSA-Werkzeuges erklären.**
 
-Das Kabel stammt von folgender Kabelrolle: 
+Das Kabel stammt von folgender Kabelrolle:
 
 ![Kabelrolle](./static/Kabelrolle.jpeg)
 
@@ -135,21 +134,20 @@ TODO: Add result (see pictures from Felicitas's phone)
 
 **Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?**
 
-Laut Norm gibt es den EIA/TIA-568A-Standard und den EIA/TIA-568B-Standard. Letzterer beschreibt den Standard, welcher von AT&T etabliert worden ist. 
+Laut Norm gibt es den EIA/TIA-568A-Standard und den EIA/TIA-568B-Standard. Letzterer beschreibt den Standard, welcher von AT&T etabliert worden ist.
 
 Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
 
-| Pin | TIA/EIA-568A | TIA/EIA-568B | 
-|-----|--------------|--------------|
-|  1  | weiß\grün | weiß\orange|
-|  2  | grün        | orange       |
-|  3  | weiß\orange| weiß\grün |
-|  4  | blau         | blau         |
-|  5  | weiß       | weiß/blau  |
-|  6  | orange       | grün        |
-|  7  | weiß\braun | weiß/braun |
-|  8  | braun        | braun        |
-
+| Pin | TIA/EIA-568A | TIA/EIA-568B |
+| --- | ------------ | ------------ |
+| 1   | weiß\grün    | weiß\orange  |
+| 2   | grün         | orange       |
+| 3   | weiß\orange  | weiß\grün    |
+| 4   | blau         | blau         |
+| 5   | weiß         | weiß/blau    |
+| 6   | orange       | grün         |
+| 7   | weiß\braun   | weiß/braun   |
+| 8   | braun        | braun        |
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
@@ -157,7 +155,7 @@ TODO: Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von
 
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
-Wir haben mit JPerf die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen. 
+Wir haben mit JPerf die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen.
 
 ![iperf server](./static/iperfserv.png)
 
@@ -169,9 +167,9 @@ Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyt
 
 TODO: Add result (see pictures on Felicitas's phone from CM 200 and Fluke)
 
-Fluke DTX 1200: 
+Fluke DTX 1200:
 
-Das Fluke-Setup sah folgendermaßen aus: 
+Das Fluke-Setup sah folgendermaßen aus:
 
 ![Fluke Setup](./static/fluke-setup.jpeg)
 
@@ -183,13 +181,13 @@ Das Problem ist daher aufgetreten, dass am Patchfeld beide Standards verzeichnet
 
 ![Standards am Patchfeld](./static/zwei-standards.jpeg)
 
-Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte. 
+Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte.
 
-![Hoher NEXT-Wert](./static/hoher-next-am-nahen-ende.jpeg)
+![Hoher NEXT-Wert](./static/hohes-next-am-nahen-ende.jpeg)
 
 **Welche Aussage können Sie bezüglich CAT5 und CAT6 machen? (Messtechniker-Gruppe ist hier gefragt; lassen sie sich ihre Ergebnisse auf dem Fluke DTX 1200 speichern)**
 
-Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit: 
+Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit:
 
 ![Cat5e](./static/cat5e.png)
 
@@ -201,7 +199,7 @@ Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies sollte abe
 
 **Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu „bearbeiten“ (Quetschen, Pressen, Biegeradius verringern), daß Sie signifikant eine Änderung der Messqualität erreichen. Bitte systematisch und dokumentiert!**
 
-Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste die Ergebnisse allerdings gar nicht. 
+Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste die Ergebnisse allerdings gar nicht.
 
 ![Knick im Kabel](./static/knick.jpeg)
 
@@ -211,7 +209,7 @@ Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durc
 
 **Was versteht man unter „CableSharing“? Realisieren Sie solch eine Verbindung (Patchfeld -> Dose) und dokumentieren Sie Ihre Messergebnisse!**
 
-Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet: 
+Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies konnte auch unter verwendung von `iperf` bestätigt werden. Es wurden beide Buchsen getestet:
 
 ![Test der ersten Buchse](./static/erste-buchse-cable-sharing.png)
 
@@ -233,7 +231,7 @@ TODO: Add answer (see pictures from Felicitas's phone: 1: 1 & 2 blinked, 2: 7 & 
 
 **Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?**
 
-Ja, dies war trotz dem Fehler `short` möglich, wie im folgenden Bild zu sehen ist: 
+Ja, dies war trotz dem Fehler `short` möglich, wie im folgenden Bild zu sehen ist:
 
 ![iperf client](./static/kabel-2-iperf-client.png)
 
@@ -241,16 +239,16 @@ Ja, dies war trotz dem Fehler `short` möglich, wie im folgenden Bild zu sehen i
 
 TODO: Add result (see pictures from Felicitas's phone (Misswire) and PDF) and interpretation
 
-![Ergebnisse der Messtechniker](./static/105106.png)
+![Ergebnisse der Messtechniker](./static/1.05-1.06.png)
 
 **Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
 TODO: Add result (see pictures from Felicitas's phone (Pass, but with blinking C) and PDF) and interpretation
 
-![Ergebnisse der Messtechniker](./static/107108.png)
+![Ergebnisse der Messtechniker](./static/1.07-1.08.png)
 
 **Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
 TODO: Add result (see pictures from Felicitas's phone (Open, but with blinking 3,4,5,6) and PDF) and interpretation
 
-![Ergebnisse der Messtechniker](./static/213214.png)
+![Ergebnisse der Messtechniker](./static/2.13-2.14.png)
