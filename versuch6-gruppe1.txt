@@ -76,11 +76,11 @@ Attenuation-Crosstalk-Ration und Normen:
 Erläutern Sie mit wenigen Worten den Begriff der „strukturierten
 Verkabelung“
 
-Die Strukturierte Verkabelung definiert ein Konzept für die Verkabelung
+Die strukturierte Verkabelung definiert ein Konzept für die Verkabelung
 zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog
 sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen
-erweitert und bezieht sich nun auch auch industrielle Gebäude,
-Wohnkomplexe und Rechenzentren.
+erweitert und bezieht sich nun auch industrielle Gebäude, Wohnkomplexe
+und Rechenzentren.
 
 Sie finden an einem Patchfeld oder einer Dose folgende
 Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme
@@ -151,32 +151,32 @@ Das Kabel stammt von folgender Kabelrolle:
 Hier wurde nun ein Stück Kabel abgeschnitten und die äußere Abschirmung
 entfernt:
 
-[Crimping-Schritt 1]
+[Anschluss-Schritt 1]
 
-[Crimping-Schritt 2]
+[Anschluss-Schritt 2]
 
-[Crimping-Schritt 3]
+[Anschluss-Schritt 3]
 
 Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
 
-[Crimping-Schritt 4]
+[Anschluss-Schritt 4]
 
 Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
 
-[Crimping-Schritt 5]
+[Anschluss-Schritt 5]
 
 Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
 
-[Crimping-Schritt 6]
+[Anschluss-Schritt 6]
 
-[Crimping-Schritt 7]
+[Anschluss-Schritt 7]
 
 Um das Kabel zu testen wurden die Abdeckungen wieder angebracht und mit
 der Workstation verbunden:
 
-[Crimping-Schritt 8]
+[Anschluss-Schritt 8]
 
-[Crimping-Schritt 9]
+[Anschluss-Schritt 9]
 
 Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den
 Anschluss einer Dose?
@@ -201,8 +201,8 @@ erkennen.
 
 Wie lang darf die unverdrillte Kabelstrecke sein?
 
-Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen
-von Nahnebensprechen nicht überhandnehmen.
+Sie muss möglichst kurz sein (max. ca. 1,5 cm), damit die Auswirkungen
+des Nahnebensprechens nicht überhandnehmen.
 
 Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung
 ist.
@@ -251,7 +251,7 @@ der beiden verwendet wurde.
 
 [Standards am Patchfeld]
 
-Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu
+Des Weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu
 weit geöffneten Verdrillungen und der daher resultierenden fehlenden
 Abschirmung liegen könnte.
 
@@ -284,7 +284,7 @@ die Ergebnisse allerdings gar nicht.
 [Knick im Kabel]
 
 Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel
-und durchtrenten eine Ader. Dies lies sich dann an der Fluke-Analyse
+und durchtrenten eine Ader; dies ließ sich dann an der Fluke-Analyse
 erkennen.
 
 [Ergebnis nach dem durchschneiden einer Ader]
