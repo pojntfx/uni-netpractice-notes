@@ -1,3 +1,9 @@
+commit f4e04a67ad0384e2d36330243ab698e5dcc029c2
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 18:28:05 2021 +0100
+
+    feat: Add section on cable quality tests
+
 commit 7e4511fe02caccd7db3b05b7ecb3f9a61c38e30d
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Nov 29 18:20:46 2021 +0100
