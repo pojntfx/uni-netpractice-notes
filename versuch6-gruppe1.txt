@@ -155,15 +155,15 @@ entfernt:
 
 [Crimping-Schritt 2]
 
-[Crimping-Schritt 4]
+[Crimping-Schritt 3]
 
 Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
 
-[Crimping-Schritt 5]
+[Crimping-Schritt 4]
 
 Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
 
-[Crimping-Schritt 3]
+[Crimping-Schritt 5]
 
 Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
 
@@ -302,7 +302,7 @@ Hierzu wurde ein CableSharing-Setup vorbereitet:
 [CableSharing mit der Workstation]
 
 Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und
-zwei anschlüsse am Pathfeld ein einzelnes Kabel teilen. Dadurch ist
+zwei Anschlüsse am Patchfeld ein einzelnes Kabel teilen. Dadurch ist
 allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies
 konnte auch unter verwendung von iperf bestätigt werden. Es wurden beide
 Buchsen getestet:
@@ -314,7 +314,7 @@ Buchsen getestet:
 Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass
 die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät
 nicht für das Testen von CableSharing ausgelegt ist. Wir erhalten
-lediglich die Meldung, dass nicht alle Adern verbunden sind.
+lediglich die Meldung, dass nicht alle Adern verbunden sind:
 
 [Fluke Messung]
 
