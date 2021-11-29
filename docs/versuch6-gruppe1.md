@@ -157,9 +157,17 @@ Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyt
 
 **Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM 200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
 
-TODO: Add result (see pictures on Felix's phone from CM 200 and Fluke)
+**CM 200**:
 
-Fluke DTX 1200:
+Hier wurde folgendes Setup aufgebaut:
+
+![CM 200 Setup](./static/cable-test-1.jpg)
+
+Und, was sich mit dem Ergebnis des Fluke deckt, folgendes Ergebnis gemessen:
+
+![CM 200 Ergebnis](./static/cable-test-2.jpg)
+
+**Fluke DTX 1200**:
 
 Das Fluke-Setup sah folgendermaßen aus:
 
