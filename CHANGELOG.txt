@@ -1,3 +1,9 @@
+commit 036657bd7ffc6f9ec425a2517329b1ee7d7e9349
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Nov 29 21:40:08 2021 +0100
+
+    refactor: Remove duplications
+
 commit 7d42a13ac4b3b580c2d6b34bbdde10ba9088e81a
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Nov 29 20:07:48 2021 +0100
