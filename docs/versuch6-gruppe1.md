@@ -47,7 +47,7 @@ Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist, desto hö
 
 **Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
 
-Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen:
+Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören folgende Werte:
 
 - Signallaufzeit
 - Transferimpedanz
