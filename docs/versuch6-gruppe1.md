@@ -57,7 +57,7 @@ Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur
 
 **Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
 
-Die Strukturierte Verkabelung definiert ein Konzept für die Verkabelung zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen erweitert und bezieht sich nun auch auch industrielle Gebäude, Wohnkomplexe und Rechenzentren.
+Die strukturierte Verkabelung definiert ein Konzept für die Verkabelung zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen erweitert und bezieht sich nun auch industrielle Gebäude, Wohnkomplexe und Rechenzentren.
 
 **Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
 
@@ -98,31 +98,31 @@ Das Kabel stammt von folgender Kabelrolle:
 
 Hier wurde nun ein Stück Kabel abgeschnitten und die äußere Abschirmung entfernt:
 
-![Crimping-Schritt 1](./static/crimping-1.jpg){ width=250px }
+![Anschluss-Schritt 1](./static/crimping-1.jpg){ width=250px }
 
-![Crimping-Schritt 2](./static/crimping-2.jpg){ width=250px }
+![Anschluss-Schritt 2](./static/crimping-2.jpg){ width=250px }
 
-![Crimping-Schritt 3](./static/crimping-4.jpg){ width=250px }
+![Anschluss-Schritt 3](./static/crimping-4.jpg){ width=250px }
 
 Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
 
-![Crimping-Schritt 4](./static/crimping-5.jpg){ width=250px }
+![Anschluss-Schritt 4](./static/crimping-5.jpg){ width=250px }
 
 Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
 
-![Crimping-Schritt 5](./static/crimping-3.jpg){ width=250px }
+![Anschluss-Schritt 5](./static/crimping-3.jpg){ width=250px }
 
 Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
 
-![Crimping-Schritt 6](./static/crimping-6.jpg){ width=250px }
+![Anschluss-Schritt 6](./static/crimping-6.jpg){ width=250px }
 
-![Crimping-Schritt 7](./static/crimping-7.jpg){ width=250px }
+![Anschluss-Schritt 7](./static/crimping-7.jpg){ width=250px }
 
 Um das Kabel zu testen wurden die Abdeckungen wieder angebracht und mit der Workstation verbunden:
 
-![Crimping-Schritt 8](./static/crimping-8.jpg){ width=250px }
+![Anschluss-Schritt 8](./static/crimping-8.jpg){ width=250px }
 
-![Crimping-Schritt 9](./static/crimping-9.jpg){ width=250px }
+![Anschluss-Schritt 9](./static/crimping-9.jpg){ width=250px }
 
 **Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?**
 
@@ -143,7 +143,7 @@ Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
-Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
+Sie muss möglichst kurz sein (max. ca. 1,5 cm), damit die Auswirkungen des Nahnebensprechens nicht überhandnehmen.
 
 \newpage
 
@@ -193,7 +193,7 @@ Das Problem ist daher aufgetreten, dass am Patchfeld beide Standards verzeichnet
 
 \newpage
 
-Des weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte.
+Des Weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu weit geöffneten Verdrillungen und der daher resultierenden fehlenden Abschirmung liegen könnte.
 
 ![Hoher NEXT-Wert](./static/hohes-next-am-nahen-ende.jpeg){ width=280px }
 
@@ -217,7 +217,7 @@ Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste die Erge
 
 \newpage
 
-Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durchtrenten eine Ader. Dies lies sich dann an der Fluke-Analyse erkennen.
+Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel und durchtrenten eine Ader; dies ließ sich dann an der Fluke-Analyse erkennen.
 
 ![Ergebnis nach dem durchschneiden einer Ader](./static/kabel-seitenschneider.jpeg){ width=280px }
 
