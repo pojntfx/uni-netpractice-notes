@@ -96,7 +96,33 @@ Das Kabel stammt von folgender Kabelrolle:
 
 ![Kabelrolle](./static/Kabelrolle.jpeg)
 
-TODO: Add result (see pictures from Felix's phone)
+Hier wurde nun ein Stück Kabel abgeschnitten und die äußere Abschirmung entfernt:
+
+![Crimping-Schritt 1](./static/crimping-1.jpg)
+
+![Crimping-Schritt 2](./static/crimping-2.jpg)
+
+![Crimping-Schritt 4](./static/crimping-4.jpg)
+
+Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
+
+![Crimping-Schritt 5](./static/crimping-5.jpg)
+
+Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
+
+![Crimping-Schritt 3](./static/crimping-3.jpg)
+
+Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
+
+![Crimping-Schritt 6](./static/crimping-6.jpg)
+
+![Crimping-Schritt 7](./static/crimping-7.jpg)
+
+Um das Kabel zu testen wurden die Abdeckungen wieder angebracht und mit der Workstation verbunden:
+
+![Crimping-Schritt 8](./static/crimping-8.jpg)
+
+![Crimping-Schritt 9](./static/crimping-9.jpg)
 
 **Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den Anschluss einer Dose?**
 
