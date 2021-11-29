@@ -39,15 +39,15 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Wie ist der ACR-Wert definiert?**
 
-TODO: Der ACR-Wert ist die Differenz aus dem NEXT-Wert und der Dämpfung. Damit gibt er das Verhältnis zwischen Nutzsignalstärke und Störsignalstärke an, was auch Signalrauschabstand genannt wird.
+Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem Signal-to-Noise-Ratio entspricht.
 
 **Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
 
-TODO: Der ACR-Wert sollte möglichst hoch sein. Ein zu niedriger ACR-Wert kann zu Bitfehlern führen.
+Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist, desto höher ist die Qualität der Übertragungsstrecke. Ein ACR-Wert, der au ss erhalb der Toleranz liegt kann dazu führen, dass das Signal nicht mehr eindeutig vom Rauschen zu unterscheiden ist. Dadurch kann es zu Übertragungsfehlern kommen.
 
 **Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
 
-TODO:
+Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen:
 
 - Signallaufzeit
 - Transferimpedanz
@@ -57,41 +57,15 @@ TODO:
 
 **Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
 
-TODO: Bei "strukturierter Verkabelung" handelt es sich um ein Konzept zur anwendungsneutralen Verkabelung in und zwischen Gebäuden.
-
-**Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
-
-TODO: Wenn die Paare direkt nebeneinander liegen hebe ich die Verdrillung auf, die notwendig ist damit sich mit Differenzsignalen die eingestreuten Störungen gegenseitig kompensieren.
-
-**Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
-
-TODO: In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche Adern Paare für Senden und Empfangen genutzt. Gigabit Ethernet (1000 Mbps) nimmt dagegen ein Paar für Senden und Empfangen, was gleichzeitiges Senden und Empfangen auf einem Paar ermöglicht. Die Bandbreite von 1 Gbps wird durch das komplette Ausnützen aller 8 Adern erreicht.
-
-**Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
-
-TODO: Der Standard T568A von der Electronic Industries Alliance (EIA) und der Telecommunications Industry Association (TIA) ist an den Farbcodes der europäischen Telefonverkabelung angelehnt und wird daher gerne hier genutzt. In den USA gab es bereits den 258A Standard der weltweit verbreitet war. Die EIA übernahm diesen und nannte ihn um in T568B.
-
-Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem Signal-to-Noise-Ratio entspricht.
-
-**Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der außerhalb der Toleranz liegt.**
-
-Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist, desto höher ist die Qualität der Übertragungsstrecke. Ein ACR-Wert, der au ss erhalb der Toleranz liegt kann dazu führen, dass das Signal nicht mehr eindeutig vom Rauschen zu unterscheiden ist. Dadurch kann es zu Übertragungsfehlern kommen.
-
-**Welche weiteren Werte können zur Kabelqualifizierung herangezogen werden?**
-
-Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören Werte wie Laufzeit, Transferimpedanz, Impedanz, Dämpfung, NEXT-Wert, Attenuation-Crosstalk-Ration und Normen.
-
-**Erläutern Sie mit wenigen Worten den Begriff der „strukturierten Verkabelung“**
-
 Die Strukturierte Verkabelung definiert ein Konzept für die Verkabelung zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen erweitert und bezieht sich nun auch auch industrielle Gebäude, Wohnkomplexe und Rechenzentren.
 
 **Sie finden an einem Patchfeld oder einer Dose folgende Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme verursachen und welche?**
 
-TODO: Add answer
+Wenn die Paare direkt nebeneinander liegen hebe ich die Verdrillung auf, die notwendig ist damit sich mit Differenzsignalen die eingestreuten Störungen gegenseitig kompensieren.
 
 **Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein? (Stichwort: 4D-PAM5)**
 
-4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt.
+In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden unterschiedliche Adern Paare für Senden und Empfangen genutzt. Gigabit Ethernet (1000 Mbps) nimmt dagegen ein Paar für Senden und Empfangen, was gleichzeitiges Senden und Empfangen auf einem Paar ermöglicht. Die Bandbreite von 1 Gbps wird durch das komplette Ausnützen aller 8 Adern erreicht. 4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt.
 PAM-5 verwendet 5 Amplitudenstufen (1V, 0.5V, 0V, -0.5V, -1.0V). PAM5 wird verwendet, um eine Datenrate von 1Gbit zu ermöglichen.
 
 **Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen RJ-45-Steckern und Buchsen?**
@@ -102,25 +76,17 @@ Die Electronic Industries Alliance (EIA) definierte die Standards für die Konta
 
 **Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den Messgrößen eines elektrischen Kabels sinnvoll?**
 
-TODO:
-
 - Attenuation die den Lichtverlust aufgrund von z.B. Absorption, Biegen und Streuung angibt.
-- Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen um eine Ader zu durchlaufen
+- Chromatische Dispersion. Sie kann gemessen werden in dem man die Dauer misst, wie lange unterschiedliche Wellenlängen benötigen, um eine Ader zu durchlaufen.
 - Reflektionen
 
 **Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?**
-
-TODO: Mittels dem Optischen Zeitbereichsreflektometrie-Verfahren werden Lauflängen und Reflexionscharakteristika von Elektromagnetischen- und Lichtwellen analysiert.
-
-**Wozu wird es benötigt**
-
-TODO: Wird z.B. verwendet um die Entfernung zu Fehlerstellen an Spleißen und Verbindern zu erfassen.
 
 Ein OTDR ist ein "Optical-Time-Domain-Reflectometer". Das ist ein Werkzeug, um optische Leitungen zu analysieren.
 
 **Wozu wird es benötigt**
 
-Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von elektromagnetischen Wellen zu analysieren. So können Leitungen auf ihre Funktionalität und Reflexionseigenschaften an Verbindungen oder Kabelenden getestet werden.
+Es kann dazu verwendet werden, um Lauflängen und Reflexionscharakteristika von optischen Wellen zu analysieren. So können Leitungen auf ihre Funktionalität und Reflexionseigenschaften an Verbindungen oder Kabelenden getestet werden.
 
 ## Aufgaben für die „Kabel“-Gruppen
 
@@ -140,28 +106,28 @@ Die Unterschiede der beiden Standards lassen sich in folgender Tabelle erkennen.
 
 | Pin | TIA/EIA-568A | TIA/EIA-568B |
 | --- | ------------ | ------------ |
-| 1   | weiß\grün    | weiß\orange  |
+| 1   | weiß/grün    | weiß/orange  |
 | 2   | grün         | orange       |
-| 3   | weiß\orange  | weiß\grün    |
+| 3   | weiß/orange  | weiß/grün    |
 | 4   | blau         | blau         |
 | 5   | weiß         | weiß/blau    |
 | 6   | orange       | grün         |
-| 7   | weiß\braun   | weiß/braun   |
+| 7   | weiß/braun   | weiß/braun   |
 | 8   | braun        | braun        |
 
 **Wie lang darf die unverdrillte Kabelstrecke sein?**
 
-TODO: Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
+Sie muss möglichst kurz sein (max. ca. 1,5 cm) damit die Auswirkungen von Nahnebensprechen nicht überhandnehmen.
 
 **Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung ist.**
 
-Wir haben mit JPerf die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen.
+Wir haben mit `iperf` die Verbindung zu einem anderen Host im Rechnernetze-Labor gemessen.
 
-![iperf server](./static/iperfserv.png)
+![iperf-Server](./static/iperfserv.png)
 
-![iperf client](./static/iperfclient.png)
+![iperf-Client](./static/iperfclient.png)
 
-Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyte eine Datenrate von 856 Mbits/s gemessen werden konnte.
+Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyte eine Datenrate von 856 Mbit/s gemessen werden konnte.
 
 **Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM 200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
 
@@ -223,7 +189,7 @@ TODO: Add result (see screenshots and pictures from Felix's phone (Misswire) and
 
 **Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?**
 
-TODO: Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine schon alle acht Adern.
+Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine schon alle acht Adern.
 
 **Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse**
 
@@ -231,7 +197,7 @@ TODO: Add answer (see pictures from Felix's phone: 1: 1 & 2 blinked, 2: 7 & 8 bl
 
 **Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?**
 
-Ja, dies war trotz dem Fehler `short` möglich, wie im folgenden Bild zu sehen ist:
+Ja, dies war trotz Fehler `short` möglich, wie im folgenden Bild zu sehen ist:
 
 ![iperf client](./static/kabel-2-iperf-client.png)
 
