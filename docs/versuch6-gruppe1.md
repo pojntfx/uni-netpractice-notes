@@ -155,17 +155,17 @@ Wir haben mit `iperf` die Verbindung zu einem anderen Host im Rechnernetze-Labor
 
 Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem Gigabyte eine Datenrate von 856 Mbit/s gemessen werden konnte.
 
-**Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM 200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
+**Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM200 und dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen Sie nicht die beigelegten kurzen blauen Kabel)**
 
-**CM 200**:
+**CM200**:
 
 Hier wurde folgendes Setup aufgebaut:
 
-![CM 200 Setup](./static/cable-test-1.jpg)
+![CM200 Setup](./static/cable-test-1.jpg)
 
 Und, was sich mit dem Ergebnis des Fluke deckt, folgendes Ergebnis gemessen:
 
-![CM 200 Ergebnis](./static/cable-test-2.jpg)
+![CM200 Ergebnis](./static/cable-test-2.jpg)
 
 **Fluke DTX 1200**:
 
@@ -227,7 +227,7 @@ Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass die M
 
 ![Fluke Messung](./static/Fluke.jpeg)
 
-Ähnlich verhält es sich mit dem Ergebnis des CM 200, welcher `Open` anzeigt:
+Ähnlich verhält es sich mit dem Ergebnis des CM200, welcher `Open` anzeigt:
 
 ![CableSharing-Ergebnisse des CM200](./static/cablesharing-cm200.jpg)
 
@@ -237,7 +237,17 @@ Bei Cable-Sharing werden ungenutzte Adern für eine zweite Netzwerkverbindung ve
 
 **Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch. Dokumentieren Sie die Messergebnisse**
 
-TODO: Add answer (see pictures from Felix's phone: 1: 1 & 2 blinked, 2: 7 & 8 blinked, 3: 6 & 2 blinked and PDF)
+Bei Kabel 1 wurden 1 & 2 blinkend und `Open` angezeigt:
+
+![CM200-Ergebnis zu Kabel 1](./static/cm200-cable-1.jpg)
+
+Bei Kabel 2 wurden 7 & 8 blinkend und `Short` angezeigt:
+
+![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-2.jpg)
+
+Bei Kabel 3 wurden 6 & 2 blinkend und `Misswire` angezeigt:
+
+![CM200-Ergebnis zu Kabel 2](./static/cm200-cable-3.jpg)
 
 **Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate messen?**
 
