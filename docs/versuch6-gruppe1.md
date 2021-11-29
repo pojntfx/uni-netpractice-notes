@@ -193,9 +193,7 @@ Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit:
 
 ![Cat6](./static/cat6.png)
 
-TODO: Stimmt die interpretation?
-
-Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies sollte aber eigentlich nicht der Fall sein. Laut unseren Vorbereitungsunterlagen sollte das Cat6-Kabel sowohl eine geringere Dämpfung, als auch einen höheren NEXT-Wert als das Cat5e-Kabel vorweisen.
+Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies sollte aber eigentlich nicht der Fall sein. Laut unseren Vorbereitungsunterlagen sollte das Cat6-Kabel sowohl eine geringere Dämpfung, als auch einen höheren NEXT-Wert als das Cat5e-Kabel vorweisen; genau das Gegenteil ist aber hier der Fall.
 
 **Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu „bearbeiten“ (Quetschen, Pressen, Biegeradius verringern), daß Sie signifikant eine Änderung der Messqualität erreichen. Bitte systematisch und dokumentiert!**
 
@@ -257,18 +255,40 @@ Ja, dies war trotz Fehler `short` möglich, wie im folgenden Bild zu sehen ist:
 
 **Messen Sie mit ihrem CM200-Messgerät folgende Strecken und dokumentieren Sie die Ergebnisse. Grosser Systemschrank: 1-05 zu 1-06 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felix's phone (Misswire) and PDF) and interpretation
+Der CM200 wurde wie folgt angeschlossen:
+
+![Aufbau der Messung](./static/cm200-setup.jpg)
+
+Zu erkennen ist ein `Misswire`:
+
+![Misswire-Ergebnis](./static/cm200-1.05-1.06.jpg)
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
 ![Ergebnisse der Messtechniker](./static/1.05-1.06.png)
 
+Beide Ergebnisse lassen darauf schließen, dass die Buchsen am Patch-Panel nicht standardkonform aneinander angeschlossen sind.
+
 **Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felix's phone (Pass, but with blinking C) and PDF) and interpretation
+Zu erkennen ist ein `Pass`, jedoch mit vertauschten Kabeln:
+
+![Pass-Ergebnis](./static/cm200-1.07-1.08.jpg)
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
 ![Ergebnisse der Messtechniker](./static/1.07-1.08.png)
 
+Die Ergebnisse der Messtechniker unterstützen unsere Vermutung; 1/2 respektive 3/6 wurden getauscht.
+
 **Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)**
 
-TODO: Add result (see pictures from Felix's phone (Open, but with blinking 3,4,5,6) and PDF) and interpretation
+Zu erkennen ist ein `Open`; 3,4,5 und 6 blinken:
+
+![Open-Ergebnis](./static/cm200-2.13-2.14.jpg)
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
 
 ![Ergebnisse der Messtechniker](./static/2.13-2.14.png)
+
+Wie auch auf dem Ergebnis der Messtechniker zu erkennen ist, sind 3 und 4 nicht miteinander verbunden.
