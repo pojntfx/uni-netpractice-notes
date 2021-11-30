@@ -175,109 +175,106 @@ subject=
     commonName                = g1.mi.hdm-stuttgart.de
 
 
-    Type the word 'yes' to continue, or any other input to abort.
-      Confirm request details: yes
-      Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4226.9Qm0XH/tmp.jenIQt
-      Check that the request matches the signature
-      Signature ok
-      The Subject's Distinguished Name is as follows
-      commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-      Certificate is to be certified until Mar  4 13:45:08 2024 GMT (825 days)
+Type the word 'yes' to continue, or any other input to abort.
+Confirm request details: yes
+Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4226.9Qm0XH/tmp.jenIQt
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
+Certificate is to be certified until Mar  4 13:45:08 2024 GMT (825 days)
 
-      Write out database with 1 new entries
-      Data Base Updated
+Write out database with 1 new entries
+Data Base Updated
 
-      Certificate created at: /root/openvpn/easyrsa/pki/issued/server-g1.crt
+Certificate created at: /root/openvpn/easyrsa/pki/issued/server-g1.crt
 
-
-      root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1
-      Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
-
-
-      You are about to sign the following certificate.
-      Please check over the details shown below for accuracy. Note that this request
-      has not been cryptographically verified. Please be sure it came from a trusted
-      source or that you have verified the request checksum with the sender.
-
-      Request subject, to be signed as a client certificate for 825 days:
-
-      subject=
-          commonName                = g1.mi.hdm-stuttgart.de
+root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1
+Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
 
-          Type the word 'yes' to continue, or any other input to abort.
-            Confirm request details: yes
-            Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4288.S5KRe9/tmp.oh8FLq
-            Check that the request matches the signature
-            Signature ok
-            The Subject's Distinguished Name is as follows
-            commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-            Certificate is to be certified until Mar  4 13:45:38 2024 GMT (825 days)
+You are about to sign the following certificate.
+Please check over the details shown below for accuracy. Note that this request
+has not been cryptographically verified. Please be sure it came from a trusted
+source or that you have verified the request checksum with the sender.
 
-            Write out database with 1 new entries
-            Data Base Updated
+Request subject, to be signed as a client certificate for 825 days:
 
-            Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1.crt
+subject=
+commonName                = g1.mi.hdm-stuttgart.de
 
 
-            root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-2
-            Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
+Type the word 'yes' to continue, or any other input to abort.
+Confirm request details: yes
+Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4288.S5KRe9/tmp.oh8FLq
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
+Certificate is to be certified until Mar  4 13:45:38 2024 GMT (825 days)
+
+Write out database with 1 new entries
+Data Base Updated
+
+Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1.crt
 
 
-            You are about to sign the following certificate.
-            Please check over the details shown below for accuracy. Note that this request
-            has not been cryptographically verified. Please be sure it came from a trusted
-            source or that you have verified the request checksum with the sender.
-
-            Request subject, to be signed as a client certificate for 825 days:
-
-            subject=
-                commonName                = g1.mi.hdm-stuttgart.de
+root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-2
+Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
 
-                Type the word 'yes' to continue, or any other input to abort.
-                  Confirm request details: yes
-                  Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4331.uHXk6o/tmp.Mg0mKH
-                  Check that the request matches the signature
-                  Signature ok
-                  The Subject's Distinguished Name is as follows
-                  commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-                  Certificate is to be certified until Mar  4 13:45:51 2024 GMT (825 days)
+You are about to sign the following certificate.
+Please check over the details shown below for accuracy. Note that this request
+has not been cryptographically verified. Please be sure it came from a trusted
+source or that you have verified the request checksum with the sender.
 
-                  Write out database with 1 new entries
-                  Data Base Updated
+Request subject, to be signed as a client certificate for 825 days:
 
-                  Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-2.crt
+subject=
+commonName                = g1.mi.hdm-stuttgart.de
 
 
-                  root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-3
-                  Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
+Type the word 'yes' to continue, or any other input to abort.
+Confirm request details: yes
+Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4331.uHXk6o/tmp.Mg0mKH
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
+Certificate is to be certified until Mar  4 13:45:51 2024 GMT (825 days)
+
+Write out database with 1 new entries
+Data Base Updated
+
+Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-2.crt
 
 
-                  You are about to sign the following certificate.
-                  Please check over the details shown below for accuracy. Note that this request
-                  has not been cryptographically verified. Please be sure it came from a trusted
-                  source or that you have verified the request checksum with the sender.
-
-                  Request subject, to be signed as a client certificate for 825 days:
-
-                  subject=
-                      commonName                = g1.mi.hdm-stuttgart.de
+root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-3
+Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
 
-                      Type the word 'yes' to continue, or any other input to abort.
-                        Confirm request details: yes
-                        Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4374.JHWG1E/tmp.mqADty
-                        Check that the request matches the signature
-                        Signature ok
-                        The Subject's Distinguished Name is as follows
-                        commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-                        Certificate is to be certified until Mar  4 13:45:54 2024 GMT (825 days)
+You are about to sign the following certificate.
+Please check over the details shown below for accuracy. Note that this request
+has not been cryptographically verified. Please be sure it came from a trusted
+source or that you have verified the request checksum with the sender.
 
-                        Write out database with 1 new entries
-                        Data Base Updated
+Request subject, to be signed as a client certificate for 825 days:
 
-                        Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-3.crt
+subject=
+commonName                = g1.mi.hdm-stuttgart.de
+
+
+Type the word 'yes' to continue, or any other input to abort.
+Confirm request details: yes
+Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4374.JHWG1E/tmp.mqADty
+Check that the request matches the signature
+Signature ok
+The Subject's Distinguished Name is as follows
+commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
+Certificate is to be certified until Mar  4 13:45:54 2024 GMT (825 days)
+
+Write out database with 1 new entries
+Data Base Updated
+Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-3.crt
 # ./easyrsa gen-dh
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 Generating DH parameters, 2048 bit long safe prime, generator 2
@@ -355,71 +352,71 @@ cd:7c:75:35
 
 # openssl x509 -in pki/issued/client-g1.crt -text -noout
 Certificate:
-    Data:
-            Version: 3 (0x2)
-                    Serial Number:
-                                7d:31:54:75:d7:f4:b3:71:9d:9a:30:52:13:1f:f4:b6
-                                    Signature Algorithm: sha256WithRSAEncryption
-                                            Issuer: CN = g1.mi.hdm-stuttgart.de
-                                                    Validity
-                                                                Not Before: Nov 30 13:45:38 2021 GMT
-                                                                            Not After : Mar  4 13:45:38 2024 GMT
-                                                                                    Subject: CN = g1.mi.hdm-stuttgart.de
-                                                                                            Subject Public Key Info:
-                                                                                                        Public Key Algorithm: rsaEncryption
-                                                                                                                        Public-Key: (2048 bit)
-                                                                                                                                        Modulus:
-                                                                                                                                                            00:de:a5:7f:88:cb:40:dc:92:76:7b:ac:67:38:ad:
-                                                                                                                                                                                b8:e5:86:8d:18:e7:ca:35:ba:5f:92:a3:89:d9:18:
-                                                                                                                                                                                                    58:51:79:c2:5e:02:0c:f3:96:4e:1e:fc:73:9b:0c:
-                                                                                                                                                                                                                        d9:3f:05:6d:7d:23:15:38:f5:0f:55:89:86:b3:6c:
-                                                                                                                                                                                                                                            ac:38:cc:85:8d:3f:97:ec:f6:0e:a7:5e:6e:39:fb:
-                                                                                                                                                                                                                                                                bd:e5:78:ac:0c:04:b8:c9:ac:29:8c:84:90:8b:de:
-                                                                                                                                                                                                                                                                                    3a:e6:83:b9:c3:82:48:9c:a1:71:d7:0b:15:ef:13:
-                                                                                                                                                                                                                                                                                                        f6:e7:59:84:bb:c9:7e:c3:69:ae:92:1e:f7:b6:39:
-                                                                                                                                                                                                                                                                                                                            45:a1:63:72:25:41:a4:30:85:c3:ba:75:23:24:4b:
-                                                                                                                                                                                                                                                                                                                                                9c:98:58:90:98:38:40:65:1d:09:21:bf:36:9b:3d:
-                                                                                                                                                                                                                                                                                                                                                                    f7:2a:65:80:e8:84:67:5b:83:f3:b9:b7:8f:9b:03:
-                                                                                                                                                                                                                                                                                                                                                                                        d0:db:23:7b:40:4d:f0:9c:c0:a9:81:26:0e:00:7c:
-                                                                                                                                                                                                                                                                                                                                                                                                            24:dd:ee:b0:d8:c5:f2:bf:be:f5:18:86:67:6c:0c:
-                                                                                                                                                                                                                                                                                                                                                                                                                                b8:ab:f9:41:a0:c7:60:e2:d2:9c:32:6a:2f:8c:94:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    c8:bb:1c:2c:80:5c:3b:20:b9:bf:a7:16:80:60:eb:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        6c:f5:de:cb:34:c1:cc:89:ee:f0:bf:60:7b:56:ef:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            1b:ca:f0:73:57:ba:b0:0d:a0:52:78:02:a1:d7:7f:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                78:bf
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Exponent: 65537 (0x10001)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        X509v3 extensions:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    X509v3 Basic Constraints:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    CA:FALSE
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                X509v3 Subject Key Identifier:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                A3:F6:BE:EC:50:50:92:A0:A3:1E:12:1A:00:A1:D1:53:B8:33:90:0F
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            X509v3 Authority Key Identifier:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            keyid:3F:CC:11:C2:51:85:77:9E:D1:D5:5F:0B:D6:D2:09:7F:79:D8:4D:4C
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            DirName:/CN=g1.mi.hdm-stuttgart.de
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            serial:AE:98:7F:B2:0A:A6:16:A4
+Data:
+Version: 3 (0x2)
+Serial Number:
+7d:31:54:75:d7:f4:b3:71:9d:9a:30:52:13:1f:f4:b6
+Signature Algorithm: sha256WithRSAEncryption
+Issuer: CN = g1.mi.hdm-stuttgart.de
+Validity
+Not Before: Nov 30 13:45:38 2021 GMT
+Not After : Mar  4 13:45:38 2024 GMT
+Subject: CN = g1.mi.hdm-stuttgart.de
+Subject Public Key Info:
+Public Key Algorithm: rsaEncryption
+Public-Key: (2048 bit)
+Modulus:
+00:de:a5:7f:88:cb:40:dc:92:76:7b:ac:67:38:ad:
+b8:e5:86:8d:18:e7:ca:35:ba:5f:92:a3:89:d9:18:
+58:51:79:c2:5e:02:0c:f3:96:4e:1e:fc:73:9b:0c:
+d9:3f:05:6d:7d:23:15:38:f5:0f:55:89:86:b3:6c:
+ac:38:cc:85:8d:3f:97:ec:f6:0e:a7:5e:6e:39:fb:
+bd:e5:78:ac:0c:04:b8:c9:ac:29:8c:84:90:8b:de:
+3a:e6:83:b9:c3:82:48:9c:a1:71:d7:0b:15:ef:13:
+f6:e7:59:84:bb:c9:7e:c3:69:ae:92:1e:f7:b6:39:
+45:a1:63:72:25:41:a4:30:85:c3:ba:75:23:24:4b:
+9c:98:58:90:98:38:40:65:1d:09:21:bf:36:9b:3d:
+f7:2a:65:80:e8:84:67:5b:83:f3:b9:b7:8f:9b:03:
+d0:db:23:7b:40:4d:f0:9c:c0:a9:81:26:0e:00:7c:
+24:dd:ee:b0:d8:c5:f2:bf:be:f5:18:86:67:6c:0c:
+b8:ab:f9:41:a0:c7:60:e2:d2:9c:32:6a:2f:8c:94:
+c8:bb:1c:2c:80:5c:3b:20:b9:bf:a7:16:80:60:eb:
+6c:f5:de:cb:34:c1:cc:89:ee:f0:bf:60:7b:56:ef:
+1b:ca:f0:73:57:ba:b0:0d:a0:52:78:02:a1:d7:7f:
+78:bf
+Exponent: 65537 (0x10001)
+X509v3 extensions:
+X509v3 Basic Constraints:
+CA:FALSE
+X509v3 Subject Key Identifier:
+A3:F6:BE:EC:50:50:92:A0:A3:1E:12:1A:00:A1:D1:53:B8:33:90:0F
+X509v3 Authority Key Identifier:
+keyid:3F:CC:11:C2:51:85:77:9E:D1:D5:5F:0B:D6:D2:09:7F:79:D8:4D:4C
+DirName:/CN=g1.mi.hdm-stuttgart.de
+serial:AE:98:7F:B2:0A:A6:16:A4
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        X509v3 Extended Key Usage:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        TLS Web Client Authentication
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    X509v3 Key Usage:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Digital Signature
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Signature Algorithm: sha256WithRSAEncryption
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 6d:18:13:c6:7d:04:58:f8:69:54:c0:74:a1:ec:5c:19:44:74:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          a5:22:ff:ac:41:96:ca:23:50:4a:14:61:3a:4e:e8:d8:23:03:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   5e:0c:2b:df:48:db:6c:f0:53:ab:36:57:9f:44:d5:f1:71:ae:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            24:43:c9:86:52:d1:87:2a:5e:d8:a5:6e:90:c9:86:cc:44:b9:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     69:2d:47:2a:94:87:46:29:00:8e:32:1b:8c:5e:cf:82:d8:e0:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              d2:d1:85:87:94:a7:bc:53:c9:8b:eb:74:d2:59:be:44:92:72:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       7a:85:ce:4c:40:ba:9f:fa:6b:e3:08:da:6a:e6:3b:34:4a:18:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                25:7a:3d:2a:a1:8c:ad:47:c1:76:cc:a8:5b:46:38:3d:ee:0c:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         35:68:c4:2f:a1:3b:66:64:e8:88:7a:1e:21:22:99:6e:4d:f2:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  f1:55:d5:c3:25:ce:ac:27:2b:76:1e:11:6e:5b:78:4f:7b:1e:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           2b:1e:5f:13:0c:b5:4e:0a:4f:b7:df:e6:85:ef:88:cd:9e:21:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    e5:70:53:20:16:33:4b:6b:67:28:c7:0c:f5:bd:f6:38:30:47:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5a:44:99:c5:28:57:47:88:72:b9:de:a8:ae:ed:d3:c1:78:23:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      07:9b:d5:2b:92:3f:ad:d8:88:f2:6e:e8:5a:0e:27:d8:7c:b2:
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               94:b5:27:ef
+X509v3 Extended Key Usage:
+TLS Web Client Authentication
+X509v3 Key Usage:
+Digital Signature
+Signature Algorithm: sha256WithRSAEncryption
+6d:18:13:c6:7d:04:58:f8:69:54:c0:74:a1:ec:5c:19:44:74:
+a5:22:ff:ac:41:96:ca:23:50:4a:14:61:3a:4e:e8:d8:23:03:
+5e:0c:2b:df:48:db:6c:f0:53:ab:36:57:9f:44:d5:f1:71:ae:
+24:43:c9:86:52:d1:87:2a:5e:d8:a5:6e:90:c9:86:cc:44:b9:
+69:2d:47:2a:94:87:46:29:00:8e:32:1b:8c:5e:cf:82:d8:e0:
+d2:d1:85:87:94:a7:bc:53:c9:8b:eb:74:d2:59:be:44:92:72:
+7a:85:ce:4c:40:ba:9f:fa:6b:e3:08:da:6a:e6:3b:34:4a:18:
+25:7a:3d:2a:a1:8c:ad:47:c1:76:cc:a8:5b:46:38:3d:ee:0c:
+35:68:c4:2f:a1:3b:66:64:e8:88:7a:1e:21:22:99:6e:4d:f2:
+f1:55:d5:c3:25:ce:ac:27:2b:76:1e:11:6e:5b:78:4f:7b:1e:
+2b:1e:5f:13:0c:b5:4e:0a:4f:b7:df:e6:85:ef:88:cd:9e:21:
+e5:70:53:20:16:33:4b:6b:67:28:c7:0c:f5:bd:f6:38:30:47:
+5a:44:99:c5:28:57:47:88:72:b9:de:a8:ae:ed:d3:c1:78:23:
+07:9b:d5:2b:92:3f:ad:d8:88:f2:6e:e8:5a:0e:27:d8:7c:b2:
+94:b5:27:ef
 
-a# tree .
+# tree .
 .
 ├── easyrsa
 ├── openssl-easyrsa.cnf
