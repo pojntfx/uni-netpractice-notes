@@ -576,7 +576,41 @@ verb 3
 Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits läuft: 
 
 ```shell
-sudo openvpn --config client.conf
+# sudo openvpn --config client.conf
+[sudo] password for root:
+2021-11-30 15:58:20 WARNING: Compression for receiving enabled. Compression has been used in the past to break encryption. Sent packets are not compressed unless "allow-compression yes" is also set.
+2021-11-30 15:58:20 --cipher is not set. Previous OpenVPN version defaulted to BF-CBC as fallback when cipher negotiation failed in this case. If you need this fallback please add '--data-ciphers-fallback BF-CBC' to your configuration and/or add BF-CBC to --data-ciphers.
+2021-11-30 15:58:20 OpenVPN 2.5.3 x86_64-suse-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Jun 17 2021
+2021-11-30 15:58:20 library versions: OpenSSL 1.1.1l  24 Aug 2021, LZO 2.10
+2021-11-30 15:58:20 WARNING: No server certificate verification method has been enabled.  See http://openvpn.net/howto.html#mitm for more info.
+2021-11-30 15:58:20 TCP/UDP: Preserving recently used remote address: [AF_INET]135.181.204.42:1194
+2021-11-30 15:58:20 Socket Buffers: R=[212992->212992] S=[212992->212992]
+2021-11-30 15:58:20 UDP link local: (not bound)
+2021-11-30 15:58:20 UDP link remote: [AF_INET]135.181.204.42:1194
+2021-11-30 15:58:20 TLS: Initial packet from [AF_INET]135.181.204.42:1194, sid=1cf1ee33 f316b385
+2021-11-30 15:58:20 VERIFY OK: depth=1, CN=g1.mi.hdm-stuttgart.de
+2021-11-30 15:58:20 VERIFY OK: depth=0, CN=g1.mi.hdm-stuttgart.de
+2021-11-30 15:58:20 Control Channel: TLSv1.2, cipher TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384, peer certificate: 2048 bit RSA, signature: RSA-SHA256
+2021-11-30 15:58:20 [g1.mi.hdm-stuttgart.de] Peer Connection Initiated with [AF_INET]135.181.204.42:1194
+2021-11-30 15:58:21 SENT CONTROL [g1.mi.hdm-stuttgart.de]: 'PUSH_REQUEST' (status=1)
+2021-11-30 15:58:21 PUSH: Received control message: 'PUSH_REPLY,route 10.8.1.1,topology net30,ping 10,ping-restart 120,ifconfig 10.8.1.6 10.8.1.5,peer-id 0,cipher AES-256-GCM'
+2021-11-30 15:58:21 OPTIONS IMPORT: timers and/or timeouts modified
+2021-11-30 15:58:21 OPTIONS IMPORT: --ifconfig/up options modified
+2021-11-30 15:58:21 OPTIONS IMPORT: route options modified
+2021-11-30 15:58:21 OPTIONS IMPORT: peer-id set
+2021-11-30 15:58:21 OPTIONS IMPORT: adjusting link_mtu to 1625
+2021-11-30 15:58:21 OPTIONS IMPORT: data channel crypto options modified
+2021-11-30 15:58:21 Data Channel: using negotiated cipher 'AES-256-GCM'
+2021-11-30 15:58:21 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
+2021-11-30 15:58:21 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
+2021-11-30 15:58:21 ROUTE_GATEWAY 100.64.84.78/255.255.255.240 IFACE=wlp3s0 HWADDR=c8:94:02:bd:60:53
+2021-11-30 15:58:21 TUN/TAP device tun0 opened
+2021-11-30 15:58:21 /usr/sbin/ip link set dev tun0 up mtu 1500
+2021-11-30 15:58:21 /usr/sbin/ip link set dev tun0 up
+2021-11-30 15:58:21 /usr/sbin/ip addr add dev tun0 local 10.8.1.6 peer 10.8.1.5
+2021-11-30 15:58:21 /usr/sbin/ip route add 10.8.1.1/32 via 10.8.1.5
+2021-11-30 15:58:21 WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
+2021-11-30 15:58:21 Initialization Sequence Completed
 ```
 
 TODO
@@ -587,7 +621,7 @@ TODO
 
 ### Versuchen Sie ebenfalls mit einem Windows-Client eine Verbindung zu Ihrem Server aufzubauen. Die Client-Software können Sie von: https://openvpn.net/index.php/open-source/downloads.html herunterladen.
 
-TODO
+TODO: Add Screenshots from Elia
 
 ## Analyse 
 
@@ -764,7 +798,7 @@ rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 
 **Stellen Sie den Unterschied der Datenpaketunverschlüsselt) mit Wireshark dar. Nutzen Sie dazu einen einfachen ping-Befehl. Beachten Sie, dass der Verkehr für Wireshark auf unterschiedlichen Interfaces stattfindet.**
 
-TODO
+TODO: Add pictures from Danny
 
 ## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt): 
 
@@ -1067,6 +1101,8 @@ tcpdump: pcap_loop: The interface went down
 
 **Rufen Sie den Dienst „ifconfig.co“ vom Client aus auf. Was ist das Resultat? Warum?**
 
+TODO: Add what should have happened
+
 ## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann? 
 
-TODO
+TODO: (Probably revoking it)
