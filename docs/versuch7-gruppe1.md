@@ -35,9 +35,22 @@ SPDX-License-Identifier: AGPL-3.0
 
 ## CA (=Zertifizierungsstelle) und Schlüssel erzeugen und signieren 
 
-TODO
+Verzeichnis erstellen und betreten: 
 
 ```shell
+# mkdir openvpn
+# cd openvpn
+```
+
+Git installieren:
+
+```shell
+apt install git
+```
+
+Repository klonen: 
+
+```shell 
 # git clone https://github.com/OpenVPN/easy-rsa
 Cloning into 'easy-rsa'...
 remote: Enumerating objects: 2095, done.
@@ -46,15 +59,26 @@ remote: Compressing objects: 100% (11/11), done.
 remote: Total 2095 (delta 3), reused 4 (delta 0), pack-reused 2082
 Receiving objects: 100% (2095/2095), 11.72 MiB | 7.01 MiB/s, done.
 Resolving deltas: 100% (914/914), done.
-root@g1:~/openvpn# ls
-easy-rsa
-root@g1:~/openvpn# mv easy-rsa/easyrsa3 easyrsa && rm -r easy-rsa && cd easyrsa
-root@g1:~/openvpn/easyrsa# ls
-easyrsa  openssl-easyrsa.cnf  vars.example  x509-types
+```
+
+Verschieben und Umbennenen einiger Ordner:
+
+```shell
+# mv easy-rsa/easyrsa3 easyrsa && rm -r easy-rsa && cd easyrsa
+```
+
+PKI-Infrastruktur erstellen: 
+
+```shell 
 root@g1:~/openvpn/easyrsa# ./easyrsa init-pki
 
 init-pki complete; you may now create a CA or requests.
 Your newly created PKI dir is: /root/openvpn/easyrsa/pki
+```
+
+Zertifizierungsstelle erstellen: 
+
+```shell
 # ./easyrsa build-ca
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
@@ -75,9 +99,19 @@ Common Name (eg: your user, host, or server name) [Easy-RSA CA]:g1.mi.hdm-stuttg
 CA creation complete and you may now import and sign cert requests.
 Your new CA certificate file for publishing is at:
 /root/openvpn/easyrsa/pki/ca.crt
+```
+
+Entfernen der Passphrase vom RSA Private Key:
+
+```shell
 # openssl rsa -in pki/private/ca.key -out pki/private/ca.key
 Enter pass phrase for pki/private/ca.key:
 writing RSA key
+```
+
+Keypair für Server generieren:
+
+```shell
 root@g1:~/openvpn/easyrsa# ./easyrsa gen-req server-g1 nopass
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 Generating a RSA private key
@@ -97,8 +131,11 @@ Common Name (eg: your user, host, or server name) [server-g1]:g1.mi.hdm-stuttgar
 Keypair and certificate request completed. Your files are:
 req: /root/openvpn/easyrsa/pki/reqs/server-g1.req
 key: /root/openvpn/easyrsa/pki/private/server-g1.key
+```
 
+Keypair für Client generieren:
 
+```shell
 root@g1:~/openvpn/easyrsa# ./easyrsa gen-req client-g1 nopass
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 Generating a RSA private key
@@ -118,48 +155,15 @@ Common Name (eg: your user, host, or server name) [client-g1]:g1.mi.hdm-stuttgar
 Keypair and certificate request completed. Your files are:
 req: /root/openvpn/easyrsa/pki/reqs/client-g1.req
 key: /root/openvpn/easyrsa/pki/private/client-g1.key
+```
 
+Analog zur vorherigen Erstellung des Keypairs für den Client haben wir zwei weitere Keypair `client-g1-2` und `client-g1-3` erstellt.
 
-root@g1:~/openvpn/easyrsa# ./easyrsa gen-req client-g1-2 nopass
-Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
-Generating a RSA private key
-..................+++++
-................+++++
-writing new private key to '/root/openvpn/easyrsa/pki/easy-rsa-4184.0O6dIm/tmp.Xhz8qb'
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Common Name (eg: your user, host, or server name) [client-g1-2]:g1.mi.hdm-stuttgart.de
+Einzelne Zertifikate signieren: 
 
-Keypair and certificate request completed. Your files are:
-req: /root/openvpn/easyrsa/pki/reqs/client-g1-2.req
-key: /root/openvpn/easyrsa/pki/private/client-g1-2.key
+Server-Zertifikat: 
 
-
-root@g1:~/openvpn/easyrsa# ./easyrsa gen-req client-g1-3 nopass
-Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
-Generating a RSA private key
-........................................................+++++
-................................+++++
-writing new private key to '/root/openvpn/easyrsa/pki/easy-rsa-4205.8d1723/tmp.aqISOy'
------
-You are about to be asked to enter information that will be incorporated
-into your certificate request.
-What you are about to enter is what is called a Distinguished Name or a DN.
-There are quite a few fields but you can leave some blank
-For some fields there will be a default value,
-If you enter '.', the field will be left blank.
------
-Common Name (eg: your user, host, or server name) [client-g1-3]:g1.mi.hdm-stuttgart.de
-
-Keypair and certificate request completed. Your files are:
-req: /root/openvpn/easyrsa/pki/reqs/client-g1-3.req
-key: /root/openvpn/easyrsa/pki/private/client-g1-3.key
+```shell
 # ./easyrsa sign server server-g1
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
@@ -189,7 +193,13 @@ Data Base Updated
 
 Certificate created at: /root/openvpn/easyrsa/pki/issued/server-g1.crt
 
-root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1
+
+```
+
+Client-Zertifikat: 
+
+```shell
+# ./easyrsa sign client client-g1
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 
 
@@ -216,72 +226,28 @@ Write out database with 1 new entries
 Data Base Updated
 
 Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1.crt
+```
 
+Analog wurden auch die zwei zusätzlich generierten Zertifikate signiert.
 
-root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-2
-Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
+Generieren der Diffie-Hellman-Parameter: 
 
-
-You are about to sign the following certificate.
-Please check over the details shown below for accuracy. Note that this request
-has not been cryptographically verified. Please be sure it came from a trusted
-source or that you have verified the request checksum with the sender.
-
-Request subject, to be signed as a client certificate for 825 days:
-
-subject=
-commonName                = g1.mi.hdm-stuttgart.de
-
-
-Type the word 'yes' to continue, or any other input to abort.
-Confirm request details: yes
-Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4331.uHXk6o/tmp.Mg0mKH
-Check that the request matches the signature
-Signature ok
-The Subject's Distinguished Name is as follows
-commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-Certificate is to be certified until Mar  4 13:45:51 2024 GMT (825 days)
-
-Write out database with 1 new entries
-Data Base Updated
-
-Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-2.crt
-
-
-root@g1:~/openvpn/easyrsa# ./easyrsa sign client client-g1-3
-Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
-
-
-You are about to sign the following certificate.
-Please check over the details shown below for accuracy. Note that this request
-has not been cryptographically verified. Please be sure it came from a trusted
-source or that you have verified the request checksum with the sender.
-
-Request subject, to be signed as a client certificate for 825 days:
-
-subject=
-commonName                = g1.mi.hdm-stuttgart.de
-
-
-Type the word 'yes' to continue, or any other input to abort.
-Confirm request details: yes
-Using configuration from /root/openvpn/easyrsa/pki/easy-rsa-4374.JHWG1E/tmp.mqADty
-Check that the request matches the signature
-Signature ok
-The Subject's Distinguished Name is as follows
-commonName            :ASN.1 12:'g1.mi.hdm-stuttgart.de'
-Certificate is to be certified until Mar  4 13:45:54 2024 GMT (825 days)
-
-Write out database with 1 new entries
-Data Base Updated
-Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1-3.crt
+```shell
 # ./easyrsa gen-dh
 Using SSL: openssl OpenSSL 1.1.0l  10 Sep 2019
 Generating DH parameters, 2048 bit long safe prime, generator 2
 This is going to take a long time
-........................................................+.............+..................................................................+..........................................................................................................................+.......................................................................................................................................+............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+......+...............................................................+...............................................................................................................................................................................................................................+........................................................................+....................................................+........+.................................+................................................................................................................................+.........................................................................+........................................................................................+..............................................+.................................................................................................................+....................................+................................................................................................+............................................................+........................................................................................+.......+.............................................................................................................................................................+..............................................................................+.....+.................................................................................+...................................+............+................................................+............................................................+...........................................................................................................................................................................................................................................................................................................................................+.................................................................+...........................+...............................................................................................+......+.........+.....................+.................+....................................................+......................................................................................................................+..........................................+...................................................................................................................................................................................................+.......................................................................................................................................................................................................+.....................+...............................................................................................................+......................................................................................................................................+................+.......+............................................................................................................+......................................................................................................................................................................................+...................................................................................+.....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+........................................................................................................................................................................................................................................+............................................................................................................................................................................................................+........................................................+..............................................................................................................................+.............................................................................................................+.................................................................................................................................................................................................................................................................................................................................+.....................................................................................................................................................................................................................+.................................................................................................................+.........................................................................+...................+................................................................................................................................................................+...................+...+.......................+.....................................................................................+..............................................................+................................................+.............................+.........................................................................................................++*++*++*++*
+........................................................+.............+..................................................................+.................................................[...].........................................................................+.......................................................................................................................................+......++*++*++*++*
+
 
 DH parameters of size 2048 created at /root/openvpn/easyrsa/pki/dh.pem
+```
+
+Gültigkeit der signierten Zertifikate prüfen: 
+
+Server-Zertifikat: 
+
+```shell
 # openssl x509 -in pki/issued/server-g1.crt -text -noout
 Certificate:
 Data:
@@ -349,7 +315,11 @@ d6:77:fc:80:6d:2f:7e:8d:5e:fe:d1:8e:be:ba:9a:01:f8:01:
 57:cb:5f:09:53:4d:f3:36:e9:cc:ac:25:d0:a2:54:27:28:c6:
 4b:30:51:e0:13:6a:f2:73:3a:d4:2e:0f:44:72:07:73:56:98:
 cd:7c:75:35
+```
 
+Client-Zertifikat:
+
+```shell
 # openssl x509 -in pki/issued/client-g1.crt -text -noout
 Certificate:
 Data:
@@ -415,7 +385,13 @@ e5:70:53:20:16:33:4b:6b:67:28:c7:0c:f5:bd:f6:38:30:47:
 5a:44:99:c5:28:57:47:88:72:b9:de:a8:ae:ed:d3:c1:78:23:
 07:9b:d5:2b:92:3f:ad:d8:88:f2:6e:e8:5a:0e:27:d8:7c:b2:
 94:b5:27:ef
+```
 
+Analog wurden auch die weiteren Zertifikate geprüft. Den Daten kann entnommen werden, dass die Zertifikate bis `Mar  4 13:45:38 2024 GMT` gültig sind. Die Zertifikate wurden von `g1.mi.hdm-stuttgart.de` signiert.
+
+Die Ordnerstruktur sieht wie folgt aus: 
+
+```shell
 # tree .
 .
 ├── easyrsa
@@ -479,6 +455,13 @@ Abschließend verschieben wir den `pki` Ordner ins Home-Verzeichnis:
 ```shell
 # mv pki ~/pki
 ```
+
+Aus der bisherigen Struktur generieren wir ein `client package`. Dafür muss man sich im `pki` Ordner befinden:
+
+```shell
+tar cf g1.tar ca.crt private/client-g1.key issued/client-g1.crt
+```
+
 ### Fragen zur Aufgabe 
 
 **Beschreiben Sie kurz den Sinn der Dateien in diesen Ordnern**
@@ -505,7 +488,7 @@ TODO
 
 ### Server konfigurieren
 
-TODO
+Analog zu der in der Versuchsanleitung geschilderten Konfigurationsdatei, wird im folgenden eine angepasste `server.conf` dargestellt:
 
 ```shell 
 # cat server.conf
@@ -521,7 +504,6 @@ comp-lzo
 persist-key
 persist-tun
 verb 3`
-### Client konfigurieren
 ```
 
 Jetzt kann der OpenVPN-Server gestartet werden: 
@@ -547,7 +529,7 @@ Tue Nov 30 14:20:50 2021 IFCONFIG POOL: base=10.8.1.4 size=62, ipv6=0
 Tue Nov 30 14:20:50 2021 Initialization Sequence Completed
 ```
 
-Mit `scp` senden wir `g1.tar` zu unserem Client `: 
+Mit `scp` senden wir das `client package` mit dem Namen `g1.tar` zu unserem Client: 
 
 ```shell
 cp root@135.181.204.42:~/pki/g1.tar ~/
@@ -573,7 +555,7 @@ comp-lzo
 verb 3
 ```
 
-Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits läuft: 
+Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits laufen muss: 
 
 ```shell
 # sudo openvpn --config client.conf
@@ -613,15 +595,13 @@ Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu bea
 2021-11-30 15:58:21 Initialization Sequence Completed
 ```
 
-TODO
-
 ### Erklären Sie die einzelnen Parameter/Optionen der „server.conf“ und der „client.conf“.
 
 TODO
 
 ### Versuchen Sie ebenfalls mit einem Windows-Client eine Verbindung zu Ihrem Server aufzubauen. Die Client-Software können Sie von: https://openvpn.net/index.php/open-source/downloads.html herunterladen.
 
-TODO: Add Screenshots from Elia
+TODO: Elia
 
 ## Analyse 
 
@@ -716,7 +696,7 @@ Tue Nov 30 14:58:21 2021 g1.mi.hdm-stuttgart.de/141.72.244.138:59463 Data Channe
 Tue Nov 30 14:58:21 2021 g1.mi.hdm-stuttgart.de/141.72.244.138:59463 Data Channel Decrypt: Cipher 'AES-256-GCM' initialized with 256 bit key
 ```
 
-TODO
+Aus dem Output lässt sich entnehmen, dass die Verbindung etabliert wurde und damit auch der Tunnel initialisiert wurde. Im folgenden kann man auch sehen, dass nun die `tun` Netzwerkinterfaces angezeigt werden.
 
 ### Funktionstest
 
@@ -725,47 +705,48 @@ TODO
 Zuerst verwenden wir `ip a`:
 
 ```shell
-Tnk/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-inet 127.0.0.1/8 scope host lo
-valid_lft forever preferred_lft forever
-inet6 ::1/128 scope host
-valid_lft forever preferred_lft forever
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+        valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+        valid_lft forever preferred_lft forever
 2: enp2s0f0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
-link/ether 84:a9:38:67:f2:18 brd ff:ff:ff:ff:ff:ff
+    link/ether 84:a9:38:67:f2:18 brd ff:ff:ff:ff:ff:ff
 3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
-link/ether c8:94:02:bd:60:53 brd ff:ff:ff:ff:ff:ff
-inet 100.64.84.65/28 brd 100.64.84.79 scope global dynamic noprefixroute wlp3s0
-valid_lft 31703sec preferred_lft 31703sec
-inet6 2001:7c7:2126:4b00:1c82:4bbd:d5bc:2749/64 scope global temporary dynamic
-valid_lft 597550sec preferred_lft 78897sec
-inet6 2001:7c7:2126:4b00:7431:96ca:2ac9:c43b/64 scope global dynamic mngtmpaddr noprefixroute
-valid_lft 2591827sec preferred_lft 604627sec
-inet6 fe80::3d0a:2eec:1296:52be/64 scope link noprefixroute
-valid_lft forever preferred_lft forever
+    link/ether c8:94:02:bd:60:53 brd ff:ff:ff:ff:ff:ff
+    inet 100.64.84.65/28 brd 100.64.84.79 scope global dynamic noprefixroute wlp3s0
+        valid_lft 31703sec preferred_lft 31703sec
+    inet6 2001:7c7:2126:4b00:1c82:4bbd:d5bc:2749/64 scope global temporary dynamic
+        valid_lft 597550sec preferred_lft 78897sec
+    inet6 2001:7c7:2126:4b00:7431:96ca:2ac9:c43b/64 scope global dynamic mngtmpaddr noprefixroute
+        valid_lft 2591827sec preferred_lft 604627sec
+    inet6 fe80::3d0a:2eec:1296:52be/64 scope link noprefixroute
+        valid_lft forever preferred_lft forever
 4: enp6s0f3u1u3c2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN group default qlen 1000
-link/ether 00:50:b6:f5:31:44 brd ff:ff:ff:ff:ff:ff
+    link/ether 00:50:b6:f5:31:44 brd ff:ff:ff:ff:ff:ff
 6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 500
-link/none
-inet 10.8.1.6 peer 10.8.1.5/32 scope global tun0
-valid_lft forever preferred_lft forever
-inet6 fe80::847d:2db8:e5f6:2a09/64 scope link stable-privacy
-valid_lft forever preferred_lft foreverODO
+    link/none
+    inet 10.8.1.6 peer 10.8.1.5/32 scope global tun0
+        valid_lft forever preferred_lft forever
+    inet6 fe80::847d:2db8:e5f6:2a09/64 scope link stable-privacy
+        valid_lft forever preferred_lft foreverODO
 ```
 
 Als nächstes verwenden wir `ip link`
 
 ```shell
-p link
+# ip link
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
-link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: enp2s0f0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN mode DEFAULT group default qlen 1000
-link/ether 84:a9:38:67:f2:18 brd ff:ff:ff:ff:ff:ff
+    link/ether 84:a9:38:67:f2:18 brd ff:ff:ff:ff:ff:ff
 3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
-link/ether c8:94:02:bd:60:53 brd ff:ff:ff:ff:ff:ff
+    link/ether c8:94:02:bd:60:53 brd ff:ff:ff:ff:ff:ff
 4: enp6s0f3u1u3c2: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN mode DEFAULT group default qlen 1000
-link/ether 00:50:b6:f5:31:44 brd ff:ff:ff:ff:ff:ff
+    link/ether 00:50:b6:f5:31:44 brd ff:ff:ff:ff:ff:ff
 6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN mode DEFAULT group default qlen 500
-link/none
+    link/none
 ```
 
 Jetzt noch ein Test mit `ip route`:
@@ -798,21 +779,98 @@ rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 
 **Stellen Sie den Unterschied der Datenpaketunverschlüsselt) mit Wireshark dar. Nutzen Sie dazu einen einfachen ping-Befehl. Beachten Sie, dass der Verkehr für Wireshark auf unterschiedlichen Interfaces stattfindet.**
 
-TODO: Add pictures from Danny
+TODO: Danny
 
 ## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt): 
 
-TODO: Bild einfügen 
+![VPN Tunnel](./static/vpntunnel.png)
 
 **Um die Funktion zu testen, nutzen Sie den Dienst „ifconfig.co“ (Versuchen Sie einmal die 
 Adresse im Browser). Für was kann dieser Dienst genutzt werden?**
 
-TODO
+Der Dienst kann genutzt werden um die eigene öffentliche IP-Adresse herauszufinden.
+
+Da bei der Person, welche die Clientverbindung hatte IPv6 verwendet wurde, lieferte `ifconfig.co` folgendes Ergebnis:
+
+```shell
+# curl ifconfig.co
+2001:7c7:2126:4b00:b016:5c9f:1161:eb14
+```
+
+Stattdessen kann `api.ipify.org` verwendet werden: 
+
+```shell
+# curl api.ipify.org
+141.72.244.138
+```
 
 ### Änderung der Konfiguration
 
-TODO: Vorgehen Dokumentieren
+Die Datei `server.conf` muss um die IP des servers von `api.ipify.org` erweitert werden. Mit Dig können die IPs der Server verwendet werden. Wir erhalten hier mehrere IPs, da anscheinend Loadbalancing verwendet wird: 
 
+```shell
+# dig api.ipify.org
+
+; <<>> DiG 9.16.23-RH <<>> api.ipify.org
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 52052
+;; flags: qr rd ra; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 65494
+;; QUESTION SECTION:
+;api.ipify.org.                 IN      A
+
+;; ANSWER SECTION:
+api.ipify.org.          3484    IN      CNAME   api.ipify.org.herokudns.com.
+api.ipify.org.herokudns.com. 5  IN      A       54.91.59.199
+api.ipify.org.herokudns.com. 5  IN      A       52.20.78.240
+api.ipify.org.herokudns.com. 5  IN      A       3.232.242.170
+api.ipify.org.herokudns.com. 5  IN      A       3.220.57.224
+
+;; Query time: 27 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+;; WHEN: Wed Dec 01 11:55:12 CET 2021
+;; MSG SIZE  rcvd: 147
+```
+
+Wir müssen also diese vier IPs in unsere Konfigurationsdatei einarbeiten: 
+
+```shell
+# cat server.conf
+proto udp
+dev tun
+ca pki/ca.crt
+cert pki/issued/server-g1.crt
+key pki/private/server-g1.key
+dh pki/dh.pem
+server 10.8.1.0 255.255.255.0
+keepalive 10 120
+comp-lzo
+persist-key
+persist-tun
+verb 3
+push "route 54.91.59.199 255.255.255.255"
+push "route 52.20.78.240 255.255.255.255"
+push "route 3.232.242.170 255.255.255.255"
+push "route 3.220.57.224 255.255.255.255"
+```
+
+Zusätzlich müssen wir auf neue Firewall-Regeln auf dem Server einfügen: 
+
+```shell 
+# iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 54.91.59.199 -j SNAT --to-source 135.181.204.42
+# iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 52.20.78.240 -j SNAT --to-source 135.181.204.42
+# iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 3.232.242.170 -j SNAT --to-source 135.181.204.42
+# iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 3.220.57.224 -j SNAT --to-source 135.181.204.42
+```
+
+Außerdem muss das IP-Forwarding eingeschaltet werden: 
+
+```shell
+# sysctl net.ipv4.conf.all.forwarding=1
+```
 **Was bewirken diese Konfigurationsänderungen? Warum sind sie nötig?**
 
 TODO 
@@ -821,287 +879,40 @@ TODO
 
 **Starten Sie den Open-VPN Client neu. Überprüfen Sie die Routen.**
 
+Nach dem neustarten des Clients sehen die Routen wie folgt aus: 
+
 ```shell
-sh root@135.181.204.42
-root@135.181.204.42's password:
-Linux g1 4.9.0-16-amd64 #1 SMP Debian 4.9.272-2 (2021-07-19) x86_64
-
-The programs included with the Debian GNU/Linux system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-Last login: Tue Nov 30 13:28:05 2021 from 141.72.244.138
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# clear
-root@g1:~# ip a
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
-link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-inet 127.0.0.1/8 scope host lo
-valid_lft forever preferred_lft forever
-inet6 ::1/128 scope host
-valid_lft forever preferred_lft forever
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-link/ether 96:00:00:f9:76:ac brd ff:ff:ff:ff:ff:ff
-inet 135.181.204.42/32 brd 135.181.204.42 scope global eth0
-valid_lft forever preferred_lft forever
-inet6 2a01:4f9:c011:8003::1/64 scope global deprecated
-valid_lft forever preferred_lft 0sec
-inet6 fe80::9400:ff:fef9:76ac/64 scope link
-valid_lft forever preferred_lft forever
-6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 100
-link/none
-inet 10.8.1.1 peer 10.8.1.2/32 scope global tun0
-valid_lft forever preferred_lft forever
-inet6 fe80::19a0:c749:8f57:8244/64 scope link flags 800
-valid_lft forever preferred_lft forever
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# clear
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# vim server.conf
-root@g1:~# ping 188.113.88.193
-PING 188.113.88.193 (188.113.88.193) 56(84) bytes of data.
-From 82.194.192.2 icmp_seq=5 Destination Host Unreachable
---- 188.113.88.193 ping statistics ---
-7 packets transmitted, 0 received, +1 errors, 100% packet loss, time 6113ms
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s 10.8.X.0/24 -d 188.113.88.193 -j SNAT
-iptables v1.6.0: SNAT: option "--to-source" must be specified
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s 10.8.X.0/24 -d 188.113.88.193 -j SNAT
-iptables v1.6.0: SNAT: option "--to-source" must be specified
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s 10.8.X.0/24 -d 188.113.88.193 -j SNAT
-iptables v1.6.0: SNAT: option "--to-source" must be specified
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# --to-source 141.62.66.X
--bash: --to-source: command not found
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s 10.8.1.0/24 -d 188.113.88.193 -j SNAT --to-source 135.181.204.42
-root@g1:~# sudo sysctl net.ipv4.conf.all.forwarding=1
-net.ipv4.conf.all.forwarding = 1
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# curl ifconfig.io
-135.181.204.42
-root@g1:~# curl ifconfig.co
-135.181.204.42
-root@g1:~# curl ifconfig.co
-135.181.204.42
-root@g1:~# ip a
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
-link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-inet 127.0.0.1/8 scope host lo
-valid_lft forever preferred_lft forever
-inet6 ::1/128 scope host
-valid_lft forever preferred_lft forever
-2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-link/ether 96:00:00:f9:76:ac brd ff:ff:ff:ff:ff:ff
-inet 135.181.204.42/32 brd 135.181.204.42 scope global eth0
-valid_lft forever preferred_lft forever
-inet6 2a01:4f9:c011:8003::1/64 scope global deprecated
-valid_lft forever preferred_lft 0sec
-inet6 fe80::9400:ff:fef9:76ac/64 scope link
-valid_lft forever preferred_lft forever
-7: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UNKNOWN group default qlen 100
-link/none
-inet 10.8.1.1 peer 10.8.1.2/32 scope global tun0
-valid_lft forever preferred_lft forever
-inet6 fe80::fd22:1f97:b284:960b/64 scope link flags 800
-valid_lft forever preferred_lft forever
-root@g1:~# clear
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# vim server.conf
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# vim server.conf
-root@g1:~# vim server.conf
-root@g1:~# ping 188.113.88.193
-PING 188.113.88.193 (188.113.88.193) 56(84) bytes of data.
-From 82.194.192.2 icmp_seq=5 Destination Host Unreachable
-7 packets transmitted, 0 received, +1 errors, 100% packet loss, time 6100ms
-root@g1:~# dig
--bash: dig: command not found
-root@g1:~# iptables -L
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination
-root@g1:~# iptables INPUT -L
-Bad argument `INPUT'
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# clear
-root@g1:~# ls
-openvpn  pki  server.conf
-root@g1:~# vim server.conf
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination
-Chain FORWARD (policy ACCEPT)
-target     prot opt source               destination
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination
-root@g1:~# iptables _l
-Bad argument `_l'
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# iptables -L
-Chain INPUT (policy ACCEPT)
-target     prot opt source               destination
-target     prot opt source               destination
-Chain OUTPUT (policy ACCEPT)
-target     prot opt source               destination
-root@g1:~# iptables -L -v -n
-Chain INPUT (policy ACCEPT 989 packets, 80786 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain FORWARD (policy ACCEPT 9 packets, 540 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain OUTPUT (policy ACCEPT 683 packets, 77967 bytes)
-pkts bytes target     prot opt in     out     source               destination
-root@g1:~# clear
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.1.6/24 -d 188.113.88.193 -j SNAT --to-source 135.181.204.42
-root@g1:~# sudo sysctl net.ipv4.conf.all.forwarding=1
-net.ipv4.conf.all.forwarding = 1
-root@g1:~# ^C
-root@g1:~# curl ifconfig.co
-135.181.204.42
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.X.0/24 -d 104.21.25.86 -j SNAT --to-source 135.181.204.42
-iptables v1.6.0: host/network `10.8.X.0' not found
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.x.0/24 -d 104.21.25.86 -j SNAT --to-source 135.181.204.42
-iptables v1.6.0: host/network `10.8.x.0' not found
-Try `iptables -h' or 'iptables --help' for more information.
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.X.0/24 -d 104.21.25.86 -j SNAT --to-source 135.181.204.42^C
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 104.21.25.86 -j SNAT --to-source 135.181.204.42
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 104.21.25.86 -j SNAT --to-source 135.181.204.42
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d ^Cj SNAT --to-source 135.181.204.42
-root@g1:~# sudo iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 104.21.25.86 -j SNAT --to-source 172.67.133.228
-root@g1:~# sudo sysctl net.ipv4.conf.all.forwarding=1
-net.ipv4.conf.all.forwarding = 1
-root@g1:~# iptables -t nat -L -v -n
-Chain PREROUTING (policy ACCEPT 53 packets, 3346 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain INPUT (policy ACCEPT 24 packets, 1082 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain POSTROUTING (policy ACCEPT 15 packets, 900 bytes)
-pkts bytes target     prot opt in     out     source               destination
-0     0 SNAT       all  --  *      *       10.8.1.0/24          188.113.88.193       to:135.181.204.42
-0     0 SNAT       all  --  *      *       10.8.1.0/24          188.113.88.193       to:135.181.204.42
-0     0 SNAT       all  --  *      *       10.8.1.0/24          188.113.88.193       to:135.181.204.42
-0     0 SNAT       all  --  *      *       10.8.1.0/24          104.21.25.86         to:135.181.204.42
-0     0 SNAT       all  --  *      *       10.8.1.0/24          104.21.25.86         to:135.181.204.42
-0     0 SNAT       all  --  *      *       10.8.1.0/24          104.21.25.86         to:172.67.133.228
-root@g1:~# tcpdump -i tun0
-tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
-listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
-0 packets captured
-0 packets received by filter
-0 packets dropped by kernel
-root@g1:~# curl ifconfig.co
-135.181.204.42
-root@g1:~# tcpdump -i tun0
-tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
-listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
-16:10:22.007373 IP 10.8.1.6.40738 > 104.21.25.86.http: Flags [S], seq 3346615366, win 64240, options [mss 1357,sackOK,TS val 3666530698 ecr 0,nop,wscale 7], length 0
-16:10:22.029786 IP 104.21.25.86.http > 10.8.1.6.40738: Flags [S.], seq 4108407271, ack 3346615367, win 65535, options [mss 1400,nop,nop,sackOK,nop,wscale 10], length 0
-16:10:22.055322 IP 10.8.1.6.40738 > 104.21.25.86.http: Flags [.], ack 1, win 502, length 0
-16:10:22.055411 IP 10.8.1.6.40738 > 104.21.25.86.http: Flags [P.], seq 1:77, ack 1, win 502, length 76: HTTP: GET / HTTP/1.1
-16:10:22.077630 IP 104.21.25.86.http > 10.8.1.6.40738: Flags [.], ack 77, win 64, length 0
-16:10:22.079521 IP 104.21.25.86.http > 10.8.1.6.40738: Flags [P.], seq 1:408, ack 77, win 64, length 407: HTTP: HTTP/1.1 403 Forbidden
-16:10:22.079689 IP 104.21.25.86.http > 10.8.1.6.40738: Flags [F.], seq 408, ack 77, win 64, length 0
-16:10:22.106380 IP 10.8.1.6.40738 > 104.21.25.86.http: Flags [.], ack 408, win 501, length 0
-16:10:22.106433 IP 10.8.1.6.40738 > 104.21.25.86.http: Flags [F.], seq 77, ack 409, win 501, length 0
-16:10:22.128521 IP 104.21.25.86.http > 10.8.1.6.40738: Flags [.], ack 78, win 64, length 0
-10 packets captured
-10 packets received by filter
-0 packets dropped by kernel
-root@g1:~# iptables -L -v -n
-Chain INPUT (policy ACCEPT 3543 packets, 313K bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain FORWARD (policy ACCEPT 133 packets, 8295 bytes)
-pkts bytes target     prot opt in     out     source               destination
-Chain OUTPUT (policy ACCEPT 2615 packets, 331K bytes)
-pkts bytes target     prot opt in     out     source               destination
-root@g1:~# tcpdump -i tun0                                                                 
-tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
-listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
-0 packets captured
-0 packets received by filter
-0 packets dropped by kernel
-root@g1:~# tcpdump -i tun0                                                                 
-tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
-listening on tun0, link-type RAW (Raw IP), capture size 262144 bytes
-16:12:20.590988 IP 10.8.1.6.40922 > proxy-iad02.fedoraproject.org.http: Flags [S], seq 550740802, win 64240, options [mss 1357,sackOK,TS val 833627940 ecr 0,nop,wscale 7], length 0
-16:13:35.593300 IP 10.8.1.6.55160 > proxy-prv.opensuse.org.http: Flags [S], seq 2253253436, win 64240, options [mss 1357,sackOK,TS val 629862708 ecr 0,nop,wscale 7], length 0
-16:13:35.596584 IP 10.8.1.6.55162 > proxy-prv.opensuse.org.http: Flags [S], seq 1642643959, win 64240, options [mss 1357,sackOK,TS val 629862711 ecr 0,nop,wscale 7], length 0
-16:13:35.612586 IP 10.8.1.6.55164 > proxy-prv.opensuse.org.http: Flags [S], seq 3850848261, win 64240, options [mss 1357,sackOK,TS val 629862726 ecr 0,nop,wscale 7], length 0
-16:13:36.596214 IP 10.8.1.6.55160 > proxy-prv.opensuse.org.http: Flags [S], seq 2253253436, win 64240, options [mss 1357,sackOK,TS val 629863711 ecr 0,nop,wscale 7], length 0
-16:13:36.613266 IP 10.8.1.6.55166 > proxy-prv.opensuse.org.http: Flags [S], seq 1134136427, win 64240, options [mss 1357,sackOK,TS val 629863728 ecr 0,nop,wscale 7], length 0
-16:13:36.628157 IP 10.8.1.6.55164 > proxy-prv.opensuse.org.http: Flags [S], seq 3850848261, win 64240, options [mss 1357,sackOK,TS val 629863743 ecr 0,nop,wscale 7], length 0
-16:13:36.628448 IP 10.8.1.6.55162 > proxy-prv.opensuse.org.http: Flags [S], seq 1642643959, win 64240, options [mss 1357,sackOK,TS val 629863743 ecr 0,nop,wscale 7], length 0
-16:13:37.624183 IP 10.8.1.6.55166 > proxy-prv.opensuse.org.http: Flags [S], seq 1134136427, win 64240, options [mss 1357,sackOK,TS val 629864739 ecr 0,nop,wscale 7], length 0
-16:13:38.612318 IP 10.8.1.6.55160 > proxy-prv.opensuse.org.http: Flags [S], seq 2253253436, win 64240, options [mss 1357,sackOK,TS val 629865727 ecr 0,nop,wscale 7], length 0
-16:13:38.612622 IP 10.8.1.6.55168 > proxy-prv.opensuse.org.http: Flags [S], seq 3097925021, win 64240, options [mss 1357,sackOK,TS val 629865727 ecr 0,nop,wscale 7], length 0
-16:13:38.644265 IP 10.8.1.6.55162 > proxy-prv.opensuse.org.http: Flags [S], seq 1642643959, win 64240, options [mss 1357,sackOK,TS val 629865759 ecr 0,nop,wscale 7], length 0
-16:13:38.644745 IP 10.8.1.6.55164 > proxy-prv.opensuse.org.http: Flags [S], seq 3850848261, win 64240, options [mss 1357,sackOK,TS val 629865759 ecr 0,nop,wscale 7], length 0
-16:13:39.636216 IP 10.8.1.6.55168 > proxy-prv.opensuse.org.http: Flags [S], seq 3097925021, win 64240, options [mss 1357,sackOK,TS val 629866751 ecr 0,nop,wscale 7], length 0
-16:13:39.640184 IP 10.8.1.6.55166 > proxy-prv.opensuse.org.http: Flags [S], seq 1134136427, win 64240, options [mss 1357,sackOK,TS val 629866755 ecr 0,nop,wscale 7], length 0
-16:13:41.652183 IP 10.8.1.6.55168 > proxy-prv.opensuse.org.http: Flags [S], seq 3097925021, win 64240, options [mss 1357,sackOK,TS val 629868767 ecr 0,nop,wscale 7], length 0
-16:13:42.612914 IP 10.8.1.6.55170 > proxy-prv.opensuse.org.http: Flags [S], seq 1627554722, win 64240, options [mss 1357,sackOK,TS val 629869727 ecr 0,nop,wscale 7], length 0
-16:13:42.869047 IP 10.8.1.6.55164 > proxy-prv.opensuse.org.http: Flags [S], seq 3850848261, win 64240, options [mss 1357,sackOK,TS val 629869983 ecr 0,nop,wscale 7], length 0
-16:13:42.869122 IP 10.8.1.6.55162 > proxy-prv.opensuse.org.http: Flags [S], seq 1642643959, win 64240, options [mss 1357,sackOK,TS val 629869983 ecr 0,nop,wscale 7], length 0
-16:13:42.869159 IP 10.8.1.6.55160 > proxy-prv.opensuse.org.http: Flags [S], seq 2253253436, win 64240, options [mss 1357,sackOK,TS val 629869983 ecr 0,nop,wscale 7], length 0
-16:13:43.636745 IP 10.8.1.6.55170 > proxy-prv.opensuse.org.http: Flags [S], seq 1627554722, win 64240, options [mss 1357,sackOK,TS val 629870751 ecr 0,nop,wscale 7], length 0
-16:13:43.892322 IP 10.8.1.6.55166 > proxy-prv.opensuse.org.http: Flags [S], seq 1134136427, win 64240, options [mss 1357,sackOK,TS val 629871007 ecr 0,nop,wscale 7], length 0
-16:13:45.652752 IP 10.8.1.6.55170 > proxy-prv.opensuse.org.http: Flags [S], seq 1627554722, win 64240, options [mss 1357,sackOK,TS val 629872767 ecr 0,nop,wscale 7], length 0
-16:13:45.684535 IP 10.8.1.6.55168 > proxy-prv.opensuse.org.http: Flags [S], seq 3097925021, win 64240, options [mss 1357,sackOK,TS val 629872799 ecr 0,nop,wscale 7], length 0
-16:13:49.780909 IP 10.8.1.6.55170 > proxy-prv.opensuse.org.http: Flags [S], seq 1627554722, win 64240, options [mss 1357,sackOK,TS val 629876895 ecr 0,nop,wscale 7], length 0
-16:13:50.615786 IP 10.8.1.6.55172 > proxy-prv.opensuse.org.http: Flags [S], seq 1662788153, win 64240, options [mss 1357,sackOK,TS val 629877727 ecr 0,nop,wscale 7], length 0
-16:13:51.061132 IP 10.8.1.6.55160 > proxy-prv.opensuse.org.http: Flags [S], seq 2253253436, win 64240, options [mss 1357,sackOK,TS val 629878175 ecr 0,nop,wscale 7], length 0
-16:13:51.061262 IP 10.8.1.6.55162 > proxy-prv.opensuse.org.http: Flags [S], seq 1642643959, win 64240, options [mss 1357,sackOK,TS val 629878175 ecr 0,nop,wscale 7], length 0
-16:13:51.061327 IP 10.8.1.6.55164 > proxy-prv.opensuse.org.http: Flags [S], seq 3850848261, win 64240, options [mss 1357,sackOK,TS val 629878175 ecr 0,nop,wscale 7], length 0
-16:13:51.636722 IP 10.8.1.6.55172 > proxy-prv.opensuse.org.http: Flags [S], seq 1662788153, win 64240, options [mss 1357,sackOK,TS val 629878751 ecr 0,nop,wscale 7], length 0
-16:13:52.088817 IP 10.8.1.6.55166 > proxy-prv.opensuse.org.http: Flags [S], seq 1134136427, win 64240, options [mss 1357,sackOK,TS val 629879203 ecr 0,nop,wscale 7], length 0
-16:13:53.652867 IP 10.8.1.6.55172 > proxy-prv.opensuse.org.http: Flags [S], seq 1662788153, win 64240, options [mss 1357,sackOK,TS val 629880767 ecr 0,nop,wscale 7], length 0
-16:13:53.876807 IP 10.8.1.6.55168 > proxy-prv.opensuse.org.http: Flags [S], seq 3097925021, win 64240, options [mss 1357,sackOK,TS val 629880991 ecr 0,nop,wscale 7], length 0
-16:13:57.716982 IP 10.8.1.6.55172 > proxy-prv.opensuse.org.http: Flags [S], seq 1662788153, win 64240, options [mss 1357,sackOK,TS val 629884831 ecr 0,nop,wscale 7], length 0
-16:13:57.973084 IP 10.8.1.6.55170 > proxy-prv.opensuse.org.http: Flags [S], seq 1627554722, win 64240, options [mss 1357,sackOK,TS val 629885087 ecr 0,nop,wscale 7], length 0
-16:14:05.909469 IP 10.8.1.6.55172 > proxy-prv.opensuse.org.http: Flags [S], seq 1662788153, win 64240, options [mss 1357,sackOK,TS val 629893023 ecr 0,nop,wscale 7], length 0
-16:14:06.614088 IP 10.8.1.6.55174 > proxy-prv.opensuse.org.http: Flags [S], seq 386482470, win 64240, options [mss 1357,sackOK,TS val 629893727 ecr 0,nop,wscale 7], length 0
-16:14:07.641273 IP 10.8.1.6.55174 > proxy-prv.opensuse.org.http: Flags [S], seq 386482470, win 64240, options [mss 1357,sackOK,TS val 629894755 ecr 0,nop,wscale 7], length 0
-16:14:09.653550 IP 10.8.1.6.55174 > proxy-prv.opensuse.org.http: Flags [S], seq 386482470, win 64240, options [mss 1357,sackOK,TS val 629896767 ecr 0,nop,wscale 7], length 0
-16:14:13.845684 IP 10.8.1.6.55174 > proxy-prv.opensuse.org.http: Flags [S], seq 386482470, win 64240, options [mss 1357,sackOK,TS val 629900959 ecr 0,nop,wscale 7], length 0
-16:14:22.037880 IP 10.8.1.6.55174 > proxy-prv.opensuse.org.http: Flags [S], seq 386482470, win 64240, options [mss 1357,sackOK,TS val 629909151 ecr 0,nop,wscale 7], length 0
-16:14:38.615220 IP 10.8.1.6.55176 > proxy-prv.opensuse.org.http: Flags [S], seq 1613563201, win 64240, options [mss 1357,sackOK,TS val 629925727 ecr 0,nop,wscale 7], length 0
-16:14:39.638701 IP 10.8.1.6.55176 > proxy-prv.opensuse.org.http: Flags [S], seq 1613563201, win 64240, options [mss 1357,sackOK,TS val 629926751 ecr 0,nop,wscale 7], length 0
-16:14:41.654729 IP 10.8.1.6.55176 > proxy-prv.opensuse.org.http: Flags [S], seq 1613563201, win 64240, options [mss 1357,sackOK,TS val 629928767 ecr 0,nop,wscale 7], length 0
-16:14:45.846916 IP 10.8.1.6.55176 > proxy-prv.opensuse.org.http: Flags [S], seq 1613563201, win 64240, options [mss 1357,sackOK,TS val 629932959 ecr 0,nop,wscale 7], length 0
-16:15:36.627531 IP6 fe80::c1e8:8eb7:f675:6c4 > ip6-allrouters: ICMP6, router solicitation, length 8
-16:15:42.618228 IP 10.8.1.6.55178 > proxy-prv.opensuse.org.http: Flags [S], seq 544574840, win 64240, options [mss 1357,sackOK,TS val 629989728 ecr 0,nop,wscale 7], length 0
-16:15:43.641643 IP 10.8.1.6.55178 > proxy-prv.opensuse.org.http: Flags [S], seq 544574840, win 64240, options [mss 1357,sackOK,TS val 629990751 ecr 0,nop,wscale 7], length 0
-16:15:45.661427 IP 10.8.1.6.55178 > proxy-prv.opensuse.org.http: Flags [S], seq 544574840, win 64240, options [mss 1357,sackOK,TS val 629992771 ecr 0,nop,wscale 7], length 0
-16:15:49.849400 IP 10.8.1.6.55178 > proxy-prv.opensuse.org.http: Flags [S], seq 544574840, win 64240, options [mss 1357,sackOK,TS val 629996959 ecr 0,nop,wscale 7], length 0
-16:15:58.041678 IP 10.8.1.6.55178 > proxy-prv.opensuse.org.http: Flags [S], seq 544574840, win 64240, options [mss 1357,sackOK,TS val 630005151 ecr 0,nop,wscale 7], length 0
-tcpdump: pcap_loop: The interface went down
-52 packets captured
-52 packets received by filter
-0 packets dropped by kernel``
+# ip route get 54.91.59.199
+54.91.59.199 via 10.8.1.5 dev tun0 src 10.8.1.6 uid 1000
+    cache
 ```
 
 ```shell
-# ip route get 104.21.25.86
-104.21.25.86 via 10.8.1.5 dev tun0 src 10.8.1.6 uid 1000
+# ip route get 52.20.78.240
+52.20.78.240 via 10.8.1.5 dev tun0 src 10.8.1.6 uid 1000
+    cache
+```
+
+```shell
+# ip route get 3.232.242.170
+3.232.242.170 via 10.8.1.5 dev tun0 src 10.8.1.6 uid 1000
+    cache
+```
+
+```shell
+# ip route get 3.220.57.224
+3.220.57.224 via 10.8.1.5 dev tun0 src 10.8.1.6 uid 1000
     cache
 ```
 
 **Rufen Sie den Dienst „ifconfig.co“ vom Client aus auf. Was ist das Resultat? Warum?**
 
-TODO: Add what should have happened
+```shell
+curl api.ipify.org
+135.181.204.42
+```
+
+Das Resultat zeigt, dass der Traffic nun durch den Server getunnelt wird. Daher bekommen wir bei der Abfrage die IP-Adresse des Servers und nicht mehr unsere eigene IP-Adresse zurück.
 
 ## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann? 
 
