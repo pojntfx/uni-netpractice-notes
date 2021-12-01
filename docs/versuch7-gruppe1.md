@@ -391,64 +391,7 @@ Analog wurden auch die weiteren Zertifikate geprüft. Den Daten kann entnommen w
 
 Die Ordnerstruktur sieht wie folgt aus: 
 
-```shell
-# tree .
-.
-├── easyrsa
-├── openssl-easyrsa.cnf
-├── pki
-│   ├── ca.crt
-│   ├── certs_by_serial
-│   │   ├── 1269D2C7D013DEA54189F3EDB5CDDD59.pem
-│   │   ├── 7D315475D7F4B3719D9A3052131FF4B6.pem
-│   │   ├── 8E88712C77364F4C60E4A61AA654D8DE.pem
-│   │   └── 98F4E5DF004DCE2442E226AEFE6414BC.pem
-│   ├── dh.pem
-│   ├── index.txt
-│   ├── index.txt.attr
-│   ├── index.txt.attr.old
-│   ├── index.txt.old
-│   ├── issued
-│   │   ├── client-g1-2.crt
-│   │   ├── client-g1-3.crt
-│   │   ├── client-g1.crt
-│   │   └── server-g1.crt
-│   ├── openssl-easyrsa.cnf
-│   ├── private
-│   │   ├── ca.key
-│   │   ├── client-g1-2.key
-│   │   ├── client-g1-3.key
-│   │   ├── client-g1.key
-│   │   └── server-g1.key
-│   ├── renewed
-│   │   ├── certs_by_serial
-│   │   ├── private_by_serial
-│   │   └── reqs_by_serial
-│   ├── reqs
-│   │   ├── client-g1-2.req
-│   │   ├── client-g1-3.req
-│   │   ├── client-g1.req
-│   │   └── server-g1.req
-│   ├── revoked
-│   │   ├── certs_by_serial
-│   │   ├── private_by_serial
-│   │   └── reqs_by_serial
-│   ├── safessl-easyrsa.cnf
-│   ├── serial
-│   └── serial.old
-├── vars.example
-└── x509-types
-    ├── ca
-        ├── client
-            ├── code-signing
-                ├── COMMON
-                    ├── email
-                        ├── kdc
-                            ├── server
-                                └── serverClient
-
-                                14 directories, 38 files
-```
+![Ordnerstruktur](./static/file.png)
 
 Abschließend verschieben wir den `pki` Ordner ins Home-Verzeichnis:
 
@@ -871,6 +814,7 @@ Außerdem muss das IP-Forwarding eingeschaltet werden:
 ```shell
 # sysctl net.ipv4.conf.all.forwarding=1
 ```
+
 **Was bewirken diese Konfigurationsänderungen? Warum sind sie nötig?**
 
 TODO 
