@@ -423,7 +423,7 @@ TODO
 
 **Was bewirkt die Option „nopass“ bei der Keypair-Erzeugung und ist diese sinnvoll?**
 
-TODO
+Schlüsselpaare werden mit dem Argument "nopass" unverschlüsselt gelassen, da Server in der Regel ohne Passworteingabe gestartet werden. Dadurch wird ein unverschlüsselter Schlüssel erzeugt, dessen Zugriff und Dateiberechtigungen daher sorgfältig geschützen werden muss.
 
 **Erstellen Sie die CA + Keys + Zertifikate auf dem Server. Das sollte man eigentlich nicht machen, warum?**
 
@@ -446,7 +446,7 @@ keepalive 10 120
 comp-lzo
 persist-key
 persist-tun
-verb 3`
+verb 3
 ```
 
 Jetzt kann der OpenVPN-Server gestartet werden: 
@@ -540,7 +540,38 @@ Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu bea
 
 ### Erklären Sie die einzelnen Parameter/Optionen der „server.conf“ und der „client.conf“.
 
-TODO
+Client:
+
+```conf
+client                        # Definiert dass es sich um eine Konfigurationsdatei für einen Client handelt.
+dev tun                       # Als virtuelles Netzwerkgerät verwenden wir tun, welches nur TCP/IP-Verkehr weiterleitet und keinen Broadcast-Verkehr über den VPN-Tunnel bereitstellt.
+proto udp                     # Hier wird festgelegt, welches Protokoll auf Ebene 4 verwendet werden soll.
+remote 135.181.204.42 1194    # Gibt an mit welcher Adresse sich verbunden werden soll. Dies wäre auch mit einem Hostnamen möglich.
+nobind                        # Veranlasst OpenVPN dazu einen zufälligen clientseitigen Port zu verwenden.
+persist-key                   # Versucht Zustände über den Neustart der Verbindung zu erhalten.
+persist-tun                   # Versucht Zustände über den Neustart der Verbindung zu erhalten.
+ca ca.crt                     # Gibt den Pfad zur Zertifikatsdatei der Certification Authority an.
+cert issued/client-g1.crt     # Gibt den Pfad zur Zertifikatsdatei des Clients an.
+key private/client-g1.key     # Gibt den Pfad zur Key-Datei des Clients an.
+comp-lzo                      # Definiert dass keine Kompression verwendet werden soll.
+verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: Infos über Key-Generierung, Routen, Debugging des TUN/TAP-Treibers, Push/Pull/Ifconfig-Pool, Authentifizierung
+```
+Server:
+
+```conf 
+proto udp                     # Hier wird festgelegt, welches Protokoll auf Ebene 4 verwendet werden soll.
+dev tun                       # Als virtuelles Netzwerkgerät verwenden wir tun, welches nur TCP/IP-Verkehr weiterleitet und keinen Broadcast-Verkehr über den VPN-Tunnel bereitstellt.
+ca pki/ca.crt                 # Gibt den Pfad zur Zertifikatsdatei der Certification Authority an.
+cert pki/issued/server-g1.crt # Gibt den Pfad zur Zertifikatsdatei des Servers an.
+key pki/private/server-g1.key # Gibt den Pfad zur Key-Datei des Servers an.
+dh pki/dh.pem                 # Gibt den Pfad zur Diffie–Hellman-Key-Datei des Servers an.
+server 10.8.1.0 255.255.255.0 # Damit wird ein VPN-Subnetz unter Verwendung des Adressbereichs 10.8.1.XXX eingerichtet. 
+keepalive 10 120              # Hier wird alle 10 Sekunden ein Ping abgesetzt und wenn nach 120 Sekunden keine Antwort komt, gilt die Verbindung als down.
+comp-lzo                      # Definiert dass keine Kompression verwendet werden soll.
+persist-key                   # Versucht Zustände über den Neustart der Verbindung zu erhalten.
+persist-tun                   # Versucht Zustände über den Neustart der Verbindung zu erhalten.
+verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: Infos über Key-Generierung, Routen, Debugging des TUN/TAP-Treibers, Push/Pull/Ifconfig-Pool, Authentifizierung
+```
 
 ### Versuchen Sie ebenfalls mit einem Windows-Client eine Verbindung zu Ihrem Server aufzubauen. Die Client-Software können Sie von: https://openvpn.net/index.php/open-source/downloads.html herunterladen.
 
@@ -722,7 +753,11 @@ rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 
 **Stellen Sie den Unterschied der Datenpaketunverschlüsselt) mit Wireshark dar. Nutzen Sie dazu einen einfachen ping-Befehl. Beachten Sie, dass der Verkehr für Wireshark auf unterschiedlichen Interfaces stattfindet.**
 
-TODO: Danny
+![Ping mit aktiven VPN Tunnel erfasst im Interface enp3s0](./static/aufgabe7_ping_enp3s0.png)
+![Ping mit aktiven VPN Tunnel erfasst im Interface tun0](./static/aufgabe7_ping_tun0.png)
+
+Im Interface `enp3s0` werden die Daten durch ein `OpenVPN` Protokoll gehandelt, diese Daten sind, wie im Screenshot zu sehen, verschlüsselt.
+Im Interface `tun0` werden die Daten mit einem `IPv4` Protokoll gehandelt.
 
 ## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt): 
 
@@ -817,7 +852,7 @@ Außerdem muss das IP-Forwarding eingeschaltet werden:
 
 **Was bewirken diese Konfigurationsänderungen? Warum sind sie nötig?**
 
-TODO 
+Die Änderung der Konfiguration ist nötig, um den Umfang des VPNs zu erweitern, sodass die Clients mehrere Maschinen (in unserem Fall `api.ipify.org`) im Servernetz erreichen können und nicht nur die Servermaschine selbst.
 
 ### Funktionstest
 
@@ -860,4 +895,28 @@ Das Resultat zeigt, dass der Traffic nun durch den Server getunnelt wird. Daher 
 
 ## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann? 
 
-TODO: (Probably revoking it)
+**Widerruf**
+
+Wenn wir das Zertifikat widerrufen, führt dies dazu, dass das Zertifikat ungültig wird und nicht mehr für Authentifizierungszwecke genutzt werden kann. 
+
+Dies kann mit folgendem Kommando geschehen:
+
+```shell
+# ./revoke-full client-g1
+```
+
+Durch das vorangegangene Kommando wurde eine CRL-Datei erstellt (Certificate Revocation List), diese muss nun in ein Verzeichnis kopiert werden, auf das der OpenVPN-Server zugriff hat.
+
+Nun muss noch die CRL-Verfizierung aktiviert werden:
+
+```shell
+# crl-verify crl.pem
+```
+
+Hierdurch werden die Client-Zertifikate aller sich verbindenden Clients mit der CRL verglichen, und jede positive Übereinstimmung führt zum Abbruch der Verbindung.
+
+**Widerruf rückgängig machen**
+
+Die "saubere Variante" wäre ein neues Zertifikat zu erstellen, jedoch ist es auch möglich den Widerruf eines Zertifikats rückgängig zu machen. Hierzu muss man im CA-Ordner die `index.txt` bearbeiten, welche die Zertifikats-IDs beinhaltet. Diejenigen, die mit `"V"` beginnen, sind gültig, und diejenigen mit `"R"` sind widerrufen. Wir können diese Datei bearbeiten und das erste Zeichen in `"V"` ändern und die dritte Spalte (das Widerrufsdatum) löschen.
+
+Nun müssen wir die CRL-Datei noch einmal neu generieren und das Zertifikat sollte wieder gültig sein.
