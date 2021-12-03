@@ -431,7 +431,7 @@ Schlüsselpaare werden mit dem Argument "nopass" unverschlüsselt gelassen, da S
 
 ### Server konfigurieren
 
-Analog zu der in der Versuchsanleitung geschilderten Konfigurationsdatei, wird im folgenden eine angepasste `server.conf` dargestellt:
+Analog zu der in der Versuchsanleitung geschilderten Konfigurationsdatei wird im Folgenden eine angepasste `server.conf` dargestellt:
 
 ```shell 
 # cat server.conf
@@ -670,7 +670,7 @@ Tue Nov 30 14:58:21 2021 g1.mi.hdm-stuttgart.de/141.72.244.138:59463 Data Channe
 Tue Nov 30 14:58:21 2021 g1.mi.hdm-stuttgart.de/141.72.244.138:59463 Data Channel Decrypt: Cipher 'AES-256-GCM' initialized with 256 bit key
 ```
 
-Aus dem Output lässt sich entnehmen, dass die Verbindung etabliert wurde und damit auch der Tunnel initialisiert wurde. Im folgenden kann man auch sehen, dass nun die `tun` Netzwerkinterfaces angezeigt werden.
+Aus dem Output lässt sich entnehmen, dass die Verbindung etabliert wurde und damit auch der Tunnel initialisiert wurde. Im Folgenden kann man auch sehen, dass nun die `tun` Netzwerkinterfaces angezeigt werden.
 
 ### Funktionstest
 
@@ -707,7 +707,7 @@ Zuerst verwenden wir `ip a`:
         valid_lft forever preferred_lft foreverODO
 ```
 
-Als nächstes verwenden wir `ip link`
+Als Nächstes verwenden wir `ip link`
 
 ```shell
 # ip link
@@ -732,7 +732,7 @@ e0 proto dhcp metric 600
 100.64.84.64/28 dev wlp3s0 proto kernel scope link src 100.64.84.65 metric 600
 ```
 
-Als letztes noch ein Ping vom Client an das `tun0` interface des Servers:
+Als Letztes noch ein Ping vom Client an das `tun0` interface des Servers:
 
 ```shell
 NG 10.8.1.1 (10.8.1.1) 56(84) bytes of data.
@@ -768,7 +768,7 @@ Adresse im Browser). Für was kann dieser Dienst genutzt werden?**
 
 Der Dienst kann genutzt werden um die eigene öffentliche IP-Adresse herauszufinden.
 
-Da bei der Person, welche die Clientverbindung hatte IPv6 verwendet wurde, lieferte `ifconfig.co` folgendes Ergebnis:
+Da bei der Person, welche die Clientverbindung hatte, IPv6 verwendet wurde, lieferte `ifconfig.co` folgendes Ergebnis:
 
 ```shell
 # curl ifconfig.co
@@ -858,7 +858,7 @@ Die Änderung der Konfiguration ist nötig, um den Umfang des VPNs zu erweitern,
 
 **Starten Sie den Open-VPN Client neu. Überprüfen Sie die Routen.**
 
-Nach dem neustarten des Clients sehen die Routen wie folgt aus: 
+Nach dem Neustarten des Clients sehen die Routen wie folgt aus: 
 
 ```shell
 # ip route get 54.91.59.199
