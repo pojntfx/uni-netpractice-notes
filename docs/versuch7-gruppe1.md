@@ -33,9 +33,9 @@ SPDX-License-Identifier: AGPL-3.0
 
 \newpage
 
-## CA (=Zertifizierungsstelle) und Schlüssel erzeugen und signieren 
+## CA (=Zertifizierungsstelle) und Schlüssel erzeugen und signieren
 
-Verzeichnis erstellen und betreten: 
+Verzeichnis erstellen und betreten:
 
 ```shell
 # mkdir openvpn
@@ -48,9 +48,9 @@ Git installieren:
 apt install git
 ```
 
-Repository klonen: 
+Repository klonen:
 
-```shell 
+```shell
 # git clone https://github.com/OpenVPN/easy-rsa
 Cloning into 'easy-rsa'...
 remote: Enumerating objects: 2095, done.
@@ -67,16 +67,16 @@ Verschieben und Umbennenen einiger Ordner:
 # mv easy-rsa/easyrsa3 easyrsa && rm -r easy-rsa && cd easyrsa
 ```
 
-PKI-Infrastruktur erstellen: 
+PKI-Infrastruktur erstellen:
 
-```shell 
+```shell
 root@g1:~/openvpn/easyrsa# ./easyrsa init-pki
 
 init-pki complete; you may now create a CA or requests.
 Your newly created PKI dir is: /root/openvpn/easyrsa/pki
 ```
 
-Zertifizierungsstelle erstellen: 
+Zertifizierungsstelle erstellen:
 
 ```shell
 # ./easyrsa build-ca
@@ -95,7 +95,7 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
-Common Name (eg: your user, host, or server name) [Easy-RSA CA]:g1.mi.hdm-stuttgart.de         
+Common Name (eg: your user, host, or server name) [Easy-RSA CA]:g1.mi.hdm-stuttgart.de
 CA creation complete and you may now import and sign cert requests.
 Your new CA certificate file for publishing is at:
 /root/openvpn/easyrsa/pki/ca.crt
@@ -159,9 +159,9 @@ key: /root/openvpn/easyrsa/pki/private/client-g1.key
 
 Analog zur vorherigen Erstellung des Keypairs für den Client haben wir zwei weitere Keypair `client-g1-2` und `client-g1-3` erstellt.
 
-Einzelne Zertifikate signieren: 
+Einzelne Zertifikate signieren:
 
-Server-Zertifikat: 
+Server-Zertifikat:
 
 ```shell
 # ./easyrsa sign server server-g1
@@ -196,7 +196,7 @@ Certificate created at: /root/openvpn/easyrsa/pki/issued/server-g1.crt
 
 ```
 
-Client-Zertifikat: 
+Client-Zertifikat:
 
 ```shell
 # ./easyrsa sign client client-g1
@@ -230,7 +230,7 @@ Certificate created at: /root/openvpn/easyrsa/pki/issued/client-g1.crt
 
 Analog wurden auch die zwei zusätzlich generierten Zertifikate signiert.
 
-Generieren der Diffie-Hellman-Parameter: 
+Generieren der Diffie-Hellman-Parameter:
 
 ```shell
 # ./easyrsa gen-dh
@@ -243,9 +243,9 @@ This is going to take a long time
 DH parameters of size 2048 created at /root/openvpn/easyrsa/pki/dh.pem
 ```
 
-Gültigkeit der signierten Zertifikate prüfen: 
+Gültigkeit der signierten Zertifikate prüfen:
 
-Server-Zertifikat: 
+Server-Zertifikat:
 
 ```shell
 # openssl x509 -in pki/issued/server-g1.crt -text -noout
@@ -387,9 +387,9 @@ e5:70:53:20:16:33:4b:6b:67:28:c7:0c:f5:bd:f6:38:30:47:
 94:b5:27:ef
 ```
 
-Analog wurden auch die weiteren Zertifikate geprüft. Den Daten kann entnommen werden, dass die Zertifikate bis `Mar  4 13:45:38 2024 GMT` gültig sind. Die Zertifikate wurden von `g1.mi.hdm-stuttgart.de` signiert.
+Analog wurden auch die weiteren Zertifikate geprüft. Den Daten kann entnommen werden, dass die Zertifikate bis `Mar 4 13:45:38 2024 GMT` gültig sind. Die Zertifikate wurden von `g1.mi.hdm-stuttgart.de` signiert.
 
-Die Ordnerstruktur sieht wie folgt aus: 
+Die Ordnerstruktur sieht wie folgt aus:
 
 ![Ordnerstruktur](./static/file.png)
 
@@ -405,18 +405,18 @@ Aus der bisherigen Struktur generieren wir ein `client package`. Dafür muss man
 tar cf g1.tar ca.crt private/client-g1.key issued/client-g1.crt
 ```
 
-### Fragen zur Aufgabe 
+### Fragen zur Aufgabe
 
 **Beschreiben Sie kurz den Sinn der Dateien in diesen Ordnern**
 
 TODO
 
-**Wie ist der Ablauf bei der Erstellung eines eigenen Zertifikates (gemeint sind die Schritte bei der 
+**Wie ist der Ablauf bei der Erstellung eines eigenen Zertifikates (gemeint sind die Schritte bei der
 Erstellung)?**
 
 TODO
 
-**Schildern Sie den Ablauf der Authentisierung, des Schlüsselaustausches und der Verschlüsselung 
+**Schildern Sie den Ablauf der Authentisierung, des Schlüsselaustausches und der Verschlüsselung
 bei der Verwendung von Zertifikats-basierter Authentisierung in OpenVPN!**
 
 TODO
@@ -433,7 +433,7 @@ Schlüsselpaare werden mit dem Argument "nopass" unverschlüsselt gelassen, da S
 
 Analog zu der in der Versuchsanleitung geschilderten Konfigurationsdatei wird im Folgenden eine angepasste `server.conf` dargestellt:
 
-```shell 
+```shell
 # cat server.conf
 proto udp
 dev tun
@@ -449,7 +449,7 @@ persist-tun
 verb 3
 ```
 
-Jetzt kann der OpenVPN-Server gestartet werden: 
+Jetzt kann der OpenVPN-Server gestartet werden:
 
 ```shell
 # sudo openvpn --config server.conf
@@ -472,7 +472,7 @@ Tue Nov 30 14:20:50 2021 IFCONFIG POOL: base=10.8.1.4 size=62, ipv6=0
 Tue Nov 30 14:20:50 2021 Initialization Sequence Completed
 ```
 
-Mit `scp` senden wir das `client package` mit dem Namen `g1.tar` zu unserem Client: 
+Mit `scp` senden wir das `client package` mit dem Namen `g1.tar` zu unserem Client:
 
 ```shell
 cp root@135.181.204.42:~/pki/g1.tar ~/
@@ -498,7 +498,7 @@ comp-lzo
 verb 3
 ```
 
-Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits laufen muss: 
+Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits laufen muss:
 
 ```shell
 # sudo openvpn --config client.conf
@@ -556,16 +556,17 @@ key private/client-g1.key     # Gibt den Pfad zur Key-Datei des Clients an.
 comp-lzo                      # Definiert dass keine Kompression verwendet werden soll.
 verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: Infos über Key-Generierung, Routen, Debugging des TUN/TAP-Treibers, Push/Pull/Ifconfig-Pool, Authentifizierung
 ```
+
 Server:
 
-```conf 
+```conf
 proto udp                     # Hier wird festgelegt, welches Protokoll auf Ebene 4 verwendet werden soll.
 dev tun                       # Als virtuelles Netzwerkgerät verwenden wir tun, welches nur TCP/IP-Verkehr weiterleitet und keinen Broadcast-Verkehr über den VPN-Tunnel bereitstellt.
 ca pki/ca.crt                 # Gibt den Pfad zur Zertifikatsdatei der Certification Authority an.
 cert pki/issued/server-g1.crt # Gibt den Pfad zur Zertifikatsdatei des Servers an.
 key pki/private/server-g1.key # Gibt den Pfad zur Key-Datei des Servers an.
-dh pki/dh.pem                 # Gibt den Pfad zur Diffie–Hellman-Key-Datei des Servers an.
-server 10.8.1.0 255.255.255.0 # Damit wird ein VPN-Subnetz unter Verwendung des Adressbereichs 10.8.1.XXX eingerichtet. 
+dh pki/dh.pem                 # Gibt den Pfad zur Diffie-Hellman-Key-Datei des Servers an.
+server 10.8.1.0 255.255.255.0 # Damit wird ein VPN-Subnetz unter Verwendung des Adressbereichs 10.8.1.XXX eingerichtet.
 keepalive 10 120              # Hier wird alle 10 Sekunden ein Ping abgesetzt und wenn nach 120 Sekunden keine Antwort komt, gilt die Verbindung als down.
 comp-lzo                      # Definiert dass keine Kompression verwendet werden soll.
 persist-key                   # Versucht Zustände über den Neustart der Verbindung zu erhalten.
@@ -577,13 +578,13 @@ verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: I
 
 TODO: Elia
 
-## Analyse 
+## Analyse
 
-### Analyse der Logs 
+### Analyse der Logs
 
 **Inspizieren Sie die Log-Statements des Servers und des Clients. Ist ein Tunnel etabliert?**
- 
-Client-Log: 
+
+Client-Log:
 
 ```shell
 # sudo openvpn --config client.conf
@@ -623,7 +624,7 @@ Client-Log:
 2021-11-30 15:58:21 Initialization Sequence Completed
 ```
 
-Server-Log: 
+Server-Log:
 
 ```shell
 # sudo openvpn --config server.conf
@@ -759,11 +760,11 @@ rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 Im Interface `enp3s0` werden die Daten durch ein `OpenVPN` Protokoll gehandelt, diese Daten sind, wie im Screenshot zu sehen, verschlüsselt.
 Im Interface `tun0` werden die Daten mit einem `IPv4` Protokoll gehandelt.
 
-## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt): 
+## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt):
 
 ![VPN Tunnel](./static/vpntunnel.png)
 
-**Um die Funktion zu testen, nutzen Sie den Dienst „ifconfig.co“ (Versuchen Sie einmal die 
+**Um die Funktion zu testen, nutzen Sie den Dienst „ifconfig.co“ (Versuchen Sie einmal die
 Adresse im Browser). Für was kann dieser Dienst genutzt werden?**
 
 Der Dienst kann genutzt werden um die eigene öffentliche IP-Adresse herauszufinden.
@@ -775,7 +776,7 @@ Da bei der Person, welche die Clientverbindung hatte, IPv6 verwendet wurde, lief
 2001:7c7:2126:4b00:b016:5c9f:1161:eb14
 ```
 
-Stattdessen kann `api.ipify.org` verwendet werden: 
+Stattdessen kann `api.ipify.org` verwendet werden:
 
 ```shell
 # curl api.ipify.org
@@ -784,7 +785,7 @@ Stattdessen kann `api.ipify.org` verwendet werden:
 
 ### Änderung der Konfiguration
 
-Die Datei `server.conf` muss um die IP des servers von `api.ipify.org` erweitert werden. Mit Dig können die IPs der Server verwendet werden. Wir erhalten hier mehrere IPs, da anscheinend Loadbalancing verwendet wird: 
+Die Datei `server.conf` muss um die IP des servers von `api.ipify.org` erweitert werden. Mit Dig können die IPs der Server verwendet werden. Wir erhalten hier mehrere IPs, da anscheinend Loadbalancing verwendet wird:
 
 ```shell
 # dig api.ipify.org
@@ -813,7 +814,7 @@ api.ipify.org.herokudns.com. 5  IN      A       3.220.57.224
 ;; MSG SIZE  rcvd: 147
 ```
 
-Wir müssen also diese vier IPs in unsere Konfigurationsdatei einarbeiten: 
+Wir müssen also diese vier IPs in unsere Konfigurationsdatei einarbeiten:
 
 ```shell
 # cat server.conf
@@ -835,16 +836,16 @@ push "route 3.232.242.170 255.255.255.255"
 push "route 3.220.57.224 255.255.255.255"
 ```
 
-Zusätzlich müssen wir auf neue Firewall-Regeln auf dem Server einfügen: 
+Zusätzlich müssen wir auf neue Firewall-Regeln auf dem Server einfügen:
 
-```shell 
+```shell
 # iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 54.91.59.199 -j SNAT --to-source 135.181.204.42
 # iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 52.20.78.240 -j SNAT --to-source 135.181.204.42
 # iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 3.232.242.170 -j SNAT --to-source 135.181.204.42
 # iptables -t nat -A POSTROUTING -s  10.8.1.0/24 -d 3.220.57.224 -j SNAT --to-source 135.181.204.42
 ```
 
-Außerdem muss das IP-Forwarding eingeschaltet werden: 
+Außerdem muss das IP-Forwarding eingeschaltet werden:
 
 ```shell
 # sysctl net.ipv4.conf.all.forwarding=1
@@ -858,7 +859,7 @@ Die Änderung der Konfiguration ist nötig, um den Umfang des VPNs zu erweitern,
 
 **Starten Sie den Open-VPN Client neu. Überprüfen Sie die Routen.**
 
-Nach dem Neustarten des Clients sehen die Routen wie folgt aus: 
+Nach dem Neustarten des Clients sehen die Routen wie folgt aus:
 
 ```shell
 # ip route get 54.91.59.199
@@ -893,11 +894,11 @@ curl api.ipify.org
 
 Das Resultat zeigt, dass der Traffic nun durch den Server getunnelt wird. Daher bekommen wir bei der Abfrage die IP-Adresse des Servers und nicht mehr unsere eigene IP-Adresse zurück.
 
-## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann? 
+## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann?
 
 **Widerruf**
 
-Wenn wir das Zertifikat widerrufen, führt dies dazu, dass das Zertifikat ungültig wird und nicht mehr für Authentifizierungszwecke genutzt werden kann. 
+Wenn wir das Zertifikat widerrufen, führt dies dazu, dass das Zertifikat ungültig wird und nicht mehr für Authentifizierungszwecke genutzt werden kann.
 
 Dies kann mit folgendem Kommando geschehen:
 
@@ -917,6 +918,6 @@ Hierdurch werden die Client-Zertifikate aller sich verbindenden Clients mit der 
 
 **Widerruf rückgängig machen**
 
-Die "saubere Variante" wäre ein neues Zertifikat zu erstellen, jedoch ist es auch möglich den Widerruf eines Zertifikats rückgängig zu machen. Hierzu muss man im CA-Ordner die `index.txt` bearbeiten, welche die Zertifikats-IDs beinhaltet. Diejenigen, die mit `"V"` beginnen, sind gültig, und diejenigen mit `"R"` sind widerrufen. Wir können diese Datei bearbeiten und das erste Zeichen in `"V"` ändern und die dritte Spalte (das Widerrufsdatum) löschen.
+Die "saubere Variante" wäre ein neues Zertifikat zu erstellen, jedoch ist es auch möglich den Widerruf eines Zertifikats rückgängig zu machen. Hierzu muss man im CA-Ordner die `index.txt` bearbeiten, welche die Zertifikats-IDs beinhaltet. Diejenigen, die mit `V` beginnen, sind gültig, und diejenigen mit `R` sind widerrufen. Wir können diese Datei bearbeiten und das erste Zeichen in `V` ändern und die dritte Spalte (das Widerrufsdatum) löschen.
 
 Nun müssen wir die CRL-Datei noch einmal neu generieren und das Zertifikat sollte wieder gültig sein.
