@@ -410,16 +410,24 @@ tar cf g1.tar ca.crt private/client-g1.key issued/client-g1.crt
 **Beschreiben Sie kurz den Sinn der Dateien in diesen Ordnern**
 
 TODO
+ca.crt Datei ist öffentlich. User, Server und Client können damit beweisen, dass sie sich im selben vertrauten Netz befinden. Jeder daran beteiligte User und Server muss eine Kopie dieser Datei besitzen.
+
+ca.key ist der private Schlüssel, mit dem die CA Zertifikate für Server und Clients signiert werden. Die ca.key Datei sollte nur auf der CA Maschine liegen, denn der Schlüssel darf nicht in die Hände eines Angreifers gelangen.
+
+Die Private Keys liegen im Ordner "private" und im Ordner "issued" sind die signierten Zertifikate (Public Keys) für eine gegenseitige Bestätigung zwischen Server und Client.
+
 
 **Wie ist der Ablauf bei der Erstellung eines eigenen Zertifikates (gemeint sind die Schritte bei der
 Erstellung)?**
 
 TODO
+Wir benötigen ein separates Zertifikat (Public Key) und Private Key für den Server und jeden Client. Außerdem braucht es noch das Zertifikat und Key der CA, um alle Server und Client Zertifikate zu signieren. Bevor sich beide Parteien vertrauen muss der Client die Server Zertifikate authentifizieren und der Server muss die Client Zertifikate authentifizieren. Dieses gegenseitige Authentifizieren erfolgt durch das Sicherstellen, dass ein Zertifikat, welches man bekommt bereits von der CA signiert wurde. Danach kann der Inhalt in dem neu authentifizierten Zertifikat Header, wie z.B. der certificate common name getestet werden.
 
 **Schildern Sie den Ablauf der Authentisierung, des Schlüsselaustausches und der Verschlüsselung
 bei der Verwendung von Zertifikats-basierter Authentisierung in OpenVPN!**
 
 TODO
+Als erstes tauschen Client und Server die Schlüsselpaare aus und verifizieren die Zertifikate. Der Client initiiert mit einer Anfrage an den Server die Verbindung. Der Server verifiziert sich mittels seiner eigenen "certificat chain". Mithilfe der eigenen Kopie des CA Files kann der Client die "certificat chain" überprüfen. Sofern dies klappt, erfolgt der Vorgang erneut umgekehrt, indem der Server die Client "certificat chain" checkt. CCD Dateien werden überprüft. Sie ermöglichen das Vergeben von spezifischen IP-Adressen an einen Client, um z.B. einen DNS Server einem bestimmten Client zuzuordnen oder einen Client zeitweise zu deaktivieren. Falls keine Fehler entstehen, kann die Verbindung aufgebaut werden.
 
 **Was bewirkt die Option „nopass“ bei der Keypair-Erzeugung und ist diese sinnvoll?**
 
@@ -576,7 +584,13 @@ verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: I
 
 ### Versuchen Sie ebenfalls mit einem Windows-Client eine Verbindung zu Ihrem Server aufzubauen. Die Client-Software können Sie von: https://openvpn.net/index.php/open-source/downloads.html herunterladen.
 
-TODO: Elia
+TODO: 
+
+![VPN Verbunden Gui](./static/windowsVpnGui.png)
+![VPN Verbunden Commandline](./static/windowsVpnCmd.png)
+
+Windows verlangt, dass wir die "client.conf" in "client.ovpn" umbenennen. Die "client.ovpn" muss dann neben der "ca.crt", "client-g1.crt", "client-g1.key" abgelegt werden. Anschließend kann über die Gui eine Verbindung etabliert werden. 
+
 
 ## Analyse
 
