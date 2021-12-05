@@ -1,3 +1,81 @@
+commit 0a01a8570dcb0a8c6a8449b4789d57a697f4533b
+Merge: 852fc70 98ac6d3
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Fri Dec 3 16:49:16 2021 +0100
+
+    Merge pull request #12 from dentremor/main
+    
+    Feat: Complete todos
+
+commit 98ac6d3c3e77e2d4835bfdfb2d76198e06331b56
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 3 16:48:32 2021 +0100
+
+    Fix: Remove cursed chars
+
+commit ee110238d8f94a3710b4f0a23328e3e80dcbf308
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 3 16:03:50 2021 +0100
+
+    Fix: Grammar correction
+
+commit 01e97050e7175d9c29f16082fa6ea2d2397e9610
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:39:39 2021 +0100
+
+    Update versuch7-gruppe1.md
+
+commit ca9023978a7a69a06da9e2a07e9164f8ef235079
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:39:01 2021 +0100
+
+    Add files via upload
+
+commit 4d1439ddf4f707816a48d64b4c73f234c67ad6cf
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:38:41 2021 +0100
+
+    Add files via upload
+
+commit 852fc701a7b25f9e99467addf42e3ac30920eafe
+Merge: 036657b e6411d1
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Wed Dec 1 18:21:07 2021 +0100
+
+    Merge pull request #11 from JakWai01/main
+    
+    feat: Add documentation fundamentals
+
+commit e6411d1c571ada0f22e0c85f22c38ab94bf69d13
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Dec 1 15:20:04 2021 +0100
+
+    build: Remove invalid UTF-8 byte sequence
+
+commit c9ee7d97ecd9673b84a323af9548767575675fbb
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Dec 1 12:17:27 2021 +0100
+
+    feat: Add documentation
+
+commit 1d45310581ba0c21cd18f52fb7bf49aaea56b73a
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 20:25:47 2021 +0100
+
+    feat: Add some notes
+
+commit 96246baf8922ed994fd63768064cc8ddb40840f0
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 19:06:51 2021 +0100
+
+    fix: Remove leading spaces
+
+commit e7ac05cf5504ac266a05fa897949f9390ccc2c0b
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 18:09:45 2021 +0100
+
+    feat: Add terminal output
+
 commit 036657bd7ffc6f9ec425a2517329b1ee7d7e9349
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Nov 29 21:40:08 2021 +0100
