@@ -61,7 +61,7 @@ Receiving objects: 100% (2095/2095), 11.72 MiB | 7.01 MiB/s, done.
 Resolving deltas: 100% (914/914), done.
 ```
 
-Verschieben und Umbennenen einiger Ordner:
+Verschieben und umbennenen einiger Ordner:
 
 ```shell
 # mv easy-rsa/easyrsa3 easyrsa && rm -r easy-rsa && cd easyrsa
@@ -133,6 +133,8 @@ req: /root/openvpn/easyrsa/pki/reqs/server-g1.req
 key: /root/openvpn/easyrsa/pki/private/server-g1.key
 ```
 
+\newpage
+
 Keypair für Client generieren:
 
 ```shell
@@ -157,7 +159,7 @@ req: /root/openvpn/easyrsa/pki/reqs/client-g1.req
 key: /root/openvpn/easyrsa/pki/private/client-g1.key
 ```
 
-Analog zur vorherigen Erstellung des Keypairs für den Client haben wir zwei weitere Keypair `client-g1-2` und `client-g1-3` erstellt.
+Analog zur vorherigen Erstellung des Keypairs für den Client haben wir zwei weitere Keypairs `client-g1-2` und `client-g1-3` erstellt.
 
 Einzelne Zertifikate signieren:
 
@@ -387,6 +389,8 @@ e5:70:53:20:16:33:4b:6b:67:28:c7:0c:f5:bd:f6:38:30:47:
 94:b5:27:ef
 ```
 
+\newpage
+
 Analog wurden auch die weiteren Zertifikate geprüft. Den Daten kann entnommen werden, dass die Zertifikate bis `Mar 4 13:45:38 2024 GMT` gültig sind. Die Zertifikate wurden von `g1.mi.hdm-stuttgart.de` signiert.
 
 Die Ordnerstruktur sieht wie folgt aus:
@@ -409,25 +413,31 @@ tar cf g1.tar ca.crt private/client-g1.key issued/client-g1.crt
 
 **Beschreiben Sie kurz den Sinn der Dateien in diesen Ordnern**
 
-TODO
-ca.crt Datei ist öffentlich. User, Server und Client können damit beweisen, dass sie sich im selben vertrauten Netz befinden. Jeder daran beteiligte User und Server muss eine Kopie dieser Datei besitzen.
+Die `ca.crt` Datei ist öffentlich. User, Server und Client können damit beweisen, dass sie sich im selben vertrauten Netz befinden. Jeder daran beteiligte User und Server muss eine Kopie dieser Datei besitzen.
 
-ca.key ist der private Schlüssel, mit dem die CA Zertifikate für Server und Clients signiert werden. Die ca.key Datei sollte nur auf der CA Maschine liegen, denn der Schlüssel darf nicht in die Hände eines Angreifers gelangen.
+`ca.key` ist der private Schlüssel, mit dem die CA Zertifikate für Server und Clients signiert werden. Die ca.key Datei sollte nur auf der CA Maschine liegen, denn der Schlüssel darf nicht in die Hände eines Angreifers gelangen.
 
-Die Private Keys liegen im Ordner "private" und im Ordner "issued" sind die signierten Zertifikate (Public Keys) für eine gegenseitige Bestätigung zwischen Server und Client.
+Die Private Keys liegen im Ordner `private` und im Ordner `issued` sind die signierten Zertifikate (Public Keys) für eine gegenseitige Bestätigung zwischen Server und Client.
 
+Der Ordner `certs_by_serial` enthält alle von der CA signierten Zertifikate mit ihrer Seriennummer.
+
+`dh.pem` enthält die Parameter für den Diffie-Hellman-Key-Exchange.
+
+`index.txt` ist die "Master-Datenbank" aller Zertifikate.
+
+In `reqs` sind die Certificate Signing Requests (CSR) enthalten.
+
+`renewed` und `revoked` enthalten Informationen über erneuerte und ungültig gemachte Zertifikate.
 
 **Wie ist der Ablauf bei der Erstellung eines eigenen Zertifikates (gemeint sind die Schritte bei der
 Erstellung)?**
 
-TODO
-Wir benötigen ein separates Zertifikat (Public Key) und Private Key für den Server und jeden Client. Außerdem braucht es noch das Zertifikat und Key der CA, um alle Server und Client Zertifikate zu signieren. Bevor sich beide Parteien vertrauen muss der Client die Server Zertifikate authentifizieren und der Server muss die Client Zertifikate authentifizieren. Dieses gegenseitige Authentifizieren erfolgt durch das Sicherstellen, dass ein Zertifikat, welches man bekommt bereits von der CA signiert wurde. Danach kann der Inhalt in dem neu authentifizierten Zertifikat Header, wie z.B. der certificate common name getestet werden.
+Wir benötigen einen separaten Public Key und Private Key für den Server und jeden Client. Außerdem braucht es noch das Zertifikat und Key der CA, um alle Server und Client Zertifikate zu signieren. Bevor sich beide Parteien vertrauen muss der Client die Server Zertifikate authentifizieren und der Server muss die Client Zertifikate authentifizieren. Dieses gegenseitige Authentifizieren erfolgt durch das Sicherstellen, dass ein Zertifikat, welches man bekommt bereits von der CA signiert wurde. Danach kann der Inhalt in dem neu authentifizierten Zertifikat Header, wie z.B. der certificate common name getestet werden.
 
 **Schildern Sie den Ablauf der Authentisierung, des Schlüsselaustausches und der Verschlüsselung
 bei der Verwendung von Zertifikats-basierter Authentisierung in OpenVPN!**
 
-TODO
-Als erstes tauschen Client und Server die Schlüsselpaare aus und verifizieren die Zertifikate. Der Client initiiert mit einer Anfrage an den Server die Verbindung. Der Server verifiziert sich mittels seiner eigenen "certificat chain". Mithilfe der eigenen Kopie des CA Files kann der Client die "certificat chain" überprüfen. Sofern dies klappt, erfolgt der Vorgang erneut umgekehrt, indem der Server die Client "certificat chain" checkt. CCD Dateien werden überprüft. Sie ermöglichen das Vergeben von spezifischen IP-Adressen an einen Client, um z.B. einen DNS Server einem bestimmten Client zuzuordnen oder einen Client zeitweise zu deaktivieren. Falls keine Fehler entstehen, kann die Verbindung aufgebaut werden.
+Als erstes tauschen Client und Server die Schlüsselpaare aus und verifizieren die Zertifikate. Der Client initiiert mit einer Anfrage an den Server die Verbindung. Der Server verifiziert sich mittels seiner eigenen "certificat chain". Mithilfe der eigenen Kopie des CA Files kann der Client die "certificate chain" überprüfen. Sofern dies klappt, erfolgt der Vorgang erneut umgekehrt, indem der Server die Client "certificate chain" checkt. CCD Dateien werden überprüft. Sie ermöglichen das Vergeben von spezifischen IP-Adressen an einen Client, um z.B. einen DNS Server einem bestimmten Client zuzuordnen oder einen Client zeitweise zu deaktivieren. Falls keine Fehler entstehen, kann die Verbindung aufgebaut werden.
 
 **Was bewirkt die Option „nopass“ bei der Keypair-Erzeugung und ist diese sinnvoll?**
 
@@ -506,6 +516,8 @@ comp-lzo
 verb 3
 ```
 
+\newpage
+
 Jetzt können wir den client mit unserer Konfiguration starten. Dabei ist zu beachten, dass der OpenVPN-Server auch bereits laufen muss:
 
 ```shell
@@ -565,6 +577,8 @@ comp-lzo                      # Definiert dass keine Kompression verwendet werde
 verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: Infos über Key-Generierung, Routen, Debugging des TUN/TAP-Treibers, Push/Pull/Ifconfig-Pool, Authentifizierung
 ```
 
+\newpage
+
 Server:
 
 ```conf
@@ -584,13 +598,10 @@ verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: I
 
 ### Versuchen Sie ebenfalls mit einem Windows-Client eine Verbindung zu Ihrem Server aufzubauen. Die Client-Software können Sie von: https://openvpn.net/index.php/open-source/downloads.html herunterladen.
 
-TODO: 
-
 ![VPN Verbunden Gui](./static/windowsVpnGui.png)
 ![VPN Verbunden Commandline](./static/windowsVpnCmd.png)
 
-Windows verlangt, dass wir die "client.conf" in "client.ovpn" umbenennen. Die "client.ovpn" muss dann neben der "ca.crt", "client-g1.crt", "client-g1.key" abgelegt werden. Anschließend kann über die Gui eine Verbindung etabliert werden. 
-
+Windows verlangt, dass wir die "client.conf" in "client.ovpn" umbenennen. Die "client.ovpn" muss dann neben der "ca.crt", "client-g1.crt", "client-g1.key" abgelegt werden. Anschließend kann über das GUI eine Verbindung etabliert werden.
 
 ## Analyse
 
@@ -747,7 +758,7 @@ e0 proto dhcp metric 600
 100.64.84.64/28 dev wlp3s0 proto kernel scope link src 100.64.84.65 metric 600
 ```
 
-Als Letztes noch ein Ping vom Client an das `tun0` interface des Servers:
+Als Letztes noch ein Ping vom Client an das `tun0` Interface des Servers:
 
 ```shell
 NG 10.8.1.1 (10.8.1.1) 56(84) bytes of data.
@@ -764,9 +775,11 @@ NG 10.8.1.1 (10.8.1.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 ```
 
+\newpage
+
 ## Betrachtung via Wireshark
 
-**Stellen Sie den Unterschied der Datenpaketunverschlüsselt) mit Wireshark dar. Nutzen Sie dazu einen einfachen ping-Befehl. Beachten Sie, dass der Verkehr für Wireshark auf unterschiedlichen Interfaces stattfindet.**
+**Stellen Sie den Unterschied der Datenpakete (verschlüsselt, unverschlüsselt) mit Wireshark dar. Nutzen Sie dazu einen einfachen ping-Befehl. Beachten Sie, dass der Verkehr für Wireshark auf unterschiedlichen Interfaces stattfindet.**
 
 ![Ping mit aktiven VPN Tunnel erfasst im Interface enp3s0](./static/aufgabe7_ping_enp3s0.png)
 ![Ping mit aktiven VPN Tunnel erfasst im Interface tun0](./static/aufgabe7_ping_tun0.png)
@@ -774,7 +787,11 @@ rtt min/avg/max/mdev = 25.042/25.397/25.771/0.222 ms
 Im Interface `enp3s0` werden die Daten durch ein `OpenVPN` Protokoll gehandelt, diese Daten sind, wie im Screenshot zu sehen, verschlüsselt.
 Im Interface `tun0` werden die Daten mit einem `IPv4` Protokoll gehandelt.
 
-## Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt):
+\newpage
+
+## Erweiterte Konfiguration
+
+** Bis hierher haben wir nur Datenverbindung vom Client bis zum Server realisiert (In der Grafik grün dargestellt). Der Sinn einer VPN-Verbindung ist häufig die Network-to-Network-Anbindung. Eine ähnliche Verbindung ist eine Client-Verbindung über den VPN-Server nach draußen ins Internet. Folgende Grafik veranschaulicht die gewünschte Verbindung (rot dargestellt):**
 
 ![VPN Tunnel](./static/vpntunnel.png)
 
@@ -899,6 +916,8 @@ Nach dem Neustarten des Clients sehen die Routen wie folgt aus:
     cache
 ```
 
+\newpage
+
 **Rufen Sie den Dienst „ifconfig.co“ vom Client aus auf. Was ist das Resultat? Warum?**
 
 ```shell
@@ -908,7 +927,9 @@ curl api.ipify.org
 
 Das Resultat zeigt, dass der Traffic nun durch den Server getunnelt wird. Daher bekommen wir bei der Abfrage die IP-Adresse des Servers und nicht mehr unsere eigene IP-Adresse zurück.
 
-## Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann?
+## Zugriffsbeschränkung
+
+** Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann?**
 
 **Widerruf**
 
