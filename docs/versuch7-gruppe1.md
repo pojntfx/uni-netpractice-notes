@@ -133,7 +133,7 @@ req: /root/openvpn/easyrsa/pki/reqs/server-g1.req
 key: /root/openvpn/easyrsa/pki/private/server-g1.key
 ```
 
-\newpage 
+\newpage
 
 Keypair für Client generieren:
 
@@ -419,7 +419,7 @@ Die `ca.crt` Datei ist öffentlich. User, Server und Client können damit beweis
 
 Die Private Keys liegen im Ordner `private` und im Ordner `issued` sind die signierten Zertifikate (Public Keys) für eine gegenseitige Bestätigung zwischen Server und Client.
 
-Der Ordner `certs_by_serial` enthält alle von der CA signierten Zertifikate mit ihrer Seriennummer. 
+Der Ordner `certs_by_serial` enthält alle von der CA signierten Zertifikate mit ihrer Seriennummer.
 
 `dh.pem` enthält die Parameter für den Diffie-Hellman-Key-Exchange.
 
@@ -432,7 +432,7 @@ In `reqs` sind die Certificate Signing Requests (CSR) enthalten.
 **Wie ist der Ablauf bei der Erstellung eines eigenen Zertifikates (gemeint sind die Schritte bei der
 Erstellung)?**
 
-Wir benötigen einen separaten Public Key und Private Key für den Server und jeden Client. Außerdem braucht es noch das Zertifikat und Key der CA, um alle Server und Client Zertifikate zu signieren. Bevor sich beide Parteien vertrauen muss der Client die Server Zertifikate authentifizieren und der Server muss die Client Zertifikate  authentifizieren. Dieses gegenseitige Authentifizieren erfolgt durch das Sicherstellen, dass ein Zertifikat, welches man bekommt bereits von der CA signiert wurde. Danach kann der Inhalt in dem neu authentifizierten Zertifikat Header, wie z.B. der certificate common name getestet werden.
+Wir benötigen einen separaten Public Key und Private Key für den Server und jeden Client. Außerdem braucht es noch das Zertifikat und Key der CA, um alle Server und Client Zertifikate zu signieren. Bevor sich beide Parteien vertrauen muss der Client die Server Zertifikate authentifizieren und der Server muss die Client Zertifikate authentifizieren. Dieses gegenseitige Authentifizieren erfolgt durch das Sicherstellen, dass ein Zertifikat, welches man bekommt bereits von der CA signiert wurde. Danach kann der Inhalt in dem neu authentifizierten Zertifikat Header, wie z.B. der certificate common name getestet werden.
 
 **Schildern Sie den Ablauf der Authentisierung, des Schlüsselaustausches und der Verschlüsselung
 bei der Verwendung von Zertifikats-basierter Authentisierung in OpenVPN!**
@@ -601,8 +601,7 @@ verb 3                        # Definiert die Ausführlichkeit des Outputs. 3: I
 ![VPN Verbunden Gui](./static/windowsVpnGui.png)
 ![VPN Verbunden Commandline](./static/windowsVpnCmd.png)
 
-Windows verlangt, dass wir die "client.conf" in "client.ovpn" umbenennen. Die "client.ovpn" muss dann neben der "ca.crt", "client-g1.crt", "client-g1.key" abgelegt werden. Anschließend kann über das GUI eine Verbindung etabliert werden. 
-
+Windows verlangt, dass wir die "client.conf" in "client.ovpn" umbenennen. Die "client.ovpn" muss dann neben der "ca.crt", "client-g1.crt", "client-g1.key" abgelegt werden. Anschließend kann über das GUI eine Verbindung etabliert werden.
 
 ## Analyse
 
@@ -928,7 +927,8 @@ curl api.ipify.org
 
 Das Resultat zeigt, dass der Traffic nun durch den Server getunnelt wird. Daher bekommen wir bei der Abfrage die IP-Adresse des Servers und nicht mehr unsere eigene IP-Adresse zurück.
 
-## Zugriffsbeschränkung 
+## Zugriffsbeschränkung
+
 ** Angenommen ein Client soll keinen Zugriff mehr über Ihren OpenVPN-Server erhalten. Wie verhindern Sie das, ohne dass Sie Zugang zum Client bekommen? Am Ende des Versuchs können sie die Methode für alle vergebenen Client-Zertifikate durchführen und testen. Können Sie diesen Vorgang wieder rückgängig machen, so das der Client wieder am VPN „teilnehmen“ kann?**
 
 **Widerruf**
