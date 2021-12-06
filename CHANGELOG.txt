@@ -1,3 +1,24 @@
+commit f199e552c1377746d966f1a1a77a673aa55ba5d1
+Merge: 291fab1 64652dc
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Dec 6 20:33:18 2021 +0100
+
+    Merge pull request #14 from JakWai01/main
+    
+    fix: Typos and formatting
+
+commit 64652dc9b56703b70f9c7dc94840532d33971165
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Dec 6 20:31:36 2021 +0100
+
+    feat: Prettify
+
+commit 070ab02cc926eb137467dceb48bd6f5b33274363
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Dec 6 20:26:15 2021 +0100
+
+    fix: Typos and formatting
+
 commit 291fab1da566d7c8ed789a60fa122bed036f45f5
 Merge: 0a01a85 fb33d7f
 Author: Felix Pojtinger <felix@pojtinger.com>
