@@ -217,6 +217,14 @@ Gemessen wurden wie erwarted folgende Werte, welche zusammen eine Datenrate von 
 | 2      | 41 Mbit/s  |
 | 3      | 5.6 Mbit/s |
 
+Das Lastmessgerät zeigt Folgendes:
+
+![Lastmessgerät zu Stream 1](./static/qos-stream-1.jpg)
+
+![Lastmessgerät zu Stream 2](./static/qos-stream-2.jpg)
+
+![Lastmessgerät zu Stream 3](./static/qos-stream-3.jpg)
+
 Die UI zeigt hier auch den Traffic an:
 
 ![VLAN-Traffic in der UI](./static/vlan-traffic.png)
