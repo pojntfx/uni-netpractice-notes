@@ -295,6 +295,14 @@ Datenrate von ~99.6 Mbit/s darstellen:
   2        41 Mbit/s
   3        5.6 Mbit/s
 
+Das Lastmessgerät zeigt Folgendes:
+
+[Lastmessgerät zu Stream 1]
+
+[Lastmessgerät zu Stream 2]
+
+[Lastmessgerät zu Stream 3]
+
 Die UI zeigt hier auch den Traffic an:
 
 [VLAN-Traffic in der UI]
