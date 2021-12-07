@@ -1,3 +1,23 @@
+commit 0dfa1019a5ca443068bbfec7b22900b8d1b4ad9a
+Merge: 2d1bc7a f199e55
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Dec 7 17:24:07 2021 +0100
+
+    Merge branch 'main' of github.com:pojntfx/uni-netpractice-notes
+
+commit 2d1bc7ab147817b8a15b0928314433bbe9e0d6c2
+Merge: f2edd78 0a01a85
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Dec 7 17:22:13 2021 +0100
+
+    Merge branch 'main' of git://github.com/dentremor/uni-netpractice-notes
+
+commit f2edd78192daff97e42ea0e6adf1a6601859041d
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Dec 7 17:22:10 2021 +0100
+
+    feat: Add initial notes on experiment 8
+
 commit f199e552c1377746d966f1a1a77a673aa55ba5d1
 Merge: 291fab1 64652dc
 Author: Felix Pojtinger <felix@pojtinger.com>
