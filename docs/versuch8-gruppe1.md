@@ -37,25 +37,29 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Mal ganz dumm gefragt: Wieso haben manche Switches als Layer-2-Koppelelement eigentlich eine IP-Adresse?**
 
-TODO: Add answer
+Ein switch benötigt keine IP-Adresse um frames zu benachbarten Geräten zu senden. Wenn ein Switch allerdings Remote-Access über e.g. telnet oder ssh benötigt, ist eine IP-Adresse notwendig. Diese IP kann allerdings nur einem virtuellen Interface zugewiesen werden.
 
 **Ist ein Switch der eine IP-Adresse hat, automatisch ein Layer-3-Switch**
 
-TODO: Add answer
+Wie aus der vorherigen Aufgabe hervorgeht, ist ein Switch mit IP-Adresse nicht automatisch ein Layer 3 Switch. 
 
 **Was ist der Unterschied zwischen einem Layer-3-Switch und einem Router?**
 
-TODO: Add answer
+Der Hauptunterschied liegt in der Hardware. Da Switches primär für Intranets ausgelegt sind besitzt ein Layer 3 Switch keine WAN-Ports. Switches sind für lokale Netzwerke und das routen zwischen VLANs gedacht.
 
 ## Switch Konfiguration
 
 **Sie bekommen die Switche sozusagen „originalverpackt“. Um die Geräte initial zu konfigurieren, müssen Sie ein serielles Kabel (Console) an den PC anschließen und Putty oder MobaXterm (Console Serial: COMx, Speed: 9600; Console USB: COMx, Speed: 9600) starten**
+
+Im Folgenden ist die PuTTY-Konfiguration zu sehen, welche die Verbindung mit dem Switch ermöglichts hat:
 
 ![PuTTy setup](./static/putty-connection.png)
 
 ![PuTTy logged in](./static/putty-logged-in.png)
 
 **Zur Sicherheit setzen Sie nach erfolgreicher Verbindung ihren Switch auf Werkszustand zurück. Das geht über die Console mit dem Befehl erase all. (Anm.: Da an dem Switch auch ihr PC mit RDP dranhängt, geht auch die RDP-Verbindung verloren. D.h. Sie müssen sich anschließend neu mit RDP auf ihrem PC anmelden)**
+
+Vor Beginn der Konfiguration setzen wir den Switch auf Werkszustand zurück: 
 
 ![Zurücksetzen des Switches](./static/erase-all.png)
 
@@ -87,6 +91,8 @@ Der Switch wurde nach folgender Zuordnung angeschlossen: `switch-71 (141.62.66.7
 
 ![Alte UI](./static/web-gui-old.png)
 
+Die neue GUI sieht natürlich sehr schön aus, allerdings fiel uns die Navigation mit Hilfe des alten GUIs leichter, weshalb wir primär dieses verwendeten. 
+
 ## Analyse mit Wireshark
 
 **Starten Sie Wireshark und dokumentieren Sie die Protokolle die bereits jetzt Traffic in Zusammenhang mit ihrem Switch erzeugen (abgesehen von ihren eigenen httpAnfragen und die ARP-Anfragen von 141.62.66.236 (=FOG-Cloning Server) oder anderen Servern/Routern (=141.62.66.240, 141.62.66.250….) und natürlich dem RDP). Welchen Wireshark-Filter setzen Sie ein, um möglichst nur noch den Traffic ihres Switches einzufangen?**
@@ -96,6 +102,8 @@ Mit dem Filter `!ip.addr && !arp` werden alle Pakete, welche keine IP-Addresse h
 ![Traffic im Netzwerk des Switch](./static/switch-traffic.png)
 
 **Was ist LLDP? Bringen Sie Ihren Windows-Client dazu, LLDP in Verbindung mit Ihrem Switch zu realisieren (Dafür ist unter Windows noch der LLDP-Dienst z.B. von https://raspi.github.io/projects/winlldpservice/ zu installieren. Unter Linux lässt sich mit apt install lldpd der Dienst ebenfalls nachinstallieren.)**
+
+LLDP steht für `Link Layer Discovery Protocol`. Es ist ein Layer 2 Neighbor-Discovery Protokoll, welches ermöglicht, Geräteinformationen mit benac hbarten Geräten auszutauschen. Es ist üblich LLDP auf allen Koppelgeräten innerhalb eines Netzwerkes zu aktivieren, damit auch bei verschiedenen Herstellern Kommunikation reibungslos verlaufen kann. 
 
 ![Start des LLDP-Dienstes](./static/win-lldp-start.png)
 
@@ -107,19 +115,24 @@ Mit dem Filter `!ip.addr && !arp` werden alle Pakete, welche keine IP-Addresse h
 
 **Laden Sie sich die Switch-Konfiguration auf ihren PC und schauen Sie sich die Datei mit einem Texteditor an.**
 
+Wir haben die Konfigurationsdatei mit Hilfe eines TFTP-Servers auf unser lokales Gerät geladen. 
 ![Start des TFTP-Servers auf der Workstation](./static/enable-tftp-server.png)
 
 ![Gestarter TFTP-Server](./static/started-tftp-server.png)
 
 ![Upload der Konfig-Datei auf TFTP-Server](./static/tftp-upload.png)
 
-**Ändern Sie in der herruntergeladenen Config-Datei den Namen des VLAN 1 und spielen Sie diese Datei als Konfiguration zurück auf den Switch.**
+**Ändern Sie in der heruntergeladenen Config-Datei den Namen des VLAN 1 und spielen Sie diese Datei als Konfiguration zurück auf den Switch.**
+
+Nachdem wir den VLAN-Namen verändert haben, konnten wir die Datei mit Hilfe des TFTP-Servers wieder auf den Switch laden.
 
 ![Download der geänderten Konfig-Datei vom TFTP-Server](./static/tftp-download.png)
 
 ## Spanning-Tree-Verfahren
 
 **Aktivieren Sie das Spanning-Tree-Protokoll (Versuchen Sie herauszufinden was in ihrem Fall einzustellen ist, MSTP oder RSTP, wo liegen die Unterschiede). Stecken Sie nun eine Schleife (Der Betreuer im Labor erledigt das für sie) zwischen den Switches und versuchen Sie durch Verändern der Parameter, den Ring an einer Stelle zu unterbrechen (Hinweis: spanning-tree <port-list> priority <prioritymultiplier> )**
+
+Nach der Konfiguration des Spanning-Tree-Protokolls konnte man erkennen, wie beim Test des Betreuers Port 5 und 6 vom Spanning-Tree-Protokoll geblockt werden. Dies war in unserem Fall die richtige Handlung, da auf diesen Ports die Schleife angeschlossen war.
 
 ![Konfiguration des Spanning-Tree](./static/spanning-tree-config.png)
 
@@ -131,17 +144,17 @@ Mit dem Filter `!ip.addr && !arp` werden alle Pakete, welche keine IP-Addresse h
 
 **Welche Funktion hat das Protokoll BPDU (vgl. Anhang, Internet) in Zusammenhang mit Switches? In welchen Abständen sendet es der Switch? Was will er damit erreichen?**
 
-TODO: Add interpretation
+BPDU steht für "Bridge Protocol Data Unit". Dieses Protokoll wird genutzt, um Schleifen in einem Netzwerk festzustellen. Ein BPDU-Paket erhält Informationen zu Ports, Switches, Priorität von Ports und Adressen. Die Pakete werden von der jeweiligen Root-Bridge an alle Switches gesendet. Mit Hilfe dieses Protokolls kann sichergestellt werden, dass Schleifen frühzeitig erkannt werden.
+
+In unserem Fall werden BPDU-Pakete alle 2 Sekunden gesendet. 
 
 ![BDPU-Pakete werden alle 2 Sekunden gesendet](./static/bpdu-timeframe.png)
 
 **Dokumentieren und interpretieren Sie die Ziel-MAC-Adresse, an die die BPDU-Pakete gesendet werden.**
 
-TODO: Add interpretation
-
 Ziel-MAC-Adresse: `01:80:c2:00:00:00`
 
-Die Adresse wird beschrieben als "Local LAN Segment, stopping at STP-capable switches".
+Dabei handelt es sich um eine Ethernet-Multicast-Adresse. Sie ist eine Well-Known-Adresse und wird beschrieben als "Local LAN Segment, stopping at STP-capable switches".
 
 ![Ziel-MAC-Adresse eines BDPU-Pakets](./static/bpdu-dest.png)
 
