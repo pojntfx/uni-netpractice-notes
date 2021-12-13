@@ -95,7 +95,7 @@ Die neue GUI sieht natürlich sehr schön aus, allerdings fiel uns die Navigatio
 
 ## Analyse mit Wireshark
 
-**Starten Sie Wireshark und dokumentieren Sie die Protokolle die bereits jetzt Traffic in Zusammenhang mit ihrem Switch erzeugen (abgesehen von ihren eigenen httpAnfragen und die ARP-Anfragen von 141.62.66.236 (=FOG-Cloning Server) oder anderen Servern/Routern (=141.62.66.240, 141.62.66.250….) und natürlich dem RDP). Welchen Wireshark-Filter setzen Sie ein, um möglichst nur noch den Traffic ihres Switches einzufangen?**
+**Starten Sie Wireshark und dokumentieren Sie die Protokolle, die bereits jetzt Traffic in Zusammenhang mit ihrem Switch erzeugen (abgesehen von ihren eigenen httpAnfragen und die ARP-Anfragen von 141.62.66.236 (=FOG-Cloning Server) oder anderen Servern/Routern (=141.62.66.240, 141.62.66.250….) und natürlich dem RDP). Welchen Wireshark-Filter setzen Sie ein, um möglichst nur noch den Traffic ihres Switches einzufangen?**
 
 Mit dem Filter `!ip.addr && !arp` werden alle Pakete, welche keine IP-Addresse haben, und das ARP-Protokoll ausgeblendet; zurück bleibt nur noch der Traffic des Switches.
 
@@ -158,15 +158,17 @@ Dabei handelt es sich um eine Ethernet-Multicast-Adresse. Sie ist eine Well-Know
 
 ![Ziel-MAC-Adresse eines BDPU-Pakets](./static/bpdu-dest.png)
 
-**Mit Hilfe von admin-edge-port kann man für einzelne Switchports das Forwarding aktivieren. Diese Option bringt einen Port sofort in den Forwarding-Zustand,unabhängig davon ob evtl. Schleifen vorhanden sind oder nicht. Wo ist diese Funktion sinnvoll einsetzbar? Was ist der Unterschied zu der Option auto-edge-port? Welche Befehle gibt es sonst noch um sich den Status des Spanning-Tree anzusehen (Der Befehl show und seine Optionen helfen weiter)?**
+**Mit Hilfe von admin-edge-port kann man für einzelne Switchports das Forwarding aktivieren. Diese Option bringt einen Port sofort in den Forwarding-Zustand, unabhängig davon, ob evtl. Schleifen vorhanden sind oder nicht. Wo ist diese Funktion sinnvoll einsetzbar? Was ist der Unterschied zu der Option auto-edge-port? Welche Befehle gibt es sonst noch, um sich den Status des Spanning-Tree anzusehen (Der Befehl show und seine Optionen helfen weiter)?**
 
-TODO: Add answer
+Bei aktiviertem `admin-edge-port`, werden die 3 Sekunden Wartezeit übersprungen, welche mit `auto-edge-port` verbunden wären und der Port geht direkt in den Forwarding-Zustand. Hierdurch wird die Verfügbarkeit des Ports beschleunigt. Jedoch besteht dann die Gefahr, dass nicht erkannt werden kann, ob unbekannte Switches angeschlossen werden. Selbst mit `BDU-Protection` können nur Switches mit STP erkannst werden, aber nicht ohne, da diese keine BDUs versenden.
+
+Es kann der Befehl `show spanning-tree` verwendet werden, um sich den Status des Spanning-Tree anzusehen. 
 
 ## Port Mirroring und Port Security
 
 **Spiegeln Sie den Datenverkehr eines beliebigen aktiven Ports auf einen anderen Port und dokumentieren Sie die Einstellung. Wann wird in der Praxis „Mirroring“ verwendet? Die entsprechende Funktion finden Sie unter Troubleshooting in der Web-Navigation links**
 
-TODO: Add answer
+Port mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen oder Fehler im Netzwerk zu diagnostizieren.
 
 ![Deaktiviertes Port-Mirroring](./static/port-mirroring-disabled.png)
 
@@ -176,7 +178,10 @@ TODO: Add answer
 
 **Überprüfen Sie, ob es möglich ist, alle Switch-Ports auf einen einzigen Port zu spiegeln. Wann ist dieses Vorgehen sinnvoll? Wo liegen die Grenzen?**
 
-TODO: Add answer
+
+Hier gilt wieder selbiges, wie bereits oben angegeben: Port mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen oder Fehler im Netzwerk zu diagnostizieren.
+
+TODO: Falls jemand noch etwas dazu wissen sollte - gerne einfügen
 
 ![Einstellung Port-Mirroring alle Ports auf Port 8](./static/port-mirroring-everything.png)
 
@@ -208,7 +213,7 @@ TODO: Add answer
 
 ![VLAN 3](./static/vlan-3.png)
 
-**Es sollen über diese 2 Switch-Ports 3 VLANs bedient werden. Im weiteren setzen Sie für diese VLANs unterschiedlichen Prioritäten (Stichwort: qos)**
+**Es sollen über diese 2 Switch-Ports 3 VLANs bedient werden. Im Weiteren setzen Sie für diese VLANs unterschiedlichen Prioritäten (Stichwort: qos)**
 
 ![VLAN-Config](./static/vlan-config.png)
 
