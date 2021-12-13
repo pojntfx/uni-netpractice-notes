@@ -1,3 +1,18 @@
+commit aec8f4864a352a643fdbca2c0335ef1a380cfcff
+Merge: 05a0b44 e02e471
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Dec 13 01:15:32 2021 +0100
+
+    Merge pull request #16 from dentremor/main
+    
+    feat: Solve todos
+
+commit e02e47172c74816a93d3aadda6f752dc66f42d4a
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 10 21:51:29 2021 +0100
+
+    feat: Solve todos
+
 commit 05a0b449cfbeb29e291f80973317ac530586a9ba
 Merge: 28b201c 5381f88
 Author: Felix Pojtinger <felix@pojtinger.com>
