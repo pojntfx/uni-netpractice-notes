@@ -311,7 +311,12 @@ VLAN 3 an und konfigurieren Sie auf Switch-Port 5 und 6 des Switches
 jeweils die drei VLANs als getagged. Was bedeutet in diesem Zusammenhang
 tagged und untagged?
 
-TODO: Add answer
+TODO: Mehrere Tagged VLANs können über einen Switch Port laufen. An
+einem Ethernet Frame werden Tags angehängt, die angeben zu welchem VLAN
+der Frame gehört. Verfügen beide Switches die Tagging Funktionalität,
+dann reicht für die Verbindung zwischen diesen ein Kabel aus. Untagged
+VLANs sind portbasiert. Jeder Port stellt die Verbindung zu einem VLAN
+dar.
 
 [VLAN 1]
 
@@ -333,7 +338,11 @@ Die VLAN-Priorisierung auf dem SmartClass Tester entspricht der
 VLAN-Konfiguration auf dem Switch. Was sollte ihrer Meinung mit den drei
 Streams passieren?
 
-TODO: Add answer
+TODO: Es muss gedrosselt werden, da das Loopback Gerät nur 100 Mbit
+durchlässt. Wir erwarten die größte Datenrate in VLAN 1, da hier auch am
+höchsten Priorisiert wurde. Danach folgt VLAN 2 welches etwas stärker in
+der Datenrate abgeschwächt werden sollte. Am stärksten muss die
+Drosselung in VLAN 3 sichtbar werden.
 
 Der Betreuer teilt Ihnen die Ergebnisse der Messung zur Dokumentation
 mit
