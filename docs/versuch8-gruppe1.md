@@ -57,31 +57,37 @@ Im Folgenden ist die PuTTY-Konfiguration zu sehen, welche die Verbindung mit dem
 
 ![PuTTy logged in](./static/putty-logged-in.png)
 
+\newpage
+
 **Zur Sicherheit setzen Sie nach erfolgreicher Verbindung ihren Switch auf Werkszustand zurück. Das geht über die Console mit dem Befehl erase all. (Anm.: Da an dem Switch auch ihr PC mit RDP dranhängt, geht auch die RDP-Verbindung verloren. D.h. Sie müssen sich anschließend neu mit RDP auf ihrem PC anmelden)**
 
 Vor Beginn der Konfiguration setzen wir den Switch auf Werkszustand zurück:
 
-![Zurücksetzen des Switches](./static/erase-all.png)
+![Zurücksetzen des Switches](./static/erase-all.png){ width=450px }
 
 Das Zurücksetzen hat ca. 3 Minuten gedauert.
 
-![Nach dem Zurücksetzen des Switches](./static/post-reset.png)
+![Nach dem Zurücksetzen des Switches](./static/post-reset.png){ width=400px }
+
+\newpage
 
 **Vergeben Sie für Ihren Switch die entsprechende IP (siehe Zuordnung unter Ilias).**
 
 Der Switch wurde nach folgender Zuordnung angeschlossen: `switch-71 (141.62.66.71) ist per seriellem Kabel an rn01 angeschlossen`
 
-![Main-Menü](./static/menu-main.png)
+![Main-Menü](./static/menu-main.png){ width=450px }
 
-![IP-Konfiguration](./static/ip-configuration.png)
+![IP-Konfiguration](./static/ip-configuration.png){ width=450px }
 
-![SNMP-Konfiguration](./static/snmp-config.png)
+![SNMP-Konfiguration](./static/snmp-config.png){ width=450px }
 
-![Einstellen des Passworts auf `versuch`](./static/set-password.png)
+![Einstellen des Passworts auf `versuch`](./static/set-password.png){ width=450px }
 
-![Telnet ist deaktivert](./static/telnet-disabled.png)
+![Telnet ist deaktivert](./static/telnet-disabled.png){ width=450px }
 
-![Telnet ist durch Config deaktivert](./static/telnet-disabled-in-config.png)
+![Telnet ist durch Config deaktivert](./static/telnet-disabled-in-config.png){ width=450px }
+
+\newpage
 
 **Nach der IP-Konfiguration ist ihr Switch auch über einen Web-Browser erreichbar. Neuerdings bietet HP dazu zwei unterschiedliche GUIs an. Schauen Sie sich diese beiden GUIs an und bilden Sie sich ein Urteil.**
 
@@ -117,9 +123,9 @@ LLDP steht für `Link Layer Discovery Protocol`. Es ist ein Layer 2 Neighbor-Dis
 
 Wir haben die Konfigurationsdatei mithilfe eines TFTP-Servers auf unser lokales Gerät geladen.
 
-![Start des TFTP-Servers auf der Workstation](./static/enable-tftp-server.png)
+![Start des TFTP-Servers auf der Workstation](./static/enable-tftp-server.png){ width=400px }
 
-![Gestarter TFTP-Server](./static/started-tftp-server.png)
+![Gestarter TFTP-Server](./static/started-tftp-server.png){ width=400px }
 
 ![Upload der Konfig-Datei auf TFTP-Server](./static/tftp-upload.png)
 
@@ -129,19 +135,23 @@ Nachdem wir den VLAN-Namen verändert haben, konnten wir die Datei mitHilfe des 
 
 ![Download der geänderten Konfig-Datei vom TFTP-Server](./static/tftp-download.png)
 
+\newpage
+
 ## Spanning-Tree-Verfahren
 
 **Aktivieren Sie das Spanning-Tree-Protokoll (Versuchen Sie herauszufinden was in ihrem Fall einzustellen ist, MSTP oder RSTP, wo liegen die Unterschiede). Stecken Sie nun eine Schleife (Der Betreuer im Labor erledigt das für sie) zwischen den Switches und versuchen Sie durch Verändern der Parameter, den Ring an einer Stelle zu unterbrechen (Hinweis: spanning-tree <port-list> priority <prioritymultiplier> )**
 
 Nach der Konfiguration des Spanning-Tree-Protokolls konnte man erkennen, wie beim Test des Betreuers Port 5 und 6 vom Spanning-Tree-Protokoll geblockt werden. Dies war in unserem Fall die richtige Handlung, da auf diesen Ports die Schleife angeschlossen war.
 
-![Konfiguration des Spanning-Tree](./static/spanning-tree-config.png)
+![Konfiguration des Spanning-Tree](./static/spanning-tree-config.png){ width=450px }
 
 ![UI-Ausgabe der Spanning-Tree-Konfiguration](./static/spanning-tree-ui.png)
 
 ![UI-Ausgabe der Ports nach dem Erstellen der Schleife](./static/after-loop.png)
 
-![Ports werden automatisch durch MSTP blockiert](./static/ports-blocked-after-loop.png)
+![Ports werden automatisch durch MSTP blockiert](./static/ports-blocked-after-loop.png){ width=250px }
+
+\newpage
 
 **Welche Funktion hat das Protokoll BPDU (vgl. Anhang, Internet) in Zusammenhang mit Switches? In welchen Abständen sendet es der Switch? Was will er damit erreichen?**
 
@@ -150,6 +160,8 @@ BPDU steht für "Bridge Protocol Data Unit". Dieses Protokoll wird genutzt, um S
 In unserem Fall werden BPDU-Pakete alle 2 Sekunden gesendet.
 
 ![BDPU-Pakete werden alle 2 Sekunden gesendet](./static/bpdu-timeframe.png)
+
+\newpage
 
 **Dokumentieren und interpretieren Sie die Ziel-MAC-Adresse, an die die BPDU-Pakete gesendet werden.**
 
@@ -199,21 +211,23 @@ Wie zu erwarten ist, konnte vor einem allowlisten ein angeschlossenes Laptop (MA
 
 ![Aktivierte Port-Security auf Port 8 mit allowlistetem Laptop](./static/port-security-allowlisted-laptop.png)
 
+\newpage
+
 ## VLANs
 
 **Erstellen sie auf dem Switch zwei weitere VLANs mit unterschiedlicher Priorität. Es befindet sich immer ein sogenanntes Default-VLAN auf einem Switch, welches meistens die ID 1 besitzt. Legen Sie ein VLAN 2 und ein VLAN 3 an und konfigurieren Sie auf Switch-Port 5 und 6 des Switches jeweils die drei VLANs als getagged. Was bedeutet in diesem Zusammenhang tagged und untagged?**
 
 Mehrere Tagged VLANs können über einen Switch Port laufen. An einem Ethernet Frame werden Tags angehängt, die angeben zu welchem VLAN der Frame gehört. Verfügen beide Switches die Tagging-Funktionalität, dann reicht für die Verbindung zwischen diesen ein Kabel aus. Untagged VLANs sind portbasiert. Jeder Port stellt die Verbindung zu einem VLAN dar.
 
-![VLAN 1](./static/vlan-1.png)
+![VLAN 1](./static/vlan-1.png){ width=450px }
 
-![VLAN 2](./static/vlan-2.png)
+![VLAN 2](./static/vlan-2.png){ width=450px }
 
-![VLAN 3](./static/vlan-3.png)
+![VLAN 3](./static/vlan-3.png){ width=450px }
 
 **Es sollen über diese 2 Switch-Ports 3 VLANs bedient werden. Im Weiteren setzen Sie für diese VLANs unterschiedlichen Prioritäten (Stichwort: qos)**
 
-![VLAN-Config](./static/vlan-config.png)
+![VLAN-Config](./static/vlan-config.png){ width=450px }
 
 Diese Konfiguration spiegelt sich auch im Web-Interface wider:
 
@@ -235,7 +249,7 @@ Gemessen wurden wie erwarted folgende Werte, welche zusammen eine Datenrate von 
 
 Das Lastmessgerät zeigt Folgendes:
 
-![Lastmessgerät zu Stream 1](./static/qos-stream-1.jpg)
+![Lastmessgerät zu Stream 1](./static/qos-stream-1.jpg){ width=250px }
 
 ![Lastmessgerät zu Stream 2](./static/qos-stream-2.jpg)
 
@@ -244,6 +258,8 @@ Das Lastmessgerät zeigt Folgendes:
 Die UI zeigt hier auch den Traffic an:
 
 ![VLAN-Traffic in der UI](./static/vlan-traffic.png)
+
+\newpage
 
 ## Sichern der Konfiguration
 
