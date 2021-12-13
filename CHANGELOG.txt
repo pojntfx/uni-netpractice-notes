@@ -1,3 +1,9 @@
+commit abb38e1d0cb2b0a3d22a48424c9c5b56c9a3f817
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Dec 13 17:44:08 2021 +0100
+
+    refactor: Add proper print formatting to Versuch 8
+
 commit bc2c040624129c3809dcc008a87d96791226c271
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Dec 13 17:11:36 2021 +0100
