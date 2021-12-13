@@ -37,21 +37,21 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Mal ganz dumm gefragt: Wieso haben manche Switches als Layer-2-Koppelelement eigentlich eine IP-Adresse?**
 
-Ein switch benötigt keine IP-Adresse um frames zu benachbarten Geräten zu senden. Wenn ein Switch allerdings Remote-Access über e.g. telnet oder ssh benötigt, ist eine IP-Adresse notwendig. Diese IP kann allerdings nur einem virtuellen Interface zugewiesen werden.
+Ein Switch benötigt keine IP-Adresse um Frames zu benachbarten Geräten zu senden. Wenn ein Switch allerdings Remote-Access über e.g. `telnet` oder `ssh` benötigt, ist eine IP-Adresse notwendig. Diese IP kann allerdings nur einem virtuellen Interface zugewiesen werden.
 
 **Ist ein Switch der eine IP-Adresse hat, automatisch ein Layer-3-Switch**
 
-Wie aus der vorherigen Aufgabe hervorgeht, ist ein Switch mit IP-Adresse nicht automatisch ein Layer 3 Switch. 
+Wie aus der vorherigen Aufgabe hervorgeht, ist ein Switch mit IP-Adresse nicht automatisch ein Layer 3 Switch.
 
 **Was ist der Unterschied zwischen einem Layer-3-Switch und einem Router?**
 
-Der Hauptunterschied liegt in der Hardware. Da Switches primär für Intranets ausgelegt sind besitzt ein Layer 3 Switch keine WAN-Ports. Switches sind für lokale Netzwerke und das routen zwischen VLANs gedacht.
+Der Hauptunterschied liegt in der Hardware. Da Switches primär für Intranets ausgelegt sind, besitzt ein Layer 3 Switch keine WAN-Ports. Switches sind für lokale Netzwerke und das Routen zwischen VLANs gedacht.
 
 ## Switch Konfiguration
 
 **Sie bekommen die Switche sozusagen „originalverpackt“. Um die Geräte initial zu konfigurieren, müssen Sie ein serielles Kabel (Console) an den PC anschließen und Putty oder MobaXterm (Console Serial: COMx, Speed: 9600; Console USB: COMx, Speed: 9600) starten**
 
-Im Folgenden ist die PuTTY-Konfiguration zu sehen, welche die Verbindung mit dem Switch ermöglichts hat:
+Im Folgenden ist die PuTTY-Konfiguration zu sehen, welche die Verbindung mit dem Switch ermöglicht hat:
 
 ![PuTTy setup](./static/putty-connection.png)
 
@@ -59,7 +59,7 @@ Im Folgenden ist die PuTTY-Konfiguration zu sehen, welche die Verbindung mit dem
 
 **Zur Sicherheit setzen Sie nach erfolgreicher Verbindung ihren Switch auf Werkszustand zurück. Das geht über die Console mit dem Befehl erase all. (Anm.: Da an dem Switch auch ihr PC mit RDP dranhängt, geht auch die RDP-Verbindung verloren. D.h. Sie müssen sich anschließend neu mit RDP auf ihrem PC anmelden)**
 
-Vor Beginn der Konfiguration setzen wir den Switch auf Werkszustand zurück: 
+Vor Beginn der Konfiguration setzen wir den Switch auf Werkszustand zurück:
 
 ![Zurücksetzen des Switches](./static/erase-all.png)
 
@@ -91,7 +91,7 @@ Der Switch wurde nach folgender Zuordnung angeschlossen: `switch-71 (141.62.66.7
 
 ![Alte UI](./static/web-gui-old.png)
 
-Die neue GUI sieht natürlich sehr schön aus, allerdings fiel uns die Navigation mit Hilfe des alten GUIs leichter, weshalb wir primär dieses verwendeten. 
+Die neue GUI sieht zwar besser aus, allerdings fiel uns die Navigation mithilfe der alten leichter, weshalb wir primär dieses verwendeten. In Web-Recherchen ließ sich zudem mehr zur alten GUI finden.
 
 ## Analyse mit Wireshark
 
@@ -103,7 +103,7 @@ Mit dem Filter `!ip.addr && !arp` werden alle Pakete, welche keine IP-Addresse h
 
 **Was ist LLDP? Bringen Sie Ihren Windows-Client dazu, LLDP in Verbindung mit Ihrem Switch zu realisieren (Dafür ist unter Windows noch der LLDP-Dienst z.B. von https://raspi.github.io/projects/winlldpservice/ zu installieren. Unter Linux lässt sich mit apt install lldpd der Dienst ebenfalls nachinstallieren.)**
 
-LLDP steht für `Link Layer Discovery Protocol`. Es ist ein Layer 2 Neighbor-Discovery Protokoll, welches ermöglicht, Geräteinformationen mit benac hbarten Geräten auszutauschen. Es ist üblich LLDP auf allen Koppelgeräten innerhalb eines Netzwerkes zu aktivieren, damit auch bei verschiedenen Herstellern Kommunikation reibungslos verlaufen kann. 
+LLDP steht für `Link Layer Discovery Protocol`. Es ist ein Layer 2 Neighbor-Discovery Protokoll, welches ermöglicht, Geräteinformationen mit benachbarten Geräten auszutauschen. Es ist üblich LLDP auf allen Koppelgeräten innerhalb eines Netzwerkes zu aktivieren, damit auch bei verschiedenen Herstellern Kommunikation reibungslos verlaufen kann.
 
 ![Start des LLDP-Dienstes](./static/win-lldp-start.png)
 
@@ -115,7 +115,8 @@ LLDP steht für `Link Layer Discovery Protocol`. Es ist ein Layer 2 Neighbor-Dis
 
 **Laden Sie sich die Switch-Konfiguration auf ihren PC und schauen Sie sich die Datei mit einem Texteditor an.**
 
-Wir haben die Konfigurationsdatei mit Hilfe eines TFTP-Servers auf unser lokales Gerät geladen. 
+Wir haben die Konfigurationsdatei mithilfe eines TFTP-Servers auf unser lokales Gerät geladen.
+
 ![Start des TFTP-Servers auf der Workstation](./static/enable-tftp-server.png)
 
 ![Gestarter TFTP-Server](./static/started-tftp-server.png)
@@ -124,7 +125,7 @@ Wir haben die Konfigurationsdatei mit Hilfe eines TFTP-Servers auf unser lokales
 
 **Ändern Sie in der heruntergeladenen Config-Datei den Namen des VLAN 1 und spielen Sie diese Datei als Konfiguration zurück auf den Switch.**
 
-Nachdem wir den VLAN-Namen verändert haben, konnten wir die Datei mit Hilfe des TFTP-Servers wieder auf den Switch laden.
+Nachdem wir den VLAN-Namen verändert haben, konnten wir die Datei mitHilfe des TFTP-Servers wieder auf den Switch laden.
 
 ![Download der geänderten Konfig-Datei vom TFTP-Server](./static/tftp-download.png)
 
@@ -144,9 +145,9 @@ Nach der Konfiguration des Spanning-Tree-Protokolls konnte man erkennen, wie bei
 
 **Welche Funktion hat das Protokoll BPDU (vgl. Anhang, Internet) in Zusammenhang mit Switches? In welchen Abständen sendet es der Switch? Was will er damit erreichen?**
 
-BPDU steht für "Bridge Protocol Data Unit". Dieses Protokoll wird genutzt, um Schleifen in einem Netzwerk festzustellen. Ein BPDU-Paket erhält Informationen zu Ports, Switches, Priorität von Ports und Adressen. Die Pakete werden von der jeweiligen Root-Bridge an alle Switches gesendet. Mit Hilfe dieses Protokolls kann sichergestellt werden, dass Schleifen frühzeitig erkannt werden.
+BPDU steht für "Bridge Protocol Data Unit". Dieses Protokoll wird genutzt, um Schleifen in einem Netzwerk festzustellen. Ein BPDU-Paket erhält Informationen zu Ports, Switches, Priorität von Ports und Adressen. Die Pakete werden von der jeweiligen Root-Bridge an alle Switches gesendet. Mithilfe dieses Protokolls kann sichergestellt werden, dass Schleifen frühzeitig erkannt werden.
 
-In unserem Fall werden BPDU-Pakete alle 2 Sekunden gesendet. 
+In unserem Fall werden BPDU-Pakete alle 2 Sekunden gesendet.
 
 ![BDPU-Pakete werden alle 2 Sekunden gesendet](./static/bpdu-timeframe.png)
 
@@ -162,13 +163,13 @@ Dabei handelt es sich um eine Ethernet-Multicast-Adresse. Sie ist eine Well-Know
 
 Bei aktiviertem `admin-edge-port`, werden die 3 Sekunden Wartezeit übersprungen, welche mit `auto-edge-port` verbunden wären und der Port geht direkt in den Forwarding-Zustand. Hierdurch wird die Verfügbarkeit des Ports beschleunigt. Jedoch besteht dann die Gefahr, dass nicht erkannt werden kann, ob unbekannte Switches angeschlossen werden. Selbst mit `BDU-Protection` können nur Switches mit STP erkannst werden, aber nicht ohne, da diese keine BDUs versenden.
 
-Es kann der Befehl `show spanning-tree` verwendet werden, um sich den Status des Spanning-Tree anzusehen. 
+Es kann der Befehl `show spanning-tree` verwendet werden, um sich den Status des Spanning-Tree anzusehen.
 
 ## Port Mirroring und Port Security
 
 **Spiegeln Sie den Datenverkehr eines beliebigen aktiven Ports auf einen anderen Port und dokumentieren Sie die Einstellung. Wann wird in der Praxis „Mirroring“ verwendet? Die entsprechende Funktion finden Sie unter Troubleshooting in der Web-Navigation links**
 
-Port mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen oder Fehler im Netzwerk zu diagnostizieren.
+Port Mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen oder Fehler im Netzwerk zu diagnostizieren.
 
 ![Deaktiviertes Port-Mirroring](./static/port-mirroring-disabled.png)
 
@@ -178,10 +179,7 @@ Port mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen
 
 **Überprüfen Sie, ob es möglich ist, alle Switch-Ports auf einen einzigen Port zu spiegeln. Wann ist dieses Vorgehen sinnvoll? Wo liegen die Grenzen?**
 
-
-Hier gilt wieder selbiges, wie bereits oben angegeben: Port mirroring wird in der Regel verwendet, um Daten zu analysieren, zu debuggen oder Fehler im Netzwerk zu diagnostizieren.
-
-TODO: Falls jemand noch etwas dazu wissen sollte - gerne einfügen
+Es ist tatsächlich möglich, alle Ports auf einen zu mirroren. Dies kann Sinn ergeben, wenn z.B. der Traffic an mehreren Ports mit einem Port, welcher z.B. mit einer Workstation verbunden ist, zu analysieren. Problematisch/unübersichtlich könnte dies werden, wenn jedoch zu viel Traffic analysiert werden soll und es schwer wird, "Noise" von "Signal" zu unterscheiden.
 
 ![Einstellung Port-Mirroring alle Ports auf Port 8](./static/port-mirroring-everything.png)
 
@@ -205,7 +203,7 @@ Wie zu erwarten ist, konnte vor einem allowlisten ein angeschlossenes Laptop (MA
 
 **Erstellen sie auf dem Switch zwei weitere VLANs mit unterschiedlicher Priorität. Es befindet sich immer ein sogenanntes Default-VLAN auf einem Switch, welches meistens die ID 1 besitzt. Legen Sie ein VLAN 2 und ein VLAN 3 an und konfigurieren Sie auf Switch-Port 5 und 6 des Switches jeweils die drei VLANs als getagged. Was bedeutet in diesem Zusammenhang tagged und untagged?**
 
-TODO: Mehrere Tagged VLANs können über einen Switch Port laufen. An einem Ethernet Frame werden Tags angehängt, die angeben zu welchem VLAN der Frame gehört. Verfügen beide Switches die Tagging Funktionalität, dann reicht für die Verbindung zwischen diesen ein Kabel aus. Untagged VLANs sind portbasiert. Jeder Port stellt die Verbindung zu einem VLAN dar.
+Mehrere Tagged VLANs können über einen Switch Port laufen. An einem Ethernet Frame werden Tags angehängt, die angeben zu welchem VLAN der Frame gehört. Verfügen beide Switches die Tagging-Funktionalität, dann reicht für die Verbindung zwischen diesen ein Kabel aus. Untagged VLANs sind portbasiert. Jeder Port stellt die Verbindung zu einem VLAN dar.
 
 ![VLAN 1](./static/vlan-1.png)
 
@@ -217,13 +215,13 @@ TODO: Mehrere Tagged VLANs können über einen Switch Port laufen. An einem Ethe
 
 ![VLAN-Config](./static/vlan-config.png)
 
-Diese Konfiguration spiegelt sich auch im Web-Interface wieder:
+Diese Konfiguration spiegelt sich auch im Web-Interface wider:
 
 ![VLAN-Config in der UI](./static/vlan-config-ui.png)
 
 **Die VLAN-Priorisierung auf dem SmartClass Tester entspricht der VLAN-Konfiguration auf dem Switch. Was sollte ihrer Meinung mit den drei Streams passieren?**
 
-TODO: Es muss gedrosselt werden, da das Loopback Gerät nur 100 Mbit durchlässt. Wir erwarten die größte Datenrate in VLAN 1, da hier auch am höchsten Priorisiert wurde. Danach folgt VLAN 2 welches etwas stärker in der Datenrate abgeschwächt werden sollte. Am stärksten muss die Drosselung in VLAN 3 sichtbar werden.
+Es muss gedrosselt werden, da das Loopback Gerät nur 100 Mbit durchlässt. Wir erwarten die größte Datenrate in VLAN 1, da hier auch am höchsten Priorisiert wurde. Danach folgt VLAN 2 welches etwas stärker in der Datenrate abgeschwächt werden sollte. Am stärksten muss die Drosselung in VLAN 3 sichtbar werden.
 
 **Der Betreuer teilt Ihnen die Ergebnisse der Messung zur Dokumentation mit**
 
