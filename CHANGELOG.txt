@@ -1,3 +1,9 @@
+commit 44baada51e1034cb8d599f5df2391f3c7e041430
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Dec 21 17:35:10 2021 +0100
+
+    feat: Add notes on Versuch 10
+
 commit 5cdc21e1deb4941808b7adb6a59b83ea2ef9ccbc
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Dec 14 16:11:54 2021 +0100
