@@ -100,7 +100,7 @@ Die Response `180 Ringing` bedeutet, dass der UA den `INVITE` erhalten hat und d
 
 **Welche Angabe bzgl. der Absender-Rufnummer erscheint auf dem Display des Empfängers?**
 
-In unserem Fall ist die Absender-Rufnummer "anonymous", was auf eine verstecke Rufnummer hindeutet. 
+In unserem Fall ist die Absender-Rufnummer "anonymous", was auf eine verstecke Rufnummer hindeutet.
 
 ![Display-Info des SIP-Headers ("anonymous")](./static/sip-from.png)
 
@@ -145,7 +145,7 @@ TODO: Add answer
 
 **Welcher Sprach-Codec wird hier eingesetzt? Wir hoch ist die Bitrate dieses Codecs?**
 
-Wie im folgenden zu sehen wird der Codec G.711 verwendet. Dieser Codec weist eine Bitrate von 64 kbit/s. Diese Bitrate resultiert aus den 8000 samples pro Sekunde mit jeweils 8 Bit. 
+Wie im folgenden zu sehen wird der Codec G.711 verwendet. Dieser Codec weist eine Bitrate von 64 kbit/s. Diese Bitrate resultiert aus den 8000 samples pro Sekunde mit jeweils 8 Bit.
 
 ![Auszug des RTP-Captures (Codec G.711)](./static/sip-g711.png)
 
