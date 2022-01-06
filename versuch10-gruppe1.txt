@@ -44,7 +44,13 @@ Bei der Konfiguration des sipgate-Accounts sind auch Angaben zum
 sogenannten STUN-Server erforderlich. Beschreiben Sie mit eigenen Worten
 Aufgaben und die Funktion eines STUN-Servers
 
-TODO: Add answer
+Die “Session Traversal Utilities for NAT” ist ein Standard, welcher
+dabei hilft, die öffentlichen Netzwerkadressen von Netzwerknodes
+herauszufinden, um eine Peer-to-peer Verbindung zwischen diesen Nodes
+hinter NAT herzustellen. Es kann außerdem festgestellt werden, welche
+Art von NAT verwendet wird (Full Cone, Restricted Cone…). Da die
+Belastung von STUN-Servern in der Realität vergleichsweise niedrig ist,
+können für viele Projekte öffentliche STUN-Server ausreichend sein.
 
 Welche IP-Adresse hat das REGISTER-Paket nach dem NAT-Vorgang (NAT ist
 wegen der privaten Adresse erforderlich)?
@@ -80,14 +86,16 @@ TODO: Add interpretation
 Warum wird für die so wichtige Registrierung nicht TCP (garantiert die
 bitgetreue Zustellung) verwendet, sondern UDP?
 
-TODO: Refine answer
-
-Das Protokoll hat einen Control-Flow bzw. ist verbindungsorientiert,
-kann also auch über UDP funktionieren.
+Für die Registrierung wird UDP statt TCP verwendet, da das Session
+Initiation Protocol (SIP) selbst eine spezifizierte Nachrichtenabfolge
+hat und verbindungsorientiert ist. Das ermöglicht, dass das SIP
+fehlerhafte Protokollabläufe selbst feststellt und nicht zwigend TCP zur
+Fehlerkorrektur benötigt, um Fehler festzustellen.
 
 Wie lange ist die Registrierung gültig?
 
-TODO: Refine answer
+Wie im folgenden Bild zu sehen ist beträgt der “Expires” Wert 900
+Sekunden. Dies entspricht 15 Minuten.
 
 [Gültigkeitsdauer der Registrierung (900s)]
 
@@ -95,27 +103,36 @@ Die interne IP-Adresse des UA wird durch NAT in eine offizielle externe
 IP umgesetzt. Wie lautet die externe IP und zu welchem Unternehmen
 gehört diese IP?
 
+Die externe IP des UA lautet 194.49.221.0 und gehört zur “DFS Deutsche
+Flugsicherung GmbH”.
+
 [Lookup-Ergebnisse zur IP (Deutsche Flugsicherung)]
 
 Verbindungsaufbau und SDP-Protokoll
 
 Welche SIP_Methods unterstützt der Anrufer?
 
-TODO: Add interpretation
+Wie im Screenshot zu sehen unterstützt der Anrufer die SIP-Methoden
+INVITE, ACK, CANCEL, OPTIONS, BYE, REFER, SUBSCRIBE, NOTIFY, INFO,
+PUBLISH und MESSAGE.
 
 [Erlaubte SIP-Methoden]
 
 Welche Bedeutung haben Trying und Ringing?
 
-TODO: Translate answer
+Die Response 100 Trying bedeutet, dass der next-hop Server die Anfrage
+erhalten hat und eine unspezifizierte Handlung vorgenommen wird, um
+diesen Anruf zu ermöglichen. Nach Trying werden die INVITE Nachrichten
+gestoppt.
 
--   100 Trying: Extended search being performed may take a significant
-    time so a forking proxy must send a 100 Trying response.
--   180 Ringing Destination user agent received INVITE, and is alerting
-    user of call.
+Die Response 180 Ringing bedeutet, dass der UA den INVITE erhalten hat
+und den Nutzer benachrichtigt.
 
 Welche Angabe bzgl. der Absender-Rufnummer erscheint auf dem Display des
 Empfängers?
+
+In unserem Fall ist die Absender-Rufnummer “anonymous”, was auf eine
+verstecke Rufnummer hindeutet.
 
 [Display-Info des SIP-Headers (“anonymous”)]
 
@@ -149,7 +166,8 @@ Wir kommen zur folgenden Wahrscheinlichkeit:
 
     2.938735877055719e-39;
 
-Diese ist wie zu erwarten ziemlich klein.
+Die Wahrscheinlichkeit für eine Kollision ist, wie zu erwarten sehr
+klein.
 
 Beschreiben Sie Aufbau und Inhalt des Session Description Protokoll
 (SDP), insbesondere die verwendeten Portnummern und das
@@ -161,7 +179,9 @@ TODO: Add answer
 Welcher Sprach-Codec wird hier eingesetzt? Wir hoch ist die Bitrate
 dieses Codecs?
 
-TODO: Add codec bitrate
+Wie im folgenden zu sehen wird der Codec G.711 verwendet. Dieser Codec
+weist eine Bitrate von 64 kbit/s. Diese Bitrate resultiert aus den 8000
+samples pro Sekunde mit jeweils 8 Bit.
 
 [Auszug des RTP-Captures (Codec G.711)]
 
@@ -202,27 +222,20 @@ TODO: Add interpretation (is it only half the roundtrip delay?)
 Können Sie auch RTCP-Pakete erkennen? Wie häufig werden sie gesendet?
 Welchem Zweck dienen sie?
 
-TODO: Translate answer
-
-The RTCP reporting interval is randomized to prevent unintended
-synchronization of reporting. The recommended minimum RTCP report
-interval per station is 5 seconds. Stations should not transmit RTCP
-reports more often than once every 5 seconds.
-
-Zeitintervalle: Alle 10s
-
-TODO: Translate answer
-
-Zweck: RTCP provides out-of-band statistics and control information for
-an RTP session. (“ICMP of RTP”)
+Es sind RTCP-Pakete in regelmäßigen Abständen zu finden. In userem Fall
+beträgt das Zeitintervall zwischen von einer Node ausgehenden
+Nachrichten 10 Sekunden. Das ist insofern passend, da das minimale
+Zeitintervall zwischen RTCP-Paketen 5 Sekunden betragen sollte. RTCP
+dient dem Zweck Statistiken und Kontrollinformationen über RTP-Sessions
+bereitzustellen.
 
 Welche Portnummern werden für die RTP-Verbindung verwendet, welche für
 die zugehörigen RTCP-Kontrollkanäle (Wireshark: VoipCalls – SIPFlows -
 FlowSequence)
 
-TODO: Add interpretation
-
-Die Port-Nummern werden für RTP relativ zu RTCP um 1 gesenkt.
+RTCP verwendet den Port 49702 bei der einen Node und 21805 bei der
+anderen. Relativ dazu betragen die RTP Ports 49701 und 21804. Dies ist
+jeweils der um 1 verringerte RTCP Port.
 
 [Port-Nummern von RTP und RTCP]
 
