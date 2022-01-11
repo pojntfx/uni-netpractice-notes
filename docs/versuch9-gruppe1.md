@@ -87,22 +87,24 @@ Zu sehen ist also, dass für ausgeschaltene PCs die Port-Geschwindigkeit auf 10 
 
 **Setzen Sie mit snmpset einen Ansprechparter auf ihrem Switch. Überprüfen sie ihre Einstellung!**
 
-`141.62.66.71` war ab diesem Zeitpunkt der Versuchsdurchführung nicht mehr erreichbar; wir sind auf den Rechner `rn02` ausgewichen, mit dem Switch `14.62.66.72`.
-
-![Ergebnis der Abfrage auf `141.62.66.72`](./static/syscontact-og.png)
+Zuerst muss SNMP-Schreibzugriff aktiviert werden:
 
 ![Aktivieren von SNMP-Schreibzugriff](./static/enable-snmp-write-access.png)
 
-TODO: Add next steps
+Im nachfolgenden wird nun der Switch mit der IP `141.62.66.81` verwendet.
+
+![Ergebnis der Abfrage auf `141.62.66.81`](./static/syscontact-og.png)
+
+![Setzen und erneutes Abfragen von `syscontact` auf `141.62.66.81`](./static/syscontact-new.png)
 
 **Verändern Sie mittels snmpset die Namen einzelner Switchports.**
 
-TODO: Add answer
+![Abfragen und Setzen des Namens des Switch-Ports 1 auf `141.62.66.81`](./static/port-name-change.png)
 
 **Setzen Sie mit snmpset einen beliebigen Switchport auf disable (Vorsicht: „Schneiden Sie sich nicht den Ast auf dem Sie sitzen ab!“)**
 
-TODO: Add answer
+![Deaktivieren eines Switchports auf `141.62.66.81`](./static/disable-switch-port.png)
 
 **Wie ändert man den System-Namen des Switches?**
 
-TODO: Add answer
+![Abfragen und Setzen des Namens des Switch-Namens 1 auf `141.62.66.81`](./static/sysname-set.png)
