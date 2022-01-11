@@ -150,3 +150,29 @@ TODO: Add interpretation
 ![Graph in Grafana](./static/grafana-finished-graph.png)
 
 ![Eingestellte Metrics in Grafana](./static/grafana-query-edit.png)
+
+## Munin
+
+**Wie platziert man sämtliche Nodes/Switche in der Web-Ansicht unter einer neuen Gruppe „Labor“ ? (Hinweis: Die gewählt Gruppenbezeichnung ist jedem Node voranzustellen.) Sprechen Sie sich innerhalb der Gruppe beim Editieren der /etc/munin/munin.conf ab, Sie arbeiten an EINER Datei!**
+
+```shell
+$ ssh-copy-id root@141.62.66.91
+$ ssh root@141.62.66.91
+# 83 ist im Versuch nicht erreichbar gewesen
+for node in 81 82 84 85; do
+munin-node-configure --shell --snmp 141.62.66.${node} --snmpcommunity public | bash
+tee /etc/munin/munin-conf.d/141.62.66.${node}.conf <<EOT
+[Labor;141.62.66.${node}]
+    address 127.0.0.1
+    use_node_name no
+EOT
+done
+# systemctl restart munin-node
+# munin-check
+```
+
+![Output der Web-GUI (Switch 216 in der Gruppe "Switches" war zuvor schon konfiguriert)](./static/munin-output.png)
+
+**Vergleichen Sie die beiden Tools Prometheus/grafana und munin. Welche Vor und Nachteile sehen sie jeweils?**
+
+TODO: Add answer
