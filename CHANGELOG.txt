@@ -1,3 +1,9 @@
+commit 4c36119a47e72868c577fe1a5784eb803039efa2
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Jan 11 15:29:12 2022 +0100
+
+    feat: Add Prometheus section
+
 commit 559bd918179ca97b7669d773feaf1c942f7e3822
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Jan 11 15:10:00 2022 +0100

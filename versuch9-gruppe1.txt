@@ -6,6 +6,7 @@ Jakob Waibel; Daniel Hiller; Elia Wüstner; Felix Pojtinger
     -   1.1 Mitwirken
     -   1.2 Lizenz
 -   2 SNMP
+-   3 Prometheus
 
 Einführung
 
@@ -131,3 +132,33 @@ Setzen Sie mit snmpset einen beliebigen Switchport auf disable
 Wie ändert man den System-Namen des Switches?
 
 [Abfragen und Setzen des Namens des Switch-Namens 1 auf 141.62.66.81]
+
+Prometheus
+
+Fragen Sie mit Prometheus den sysName ihres Switches ab
+
+[Ergebnis der sysname-Abfrage für 141.62.66.81`]
+
+Wie lange läuft Ihr Switch bereits?
+
+[Ergebnis der uptime-Abfrage für 141.62.66.81`]
+
+TODO: Add interpretation
+
+Sind alle Switchports „UP“?
+
+[Ergebnis der Switchport-Status-Abfrage für 141.62.66.81`]
+
+TODO: Add interpretation
+
+Mit welchem Speed laufen ihre Switchports
+
+[Ergebnis der ifspeed-Abfrage für 141.62.66.81`]
+
+TODO: Add interpretation
+
+Über wie viele Ethernet-Interfaces verfügt ihr Switch?
+
+[Ergebnis der ifindex-Abfrage für 141.62.66.81`]
+
+TODO: Add interpretation
