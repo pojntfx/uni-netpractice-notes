@@ -1,3 +1,9 @@
+commit 559bd918179ca97b7669d773feaf1c942f7e3822
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Jan 11 15:10:00 2022 +0100
+
+    feat: Add rest of switch configuration section
+
 commit 9955e55108f54fb3ab6f3045db6339106f0b853f
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Thu Jan 6 20:30:22 2022 +0100
