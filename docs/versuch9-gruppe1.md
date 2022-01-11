@@ -109,7 +109,7 @@ Im nachfolgenden wird nun der Switch mit der IP `141.62.66.81` verwendet.
 
 ![Abfragen und Setzen des Namens des Switch-Namens 1 auf `141.62.66.81`](./static/sysname-set.png)
 
-## Prometheus
+## Prometheus und Grafana
 
 **Fragen Sie mit Prometheus den sysName ihres Switches ab**
 
@@ -138,3 +138,15 @@ TODO: Add interpretation
 ![Ergebnis der `ifindex`-Abfrage für 141.62.66.81`](./static/prometheus-ifindex.png)
 
 TODO: Add interpretation
+
+**Legen Sie sich zunächst ein eigenes Dashboard (entsprechend ihrem Switch-Namen) an, damit Sie niemandem in die Quere kommen.**
+
+![Erstellen der Datenquelle für Prometheus](./static/grafana-add-data-source.png)
+
+**Stellen Sie Ingress und Egress eines Switchports mit einem sinnvollen Graphen dar**
+
+![Query in Prometheus (`irate(ifInOctets{instance="141.62.66.81", ifIndex="1"}[1m])`)](./static/prometheus-irate.png)
+
+![Graph in Grafana](./static/grafana-finished-graph.png)
+
+![Eingestellte Metrics in Grafana](./static/grafana-query-edit.png)
