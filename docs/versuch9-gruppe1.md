@@ -108,3 +108,33 @@ Im nachfolgenden wird nun der Switch mit der IP `141.62.66.81` verwendet.
 **Wie ändert man den System-Namen des Switches?**
 
 ![Abfragen und Setzen des Namens des Switch-Namens 1 auf `141.62.66.81`](./static/sysname-set.png)
+
+## Prometheus
+
+**Fragen Sie mit Prometheus den sysName ihres Switches ab**
+
+![Ergebnis der `sysname`-Abfrage für 141.62.66.81`](./static/prometheus-sysname.png)
+
+**Wie lange läuft Ihr Switch bereits?**
+
+![Ergebnis der `uptime`-Abfrage für 141.62.66.81`](./static/prometheus-uptime.png)
+
+TODO: Add interpretation
+
+**Sind alle Switchports „UP“?**
+
+![Ergebnis der Switchport-Status-Abfrage für 141.62.66.81`](./static/prometheus-ifadmin.png)
+
+TODO: Add interpretation
+
+**Mit welchem Speed laufen ihre Switchports**
+
+![Ergebnis der `ifspeed`-Abfrage für 141.62.66.81`](./static/prometheus-ifspeed.png)
+
+TODO: Add interpretation
+
+**Über wie viele Ethernet-Interfaces verfügt ihr Switch?**
+
+![Ergebnis der `ifindex`-Abfrage für 141.62.66.81`](./static/prometheus-ifindex.png)
+
+TODO: Add interpretation
