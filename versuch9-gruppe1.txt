@@ -6,7 +6,7 @@ Jakob Waibel; Daniel Hiller; Elia Wüstner; Felix Pojtinger
     -   1.1 Mitwirken
     -   1.2 Lizenz
 -   2 SNMP
--   3 Prometheus
+-   3 Prometheus und Grafana
 
 Einführung
 
@@ -133,7 +133,7 @@ Wie ändert man den System-Namen des Switches?
 
 [Abfragen und Setzen des Namens des Switch-Namens 1 auf 141.62.66.81]
 
-Prometheus
+Prometheus und Grafana
 
 Fragen Sie mit Prometheus den sysName ihres Switches ab
 
@@ -162,3 +162,18 @@ TODO: Add interpretation
 [Ergebnis der ifindex-Abfrage für 141.62.66.81`]
 
 TODO: Add interpretation
+
+Legen Sie sich zunächst ein eigenes Dashboard (entsprechend ihrem
+Switch-Namen) an, damit Sie niemandem in die Quere kommen.
+
+[Erstellen der Datenquelle für Prometheus]
+
+Stellen Sie Ingress und Egress eines Switchports mit einem sinnvollen
+Graphen dar
+
+[Query in Prometheus
+(irate(ifInOctets{instance="141.62.66.81", ifIndex="1"}[1m]))]
+
+[Graph in Grafana]
+
+[Eingestellte Metrics in Grafana]

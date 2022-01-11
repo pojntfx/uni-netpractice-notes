@@ -1,3 +1,9 @@
+commit 1fed1b12ece48ae95f82edcc2723f0443e5dde26
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Tue Jan 11 16:04:24 2022 +0100
+
+    feat: Add section on Grafana
+
 commit 4c36119a47e72868c577fe1a5784eb803039efa2
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Jan 11 15:29:12 2022 +0100
