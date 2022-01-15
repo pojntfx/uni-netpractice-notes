@@ -44,8 +44,17 @@ Erkennen Sie, wer der Verwalter des Gerätes 141.62.66.213, 141.62.66.214
 und 141.62.66.215 ist (sysContact)? Starten Sie eine Anfrage an einen
 Switch, die die Systeminfos abruft.
 
-141.62.66.215 war wie auf dem Screenshot zu sehen ist zum Zeitpunkt der
-Versuchsdurchführung nicht erreichbar.
+Um die nötigen Informationen zu erhalten, verwendeten wir den folgenden
+Befehl für die angegebenen IP-Adressen:
+
+    ./snmpwalk.exe -v 2c -c public 141.62.66.213 .1.3.6.1.2.1.1
+
+141.62.66.215 war, wie auf dem Screenshot zu sehen ist, zum Zeitpunkt
+der Versuchsdurchführung nicht erreichbar.
+
+Der Screenshot zeigt, dass der sysContact und dementsprechend der
+Verwalter der Geräte für 141.62.66.213 und 141.62.66.214 den String-Wert
+“van der Kamp” hat.
 
 [Ergebnis der Abfrage (van der Kamp)]
 
@@ -78,14 +87,21 @@ derzeit jeweils und warum? Was ist das besondere bei Port 25 auf Switch
 TODO: Add interpretation
 
 Welche Geräte sind auf welchen Ports (141.62.66.213 oder .214, .215)
-angeschlossen (Hinseis: ifAlias)?
-
-TODO: Add interpretation
+angeschlossen (Hinweis: ifAlias)?
 
 141.62.66.215 war zum Zeitpunkt der Versuchsdurchführung nicht
 erreichbar.
 
+Mit ./snmpwalk.exe -v 2c -c public 141.62.66.213 ifAlias können wir die
+angeschlossenenen Geräte an den jeweiligen Ports finden.
+
+141.62.66.213 hat ein Gerät namens PC-1 in Port 20 angeschlossen und
+Server-15 in Port 21.
+
 [Ergebnis der Abfrage auf 141.62.66.213]
+
+An 141.62.66.214 sind an Port 20 ein HP-Officejet angeschlossen und an
+Port 21 eine Fritzbox 7590.
 
 [Ergebnis der Abfrage auf 141.62.66.214]
 
@@ -93,7 +109,7 @@ Gibt es Unterschiede beispielsweise zwischen PCs die angeschaltet sind
 und solchen, die zwar angeschlossen, aber ausgeschaltet sind (Hinweis:
 Erkennbar an der Port-Geschwindgkeit) ?
 
-Alle Geräte bei uns sind angeschlossen und deren Ports werden als 1
+Anfangs waren alle Geräte bei uns angeschlossen und deren Ports als 1
 Gigabit-Port dargestellt; Alias 25 aber wird als 10 Gigabit-Port
 dargestellt. Alias 4433 wird als 100 MBit-Port dargestellt.
 
@@ -108,7 +124,14 @@ auf 10 Mbit sinkt.
 Wie sieht ein entsprechender snmpwalk bei ihrem Switch aus (objectID:
 .1.3.6.1.2.1.1)?
 
+Wir verwenden den Befehl
+./snmpwalk.exe -v 2c -c public 141.62.66.71 .1.3.6.1.2.1.1:
+
 [Ergebnis der Abfrage auf 141.62.66.71]
+
+Man kann auf dem Screenshot erkennen, dass sysContact, sysName und
+sysLocation noch nicht konfiguriert sind, beziehungsweise Stadardwerte
+haben.
 
 Setzen Sie mit snmpset einen Ansprechparter auf ihrem Switch. Überprüfen
 sie ihre Einstellung!
@@ -119,20 +142,58 @@ Zuerst muss SNMP-Schreibzugriff aktiviert werden:
 
 Im nachfolgenden wird nun der Switch mit der IP 141.62.66.81 verwendet.
 
+Zunächst geben wir uns den alten sysContact mit
+./snmpwalk.exe -v 2c -c public 141.62.66.81 syscontact aus. Wir sehen,
+dieser hat aktuell den Wert TestSwitch.
+
 [Ergebnis der Abfrage auf 141.62.66.81]
+
+Nun setzen wir den Wert des syscontacts mit dem Befehl
+./snmpset.exe -v 2c -c public 141.62.66.81 1.3.6.1.2.1.1.4.0 s "uwu" auf
+den Wert uwu. Danach geben wir uns den geänderten sysContact erneut aus:
 
 [Setzen und erneutes Abfragen von syscontact auf 141.62.66.81]
 
 Verändern Sie mittels snmpset die Namen einzelner Switchports.
+
+Zuerst zeigen wir uns mit
+./snmpwalk.exe -v 2c -c public 141.62.66.81 IF-MIB::ifAlias die
+bisherigen Informationen und daher auch die Namen der Switchports an.
+
+Im folgenden ändern wir den Namen des ersten Ports mit dem Befehl
+./snmpset.exe -v 2c -c public 141.62.66.81 IF-MIB::ifAlias.1 s "uwu_port"
+auf den Wert uwu_port.
+
+Beim erneuten Anzeigen der Switchport-Informationen können wir den
+geänderten Namen sehen:
 
 [Abfragen und Setzen des Namens des Switch-Ports 1 auf 141.62.66.81]
 
 Setzen Sie mit snmpset einen beliebigen Switchport auf disable
 (Vorsicht: „Schneiden Sie sich nicht den Ast auf dem Sie sitzen ab!“)
 
+Mit
+./snmpset.exe -v 2c -c public 141.62.66.81 IF-MIB::ifAdminStatus.7 i 2
+deaktivieren wir einen der Switchports. Der Wert 2 kann zum deaktivieren
+verwendet werden. Der Wert 1 aktiviert den Switchport wieder.
+
+Wie wir im Screenshot sehen können, hat sich der Status des Ports auf
+down(2) geändert:
+
 [Deaktivieren eines Switchports auf 141.62.66.81]
 
 Wie ändert man den System-Namen des Switches?
+
+Zuerst geben wir uns den bisherigen Switch-Namen mit
+./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0 aus. Der bisherige
+System-Name ist HP-2530-8G.
+
+Wir ändern den Switch-Namen mit
+./snmpset.exe -v 2c -c public 141.62.66.81 sysName.0 s "uwu-switch" auf
+den Wert uwu-switch.
+
+Mit ./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0 geben wir uns
+den geänderten System-Namen erneut aus:
 
 [Abfragen und Setzen des Namens des Switch-Namens 1 auf 141.62.66.81]
 
@@ -140,42 +201,76 @@ Prometheus und Grafana
 
 Fragen Sie mit Prometheus den sysName ihres Switches ab
 
+Mit sysName{instance="141.62.66.81"} können wir den System-Namen unseres
+Switches abfragen:
+
 [Ergebnis der sysname-Abfrage für 141.62.66.81`]
+
+Der Name unseres Switches ist, wie vorhin festgelegt, uwu-switch.
 
 Wie lange läuft Ihr Switch bereits?
 
+Mit sysUpTime{instance="141.62.66.81} können wir herausfinden, wie lange
+unser Switch bisher läuft:
+
 [Ergebnis der uptime-Abfrage für 141.62.66.81`]
 
-TODO: Add interpretation
+Unser Switch läuft seit 8587799. Unter diesem Link konnten wir
+herausfinden, dass dieser Wert in Hundertstel-Sekunden angegeben ist.
+Das lässt darauf schließen, dass dieser Switch seit 85877 Sekunden
+läuft, was ungefähr einem Tag entspricht.
 
 Sind alle Switchports „UP“?
 
-[Ergebnis der Switchport-Status-Abfrage für 141.62.66.81`]
+Mit ifAdminStatus{instance="141.62.66.82"} können wir uns Informationen
+über unsere Switchports anzeigen lassen. Die Value 1 deutet auf einen
+aktivierten Switchport hin. Der Wert 2 deutet auf deaktivierte
+Switchports hin.
 
-TODO: Add interpretation
+Auf unserem Screenshot haben 7 Ports die Value 2, was darauf deutet,
+dass diese Ports deaktiviert sind und damit nicht alle Switchports “up”
+sind.
+
+[Ergebnis der Switchport-Status-Abfrage für 141.62.66.81`]
 
 Mit welchem Speed laufen ihre Switchports
 
-[Ergebnis der ifspeed-Abfrage für 141.62.66.81`]
+Mit ifSpeed{instance="141.62.66.82} kann die Bandbreite der Switchports
+angezeigt werden. Laut der Dokumentation wird die Bandbreite in Bits pro
+Sekunde angegeben.
 
-TODO: Add interpretation
+Die meisten Switchports laufen auf 1.000.000.000 Bits pro Sekunde, was 1
+Gigabit pro Sekunde entspricht.
+
+[Ergebnis der ifspeed-Abfrage für 141.62.66.81`]
 
 Über wie viele Ethernet-Interfaces verfügt ihr Switch?
 
-[Ergebnis der ifindex-Abfrage für 141.62.66.81`]
+Mit ifIndex{instance="141.62.66.81"} können die Ethernet-Interfaces
+aufgelistet werden. Auf dem Screenshot sind 19 Ethernet-Interfaces zu
+sehen.
 
-TODO: Add interpretation
+[Ergebnis der ifindex-Abfrage für 141.62.66.81`]
 
 Legen Sie sich zunächst ein eigenes Dashboard (entsprechend ihrem
 Switch-Namen) an, damit Sie niemandem in die Quere kommen.
+
+Zunächst erstellen wir eine neue Data Source mit der folgenden
+Konfiguration:
 
 [Erstellen der Datenquelle für Prometheus]
 
 Stellen Sie Ingress und Egress eines Switchports mit einem sinnvollen
 Graphen dar
 
+Mit Prometheus kann der Graph mit Hilfe der Query
+irate(iflnOctets{instance="141.62.66.81", ifIndex="1"}[1m]) angezeigt
+werden.
+
 [Query in Prometheus
 (irate(ifInOctets{instance="141.62.66.81", ifIndex="1"}[1m]))]
+
+Mit Graphana kann der Graph mit der gleichen Query angezeigt werden:
 
 [Graph in Grafana]
 

@@ -1,3 +1,18 @@
+commit 1943a028e7de4716a7fb1ccb24536ebc5821b3fe
+Merge: ce48eb5 bd1db4a
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Sat Jan 15 17:04:51 2022 +0100
+
+    Merge pull request #19 from JakWai01/main
+    
+    feat: Add some documentation
+
+commit bd1db4a1b33e50de8d1c5b346304b47877bfa0d3
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Jan 15 15:59:33 2022 +0100
+
+    feat: Add some documentation
+
 commit ce48eb5696344d4dacd4581624da7b1d2a9ce432
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Tue Jan 11 17:35:20 2022 +0100
