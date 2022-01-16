@@ -303,7 +303,10 @@ konfiguriert)]
 Vergleichen Sie die beiden Tools Prometheus/grafana und munin. Welche
 Vor und Nachteile sehen sie jeweils?
 
-TODO: Add answer
+TODO: Bei Prometheus/grafana ist die UI etwas ansprechender und
+konfigurierbar. Das älter aussehende Munin ist nur in der CLI
+konfigurierbar. Es gibt dort bereits einige Grafen zu Themen wie Traffic
+und Errors. In grafana hätte man diese selbst konfigurieren müssen.
 
 LibreNMS
 
