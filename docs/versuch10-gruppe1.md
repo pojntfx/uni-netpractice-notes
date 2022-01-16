@@ -59,7 +59,7 @@ TODO: Add interpretation
 
 **Nach diesem typischen Ablauf ist der UAC beim Provider registriert. Warum wird die Anfrage zur Registrierung zunächst abgewiesen?**
 
-TODO: Add answer (NAT)
+TODO: Die Credentials des UAC werden mithilfe der in der Rejection (401 Unauthorized) vorhandenen Daten verschlüsselt. Sobald die Credentials verschlüsselt wurden können sie an das SIP-Gateway geschickt werden.
 
 **Worin unterscheiden sich die beiden REGISTER-Pakete?**
 
@@ -141,7 +141,7 @@ Die Wahrscheinlichkeit für eine Kollision ist, wie zu erwarten sehr klein.
 
 **Beschreiben Sie Aufbau und Inhalt des Session Description Protokoll (SDP), insbesondere die verwendeten Portnummern und das Audio-Video-Profile AVP, das die erlaubten Codecs in einer priorisierten Reihenfolge angibt.**
 
-TODO: Add answer
+TODO: In SDP werden Eigenschaften von Multimediadatenströmen aufgezeigt. SDP beinhaltet die Sitzungsbeschreibungen (Protokollversion (v), Session-ID (o)), die Zeitbeschreibung und die Medienbeschreibung (Medientyp, Port und Protokoll (m))
 
 **Welcher Sprach-Codec wird hier eingesetzt? Wir hoch ist die Bitrate dieses Codecs?**
 
@@ -159,7 +159,7 @@ TODO: Add interpretation
 
 **Wieviel „Audio-Samples“ (Abtastproben) enthält ein Ethernet-Paket? In welchen zeitlichen Abständen werden die Pakete gesendet?**
 
-TODO: Add answer
+TODO: In digitaler Telephonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate kann dann im Media-Attribute eingestellt werden.
 
 **Welche Ethernet-Paketlänge wird übertragen? Warum fasst man nicht längere oder kürzere Zeiträume zusammen?**
 
