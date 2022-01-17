@@ -1,3 +1,9 @@
+commit 6a913b548c22cdcb791f22a3c5ddb1f946e4985f
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Jan 17 20:20:06 2022 +0100
+
+    feat: Resolve TODOs in the tenth exercise
+
 commit b40bc7459f8af62db2418f9aefe394225699b581
 Merge: 99eb863 aa4e328
 Author: Felix Pojtinger <felix@pojtinger.com>
