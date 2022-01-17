@@ -1,3 +1,9 @@
+commit ea5fe36306bcd4712462d876fd5c9f93f8f752ea
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Jan 17 20:32:38 2022 +0100
+
+    feat: Resolve first TODOs in the ninth exercise
+
 commit 6a913b548c22cdcb791f22a3c5ddb1f946e4985f
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Jan 17 20:20:06 2022 +0100

@@ -63,7 +63,10 @@ Nutzen Sie den Befehl snmpwalk, um zu ergründen auf welchem Switchport
 welche Einheit handelt es sich? Auf welchem Switchport war bisher
 offensichtlich kein PC angesteckt?
 
-TODO: Add interpretation
+Verwendet wurde ifInOctets bzw. ifOutOctets, was die Anzahl an
+empfangenen bzw. gesendeten Oktets (Bytes) beschreibt; auf den Ports, an
+welchen kein Traffic stattfindet, ist offensichtlich kein PC
+eingesteckt.
 
 141.62.66.215 war zum Zeitpunkt der Versuchsdurchführung nicht
 erreichbar.
@@ -84,7 +87,10 @@ derzeit jeweils und warum? Was ist das besondere bei Port 25 auf Switch
 
 [Ergebnis der ifHighSpeed Abfrage auf 141.62.66.215]
 
-TODO: Add interpretation
+-   Port 2 auf 141.62.66.215: 10 Mbit/s
+-   Port 24 auf 141.62.66.215: 100 Mbit/s
+-   Port 25 auf 141.62.66.213, 141.62.66.214: 10 Gigabit/s
+-   Restliche Ports: 1 Gigabit/s
 
 Welche Geräte sind auf welchen Ports (141.62.66.213 oder .214, .215)
 angeschlossen (Hinweis: ifAlias)?
