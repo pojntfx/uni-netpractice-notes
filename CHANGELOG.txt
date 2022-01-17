@@ -1,3 +1,18 @@
+commit b40bc7459f8af62db2418f9aefe394225699b581
+Merge: 99eb863 aa4e328
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Jan 17 20:08:44 2022 +0100
+
+    Merge pull request #21 from dentremor/main
+    
+    feat: Solve todos
+
+commit aa4e32802e165399a23ac3bd0f643560e77c086e
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Mon Jan 17 18:29:07 2022 +0100
+
+    feat: Solve todos
+
 commit 99eb863b85903c2a78d00bb06d7ab8d673104074
 Merge: 1943a02 eb1369c
 Author: Felix Pojtinger <felix@pojtinger.com>
