@@ -37,7 +37,7 @@ SPDX-License-Identifier: AGPL-3.0
 
 **Erkennen Sie, wer der Verwalter des Gerätes 141.62.66.213, 141.62.66.214 und 141.62.66.215 ist (sysContact)? Starten Sie eine Anfrage an einen Switch, die die Systeminfos abruft.**
 
-Um die nötigen Informationen zu erhalten, verwendeten wir den folgenden Befehl für die angegebenen IP-Adressen: 
+Um die nötigen Informationen zu erhalten, verwendeten wir den folgenden Befehl für die angegebenen IP-Adressen:
 
 ```
 ./snmpwalk.exe -v 2c -c public 141.62.66.213 .1.3.6.1.2.1.1
@@ -45,13 +45,13 @@ Um die nötigen Informationen zu erhalten, verwendeten wir den folgenden Befehl 
 
 `141.62.66.215` war, wie auf dem Screenshot zu sehen ist, zum Zeitpunkt der Versuchsdurchführung nicht erreichbar.
 
-Der Screenshot zeigt, dass der `sysContact` und dementsprechend der Verwalter der Geräte für `141.62.66.213` und `141.62.66.214` den String-Wert "van der Kamp" hat. 
+Der Screenshot zeigt, dass der `sysContact` und dementsprechend der Verwalter der Geräte für `141.62.66.213` und `141.62.66.214` den String-Wert "van der Kamp" hat.
 
 ![Ergebnis der Abfrage (van der Kamp)](./static/snmp-results.png)
 
 **Nutzen Sie den Befehl snmpwalk, um zu ergründen auf welchem Switchport (141.62.66.213, 141.62.66.214 oder 141.62.66.215) wie viel los war. Um welche Einheit handelt es sich? Auf welchem Switchport war bisher offensichtlich kein PC angesteckt?**
 
-TODO: Add interpretation
+Verwendet wurde `ifInOctets` bzw. `ifOutOctets`, was die Anzahl an empfangenen bzw. gesendeten Oktets (Bytes) beschreibt; auf den Ports, an welchen kein Traffic stattfindet, ist offensichtlich kein PC eingesteckt.
 
 `141.62.66.215` war zum Zeitpunkt der Versuchsdurchführung nicht erreichbar.
 
@@ -69,7 +69,10 @@ TODO: Add interpretation
 
 ![Ergebnis der `ifHighSpeed` Abfrage auf `141.62.66.215`](./static/snmpwalk-ifhighspeed-215.png)
 
-TODO: Add interpretation
+- Port 2 auf `141.62.66.215`: 10 Mbit/s
+- Port 24 auf `141.62.66.215`: 100 Mbit/s
+- Port 25 auf `141.62.66.213`, `141.62.66.214`: 10 Gigabit/s
+- Restliche Ports: 1 Gigabit/s
 
 **Welche Geräte sind auf welchen Ports (141.62.66.213 oder .214, .215) angeschlossen (Hinweis: ifAlias)?**
 
@@ -101,7 +104,7 @@ Wir verwenden den Befehl `./snmpwalk.exe -v 2c -c public 141.62.66.71 .1.3.6.1.2
 
 ![Ergebnis der Abfrage auf `141.62.66.71`](./static/snmpwalk-switch.png)
 
-Man kann auf dem Screenshot erkennen, dass `sysContact`, `sysName` und `sysLocation` noch nicht konfiguriert sind, beziehungsweise Stadardwerte haben. 
+Man kann auf dem Screenshot erkennen, dass `sysContact`, `sysName` und `sysLocation` noch nicht konfiguriert sind, beziehungsweise Stadardwerte haben.
 
 **Setzen Sie mit snmpset einen Ansprechparter auf ihrem Switch. Überprüfen sie ihre Einstellung!**
 
@@ -111,7 +114,7 @@ Zuerst muss SNMP-Schreibzugriff aktiviert werden:
 
 Im nachfolgenden wird nun der Switch mit der IP `141.62.66.81` verwendet.
 
-Zunächst geben wir uns den alten `sysContact` mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 syscontact` aus. Wir sehen, dieser hat aktuell den Wert `TestSwitch`. 
+Zunächst geben wir uns den alten `sysContact` mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 syscontact` aus. Wir sehen, dieser hat aktuell den Wert `TestSwitch`.
 
 ![Ergebnis der Abfrage auf `141.62.66.81`](./static/syscontact-og.png)
 
@@ -139,11 +142,11 @@ Wie wir im Screenshot sehen können, hat sich der Status des Ports auf `down(2)`
 
 **Wie ändert man den System-Namen des Switches?**
 
-Zuerst geben wir uns den bisherigen Switch-Namen mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` aus. Der bisherige System-Name ist `HP-2530-8G`. 
+Zuerst geben wir uns den bisherigen Switch-Namen mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` aus. Der bisherige System-Name ist `HP-2530-8G`.
 
-Wir ändern den Switch-Namen mit `./snmpset.exe -v 2c -c public 141.62.66.81 sysName.0 s "uwu-switch"` auf den Wert `uwu-switch`. 
+Wir ändern den Switch-Namen mit `./snmpset.exe -v 2c -c public 141.62.66.81 sysName.0 s "uwu-switch"` auf den Wert `uwu-switch`.
 
-Mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` geben wir uns den geänderten System-Namen erneut aus: 
+Mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` geben wir uns den geänderten System-Namen erneut aus:
 
 ![Abfragen und Setzen des Namens des Switch-Namens 1 auf `141.62.66.81`](./static/sysname-set.png)
 
@@ -151,7 +154,7 @@ Mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` geben wir uns den ge
 
 **Fragen Sie mit Prometheus den sysName ihres Switches ab**
 
-Mit `sysName{instance="141.62.66.81"}` können wir den System-Namen unseres Switches abfragen: 
+Mit `sysName{instance="141.62.66.81"}` können wir den System-Namen unseres Switches abfragen:
 
 ![Ergebnis der `sysname`-Abfrage für 141.62.66.81`](./static/prometheus-sysname.png)
 
@@ -159,23 +162,23 @@ Der Name unseres Switches ist, wie vorhin festgelegt, `uwu-switch`.
 
 **Wie lange läuft Ihr Switch bereits?**
 
-Mit `sysUpTime{instance="141.62.66.81}` können wir herausfinden, wie lange unser Switch bisher läuft: 
+Mit `sysUpTime{instance="141.62.66.81}` können wir herausfinden, wie lange unser Switch bisher läuft:
 
 ![Ergebnis der `uptime`-Abfrage für 141.62.66.81`](./static/prometheus-uptime.png)
 
-Unser Switch läuft seit `8587799`. Unter diesem [Link](https://oidref.com/1.3.6.1.2.1.1.3) konnten wir herausfinden, dass dieser Wert in Hundertstel-Sekunden angegeben ist. Das lässt darauf schließen, dass dieser Switch seit `85877` Sekunden läuft, was ungefähr einem Tag entspricht. 
+Unser Switch läuft seit `8587799`. Unter diesem [Link](https://oidref.com/1.3.6.1.2.1.1.3) konnten wir herausfinden, dass dieser Wert in Hundertstel-Sekunden angegeben ist. Das lässt darauf schließen, dass dieser Switch seit `85877` Sekunden läuft, was ungefähr einem Tag entspricht.
 
 **Sind alle Switchports „UP“?**
 
-Mit `ifAdminStatus{instance="141.62.66.82"}` können wir uns Informationen über unsere Switchports anzeigen lassen. Die Value `1` deutet auf einen aktivierten Switchport hin. Der Wert `2` deutet auf deaktivierte Switchports hin. 
+Mit `ifAdminStatus{instance="141.62.66.82"}` können wir uns Informationen über unsere Switchports anzeigen lassen. Die Value `1` deutet auf einen aktivierten Switchport hin. Der Wert `2` deutet auf deaktivierte Switchports hin.
 
-Auf unserem Screenshot haben 7 Ports die Value `2`, was darauf deutet, dass diese Ports deaktiviert sind und damit nicht alle Switchports "up" sind. 
+Auf unserem Screenshot haben 7 Ports die Value `2`, was darauf deutet, dass diese Ports deaktiviert sind und damit nicht alle Switchports "up" sind.
 
 ![Ergebnis der Switchport-Status-Abfrage für 141.62.66.81`](./static/prometheus-ifadmin.png)
 
 **Mit welchem Speed laufen ihre Switchports**
 
-Mit `ifSpeed{instance="141.62.66.82}` kann die Bandbreite der Switchports angezeigt werden. Laut der [Dokumentation](http://oid-info.com/get/1.3.6.1.2.1.2.2.1.5) wird die Bandbreite in Bits pro Sekunde angegeben. 
+Mit `ifSpeed{instance="141.62.66.82}` kann die Bandbreite der Switchports angezeigt werden. Laut der [Dokumentation](http://oid-info.com/get/1.3.6.1.2.1.2.2.1.5) wird die Bandbreite in Bits pro Sekunde angegeben.
 
 Die meisten Switchports laufen auf 1.000.000.000 Bits pro Sekunde, was 1 Gigabit pro Sekunde entspricht.
 
@@ -189,17 +192,17 @@ Mit `ifIndex{instance="141.62.66.81"}` können die Ethernet-Interfaces aufgelist
 
 **Legen Sie sich zunächst ein eigenes Dashboard (entsprechend ihrem Switch-Namen) an, damit Sie niemandem in die Quere kommen.**
 
-Zunächst erstellen wir eine neue Data Source mit der folgenden Konfiguration: 
+Zunächst erstellen wir eine neue Data Source mit der folgenden Konfiguration:
 
 ![Erstellen der Datenquelle für Prometheus](./static/grafana-add-data-source.png)
 
 **Stellen Sie Ingress und Egress eines Switchports mit einem sinnvollen Graphen dar**
 
-Mit Prometheus kann der Graph mit Hilfe der Query `irate(iflnOctets{instance="141.62.66.81", ifIndex="1"}[1m])` angezeigt werden. 
+Mit Prometheus kann der Graph mit Hilfe der Query `irate(iflnOctets{instance="141.62.66.81", ifIndex="1"}[1m])` angezeigt werden.
 
 ![Query in Prometheus (`irate(ifInOctets{instance="141.62.66.81", ifIndex="1"}[1m])`)](./static/prometheus-irate.png)
 
-Mit Graphana kann der Graph mit der gleichen Query angezeigt werden: 
+Mit Graphana kann der Graph mit der gleichen Query angezeigt werden:
 
 ![Graph in Grafana](./static/grafana-finished-graph.png)
 
