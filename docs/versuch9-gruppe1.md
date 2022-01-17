@@ -49,23 +49,27 @@ Der Screenshot zeigt, dass der `sysContact` und dementsprechend der Verwalter de
 
 ![Ergebnis der Abfrage (van der Kamp)](./static/snmp-results.png)
 
+\newpage
+
 **Nutzen Sie den Befehl snmpwalk, um zu ergründen auf welchem Switchport (141.62.66.213, 141.62.66.214 oder 141.62.66.215) wie viel los war. Um welche Einheit handelt es sich? Auf welchem Switchport war bisher offensichtlich kein PC angesteckt?**
 
 Verwendet wurde `ifInOctets` bzw. `ifOutOctets`, was die Anzahl an empfangenen bzw. gesendeten Oktets (Bytes) beschreibt; auf den Ports, an welchen kein Traffic stattfindet, ist offensichtlich kein PC eingesteckt.
 
 `141.62.66.215` war zum Zeitpunkt der Versuchsdurchführung nicht erreichbar.
 
-![Ergebnis der Abfrage auf `141.62.66.213`](./static/traffic-213.png)
+![Ergebnis der Abfrage auf `141.62.66.213`](./static/traffic-213.png){ width=400px }
 
-![Ergebnis der Abfrage auf `141.62.66.214`](./static/traffic-214.png)
+![Ergebnis der Abfrage auf `141.62.66.214`](./static/traffic-214.png){ width=400px }
+
+\newpage
 
 **Welche „Geschwindigkeiten“ (10, 100, 1000 Mbit/s) haben die Interfaces derzeit jeweils und warum? Was ist das besondere bei Port 25 auf Switch 141.62.66.215? (Hinweis: ifSpeed vs. ifHighSpeed)**
 
-![Ergebnis der Abfrage auf `141.62.66.213`](./static/speed-213.png)
+![Ergebnis der Abfrage auf `141.62.66.213`](./static/speed-213.png){ width=400px }
 
-![Ergebnis der Abfrage auf `141.62.66.214`](./static/speed-214.png)
+![Ergebnis der Abfrage auf `141.62.66.214`](./static/speed-214.png){ width=400px }
 
-![Ergebnis der `ifspeed` Abfrage auf `141.62.66.215`](./static/snmpwalk-ifspeed-215.png)
+![Ergebnis der `ifspeed` Abfrage auf `141.62.66.215`](./static/snmpwalk-ifspeed-215.png){ width=400px }
 
 ![Ergebnis der `ifHighSpeed` Abfrage auf `141.62.66.215`](./static/snmpwalk-ifhighspeed-215.png)
 
@@ -149,6 +153,8 @@ Wir ändern den Switch-Namen mit `./snmpset.exe -v 2c -c public 141.62.66.81 sys
 Mit `./snmpwalk.exe -v 2c -c public 141.62.66.81 sysName.0` geben wir uns den geänderten System-Namen erneut aus:
 
 ![Abfragen und Setzen des Namens des Switch-Namens 1 auf `141.62.66.81`](./static/sysname-set.png)
+
+\newpage
 
 ## Prometheus und Grafana
 
@@ -244,6 +250,8 @@ Bei Prometheus/grafana ist die UI etwas ansprechender und konfigurierbar. Das ä
 
 ![Setzen der SNMP-Einstellungen auf Windows](./static/snmp-windows-contact.png)
 
+\newpage
+
 ```shell
 $ snmpwalk -v 2c -c public 141.62.66.1
 SNMPv2-MIB::sysDescr.0 = STRING: Hardware: Intel64 Family 6 Model 158 Stepping 9 AT/AT COMPATIBLE - Software: Windows Version 6.3 (Build 19043 Multiprocessor Free)
@@ -298,6 +306,8 @@ Zu STP kann erkannt werden:
 - Performance- und Latenzdaten wie Hello Time etc.
 
 Bzgl. der Neighbors kann aus dem Graph entnommen werden, dass die Node `151.62.66.1` im selben Netz ist.
+
+\newpage
 
 **Fügen Sie den Switch 141.62.66.215 zu LibreNMS hinzu. Kontrollieren Sie den Port 25 (A1) auf Switch 141.62.66.215. Wie ist die Angabe des „Speed“ im Vergleich zur Feststellung aus Aufgabe 1 c?**
 
@@ -358,4 +368,4 @@ IF-MIB::ifSpecific.1 = OID: SNMPv2-SMI::zeroDotZero
 
 ![Device info in LibreNMS](./static/librenms-status-241.png)
 
-Aus dem Systennamen "brennenstuhlpdu" lässt sich schließen, dass es sich um eine Steckdosenleiste des Herstellers Brennenstuhl handelt.
+Aus dem Systennamen `brennenstuhlpdu` lässt sich schließen, dass es sich um eine Steckdosenleiste des Herstellers Brennenstuhl handelt.
