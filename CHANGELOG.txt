@@ -1,3 +1,25 @@
+commit 2c67be7c8b21226de1194ed0ca671081c9a4db56
+Merge: 29c5a8c 4df2e80
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Jan 17 21:30:18 2022 +0100
+
+    Merge pull request #22 from JakWai01/main
+    
+    fix: Typos
+
+commit 4df2e802f4cf2d478cb9bdcae75adff311ebcd8c
+Merge: e06da99 29c5a8c
+Author: Jakob Waibel <59575534+JakWai01@users.noreply.github.com>
+Date:   Mon Jan 17 21:27:32 2022 +0100
+
+    Merge branch 'pojntfx:main' into main
+
+commit e06da9924c7118bea1e514c114ab4ed89c2467ce
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Jan 17 21:27:13 2022 +0100
+
+    fix: Typos
+
 commit 29c5a8c77c5042156b2673cb65e78befc0bc9e4d
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Jan 17 20:54:53 2022 +0100
