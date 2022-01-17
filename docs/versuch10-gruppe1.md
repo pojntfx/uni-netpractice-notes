@@ -63,9 +63,9 @@ Die Credentials des UAC werden mithilfe der in der Rejection (401 Unauthorized) 
 
 **Worin unterscheiden sich die beiden REGISTER-Pakete?**
 
-TODO: Add interpretation
-
 ![Vergleich beider SIP-Pakete (Contact & Authorization)](./static/sip-packet-comparison.png)
+
+Dem linken (ersten) Paket fehlt die Authorisierung, das zweite besitzt diese im Realm `sipgate.de`
 
 **Warum wird für die so wichtige Registrierung nicht TCP (garantiert die bitgetreue Zustellung) verwendet, sondern UDP?**
 
@@ -163,8 +163,7 @@ In digitaler Telefonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate
 
 **Welche Ethernet-Paketlänge wird übertragen? Warum fasst man nicht längere oder kürzere Zeiträume zusammen?**
 
-Es wird eine Paketlänge von insgesamt 214 Bytes übertragen. Von diesen 214 Bytes, stellen 54 Bytes Header von Ethernet(14 Byte), IPv4(20 Byte), UDP(8 Byte) und RTP(12 Byte) dar. Somit bleibt eine Nutzlast von 160 Bytes. 
-TODO: Zweite Frage beantworten.
+Es wird eine Paketlänge von insgesamt 214 Bytes übertragen. Von diesen 214 Bytes, stellen 54 Bytes Header von Ethernet (14 Byte), IPv4 (20 Byte), UDP (8 Byte) und RTP (12 Byte) dar. Somit bleibt eine Nutzlast von 160 Bytes. Längere Zeiträume würden zu höherer Latenz, kleine Zeiträume zu größerem Overhead durch den Header führen.
 
 ![Länge des Ethernet-Frames (214 bytes)](./static/rtp-frame-length.png)
 
