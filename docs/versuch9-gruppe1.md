@@ -261,7 +261,10 @@ SNMPv2-MIB::sysServices.0 = INTEGER: 77
 
 ![Abfrage der Netzwerkinterfaces des Windows-Host über LibreNMS](./static/librenms-ports.png)
 
-TODO: Add interpretation of network interface names
+- `loopback_5`: Ein Pseudo-Interface, über welches sich das System selbst kontaktieren kann (auf Linux: `lo`)
+- `tunnel_*`: Windows-Äquivalent eines TAP- oder TUN-Device, mittels welchem z.B. VPNs realisiert werden können (auf Linux: `tapX`/`tunX`); da mehrere solcher Adapter vorhanden sind, sind wohl mehrere Tunnel vorhanden
+- `ethernet_*`: Ethernet-Adapter (auf Linux: `enpXsX`); da mehrere solcher Adapter vorhanden sind, sind wohl mehrere Netzwerkkarten verbaut
+- `ppp_*`: Ein Point-to-Point-Protokoll-Adapter (auf Linux: `pppX`)
 
 **Welche Erkenntnisse ziehen Sie aus den Angaben zu STP und Neighbours bzgl. Ihres HP 2530-Switch, nachdem Sie ihn hinzugefügt haben?**
 
@@ -284,7 +287,17 @@ SNMPv2-MIB::sysServices.0 = INTEGER: 74
 
 ![Ports zu STP LibreNMS](./static/librenms-stp-ports.png)
 
-TODO: Add interpretation on STP and neigbors
+Zu STP kann erkannt werden:
+
+- Ob der Switch die Root-Bridge ist
+- MAC-Adresse der Bridge
+- Verwendete Protokollspezifikation
+- Priorität
+- Zeit, seitdem sich zuletzt die Topologie geändert hat
+- MAC-Adresse des Roots
+- Performance- und Latenzdaten wie Hello Time etc.
+
+Bzgl. der Neighbors kann aus dem Graph entnommen werden, dass die Node `151.62.66.1` im selben Netz ist.
 
 **Fügen Sie den Switch 141.62.66.215 zu LibreNMS hinzu. Kontrollieren Sie den Port 25 (A1) auf Switch 141.62.66.215. Wie ist die Angabe des „Speed“ im Vergleich zur Feststellung aus Aufgabe 1 c?**
 
@@ -303,7 +316,7 @@ SNMPv2-MIB::sysServices.0 = INTEGER: 74
 
 ![Speed an Port A1](./static/librenms-215-speed.png)
 
-TODO: Add interpretation (10 Gigabit)
+Der Port 25 (Port A1) ist ein 10-Gigabit-Port.
 
 **Fügen Sie Device 141.62.66.241 hinzu. Wozu dient das Device?**
 
@@ -345,4 +358,4 @@ IF-MIB::ifSpecific.1 = OID: SNMPv2-SMI::zeroDotZero
 
 ![Device info in LibreNMS](./static/librenms-status-241.png)
 
-TODO: Add interpretation (socket strip)
+Aus dem Systennamen "brennenstuhlpdu" lässt sich schließen, dass es sich um eine Steckdosenleiste des Herstellers Brennenstuhl handelt.
