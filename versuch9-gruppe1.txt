@@ -442,5 +442,5 @@ Fügen Sie Device 141.62.66.241 hinzu. Wozu dient das Device?
 
 [Device info in LibreNMS]
 
-Aus dem Systennamen “brennenstuhlpdu” lässt sich schließen, dass es sich
+Aus dem Systennamen brennenstuhlpdu lässt sich schließen, dass es sich
 um eine Steckdosenleiste des Herstellers Brennenstuhl handelt.

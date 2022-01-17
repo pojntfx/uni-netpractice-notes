@@ -1,3 +1,9 @@
+commit 29c5a8c77c5042156b2673cb65e78befc0bc9e4d
+Author: Felix Pojtinger <felix@pojtinger.com>
+Date:   Mon Jan 17 20:54:53 2022 +0100
+
+    refactor: Add semi-proper formatting to ninth exercise
+
 commit 6910b7c5a8a55b10251fe302ed237c96260c542d
 Author: Felix Pojtinger <felix@pojtinger.com>
 Date:   Mon Jan 17 20:46:25 2022 +0100
