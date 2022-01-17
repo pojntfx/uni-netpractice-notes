@@ -59,7 +59,7 @@ TODO: Add interpretation
 
 ![Ergebnis der Abfrage auf `141.62.66.214`](./static/traffic-214.png)
 
-**Welche „Geschwindigkeiten“ (10, 100, 1000 Mbit/s) haben die Interfaces derzeit jeweils und warum? Was ist das besondere bei Port 25 auf Switch 141.62.66.215 ? (Hinweis: ifSpeed vs. ifHighSpeed)**
+**Welche „Geschwindigkeiten“ (10, 100, 1000 Mbit/s) haben die Interfaces derzeit jeweils und warum? Was ist das besondere bei Port 25 auf Switch 141.62.66.215? (Hinweis: ifSpeed vs. ifHighSpeed)**
 
 ![Ergebnis der Abfrage auf `141.62.66.213`](./static/speed-213.png)
 
@@ -131,7 +131,7 @@ Beim erneuten Anzeigen der Switchport-Informationen können wir den geänderten 
 
 **Setzen Sie mit snmpset einen beliebigen Switchport auf disable (Vorsicht: „Schneiden Sie sich nicht den Ast auf dem Sie sitzen ab!“)**
 
-Mit `./snmpset.exe -v 2c -c public 141.62.66.81 IF-MIB::ifAdminStatus.7 i 2` deaktivieren wir einen der Switchports. Der Wert `2` kann zum deaktivieren verwendet werden. Der Wert `1` aktiviert den Switchport wieder.
+Mit `./snmpset.exe -v 2c -c public 141.62.66.81 IF-MIB::ifAdminStatus.7 i 2` deaktivieren wir einen der Switchports. Der Wert `2` kann zum Deaktivieren verwendet werden. Der Wert `1` aktiviert den Switchport wieder.
 
 Wie wir im Screenshot sehen können, hat sich der Status des Ports auf `down(2)` geändert:
 
@@ -229,7 +229,7 @@ done
 
 **Vergleichen Sie die beiden Tools Prometheus/grafana und munin. Welche Vor und Nachteile sehen sie jeweils?**
 
-TODO: Bei Prometheus/grafana ist die UI etwas ansprechender und konfigurierbar. Das älter aussehende Munin ist nur in der CLI konfigurierbar. Es gibt dort bereits einige Grafen zu Themen wie Traffic und Errors. In grafana hätte man diese selbst konfigurieren müssen.
+Bei Prometheus/grafana ist die UI etwas ansprechender und konfigurierbar. Das älter aussehende Munin ist nur in der CLI konfigurierbar. Es gibt dort bereits einige Grafen zu Themen wie Traffic und Errors. In grafana hätte man diese selbst konfigurieren müssen.
 
 ## LibreNMS
 

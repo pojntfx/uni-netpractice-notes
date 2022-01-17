@@ -41,7 +41,7 @@ Die "Session Traversal Utilities for NAT" ist ein Standard, welcher dabei hilft,
 
 **Welche IP-Adresse hat das REGISTER-Paket nach dem NAT-Vorgang (NAT ist wegen der privaten Adresse erforderlich)?**
 
-TODO: Add interpretation
+Wie dem unteren Screenshot entnommen werden kann, hat das REGISTER-Paket nach dem NAT-Vorgang die IP-Adresse `194.49.221.7`.
 
 ![Capture des Register-Pakets vor NAT](./static/sip-before-nat.png)
 
@@ -49,7 +49,7 @@ TODO: Add interpretation
 
 **Erstellen und dokumentieren Sie den „FlowGraph“ des vorliegenden Pakets und erläutern Sie kurz den prinzipiellen Ablauf.**
 
-TODO: Add interpretation
+Im ersten Schritt registriert sich der Client beim Server in Form eines `Register`. Bei diesem teilt der Client dem Server seine Standort-Informationen mit. Wenn dies erfolgt ist, kann durch den `Invite` ein Anruf initialisiert werden. Es wird eine Verbindung zur Gegenseite hergestellt und anschließend auf deren Reaktion gewartet. Wenn die Gegenseite mit einem `Ack` reagiert, bestätigt sie uns die Verbindung. Nun kann die Kommunikation über einen RTP-Stream erfolgen. Um die Trennung der Verbindung zu realiseren, kann einer der beiden Teilnehmer ein `Bye` senden.
 
 ![Verbindungsaufbau mit SIP](./static/sip-1.png)
 
@@ -59,7 +59,7 @@ TODO: Add interpretation
 
 **Nach diesem typischen Ablauf ist der UAC beim Provider registriert. Warum wird die Anfrage zur Registrierung zunächst abgewiesen?**
 
-TODO: Die Credentials des UAC werden mithilfe der in der Rejection (401 Unauthorized) vorhandenen Daten verschlüsselt. Sobald die Credentials verschlüsselt wurden können sie an das SIP-Gateway geschickt werden.
+Die Credentials des UAC werden mithilfe der in der Rejection (401 Unauthorized) vorhandenen Daten verschlüsselt. Sobald die Credentials verschlüsselt wurden können sie an das SIP-Gateway geschickt werden.
 
 **Worin unterscheiden sich die beiden REGISTER-Pakete?**
 
@@ -73,7 +73,7 @@ Für die Registrierung wird UDP statt TCP verwendet, da das Session Initiation P
 
 **Wie lange ist die Registrierung gültig?**
 
-Wie im folgenden Bild zu sehen ist beträgt der "Expires" Wert 900 Sekunden. Dies entspricht 15 Minuten.
+Wie im folgenden Bild zu sehen ist, beträgt der "Expires" Wert 900 Sekunden. Dies entspricht 15 Minuten.
 
 ![Gültigkeitsdauer der Registrierung (900s)](./static/sip-ttl.png)
 
@@ -141,7 +141,7 @@ Die Wahrscheinlichkeit für eine Kollision ist, wie zu erwarten sehr klein.
 
 **Beschreiben Sie Aufbau und Inhalt des Session Description Protokoll (SDP), insbesondere die verwendeten Portnummern und das Audio-Video-Profile AVP, das die erlaubten Codecs in einer priorisierten Reihenfolge angibt.**
 
-TODO: In SDP werden Eigenschaften von Multimediadatenströmen aufgezeigt. SDP beinhaltet die Sitzungsbeschreibungen (Protokollversion (v), Session-ID (o)), die Zeitbeschreibung und die Medienbeschreibung (Medientyp, Port und Protokoll (m))
+In SDP werden Eigenschaften von Multimediadatenströmen aufgezeigt. SDP beinhaltet die Sitzungsbeschreibungen (Protokollversion (v), Session-ID (o)), die Zeitbeschreibung und die Medienbeschreibung (Medientyp, Port und Protokoll (m))
 
 **Welcher Sprach-Codec wird hier eingesetzt? Wir hoch ist die Bitrate dieses Codecs?**
 
@@ -153,27 +153,25 @@ Wie im folgenden zu sehen wird der Codec G.711 verwendet. Dieser Codec weist ein
 
 **Dokumentieren Sie den RTP-Kommunikationsfluss anhand der IP-Adressen. Wer kommuniziert mit wem?**
 
-TODO: Add interpretation
+Die beiden Teilnehmer kommunizieren durch den Server miteinander. Zur Veranschaulichung sprechen wir hier von Bob und Alice. Alice versendet ihr Paket an den Server, dieser leitet es dann an Bob weiter. Das Gleiche gilt für die Pakte, welche Bob versendet. Dies ist zum Beispiel bei SRTP wichtig, da hierdurch die Streams unabhängig verschlüsselt werden.
 
 ![Flow-Chart des Kommunikationsflusses](./static/rtp-flow.png)
 
 **Wieviel „Audio-Samples“ (Abtastproben) enthält ein Ethernet-Paket? In welchen zeitlichen Abständen werden die Pakete gesendet?**
 
-TODO: In digitaler Telephonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate kann dann im Media-Attribute eingestellt werden.
+In digitaler Telefonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate kann dann im Media-Attribute eingestellt werden.
 
 **Welche Ethernet-Paketlänge wird übertragen? Warum fasst man nicht längere oder kürzere Zeiträume zusammen?**
 
-TODO: Add interpretation
+Es wird eine Paketlänge von insgesamt 214 Bytes übertragen. Von diesen 214 Bytes, stellen 54 Bytes Header von Ethernet(14 Byte), IPv4(20 Byte), UDP(8 Byte) und RTP(12 Byte) dar. Somit bleibt eine Nutzlast von 160 Bytes. 
+TODO: Zweite Frage beantworten.
 
 ![Länge des Ethernet-Frames (214 bytes)](./static/rtp-frame-length.png)
 
 **Wie groß ist die Verzögerungszeit über das Verbindungsnetz?**
 
-TODO: Translate answer
-
-In your captured trace select any RTCP packet, then right click on mouse, Select "Protocol Preferences" then select "Show relative roundtrip calculation" Secondly now apply a Display filter: rtcp.roundtrip-delay.
-
-TODO: Add interpretation (is it only half the roundtrip delay?)
+Um unser Ergebnis zu ermitteln, haben wir unter `Protocol Preferences` uns die `relative roundtrip calculation` anzeigen lassen und anschließend den Anzeigefilter `rtcp.roundtrip-delay` angewendet.
+Das Ergebnis war eine Verzögerungszeit von 11ms.
 
 ![Roundtrip-Delay eines RTP-Pakets, wie es von RTCP dargestellt wird](./static/rtcp-roundtrip.png)
 
@@ -192,18 +190,7 @@ RTCP verwendet den Port 49702 bei der einen Node und 21805 bei der anderen. Rela
 
 **Beschreiben Sie, wie der BYE-Method-Timer arbeitet?**
 
-TODO: Translate answer
-
-This document provides an extension to SIP that defines a session
-expiration mechanism. Periodic refreshes, through re-INVITEs or
-UPDATEs, are used to keep the session active. The extension is
-sufficiently backward compatible with SIP that it works as long as
-either one of the two participants in a dialog understands the
-extension. Two new header fields (Session-Expires and Min-SE) and a
-new response code (422) are defined. Session-Expires conveys the
-duration of the session, and Min-SE conveys the minimum allowed value
-for the session expiration. The 422 response code indicates that the
-session timer duration was too small.
+Der Mechanismus verwendet periodische Aktualiserungen, um die Sitzung aktiv zu halten. Dies wird durch re-INVITEs oder UPDATEs realisiert. Der Mechanismus ist abwärtskompatibel mit SIP, sodass er funktioniert, solange einer der beiden Teilnehmer eines Dialogs, ihn beherrscht. Es werden zwei neue Header-Felder (Session-Expires und Min-SE) und ein neuer Antwortcode (422) definiert. Session-Expires gibt die Dauer der Sitzung an, und Min-SE gibt den minimal zulässigen Wert für den Ablauf der Sitzung an. Der Antwortcode 422 zeigt an, dass die Dauer des Sitzungszeitraums zu gering war.
 
 ![Re-`INVITE` mit Session Timer](./static/sip-session-expires.png)
 
