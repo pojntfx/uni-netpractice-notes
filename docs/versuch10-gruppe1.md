@@ -49,7 +49,9 @@ Wie dem unteren Screenshot entnommen werden kann, hat das REGISTER-Paket nach de
 
 **Erstellen und dokumentieren Sie den „FlowGraph“ des vorliegenden Pakets und erläutern Sie kurz den prinzipiellen Ablauf.**
 
-Im ersten Schritt registriert sich der Client beim Server in Form eines `Register`. Bei diesem teilt der Client dem Server seine Standort-Informationen mit. Wenn dies erfolgt ist, kann durch den `Invite` ein Anruf initialisiert werden. Es wird eine Verbindung zur Gegenseite hergestellt und anschließend auf deren Reaktion gewartet. Wenn die Gegenseite mit einem `Ack` reagiert, bestätigt sie uns die Verbindung. Nun kann die Kommunikation über einen RTP-Stream erfolgen. Um die Trennung der Verbindung zu realiseren, kann einer der beiden Teilnehmer ein `Bye` senden.
+Im ersten Schritt registriert sich der Client beim Server in Form eines `Register`. Bei diesem teilt der Client dem Server seine Standort-Informationen mit. Wenn dies erfolgt ist, kann durch den `Invite` ein Anruf initialisiert werden. Es wird eine Verbindung zur Gegenseite hergestellt und anschließend auf deren Reaktion gewartet. Wenn die Gegenseite mit einem `Ack` reagiert, bestätigt sie uns die Verbindung. Nun kann die Kommunikation über einen RTP-Stream erfolgen. Um die Trennung der Verbindung zu realisieren, kann einer der beiden Teilnehmer ein `Bye` senden.
+
+\newpage
 
 ![Verbindungsaufbau mit SIP](./static/sip-1.png)
 
@@ -57,9 +59,11 @@ Im ersten Schritt registriert sich der Client beim Server in Form eines `Registe
 
 ![Verbindungsabbau mit SIP](./static/sip-3.png)
 
+\newpage
+
 **Nach diesem typischen Ablauf ist der UAC beim Provider registriert. Warum wird die Anfrage zur Registrierung zunächst abgewiesen?**
 
-Die Credentials des UAC werden mithilfe der in der Rejection (401 Unauthorized) vorhandenen Daten verschlüsselt. Sobald die Credentials verschlüsselt wurden können sie an das SIP-Gateway geschickt werden.
+Die Credentials des UAC werden mit Hilfe der in der Rejection (401 Unauthorized) vorhandenen Daten verschlüsselt. Sobald die Credentials verschlüsselt wurden, können sie an das SIP-Gateway geschickt werden.
 
 **Worin unterscheiden sich die beiden REGISTER-Pakete?**
 
@@ -69,7 +73,7 @@ Dem linken (ersten) Paket fehlt die Authorisierung, das zweite besitzt diese im 
 
 **Warum wird für die so wichtige Registrierung nicht TCP (garantiert die bitgetreue Zustellung) verwendet, sondern UDP?**
 
-Für die Registrierung wird UDP statt TCP verwendet, da das Session Initiation Protocol (SIP) selbst eine spezifizierte Nachrichtenabfolge hat und verbindungsorientiert ist. Das ermöglicht, dass das SIP fehlerhafte Protokollabläufe selbst feststellt und nicht zwigend TCP zur Fehlerkorrektur benötigt, um Fehler festzustellen.
+Für die Registrierung wird UDP statt TCP verwendet, da das Session Initiation Protocol (SIP) selbst eine spezifizierte Nachrichtenabfolge hat und verbindungsorientiert ist. Das ermöglicht, dass das SIP fehlerhafte Protokollabläufe selbst feststellt und nicht zwigend TCP zur Fehlerkorrektur benötigt.
 
 **Wie lange ist die Registrierung gültig?**
 
@@ -98,11 +102,15 @@ Nach `Trying` werden die `INVITE` Nachrichten gestoppt.
 
 Die Response `180 Ringing` bedeutet, dass der UA den `INVITE` erhalten hat und den Nutzer benachrichtigt.
 
+\newpage
+
 **Welche Angabe bzgl. der Absender-Rufnummer erscheint auf dem Display des Empfängers?**
 
 In unserem Fall ist die Absender-Rufnummer "anonymous", was auf eine verstecke Rufnummer hindeutet.
 
 ![Display-Info des SIP-Headers ("anonymous")](./static/sip-from.png)
+
+\newpage
 
 **Der sehr lange "branch"-Wert ist eine Zufallszahl und identifiziert eindeutig eine SIP-Vermittlungsinstanz. Berechnen Sie die Wahrscheinlichkeit, dass zwei SIP-Geräte einen identischen Wert erwürfeln (es zählen nur die Angaben zwischen den beiden Punkten).**
 
@@ -139,9 +147,32 @@ Wir kommen zur folgenden Wahrscheinlichkeit:
 
 Die Wahrscheinlichkeit für eine Kollision ist, wie zu erwarten sehr klein.
 
+\newpage
+
 **Beschreiben Sie Aufbau und Inhalt des Session Description Protokoll (SDP), insbesondere die verwendeten Portnummern und das Audio-Video-Profile AVP, das die erlaubten Codecs in einer priorisierten Reihenfolge angibt.**
 
-In SDP werden Eigenschaften von Multimediadatenströmen aufgezeigt. SDP beinhaltet die Sitzungsbeschreibungen (Protokollversion (v), Session-ID (o)), die Zeitbeschreibung und die Medienbeschreibung (Medientyp, Port und Protokoll (m))
+In SDP werden Eigenschaften von Multimediadatenströmen aufgezeigt. SDP beinhaltet die Sitzungsbeschreibungen (Protokollversion (v), Session-ID (o)), die Zeitbeschreibung (Zeit, in der die Session schon aktiv ist (t),...) und die Medienbeschreibung (Medientyp, Port und Protokoll (m)). Wichtig bei den Medienbeschreibungen sind auch die Medienattribute (a), mit welchen weitere Einstellungen getroffen werden können.
+
+Ein Beispiel des SDP-Teils einer SIP-Nachricht könnte wie folgt aussehen: 
+
+```
+v=0
+o=Jean 1234 1234 IN IP4 host.hdm.com
+s=Video von 987654
+c=IN IP4 host.hdm.com
+t=0 0
+m=audio 20000 RTP/AVP 97
+a=rtpmap:97 iLBC/8000
+a=fmtp:97 mode=30
+m=video 20002 RTP/AVP 31
+a=rtpmap:31 H261/90000
+```
+
+Das Audio-Video-Profile (AVP) spezifiziert die Formate für Audio- und Videostreams. Im obenstehenden Beispiel werden mit den IDs 97 und 31 iLBC und H.261 spezifiziert. Es können auch mehrere ID's hintereinander aufgeführt werden, was dann eine Liste mit Priorisierungen darstellt.
+
+Die Portnummern hängen vom jeweiligen Datenstrom ab. Der eine Datenstrom, welcher in diesem Beispiel ein Audiostrom im Format iLBC (ID: 97) darstellt, läuft in diesem Fall auf Port 20000. Der andere Datenstrom, welcher einen Videodatenstrom im Fromat H.261 (ID:31) darstellt, läuft auf Port 20002. Dies konnte auch jeweils in der Beschreibung der Medienypen (m) in der Medienbeschreibung festgelegt werden.
+
+\newpage
 
 **Welcher Sprach-Codec wird hier eingesetzt? Wir hoch ist die Bitrate dieses Codecs?**
 
@@ -153,13 +184,13 @@ Wie im folgenden zu sehen wird der Codec G.711 verwendet. Dieser Codec weist ein
 
 **Dokumentieren Sie den RTP-Kommunikationsfluss anhand der IP-Adressen. Wer kommuniziert mit wem?**
 
-Die beiden Teilnehmer kommunizieren durch den Server miteinander. Zur Veranschaulichung sprechen wir hier von Bob und Alice. Alice versendet ihr Paket an den Server, dieser leitet es dann an Bob weiter. Das Gleiche gilt für die Pakte, welche Bob versendet. Dies ist zum Beispiel bei SRTP wichtig, da hierdurch die Streams unabhängig verschlüsselt werden.
+Die beiden Teilnehmer kommunizieren durch den Server miteinander. Zur Veranschaulichung sprechen wir hier von Bob und Alice. Alice versendet ihr Paket an den Server, dieser leitet es dann an Bob weiter. Das gleiche gilt für die Pakete, welche Bob versendet. Dies ist zum Beispiel bei SRTP wichtig, da hierdurch die Streams unabhängig verschlüsselt werden.
 
 ![Flow-Chart des Kommunikationsflusses](./static/rtp-flow.png)
 
 **Wieviel „Audio-Samples“ (Abtastproben) enthält ein Ethernet-Paket? In welchen zeitlichen Abständen werden die Pakete gesendet?**
 
-In digitaler Telefonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate kann dann im Media-Attribute eingestellt werden.
+In digitaler Telefonie wird üblicherweise mit 8000Hz gearbeitet. Die Samplerate kann dann im Media-Attribut eingestellt werden.
 
 **Welche Ethernet-Paketlänge wird übertragen? Warum fasst man nicht längere oder kürzere Zeiträume zusammen?**
 
@@ -194,6 +225,8 @@ Der Mechanismus verwendet periodische Aktualiserungen, um die Sitzung aktiv zu h
 ![Re-`INVITE` mit Session Timer](./static/sip-session-expires.png)
 
 ![Flowgraph mit Re-Tries für den BYE-Request](./static/sip-byte-flowgraph.png)
+
+\newpage
 
 **Berechnen Sie die Bandbreite einer bidirektionalen VoIP-Verbindung (mit dem Codec G.711) mit den angegebenen Zahlenwerten. Gehen Sie dabei davon aus, dass alle 20 ms ein Sprachpaket abgegeben wird**
 
