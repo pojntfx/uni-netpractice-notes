@@ -1,5 +1,5 @@
 ---
-author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger]
+author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felicitas Pojtinger]
 date: "2021-10-26"
 subject: "Praktikum Rechnernetze: Protokoll zu Versuch 2 (Protokollanalyse mit Wireshark) von Gruppe 1"
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
@@ -27,7 +27,7 @@ Dieses Dokument und der enthaltene Quelltext ist freie Kultur bzw. freie Softwar
 
 ![Badge der AGPL-3.0-Lizenz](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
 
-Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger
+Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felicitas Pojtinger
 
 SPDX-License-Identifier: AGPL-3.0
 

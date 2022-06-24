@@ -1,5 +1,5 @@
 ---
-author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger]
+author: [Jakob Waibel, Daniel Hiller, Elia Wüstner, Felicitas Pojtinger]
 date: "2021-10-19"
 subject: "Praktikum Rechnernetze: Protokoll zu Versuch 1 (Troubleshooting TCP/IP) von Gruppe 1"
 keywords: [Rechnernetze, Protokoll, Versuch, HdM Stuttgart]
@@ -27,7 +27,7 @@ Dieses Dokument und der enthaltene Quelltext ist freie Kultur bzw. freie Softwar
 
 ![Badge der AGPL-3.0-Lizenz](https://www.gnu.org/graphics/agplv3-155x51.png){ width=128px }
 
-Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felix Pojtinger
+Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia Wüstner, Felicitas Pojtinger
 
 SPDX-License-Identifier: AGPL-3.0
 
@@ -766,7 +766,7 @@ traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
 12  lo0.fab2-1-gdc.ir2.yahoo.com (77.238.190.3)  29.678 ms lo0.fab3-1-gdc.ir2.yahoo.com (77.238.190.4)  29.709 ms lo0.fab2-1-gdc.ir2.yahoo.com (77.238.190.3)  29.842 ms
 13  usw2-1-lba.ir2.yahoo.com (77.238.190.103)  29.724 ms  29.602 ms usw1-1-lba.ir2.yahoo.com (77.238.190.102)  29.750 ms
 14  media-router-aol71.prod.media.vip.ir2.yahoo.com (212.82.100.163)  29.546 ms  30.166 ms  29.797 ms
-[pojntfx@felixs-xps13 hrping-v504]$ ssh pojntfx@159.223.25.154 "nc -lp 6969"
+[pojntfx@felicitass-xps13 hrping-v504]$ ssh pojntfx@159.223.25.154 "nc -lp 6969"
 $ traceroute -w 5 www.aol.com
 traceroute to www.aol.com (212.82.100.163), 30 hops max, 60 byte packets
  1  opnsense.rnlabor.hdm-stuttgart.de (141.62.66.250)  0.707 ms  3.001 ms  1.312 ms
@@ -962,7 +962,7 @@ $ mtr -n --json www.aol.com
 {
     "report": {
         "mtr": {
-            "src": "felixs-xps13",
+            "src": "felicitass-xps13",
             "dst": "www.aol.com",
             "tos": 0,
             "tests": 10,
@@ -1033,7 +1033,7 @@ $ mtr --json www.aol.com
 {
     "report": {
         "mtr": {
-            "src": "felixs-xps13",
+            "src": "felicitass-xps13",
             "dst": "www.aol.com",
             "tos": 0,
             "tests": 10,

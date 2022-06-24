@@ -28,6 +28,6 @@ The note should now be opened. Whenever you change a source file, it will automa
 
 ## License
 
-Uni Network Practice Notes (c) 2021 Felix Pojtinger and contributors
+Uni Network Practice Notes (c) 2021 Felicitas Pojtinger and contributors
 
 SPDX-License-Identifier: AGPL-3.0
