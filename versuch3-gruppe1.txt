@@ -1,5 +1,5 @@
 Praktikum Rechnernetze
-Jakob Waibel; Daniel Hiller; Elia Wüstner; Felix Pojtinger
+Jakob Waibel; Daniel Hiller; Elia Wüstner; Felicitas Pojtinger
 2021-10-19
 
 -   1 Einführung
@@ -50,7 +50,7 @@ Software.
 [Badge der AGPL-3.0-Lizenz]
 
 Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia
-Wüstner, Felix Pojtinger
+Wüstner, Felicitas Pojtinger
 
 SPDX-License-Identifier: AGPL-3.0
 
