@@ -1,0 +1,1061 @@
+commit 26cc664f8effbef5d4f1ae647bc5311d9c29f68e
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 21:34:46 2022 +0100
+
+    chore: Update QR code URL
+
+commit 5f5fcbda90a49fe9def555f20f1fd9f74480a00b
+Merge: 09a954a 27bb2b1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 21:30:18 2022 +0100
+
+    Merge pull request #22 from JakWai01/main
+    
+    fix: Typos
+
+commit 27bb2b1dd9404b8789eec2d2e368698ab4df898a
+Merge: f5cc5e9 09a954a
+Author: Jakob Waibel <59575534+JakWai01@users.noreply.github.com>
+Date:   Mon Jan 17 21:27:32 2022 +0100
+
+    Merge branch 'pojntfx:main' into main
+
+commit f5cc5e9088f9aaf5fb12aa25ee9ca247ccb3bbf7
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Jan 17 21:27:13 2022 +0100
+
+    fix: Typos
+
+commit 09a954ab153728d49f1bde3a4c8c28cd541f8d51
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 20:54:53 2022 +0100
+
+    refactor: Add semi-proper formatting to ninth exercise
+
+commit 8957181158f6fa3656787090753aae8d9b59e88b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 20:46:25 2022 +0100
+
+    feat: Resolve remaining TODOs
+
+commit 40734b2dcc7419dfc1507caab5f99356ba9019e5
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 20:32:38 2022 +0100
+
+    feat: Resolve first TODOs in the ninth exercise
+
+commit 48fdd74243227bf3922453b8496a78da93cf162d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 20:20:06 2022 +0100
+
+    feat: Resolve TODOs in the tenth exercise
+
+commit 728c0411c4682fe91f4cec1a3ded65d4b68e345e
+Merge: 4e6b02a 42a1066
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 20:08:44 2022 +0100
+
+    Merge pull request #21 from dentremor/main
+    
+    feat: Solve todos
+
+commit 42a1066b6c7f2bcd4193dd0e6896d37a4a62b37d
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Mon Jan 17 18:29:07 2022 +0100
+
+    feat: Solve todos
+
+commit 4e6b02ad71b2ec5cc212f782fbe949e39f93ca52
+Merge: 061bc60 63f5e97
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Jan 17 00:15:12 2022 +0100
+
+    Merge pull request #20 from Elia-Wuestner/main
+    
+    todos
+
+commit 63f5e97e085de334b750a072e8ba79321b1f7ccf
+Author: elia-wuestner <elia_wuestner@web.de>
+Date:   Sun Jan 16 14:08:25 2022 +0100
+
+    todos
+
+commit 061bc607a452ebf6c52dfa3fc0aa1f1f0f809383
+Merge: 20e1bf1 a403548
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sat Jan 15 17:04:51 2022 +0100
+
+    Merge pull request #19 from JakWai01/main
+    
+    feat: Add some documentation
+
+commit a40354865c77479c73848d5f1d3ceefa21244071
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Jan 15 15:59:33 2022 +0100
+
+    feat: Add some documentation
+
+commit 20e1bf1ae6578fb8a81c208e7b6228218bff1c26
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 11 17:35:20 2022 +0100
+
+    feat: Add section on LibreNMS
+
+commit 99c6b15fc31f384a12d7ec1aef9a817df1c26aa1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 11 16:37:58 2022 +0100
+
+    feat: Add section on Munin
+
+commit 8468b1fd1bd1f7e2dc137db8e96e1cad931d9cd6
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 11 16:04:24 2022 +0100
+
+    feat: Add section on Grafana
+
+commit 36bcdfe573de91283409cf98986e75ea88e112e3
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 11 15:29:12 2022 +0100
+
+    feat: Add Prometheus section
+
+commit 03d95e8a4ea54b05f1ac1fd5b24dda0b743f01f1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 11 15:10:00 2022 +0100
+
+    feat: Add rest of switch configuration section
+
+commit 5296e302e6ac7ca9d38a05549d36d9bc0eeca098
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Jan 6 20:30:22 2022 +0100
+
+    chore: Fix formatting
+
+commit ec63c67adba7b0c330a5cf4c9c143c6c35070375
+Merge: 008650b 1605ff6
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Jan 4 03:40:41 2022 +0100
+
+    Merge pull request #18 from JakWai01/main
+    
+    feat: Finish 9 TODOs
+
+commit 1605ff64df3e6c8b9a2d9de2b9ca9baf3fa00315
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sun Jan 2 21:52:00 2022 +0100
+
+    feat: Finish 9 TODOs
+
+commit 008650be55d25f20f481cc482b86975731cae225
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 21 17:35:10 2021 +0100
+
+    feat: Add notes on Versuch 10
+
+commit 45536c7a094174293d32258ecf99353da06cc564
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 14 16:11:54 2021 +0100
+
+    feat: Add start of Versuch 9
+
+commit 39cd335abecce4d730975333f2dbebee5ea430b8
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 13 17:44:08 2021 +0100
+
+    refactor: Add proper print formatting to Versuch 8
+
+commit c43caa90fa7f7ef3f930e95af63b1b56955f1a0f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 13 17:11:36 2021 +0100
+
+    fix: Correct typos
+
+commit b6260b9296f8dd5477289e5eefd6701cf3d74c53
+Merge: 0dd0a1a 9fa78a4
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 13 16:57:33 2021 +0100
+
+    Merge pull request #17 from Elia-Wuestner/main
+    
+    Elia Todos
+
+commit 9fa78a4121361781f54127e36ece530c679e85aa
+Author: elia-wuestner <elia_wuestner@web.de>
+Date:   Mon Dec 13 16:53:47 2021 +0100
+
+    Elia Todos
+
+commit 0dd0a1a8be215d431c28ea167c3f7d68eb85b7a2
+Merge: 70036f8 47435e3
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 13 01:15:32 2021 +0100
+
+    Merge pull request #16 from dentremor/main
+    
+    feat: Solve todos
+
+commit 47435e33f5cd3b688b61e881d11eedf0158debc4
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 10 21:51:29 2021 +0100
+
+    feat: Solve todos
+
+commit 70036f8853bd9d125d7294fe57af1b82a93a5d8f
+Merge: 43cb5a4 581bac9
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Dec 9 15:17:44 2021 +0100
+
+    Merge pull request #15 from JakWai01/main
+    
+    feat: Add documentation
+
+commit 581bac9037afecf568aea61349c15414502a81d0
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Thu Dec 9 14:34:50 2021 +0100
+
+    feat: Add documentation
+
+commit 43cb5a4eef8f8eaa253fde1e945a3190b695d5a1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 7 20:47:40 2021 +0100
+
+    feat: Add images of stream results
+
+commit 2f5b925649dec367934dc34382e938fb4e174ed3
+Merge: b61f4d8 56f2e5d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 7 17:24:07 2021 +0100
+
+    Merge branch 'main' of github.com:pojntfx/uni-netpractice-notes
+
+commit b61f4d837495c8d74dc9cf38074e939ab165ae6d
+Merge: 3c63a3b 15bfef3
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 7 17:22:13 2021 +0100
+
+    Merge branch 'main' of git://github.com/dentremor/uni-netpractice-notes
+
+commit 3c63a3bf7cb546cd4c069dfcd647569ab594e2eb
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Dec 7 17:22:10 2021 +0100
+
+    feat: Add initial notes on experiment 8
+
+commit 56f2e5d216c87d3ebdac293c72061d575fd5d7f5
+Merge: ea91890 0df8ad0
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 6 20:33:18 2021 +0100
+
+    Merge pull request #14 from JakWai01/main
+    
+    fix: Typos and formatting
+
+commit 0df8ad0ea237c6e8501986b6168e806bb75594b6
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Dec 6 20:31:36 2021 +0100
+
+    feat: Prettify
+
+commit 88791e66e98d3e81dda5de48015b89be05b8137f
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Dec 6 20:26:15 2021 +0100
+
+    fix: Typos and formatting
+
+commit ea91890c0ef1d02099037878c02db0cfef30f2e2
+Merge: 15bfef3 a992e71
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Dec 6 18:05:10 2021 +0100
+
+    Merge pull request #13 from Elia-Wuestner/main
+    
+    Elia Todos
+
+commit a992e71797ddfbb35cd064bd3826822ef8e96a3f
+Author: elia-wuestner <elia_wuestner@web.de>
+Date:   Sun Dec 5 22:38:40 2021 +0100
+
+    Elia Todos
+
+commit 15bfef3bb57aa284f25303262c11b227805c1ca3
+Merge: 5014b73 431e5f8
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Dec 3 16:49:16 2021 +0100
+
+    Merge pull request #12 from dentremor/main
+    
+    Feat: Complete todos
+
+commit 431e5f8f0dd00fd63aad158328ddf3cdf54dca66
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 3 16:48:32 2021 +0100
+
+    Fix: Remove cursed chars
+
+commit 3b8db45bb3def23bd2ebb4b604be0332be0a78a7
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Dec 3 16:03:50 2021 +0100
+
+    Fix: Grammar correction
+
+commit f44797e6a747bbea505c6422cfc53184a0c753f5
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:39:39 2021 +0100
+
+    Update versuch7-gruppe1.md
+
+commit 53e841add68b9783467dda8aaac29b04f65c7f21
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:39:01 2021 +0100
+
+    Add files via upload
+
+commit 2aec931c0a7482ade0d1271453cfdb2eefc339a8
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Dec 3 12:38:41 2021 +0100
+
+    Add files via upload
+
+commit 5014b739ff9ffc19f61f728df9bf13ad6860ea63
+Merge: c66c36d 2de420b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Dec 1 18:21:07 2021 +0100
+
+    Merge pull request #11 from JakWai01/main
+    
+    feat: Add documentation fundamentals
+
+commit 2de420ba682fecadec0df90cbe60607f9964a0c9
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Dec 1 15:20:04 2021 +0100
+
+    build: Remove invalid UTF-8 byte sequence
+
+commit 6e04aa3c41fcf46cd0baa50e79f6c3a79d7fd06a
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Dec 1 12:17:27 2021 +0100
+
+    feat: Add documentation
+
+commit d4053446d52594a087502191d0bab618e9bf1705
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 20:25:47 2021 +0100
+
+    feat: Add some notes
+
+commit f83eb22d5f10135f4af49cdd22a8a36335c9fe38
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 19:06:51 2021 +0100
+
+    fix: Remove leading spaces
+
+commit 244549e63194822cea67ae7fb95ae2a35d50b146
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 30 18:09:45 2021 +0100
+
+    feat: Add terminal output
+
+commit c66c36d0bce046728369bbbce17d950a69b9f949
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 21:40:08 2021 +0100
+
+    refactor: Remove duplications
+
+commit 1bbfb63148159b63c9d13cbc23c411c93ae7b845
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 20:07:48 2021 +0100
+
+    fix: Correct typos
+
+commit 05113ac831ddd9abc241afe4f031866b50fa2a6b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 20:04:57 2021 +0100
+
+    refactor: Add print layout
+
+commit 8957a042b94b9e4edf0769564cfc8c3decfe83c5
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 19:40:03 2021 +0100
+
+    feat: Add section on cable tests
+
+commit a5987d42b0bd7f5857ec4ac03b6a0ee55e420078
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 19:23:45 2021 +0100
+
+    feat: Add section on wire testing
+
+commit b4a36ea16fcbd6f375bd14f2c70214214695d488
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 19:10:58 2021 +0100
+
+    feat: Add section on CableSharing
+
+commit 0757a3b1acda21ec313a75b8203d439ae9ae5020
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 18:28:05 2021 +0100
+
+    feat: Add section on cable quality tests
+
+commit 89b7f5b318d5b5a6b7cf6c4b10f90f0afa70701f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 18:20:46 2021 +0100
+
+    refactor: Scale down images for crimping
+
+commit b398cbb693c61adeb263592ed087c53b732525c6
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 17:25:07 2021 +0100
+
+    feat: Add notes on cabling
+
+commit 2e02941509be0fe4c14b511dc0ae154abbbfe9c3
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 17:01:51 2021 +0100
+
+    refactor: De-duplicate answers
+
+commit 28d6c148964ebd1e3efc0b4ca8f0a9a105516bbe
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 16:48:19 2021 +0100
+
+    fix: Use proper filenames
+
+commit 3ad00027c6a66b2734c725b8812f735443e74abb
+Merge: 2bce72c ecd4860
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 16:39:42 2021 +0100
+
+    Merge pull request #10 from Elia-Wuestner/main
+    
+    tasks without screenshots
+
+commit ecd4860682468ca92943ce04b661e37fcdb0e0cf
+Merge: 5770e4c 2bce72c
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 16:39:36 2021 +0100
+
+    Merge branch 'main' into main
+
+commit 2bce72ca2551d188db232fb527b01ddd74fbfe3a
+Merge: bd7143c f0057fc
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 29 16:36:47 2021 +0100
+
+    Merge pull request #9 from JakWai01/main
+    
+    feat: Add documentation
+
+commit 5770e4ca69205593dc5818e3219ff95502fc8d04
+Author: elia-wuestner <elia_wuestner@web.de>
+Date:   Sun Nov 28 12:21:53 2021 +0100
+
+    tasks without screenshots
+
+commit f0057fc3cb8cd0714115e8d254b5cc09f32ba0b2
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 23 23:58:37 2021 +0100
+
+    feat: Add documentation
+
+commit bd7143c0a60a10c98a9e6c11d578fee106131753
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 23 17:08:20 2021 +0100
+
+    feat: Add initial script on cabling
+
+commit 994c4a29c5908a8477d7451f53adb48ec71a4a61
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 23 00:17:24 2021 +0100
+
+    docs: Add `./configure` step in contributing info
+
+commit 4eb82769bbbd1b13dea746137406a77c74df80c2
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 23 00:04:47 2021 +0100
+
+    build: Pass GH token to Deliverance
+
+commit f5f5b39585e1cfd19f0c429f8bc0ccaaee0bc8d1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:55:06 2021 +0100
+
+    build: Use Deliverance action
+
+commit c7d00599b78cfa1cec6b165d069679a5994e1a06
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:42:38 2021 +0100
+
+    fix: Specify OS for action
+
+commit ef9750367ede199d0fd797db3b4f4c3cb245087c
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:41:29 2021 +0100
+
+    build: Use simplified action
+
+commit 63eb70fef6eefeada3737ac8c0f0dc30cab0b800
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:25:49 2021 +0100
+
+    build: Add Deliverance-provided Makefile to gitignore
+
+commit 7a0a47e8eb33c6101b637ac3da80351b084a655d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:25:26 2021 +0100
+
+    feat: Use Deliverance
+
+commit 80bba0f2075d7da8697898ca1a7265eb5a843c11
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 23:08:48 2021 +0100
+
+    fix: Use correct flag to extract release archive
+
+commit 5aa388b20591604ea9a618f02117e4300dfafbf8
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 22:57:12 2021 +0100
+
+    fix: Upload all release files
+
+commit e727710da3c70a28f89147f3fc425fb596d04b14
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 22:47:40 2021 +0100
+
+    fix: Prevent trying to read the current directory while reading from it when creating the release archive
+
+commit 80da60592b5388c3d4d8352cf00a463689b18f0a
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 22 22:36:17 2021 +0100
+
+    feat: Add Markdown and Gemini support, add .tar.gz release support
+
+commit b24aca8066d33cab68b807579cc422bdc908dd8d
+Merge: c4e5a31 615e09b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Nov 17 00:19:21 2021 +0100
+
+    Merge pull request #8 from JakWai01/main
+    
+    feat: Add final script
+
+commit 615e09b31cb17ee5d7cfdaa53ab6762a693f1b96
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 16 21:39:42 2021 +0100
+
+    feat: Add some interpretation
+
+commit 49ec5da1a6a41cc6ed1ca971aaa0d6946cc426ff
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 16 16:47:13 2021 +0100
+
+    feat: Add final script
+
+commit c4e5a313060cb62af878e01fb8fe38678dbeb148
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 16 16:32:10 2021 +0100
+
+    refactor: Add formatting
+
+commit 991ba64f40b8104766e9f9b63c21cc174b423294
+Merge: 5542b92 2129723
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 16 16:17:09 2021 +0100
+
+    Merge branch 'main' of github.com:pojntfx/uni-netpractice-notes
+
+commit 5542b92de8daa65818034cf2a1fef9386a8b2012
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 16 16:17:05 2021 +0100
+
+    feat: Add section on Firewalls
+
+commit 2129723e669a1975d683ebfad4eb88b511aef7b1
+Merge: 7f2468c 15d1c6f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 15 14:06:11 2021 +0100
+
+    Merge pull request #7 from JakWai01/main
+    
+    fix: Spelling
+
+commit 15d1c6f5a82e06b610e15fceeb8843a767651d02
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Nov 15 13:58:52 2021 +0100
+
+    fix: Gender with : instead of *
+
+commit 91a86e126d78ed362253ecc601d9c38015d4d128
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Nov 15 12:36:31 2021 +0100
+
+    fix: Spelling
+
+commit 7f2468cdc5d5063521c4438fc414ff0b871b15ba
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sun Nov 14 21:48:16 2021 +0100
+
+    feat: Add update wireshark results
+
+commit f1db883700b8d740dff3ee87f5487dd010d7301d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sun Nov 14 21:13:46 2021 +0100
+
+    docs: Add Linux sections on IPv6 privacy extensions
+
+commit 704c4e40cef20cb5f4ac39a87c03fce2b8d1a47a
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sun Nov 14 20:36:00 2021 +0100
+
+    fix: Use block formatting for pictures
+
+commit 24a6accad7dd1e7d57f3cbede20aa1cfd41bdc13
+Merge: 2b1f2d8 8dd966f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sat Nov 13 16:19:33 2021 +0100
+
+    Merge pull request #6 from JakWai01/main
+    
+    feat: Finished 8 TODOs
+
+commit 8dd966f101ad14afebab01d1af97c818472e2e41
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Nov 13 09:52:27 2021 +0100
+
+    feat: Add missing images
+
+commit f24b47bd7130e2b7d864023f6629b20e33eecf05
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 22:09:44 2021 +0100
+
+    feat: Finish the interpretation of the tasks
+
+commit 1c22fb00517c6be98ac5e030efd7a306192f839f
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 20:34:27 2021 +0100
+
+    feat: Add answer to fragmentation question
+
+commit 369310600ec7c88827103220dc98808f79aa0498
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 12 20:15:58 2021 +0100
+
+    feat: Work on experiment 4
+
+commit 2b1f2d81ae4e4c98ba6122ed2b80e7ce0d37ac18
+Merge: 980b630 1715a41
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Nov 12 12:43:57 2021 +0100
+
+    Merge pull request #5 from dentremor/main
+    
+    feat: Add windows stuff for task 1-6
+
+commit 1715a41295ee0fbe66cac577b77b9553f50eaded
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Thu Nov 11 14:32:22 2021 +0100
+
+    fix: Replace capital letters in image name
+
+commit be4f317bfabd45b0c59141e689d6063a864bad20
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Wed Nov 10 22:27:23 2021 +0100
+
+    fix: Remove wrong alt text
+
+commit 19a2f9a5398890fa84b394bc04cc4ffac4b873e2
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Wed Nov 10 18:37:21 2021 +0100
+
+    feat: Add windows stuff for task 1-6
+
+commit 980b6301ce7f07754bcbfe5edc1aa6db4b0fcfe4
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Nov 9 17:31:40 2021 +0100
+
+    feat: Add docs on IPv6
+
+commit cae2d079e8973fa4f5bcd3d021d0f2870b1e0ebb
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 8 22:00:13 2021 +0100
+
+    docs: Add third exercise
+
+commit 27784313e37495d777ea0aa9645a2f3d8d85c3dc
+Merge: 66a6a0c 219b5bb
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Nov 8 20:40:29 2021 +0100
+
+    Merge pull request #4 from JakWai01/main
+    
+    feat: Finish first draft of task 2 and installation instructions, include all screenshots
+
+commit 219b5bb82f0b0ca7bafa72459e245c19ae8fcd18
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 5 15:01:08 2021 +0100
+
+    feat: Update task 1
+
+commit 6911020ca54f9ac1e85ead2b2980f31afe749dec
+Merge: c998b62 b67c2de
+Author: Jakob Waibel <59575534+JakWai01@users.noreply.github.com>
+Date:   Fri Nov 5 12:56:27 2021 +0100
+
+    Merge pull request #1 from dentremor/main
+    
+    feat: Finish task 1 with two remaining todos
+
+commit b67c2dec5d2c036a28a51e6a2eda1d5cd09acae5
+Merge: 6289b5c b175be5
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Nov 5 12:43:41 2021 +0100
+
+    Merge branch 'main' of https://github.com/dentremor/uni-netpractice-notes
+
+commit 6289b5ca96a5914975e8c37cf6e413ad34de8d6f
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Nov 5 12:43:14 2021 +0100
+
+    fix: Add a description to the images from task 1
+
+commit b175be58acfcd1efeba25d2af7d15a46fdee4967
+Merge: f0e2304 c998b62
+Author: Daniel Hiller <48788571+dentremor@users.noreply.github.com>
+Date:   Fri Nov 5 12:33:59 2021 +0100
+
+    Merge branch 'main' into main
+
+commit f0e23040afd0a460d94a2d703d574d5eee0cc447
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Nov 5 12:32:08 2021 +0100
+
+    fix: Add a description to the images from task 1
+
+commit 097cd1716ec0753e205a45944cd2e2939d75e8ac
+Author: dentremor <hillerdaniel11@gmail.com>
+Date:   Fri Nov 5 12:13:00 2021 +0100
+
+    feat: Finish task 2 with two remaining todos
+
+commit c998b6209b4eb87163c5172173f51453d983e9cb
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 5 10:45:25 2021 +0100
+
+    fix: Typos
+
+commit 54a0659b4b0bc60175b03584f7bc5c7e8a400c93
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Nov 5 10:29:25 2021 +0100
+
+    feat: Finish first draft of Task 2 + Installation instructions
+
+commit 567e7155cba82cac6a7c231e653734a0fea0b1df
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Nov 3 16:26:45 2021 +0100
+
+    feat: Add cropped images
+
+commit e49da6b5be913ff8da57af3966ba077ed20d5272
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Wed Nov 3 10:23:10 2021 +0100
+
+    feat: Work on adding task 2 to the protocol
+
+commit f0ce25ab1b416dfd29092b3357d0cc2a01c69651
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 2 21:21:40 2021 +0100
+
+    feat: Add media for experiment 3
+
+commit 4271f835d84660d66c611fd979a9e4535bb858e5
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Tue Nov 2 18:32:41 2021 +0100
+
+    feat: Add template for 3rd experiment
+
+commit 66a6a0cd5d0b9582da2115cc040648614b7b5a64
+Merge: 261f78a 40ba29b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Sat Oct 30 15:45:06 2021 +0200
+
+    Merge pull request #3 from JakWai01/main
+    
+    fix: Update date
+
+commit 40ba29b7034c265a140e67f36db718e8f07ef8df
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Oct 30 13:28:42 2021 +0200
+
+    fix: Revert qr code changes
+
+commit 05d574751bbea421e964b2d3dceb957a5d171b18
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Oct 30 13:26:34 2021 +0200
+
+    Revert "fix: Update date"
+    
+    This reverts commit f77d41742d1c871bd5806473557d1965c5c07fc9.
+
+commit f77d41742d1c871bd5806473557d1965c5c07fc9
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Sat Oct 30 10:51:21 2021 +0200
+
+    fix: Update date
+
+commit 261f78a655077128da63af28498cf2e28ca6036f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 23:41:48 2021 +0200
+
+    fix: Update GH repo URL in QR code
+
+commit a35b55ebef37620debd676b23ef63603def1ce9b
+Merge: 1f441c0 6ad239e
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 23:40:39 2021 +0200
+
+    Merge pull request #2 from JakWai01/main
+    
+    fix: Formatting and pictures
+
+commit 6ad239e6ebdd60f5241ecd35461f0895f8c1652e
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Oct 29 15:44:02 2021 +0200
+
+    fix: Formatting and pictures
+
+commit 355ef735fff27bc4490b3b3bb7589e962e524306
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Fri Oct 29 14:17:20 2021 +0200
+
+    fix: Use correct images
+
+commit 1f441c01f8c5222bd25129ea83934b2b40be0f10
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 02:17:21 2021 +0200
+
+    build: Enable correct mimetype detection of CHANGELOG and MIMETYPE
+
+commit c56d3c0e007f61d53f603cbe13024000ac47b57d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 02:08:06 2021 +0200
+
+    docs: Add CoC
+
+commit 0c89946a3ec70ae571573308e3399e37c1a2e0e5
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 02:07:25 2021 +0200
+
+    build: Add auto-generated open and develop commands
+
+commit 19010462545778551a79d08ef05bd29e939ca251
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 02:04:46 2021 +0200
+
+    refactor: Correct typos and hide broken images
+
+commit a83c3803c4bd0ba5ae424375d856054944622164
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Fri Oct 29 00:50:44 2021 +0200
+
+    feat: Add rest of descriptions
+
+commit 2444bb5298ab1e394a8e518816d63dc086862b10
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 21:38:04 2021 +0000
+
+    feat: Add sections starting from STP
+
+commit 12928830b01fca35f2d9318329ed6563e89843db
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 09:19:37 2021 +0200
+
+    build: Shift headers to allow correct markdown input and HTML output
+
+commit 181afdb39ba2b7218c0f87c2b30ef287e0e4cec5
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 02:45:51 2021 +0200
+
+    fix: Set `fetch-depth` for checkout of `build`, not `publish` job
+
+commit b3729c8584bbb009dcc88194142933acf2379c7a
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 02:43:09 2021 +0200
+
+    build: Add open commands for EPUB, ODT and plaintext
+
+commit 5a5b92f852ba0c81ffe07cbcf516d0934d1509b8
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 02:38:16 2021 +0200
+
+    fix: Checkout full history in GH action
+
+commit 5623efbcd479b9aa204ab82096bd97ee0a3fc218
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 02:35:25 2021 +0200
+
+    build: Drop unused `DESTDIR` env var as there is no install dir, exclude `OUTPUT_DIR` from source package in release
+
+commit bd443ebca502a2e12e9c1fde22f1a987c2ccfd21
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 02:30:31 2021 +0200
+
+    build: Add plaintext, changelog, license, tarball and README to output
+
+commit f0c2213c24599b440a5a2e5a98c029a3f15a7c8b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 01:47:27 2021 +0200
+
+    build: Add EPUB, ODT and Markdown to the output formats
+
+commit e71a73b60320addf800c40b9297245fc06b6a923
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 00:43:30 2021 +0200
+
+    build: Refine git protocol strip regex
+
+commit 2e1a908280b12aaa07a102202cf5eff3f9ade939
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 00:31:35 2021 +0200
+
+    fix: Use correct path to extracted release archive
+
+commit 8aed13426879f367d7165c90d74e262815275de2
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 00:27:06 2021 +0200
+
+    build: Use release artifact explicitly
+
+commit 7ee9099b5cc3a1f6009dbb322f676f0f15b7e32b
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Thu Oct 28 00:11:00 2021 +0200
+
+    build: Add release archive
+
+commit a18021f724c88d697c61c85a4f1b28122ad59bea
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 27 23:56:59 2021 +0200
+
+    feat: Add index to build system
+
+commit f617ad61f1ee328fe6eca5aba151c101e7c048dd
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 27 23:09:39 2021 +0200
+
+    build: Add HTML output and PDF & HTML slides
+
+commit a69a95fcaa584011d8515fa4a88ab48571f08dc1
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Oct 26 17:27:19 2021 +0200
+
+    feat: Add protocol for second experiment
+
+commit 26fec81364aea1fc2d6c974a5ecd08df2bf9829d
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 20:18:03 2021 +0200
+
+    build: Escape user-supplied variables
+
+commit 8c3a3ef00cf4cb9da6819cb4a1b0ec86b0999019
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 20:01:35 2021 +0200
+
+    fix: Correct typos
+
+commit 303fe6f547124dfa80c1b8befa9a90cbb34dc387
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:50:17 2021 +0200
+
+    build: Set release tag
+
+commit ee852f90a481f4bdd482808c4d53a5ab2e1c4937
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:46:10 2021 +0200
+
+    build: Add pandoc
+
+commit 0336d349a80229db98940cba92424334e58b3fc6
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:43:30 2021 +0200
+
+    build: Remove unnecessary build steps
+
+commit 7b65939c42c2e3fe4b03858f09c51d4434a3b13e
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:41:37 2021 +0200
+
+    build: Use `texlive/texlive` base image
+
+commit b0b08b1c4d28c0fcb25568d54e686225b249d335
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:30:29 2021 +0200
+
+    fix: Add auto-generated QR code
+
+commit ce48d1969dd89108f5ce78c599f0fdbea82f49de
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:28:57 2021 +0200
+
+    docs: Add README
+
+commit 4485f6ea4cafeeef90b02cbb15fd6f72c0c9b08a
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 19:27:08 2021 +0200
+
+    feat: Port to Eisvogel
+
+commit dfea2b6255cd78b4f4aae9cb48f033734854d777
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 17:59:15 2021 +0200
+
+    refactor: Add frontmatter
+
+commit f315b2276de53f137628751b437c8d88229cd126
+Merge: dd113f6 957dc92
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Mon Oct 25 16:47:21 2021 +0200
+
+    Merge pull request #1 from JakWai01/main
+    
+    feat: Add "titlepage" and update nmap section
+
+commit 957dc92d5a316a1b6352ee38d4b68f1969644d27
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Mon Oct 25 12:20:08 2021 +0200
+
+    feat: Finish protocol
+
+commit caff435e25cbcfe6f5d67a86c1054459ee04be72
+Author: JakWai01 <jakob.waibel@web.de>
+Date:   Thu Oct 21 00:29:51 2021 +0200
+
+    feat: Add "titlepage" and update nmap section
+
+commit dd113f6d76740aa09167a11b2def154e6a81f160
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 20 23:04:37 2021 +0200
+
+    feat: Add `Nmap` docs
+
+commit 23b6ce38131792327301701240eb31f120e361d4
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 20 23:01:32 2021 +0200
+
+    feat: Add descriptions for research results
+
+commit 244d9eca8d27f73c1d20e8a3c0f2b0aca41ec496
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 20 22:10:11 2021 +0200
+
+    refactor: Add syntax highlighting to ip config output
+
+commit e984b92839e8a77d3c276e2318e33f54e6213e7e
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Wed Oct 20 22:02:09 2021 +0200
+
+    feat: Add more pictures and use professor-enforced conventions
+
+commit 9d5a975eadeaf5cccbd49ac0316e0f6d4fe3009f
+Author: Felicitas Pojtinger <felicitas@pojtinger.com>
+Date:   Tue Oct 19 21:25:06 2021 +0200
+
+    feat: Add initial notes

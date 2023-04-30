@@ -1,0 +1,401 @@
+Praktikum Rechnernetze
+Jakob Waibel; Daniel Hiller; Elia Wüstner; Felicitas Pojtinger
+2021-11-16
+
+-   1 Einführung
+    -   1.1 Mitwirken
+    -   1.2 Lizenz
+-   2 Elektrische Verkabelung
+-   3 Optische Verkabelung
+-   4 Aufgaben für die „Kabel“-Gruppen
+
+Einführung
+
+Mitwirken
+
+Diese Materialien basieren auf Professor Kiefers “Praktikum
+Rechnernetze”-Vorlesung der HdM Stuttgart.
+
+Sie haben einen Fehler gefunden oder haben einen Verbesserungsvorschlag?
+Bitte eröffnen Sie ein Issue auf GitHub
+(github.com/pojntfx/uni-netpractice-notes):
+
+[QR-Code zum Quelltext auf GitHub]
+
+Wenn ihnen die Materialien gefallen, würden wir uns über einen
+GitHub-Stern sehr freuen.
+
+Lizenz
+
+Dieses Dokument und der enthaltene Quelltext ist freie Kultur bzw. freie
+Software.
+
+[Badge der AGPL-3.0-Lizenz]
+
+Uni Network Practice Notes (c) 2021 Jakob Waibel, Daniel Hiller, Elia
+Wüstner, Felicitas Pojtinger
+
+SPDX-License-Identifier: AGPL-3.0
+
+Elektrische Verkabelung
+
+Die wichtigsten technischen Größen eines Kabels sind die Werte für die
+Impedanz, die Dämpfung, für das Nebensprechen und das sich daraus zu
+errechnende ACR.
+
+Wie ist der ACR-Wert definiert?
+
+Der Attenuation-Crosstalk-Ratio ist als das Verhältnis von
+Nutzsignalstärke und Störsignalstärke definiert. Er lässt sich aus der
+Differenz des NEXT-Wertes und der Dämpfung berechnen, was dem
+Signal-to-Noise-Ratio entspricht.
+
+Sollte er hoch oder niedrig sein. Was kann ein ACR-Wert bewirken, der
+außerhalb der Toleranz liegt.
+
+Der ACR-Wert sollte so hoch wie möglich sein. Je höher der Wert ist,
+desto höher ist die Qualität der Übertragungsstrecke. Ein ACR-Wert, der
+au ss erhalb der Toleranz liegt kann dazu führen, dass das Signal nicht
+mehr eindeutig vom Rauschen zu unterscheiden ist. Dadurch kann es zu
+Übertragungsfehlern kommen.
+
+Welche weiteren Werte können zur Kabelqualifizierung herangezogen
+werden?
+
+Wie auch schon auf dem Vorbereitungsmaterial erwähnt, können diverse
+Werte zur Klassifizierung von Kabeln verwendet werden. Dazu gehören
+folgende Werte:
+
+-   Signallaufzeit
+-   Transferimpedanz
+-   Impedanz
+-   Dämpfung
+-   NEXT
+
+Erläutern Sie mit wenigen Worten den Begriff der „strukturierten
+Verkabelung“
+
+Die strukturierte Verkabelung definiert ein Konzept für die Verkabelung
+zwischen Gebäuden und wird in EN 50173 definiert. Ursprünglich bezog
+sich die Norm nur auf Bürogebäude. Sie wurde allerdings um andere Normen
+erweitert und bezieht sich nun auch industrielle Gebäude, Wohnkomplexe
+und Rechenzentren.
+
+Sie finden an einem Patchfeld oder einer Dose folgende
+Gigabit-Verbindung vor. Warum könnte ein derartiges Kabel Probleme
+verursachen und welche?
+
+Wenn die Paare direkt nebeneinander liegen hebe ich die Verdrillung auf,
+die notwendig ist damit sich mit Differenzsignalen die eingestreuten
+Störungen gegenseitig kompensieren.
+
+Warum müssen eigentlich alle 8 Adern (=4 Paare) angeschlossen sein?
+(Stichwort: 4D-PAM5)
+
+In Ethernet (10 Mbps) und FastEthernet (100 Mbps) werden
+unterschiedliche Adern Paare für Senden und Empfangen genutzt. Gigabit
+Ethernet (1000 Mbps) nimmt dagegen ein Paar für Senden und Empfangen,
+was gleichzeitiges Senden und Empfangen auf einem Paar ermöglicht. Die
+Bandbreite von 1 Gbps wird durch das komplette Ausnützen aller 8 Adern
+erreicht. 4D-PAM5 ist ein Pulsamplituden-Modulationsverfahren. Auf jeder
+der vier Doppeladern wird mit einer Nutzbitrate von 250Mbit/s
+üebertragen, was zu einer insgesamten Nutzbitrate von 1Gbit führt. PAM-5
+verwendet 5 Amplitudenstufen (1V, 0.5V, 0V, -0.5V, -1.0V). PAM5 wird
+verwendet, um eine Datenrate von 1Gbit zu ermöglichen.
+
+Wieso gibt es 2 Standards für die Kontaktierung von achtpoligen
+RJ-45-Steckern und Buchsen?
+
+Die Electronic Industries Alliance (EIA) definierte die Standards für
+die Kontaktierung von achtpoligen RJ-45 Steckern und Buchsen. Da es vor
+dem TIA-568A-Standard der EIA bereits den populären 258-A-Standard von
+AT&T gab, wurde bei der Veröffentlichung von TIA-568A der bereits
+etablierte 258-A-Standard als TIA-568B-Standard veröffentlicht.
+
+Optische Verkabelung
+
+Welche Messgrößen sind bei einem optischen Kabel im Vergleich zu den
+Messgrößen eines elektrischen Kabels sinnvoll?
+
+-   Attenuation die den Lichtverlust aufgrund von z.B. Absorption,
+    Biegen und Streuung angibt.
+-   Chromatische Dispersion. Sie kann gemessen werden in dem man die
+    Dauer misst, wie lange unterschiedliche Wellenlängen benötigen, um
+    eine Ader zu durchlaufen.
+-   Reflektionen
+
+Was ist ein OTDR (zur Qualifizierung optischer Verbindungen)?
+
+Ein OTDR ist ein “Optical-Time-Domain-Reflectometer”. Das ist ein
+Werkzeug, um optische Leitungen zu analysieren.
+
+Wozu wird es benötigt
+
+Es kann dazu verwendet werden, um Lauflängen und
+Reflexionscharakteristika von optischen Wellen zu analysieren. So können
+Leitungen auf ihre Funktionalität und Reflexionseigenschaften an
+Verbindungen oder Kabelenden getestet werden.
+
+Aufgaben für die „Kabel“-Gruppen
+
+Schließen Sie eine RJ-45 Anschlussdose an das zur Verfügung gestellte
+Patchfeld an (kurzes Kabel von der Rolle abschneiden). Am Arbeitsplatz
+liegt entsprechendes Werkzeug. Lassen Sie sich vom Betreuer u. U. die
+Funktion des LSA-Werkzeuges erklären.
+
+Das Kabel stammt von folgender Kabelrolle:
+
+[Kabelrolle]
+
+Hier wurde nun ein Stück Kabel abgeschnitten und die äußere Abschirmung
+entfernt:
+
+[Anschluss-Schritt 1]
+
+[Anschluss-Schritt 2]
+
+[Anschluss-Schritt 3]
+
+Und das Kabel mittels LSA-Werkzeug an die RJ45-Buchse angeschlossen:
+
+[Anschluss-Schritt 4]
+
+Daraufhin wurde dasselbe für das Patch-Panel wiederholt:
+
+[Anschluss-Schritt 5]
+
+Und das Kabel mittels LSA-Werkzeug an das Patch-Panel angeschlossen:
+
+[Anschluss-Schritt 6]
+
+[Anschluss-Schritt 7]
+
+Um das Kabel zu testen wurden die Abdeckungen wieder angebracht und mit
+der Workstation verbunden:
+
+[Anschluss-Schritt 8]
+
+[Anschluss-Schritt 9]
+
+Welche zwei Anschlussmöglichkeiten (lt. Norm) haben sie für den
+Anschluss einer Dose?
+
+Laut Norm gibt es den EIA/TIA-568A-Standard und den
+EIA/TIA-568B-Standard. Letzterer beschreibt den Standard, welcher von
+AT&T etabliert worden ist.
+
+Die Unterschiede der beiden Standards lassen sich in folgender Tabelle
+erkennen.
+
+  Pin   TIA/EIA-568A   TIA/EIA-568B
+  ----- -------------- --------------
+  1     weiß/grün      weiß/orange
+  2     grün           orange
+  3     weiß/orange    weiß/grün
+  4     blau           blau
+  5     weiß           weiß/blau
+  6     orange         grün
+  7     weiß/braun     weiß/braun
+  8     braun          braun
+
+Wie lang darf die unverdrillte Kabelstrecke sein?
+
+Sie muss möglichst kurz sein (max. ca. 1,5 cm), damit die Auswirkungen
+des Nahnebensprechens nicht überhandnehmen.
+
+Überprüfen Sie mittels JPerf, wie hoch die Datenrate ihrer Verbindung
+ist.
+
+Wir haben mit iperf die Verbindung zu einem anderen Host im
+Rechnernetze-Labor gemessen.
+
+[iperf-Server]
+
+[iperf-Client]
+
+Aus den Bildern lässt sich entnehmen, dass bei einem Transfer von einem
+Gigabyte eine Datenrate von 856 Mbit/s gemessen werden konnte.
+
+Weisen Sie die Qualität Ihrer Strecke messtechnisch mit dem CM200 und
+dem Fluke DTX 1200 nach und dokumentieren Sie die Ergebnisse. (Benutzen
+Sie nicht die beigelegten kurzen blauen Kabel)
+
+CM200:
+
+Hier wurde folgendes Setup aufgebaut:
+
+[CM200 Setup]
+
+Und, was sich mit dem Ergebnis des Fluke deckt, folgendes Ergebnis
+gemessen:
+
+[CM200 Ergebnis]
+
+Fluke DTX 1200:
+
+Das Fluke-Setup sah folgendermaßen aus:
+
+[Fluke Setup]
+
+Das Gerät zeigt uns an, dass wir am Patch-Feld aus Versehen den falschen
+Standard verwendet haben, um die Kabel anzuschließen. Das stellt aber
+keine weiteren Probleme dar. Eine Internetverbindung war auch so ohne
+Probleme möglich. Im folgenden Bild kann der Fehler betrachtet werden:
+
+[Verschiedene Standards verwendet]
+
+Das Problem ist daher aufgetreten, dass am Patchfeld beide Standards
+verzeichnet sind, jedoch dies erst im Nachhinein bemerkt wurde und einer
+der beiden verwendet wurde.
+
+[Standards am Patchfeld]
+
+Des Weiteren wurde ein hoher NEXT-Wert gemeldet, was an eventuell zu
+weit geöffneten Verdrillungen und der daher resultierenden fehlenden
+Abschirmung liegen könnte.
+
+[Hoher NEXT-Wert]
+
+Welche Aussage können Sie bezüglich CAT5 und CAT6 machen?
+(Messtechniker-Gruppe ist hier gefragt; lassen sie sich ihre Ergebnisse
+auf dem Fluke DTX 1200 speichern)
+
+Die Messtechniker-Gruppe stellte uns folgende Ergebnisse bereit:
+
+[Cat5e]
+
+[Cat6]
+
+Es scheint, als wäre das CAT5e-Kabel besser als das CAT6-Kabel. Dies
+sollte aber eigentlich nicht der Fall sein. Laut unseren
+Vorbereitungsunterlagen sollte das Cat6-Kabel sowohl eine geringere
+Dämpfung, als auch einen höheren NEXT-Wert als das Cat5e-Kabel
+vorweisen; genau das Gegenteil ist aber hier der Fall.
+
+Versuchen Sie Ihr hoffentlich gut angeschlossenes Kabel so zu
+„bearbeiten“ (Quetschen, Pressen, Biegeradius verringern), daß Sie
+signifikant eine Änderung der Messqualität erreichen. Bitte systematisch
+und dokumentiert!
+
+Im ersten Durchgang knickten wir das Kabel sehr stark. Dies beinflusste
+die Ergebnisse allerdings gar nicht.
+
+[Knick im Kabel]
+
+Im zweiten Durchgang schnitten wir mit dem Seitenschneider in das Kabel
+und durchtrenten eine Ader; dies ließ sich dann an der Fluke-Analyse
+erkennen.
+
+[Ergebnis nach dem durchschneiden einer Ader]
+
+Was versteht man unter „CableSharing“? Realisieren Sie solch eine
+Verbindung (Patchfeld -> Dose) und dokumentieren Sie Ihre
+Messergebnisse!
+
+Hierzu wurde ein CableSharing-Setup vorbereitet:
+
+[Buchsenverkabelung]
+
+[Patch-Panel-Verkabelung]
+
+[CableSharing mit der Workstation]
+
+Unter CableSharing versteht man, dass sich zwei Buchsen an der Dose und
+zwei Anschlüsse am Patchfeld ein einzelnes Kabel teilen. Dadurch ist
+allerdings nur eine maximale Datenrate von 100Mbit/s möglich. Dies
+konnte auch unter verwendung von iperf bestätigt werden. Es wurden beide
+Buchsen getestet:
+
+[Test der ersten Buchse]
+
+[Test der zweiten Buchse]
+
+Misst man das CableSharing-Setup mit dem Fluke-Messgerät fällt auf, dass
+die Messung fehlschlägt. Dies liegt daran, dass das Fluke-Messgerät
+nicht für das Testen von CableSharing ausgelegt ist. Wir erhalten
+lediglich die Meldung, dass nicht alle Adern verbunden sind:
+
+[Fluke Messung]
+
+Ähnlich verhält es sich mit dem Ergebnis des CM200, welcher Open
+anzeigt:
+
+[CableSharing-Ergebnisse des CM200]
+
+Warum kann man mit CableSharing keine Gigabit-Anbindung realisieren?
+
+Bei Cable-Sharing werden ungenutzte Adern für eine zweite
+Netzwerkverbindung verwendet. Gigabit-Ethernet benötigt aber alleine
+schon alle acht Adern.
+
+Ihnen stehen 3 blaue Kabel zur Verfügung, die unterschiedliche Fehler
+aufweisen. Messen sie diese Kabel mit ihrem CM200-Messgerät durch.
+Dokumentieren Sie die Messergebnisse
+
+Bei Kabel 1 wurden 1 & 2 blinkend und Open angezeigt:
+
+[CM200-Ergebnis zu Kabel 1]
+
+Bei Kabel 2 wurden 7 & 8 blinkend und Short angezeigt:
+
+[CM200-Ergebnis zu Kabel 2]
+
+Bei Kabel 3 wurden 6 & 2 blinkend und Misswire angezeigt:
+
+[CM200-Ergebnis zu Kabel 2]
+
+Können Sie bei Verwendung von Kabel 2 mittels JPerf die Übertragungsrate
+messen?
+
+Ja, dies war trotz Fehler short möglich, wie im folgenden Bild zu sehen
+ist:
+
+[iperf client]
+
+Messen Sie mit ihrem CM200-Messgerät folgende Strecken und dokumentieren
+Sie die Ergebnisse. Grosser Systemschrank: 1-05 zu 1-06 (Fragen Sie nach
+den Messergebnissen der „Messtechnikern“-Gruppe und vergleichen sie mit
+Ihren Ergebnissen)
+
+Der CM200 wurde wie folgt angeschlossen:
+
+[Aufbau der Messung]
+
+Zu erkennen ist ein Misswire:
+
+[Misswire-Ergebnis]
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
+
+[Ergebnisse der Messtechniker]
+
+Beide Ergebnisse lassen darauf schließen, dass die Buchsen am
+Patch-Panel nicht standardkonform aneinander angeschlossen sind.
+
+Grosser Systemschrank: 1-07 zu 1-08 (Fragen Sie nach den Messergebnissen
+der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)
+
+Zu erkennen ist ein Pass, jedoch mit vertauschten Kabeln:
+
+[Pass-Ergebnis]
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
+
+[Ergebnisse der Messtechniker]
+
+Die Ergebnisse der Messtechniker unterstützen unsere Vermutung; 1/2
+respektive 3/6 wurden getauscht.
+
+Kleiner Systemschrank: 2-13 zu 2-14 (Fragen Sie nach den Messergebnissen
+der „Messtechnikern“-Gruppe und vergleichen sie mit Ihren Ergebnissen)
+
+Zu erkennen ist ein Open; 3,4,5 und 6 blinken:
+
+[Open-Ergebnis]
+
+Von den Messtechnikern bekamen wir folgendes Ergebnis:
+
+[Ergebnisse der Messtechniker]
+
+Wie auch auf dem Ergebnis der Messtechniker zu erkennen ist, sind 3 und
+4 nicht miteinander verbunden.
